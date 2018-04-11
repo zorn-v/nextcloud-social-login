@@ -1,2 +1,2 @@
 # Social Login
-Place this app in **nextcloud/apps/**
+Place this app in **nextcloud/apps/sociallogin**
