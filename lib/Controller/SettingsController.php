@@ -17,7 +17,7 @@ class SettingsController extends Controller
         $this->config = $config;
     }
 
-    public function saveAdmin()
+    public function saveAdmin($new_user_group)
     {
         $r = new \ReflectionMethod(__METHOD__);
         $names = $r->getParameters();
