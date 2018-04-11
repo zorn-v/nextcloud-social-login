@@ -5,5 +5,8 @@
 		"vendor-dir": ".",
 		"optimize-autoloader": true,
 		"classmap-authoritative": true
+	},
+	"require": {
+		"hybridauth/hybridauth": "^3.0.0-rc.3"
 	}
 }
