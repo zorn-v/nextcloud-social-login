@@ -73,6 +73,7 @@ class OAuthController extends Controller
             $user = $this->userManager->createUser($uid, $password);
             $user->setDisplayName($profile->displayName);
             $this->userSession->login($uid, $password);
+            $this->userSession->createSessionToken($this->request, $uid, $uid, $password);
         }
         return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
     }
