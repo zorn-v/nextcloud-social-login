@@ -17,8 +17,13 @@ class SettingsController extends Controller
         $this->config = $config;
     }
 
-    public function saveAdmin($new_user_group)
-    {
+    public function saveAdmin(
+        $new_user_group,
+        $facebook_appid,
+        $facebook_secret,
+        $google_appid,
+        $google_secret
+    ) {
         $r = new \ReflectionMethod(__METHOD__);
         $names = $r->getParameters();
         $values = func_get_args();

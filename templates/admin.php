@@ -13,6 +13,32 @@
 			<?php endforeach ?>
 		</select>
 		</p>
+		<p>
+			<h2><?php p('Facebook')?></h2>
+			<label>
+				<?php p('App id') ?><br>
+				<input type="text" name="facebook_appid" value="<?php p($_['facebook_appid']) ?>">
+			</label>
+			<br>
+			<label>
+				<?php p('Secret') ?><br>
+				<input type="password" name="facebook_secret" value="<?php p($_['facebook_secret']) ?>">
+			</label>
+		</p>
+		<br/>
+		<p>
+			<h2><?php p('Google')?></h2>
+			<label>
+				<?php p('App id') ?><br>
+				<input type="text" name="google_appid" value="<?php p($_['google_appid']) ?>">
+			</label>
+			<br>
+			<label>
+				<?php p('Secret') ?><br>
+				<input type="password" name="google_secret" value="<?php p($_['google_secret']) ?>">
+			</label>
+		</p>
+
 		<button><?php p($l->t('Save')); ?></button>
 	</form>
 </div>

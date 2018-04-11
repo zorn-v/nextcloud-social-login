@@ -32,7 +32,11 @@ class AdminSettings implements ISettings
     {
         Util::addScript($this->appName, 'settings');
         $paramsNames = [
-            'new_user_group'
+            'new_user_group',
+            'facebook_appid',
+            'facebook_secret',
+            'google_appid',
+            'google_secret',
         ];
         $groupNames = [];
         $groups = $this->groupManager->search('');
