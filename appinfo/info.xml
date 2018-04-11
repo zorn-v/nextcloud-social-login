@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>sociallogin</id>
+    <name>Social Login</name>
+    <summary>Social login via OAuth</summary>
+    <description><![CDATA[Make possible create users and login via OAuth]]></description>
+    <version>0.0.4</version>
+    <licence>agpl</licence>
+    <author mail="zorn7@yandex.ru" homepage="https://github.com/zorn-v/nextcloud-social-login">Zorn</author>
+    <namespace>SocialLogin</namespace>
+    <category>integration</category>
+    <category>social</category>
+    <bugs>https://github.com/zorn-v/nextcloud-social-login/issues</bugs>
+    <dependencies>
+        <nextcloud min-version="12" />
+    </dependencies>
+    <settings>
+  		<admin>OCA\SocialLogin\Settings\AdminSettings</admin>
+      <admin-section>OCA\SocialLogin\Settings\AdminSection</admin-section>
+  	</settings>
+</info>
