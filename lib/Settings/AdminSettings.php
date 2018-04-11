@@ -30,22 +30,33 @@ class AdminSettings implements ISettings
 
     public function getForm()
     {
+        Util::addStyle($this->appName, 'settings');
         Util::addScript($this->appName, 'settings');
         $paramsNames = [
-            'new_user_group',
-            'facebook_appid',
-            'facebook_secret',
-            'google_appid',
-            'google_secret',
+            'new_user_group'
+        ];
+        $defaultProviders = [
+            'facebook',
+            'google',
         ];
         $groupNames = [];
         $groups = $this->groupManager->search('');
         foreach ($groups as $group) {
             $groupNames[] = $group->getGid();
         }
+        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true);
+        foreach ($defaultProviders as $provider) {
+            if (!isset($providers[$provider])) {
+                $providers[$provider] = [
+                    'appid' => '',
+                    'secret' => '',
+                ];
+            }
+        }
         $params = [
             'action_url' => $this->urlGenerator->linkToRoute($this->appName.'.settings.saveAdmin'),
             'groups' => $groupNames,
+            'providers' => $providers,
         ];
         foreach ($paramsNames as $paramName) {
             $params[$paramName] = $this->config->getAppValue($this->appName, $paramName);

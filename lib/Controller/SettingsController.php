@@ -17,19 +17,10 @@ class SettingsController extends Controller
         $this->config = $config;
     }
 
-    public function saveAdmin(
-        $new_user_group,
-        $facebook_appid,
-        $facebook_secret,
-        $google_appid,
-        $google_secret
-    ) {
-        $r = new \ReflectionMethod(__METHOD__);
-        $names = $r->getParameters();
-        $values = func_get_args();
-        foreach ($names as $k=>$name) {
-            $this->config->setAppValue($this->appName, $name->name, $values[$k]);
-        }
+    public function saveAdmin($new_user_group, $providers)
+    {
+        $this->config->setAppValue($this->appName, 'new_user_group', $new_user_group);
+        $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
         return new JSONResponse(['success' => true]);
     }
 }
