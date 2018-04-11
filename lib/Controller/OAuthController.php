@@ -72,9 +72,12 @@ class OAuthController extends Controller
             $password = substr(base64_encode(random_bytes(64)), 0, 10);
             $user = $this->userManager->createUser($uid, $password);
             $user->setDisplayName($profile->displayName);
-            $this->userSession->login($uid, $password);
-            $this->userSession->createSessionToken($this->request, $uid, $uid, $password);
+            $this->config->setUserValue($uid, $this->appName, 'password', $password);
+        } else {
+            $password = $this->config->getUserValue($uid, $this->appName, 'password');
         }
+        $this->userSession->login($uid, $password);
+        $this->userSession->createSessionToken($this->request, $uid, $uid, $password);
         return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
     }
 }
