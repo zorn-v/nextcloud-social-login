@@ -15,7 +15,7 @@
     <repository>https://github.com/zorn-v/nextcloud-social-login</repository>
     <screenshot>https://raw.githubusercontent.com/zorn-v/nextcloud-social-login/master/appinfo/screenshot.png</screenshot>
     <dependencies>
-        <nextcloud min-version="12" />
+        <nextcloud min-version="12" max-version="14" />
     </dependencies>
     <settings>
   		<admin>OCA\SocialLogin\Settings\AdminSettings</admin>
