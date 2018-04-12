@@ -5,7 +5,8 @@ namespace OCA\SocialLogin\AppInfo;
 use OCP\AppFramework\App;
 use OCP\IURLGenerator;
 use OCP\IConfig;
-
+use OCP\IUserManager;
+use OCP\IUser;
 
 class Application extends App
 {
@@ -28,6 +29,16 @@ class Application extends App
                 	'href' => $urlGenerator->linkToRoute($this->appName.'.oAuth.login', ['provider'=>$title]),
                 ]);
             }
+        }
+        $this->query(IUserManager::class)->listen('\OC\User', 'postSetPassword', [$this, 'postSetPassword']);
+    }
+
+    /** @internal */
+    public function postSetPassword(IUser $user, $password, $recoverPassword)
+    {
+        $config = $this->query(IConfig::class);
+        if ($config->getUserValue($user->getUID(), $this->appName, 'password')) {
+            $config->setUserValue($user->getUID(), $this->appName, 'password', $password);
         }
     }
 
