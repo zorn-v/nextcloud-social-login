@@ -10,6 +10,7 @@ use OCP\IUserSession;
 use OCP\IUserManager;
 use OCP\IURLGenerator;
 use OCP\IAvatarManager;
+use OCP\IGroupManager;
 use OCA\SocialLogin\Storage\SessionStorage;
 use Hybridauth\Hybridauth;
 use Hybridauth\HttpClient\Curl;
@@ -28,6 +29,8 @@ class OAuthController extends Controller
     private $userSession;
     /** @var IAvatarManager */
     private $avatarManager;
+    /** @var IGroupManager */
+    private $groupManager;
 
 
     public function __construct(
@@ -38,7 +41,8 @@ class OAuthController extends Controller
         SessionStorage $storage,
         IUserManager $userManager,
         IUserSession $userSession,
-        IAvatarManager $avatarManager
+        IAvatarManager $avatarManager,
+        IGroupManager $groupManager
     ) {
         parent::__construct($appName, $request);
         $this->config = $config;
@@ -47,6 +51,7 @@ class OAuthController extends Controller
         $this->userManager = $userManager;
         $this->userSession = $userSession;
         $this->avatarManager = $avatarManager;
+        $this->groupManager = $groupManager;
     }
 
     /**
@@ -67,7 +72,7 @@ class OAuthController extends Controller
             $config['providers'][ucfirst($title)] = [
                 'enabled' => true,
                 'keys' => $keys,
-                'scope' => '',
+                'scope' => 'email',
             ];
         }
         $auth = new Hybridauth($config, null, $this->storage);
@@ -79,6 +84,15 @@ class OAuthController extends Controller
             $user = $this->userManager->createUser($uid, $password);
             $user->setDisplayName($profile->displayName);
             $this->config->setUserValue($uid, $this->appName, 'password', $password);
+
+            $newUserGroup = $this->config->getAppValue($this->appName, 'new_user_group');
+            if ($newUserGroup) {
+                try {
+                    $group = $this->groupManager->get($newUserGroup);
+                    $group->addUser($user);
+                } catch (\Exception $e) {}
+            }
+
             if ($profile->photoURL) {
                 $curl = new Curl();
                 $photo = $curl->request($profile->photoURL);
