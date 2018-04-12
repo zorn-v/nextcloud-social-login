@@ -12,6 +12,8 @@
     <category>integration</category>
     <category>social</category>
     <bugs>https://github.com/zorn-v/nextcloud-social-login/issues</bugs>
+    <repository>https://github.com/zorn-v/nextcloud-social-login</repository>
+    <screenshot>https://raw.githubusercontent.com/zorn-v/nextcloud-social-login/master/appinfo/screenshot.png</screenshot>
     <dependencies>
         <nextcloud min-version="12" />
     </dependencies>
