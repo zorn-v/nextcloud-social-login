@@ -65,10 +65,17 @@ class OAuthController extends Controller
             'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.oAuth.login', ['provider'=>$provider])
         ];
         foreach ($providers as $title=>$prov) {
-            $keys = [
-                'id' => $prov['appid'],
-                'secret' => $prov['secret'],
-            ];
+            if ($title === 'twitter') {
+                $keys = [
+                    'key' => $prov['appid'],
+                    'secret' => $prov['secret'],
+                ];
+            } else {
+                $keys = [
+                    'id' => $prov['appid'],
+                    'secret' => $prov['secret'],
+                ];
+            }
             $config['providers'][ucfirst($title)] = [
                 'enabled' => true,
                 'keys' => $keys,
@@ -82,9 +89,9 @@ class OAuthController extends Controller
         if (null === $this->userManager->get($uid)) {
             $password = substr(base64_encode(random_bytes(64)), 0, 10);
             $user = $this->userManager->createUser($uid, $password);
-            $user->setDisplayName($profile->displayName);
-            $user->setEMailAddress($profile->email);
             $this->config->setUserValue($uid, $this->appName, 'password', $password);
+            $user->setDisplayName((string)$profile->displayName);
+            $user->setEMailAddress((string)$profile->email);
 
             $newUserGroup = $this->config->getAppValue($this->appName, 'new_user_group');
             if ($newUserGroup) {

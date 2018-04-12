@@ -38,6 +38,7 @@ class AdminSettings implements ISettings
         $defaultProviders = [
             'facebook',
             'google',
+            'twitter',
             'GitHub',
         ];
         $groupNames = [];
@@ -45,9 +46,12 @@ class AdminSettings implements ISettings
         foreach ($groups as $group) {
             $groupNames[] = $group->getGid();
         }
-        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true);
+        $providers = [];
+        $savedProviders = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true);
         foreach ($defaultProviders as $provider) {
-            if (!isset($providers[$provider])) {
+            if (isset($savedProviders[$provider])) {
+                $providers[$provider] = $savedProviders[$provider];
+            } else {
                 $providers[$provider] = [
                     'appid' => '',
                     'secret' => '',
