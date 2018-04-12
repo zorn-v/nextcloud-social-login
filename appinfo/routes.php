@@ -9,7 +9,7 @@
  */
 return [
     'routes' => [
-	   ['name' => 'settings#saveAdmin', 'url' => '/settings/save-admin', 'verb' => 'POST'],
-       ['name' => 'oAuth#login', 'url' => '/oauth/{provider}', 'verb' => 'GET'],
+        ['name' => 'settings#saveAdmin', 'url' => '/settings/save-admin', 'verb' => 'POST'],
+        ['name' => 'oAuth#login', 'url' => '/oauth/{provider}', 'verb' => 'GET'],
     ]
 ];

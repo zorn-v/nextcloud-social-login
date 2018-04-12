@@ -9,8 +9,10 @@ use OCP\IConfig;
 use OCP\IUserSession;
 use OCP\IUserManager;
 use OCP\IURLGenerator;
+use OCP\IAvatarManager;
 use OCA\SocialLogin\Storage\SessionStorage;
 use Hybridauth\Hybridauth;
+use Hybridauth\HttpClient\Curl;
 
 class OAuthController extends Controller
 {
@@ -24,6 +26,8 @@ class OAuthController extends Controller
     private $userManager;
     /** @var IUserSession */
     private $userSession;
+    /** @var IAvatarManager */
+    private $avatarManager;
 
 
     public function __construct(
@@ -33,7 +37,8 @@ class OAuthController extends Controller
         IURLGenerator $urlGenerator,
         SessionStorage $storage,
         IUserManager $userManager,
-        IUserSession $userSession
+        IUserSession $userSession,
+        IAvatarManager $avatarManager
     ) {
         parent::__construct($appName, $request);
         $this->config = $config;
@@ -41,6 +46,7 @@ class OAuthController extends Controller
         $this->storage = $storage;
         $this->userManager = $userManager;
         $this->userSession = $userSession;
+        $this->avatarManager = $avatarManager;
     }
 
     /**
@@ -68,11 +74,19 @@ class OAuthController extends Controller
         $adapter = $auth->authenticate(ucfirst($provider));
         $profile = $adapter->getUserProfile();
         $uid = $provider.'-'.$profile->identifier;
-        if (null === $user = $this->userManager->get($uid)) {
+        if (null === $this->userManager->get($uid)) {
             $password = substr(base64_encode(random_bytes(64)), 0, 10);
             $user = $this->userManager->createUser($uid, $password);
             $user->setDisplayName($profile->displayName);
             $this->config->setUserValue($uid, $this->appName, 'password', $password);
+            if ($profile->photoURL) {
+                $curl = new Curl();
+                $photo = $curl->request($profile->photoURL);
+                try {
+                    $avatar = $this->avatarManager->getAvatar($uid);
+                    $avatar->set($photo);
+                } catch (\Exception $e) {}
+            }
         } else {
             $password = $this->config->getUserValue($uid, $this->appName, 'password');
         }
