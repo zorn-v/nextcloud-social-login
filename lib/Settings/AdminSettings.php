@@ -38,6 +38,7 @@ class AdminSettings implements ISettings
         $defaultProviders = [
             'facebook',
             'google',
+            'GitHub',
         ];
         $groupNames = [];
         $groups = $this->groupManager->search('');
