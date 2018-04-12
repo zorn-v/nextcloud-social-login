@@ -21,12 +21,12 @@ class Application extends App
     {
         $config = $this->query(IConfig::class);
         $urlGenerator = $this->query(IURLGenerator::class);
-        $providers = json_decode($config->getAppValue($this->appName, 'oauth_providers'), true);
+        $providers = json_decode($config->getAppValue($this->appName, 'oauth_providers', '{}'), true);
         foreach ($providers as $title=>$provider) {
             if ($provider['appid']) {
                 \OC_App::registerLogIn([
-                	'name' => ucfirst($title),
-                	'href' => $urlGenerator->linkToRoute($this->appName.'.oAuth.login', ['provider'=>$title]),
+                    'name' => ucfirst($title),
+                    'href' => $urlGenerator->linkToRoute($this->appName.'.oAuth.login', ['provider'=>$title]),
                 ]);
             }
         }
