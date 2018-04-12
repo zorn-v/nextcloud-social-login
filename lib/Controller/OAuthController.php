@@ -83,6 +83,7 @@ class OAuthController extends Controller
             $password = substr(base64_encode(random_bytes(64)), 0, 10);
             $user = $this->userManager->createUser($uid, $password);
             $user->setDisplayName($profile->displayName);
+            $user->setEMailAddress($profile->email);
             $this->config->setUserValue($uid, $this->appName, 'password', $password);
 
             $newUserGroup = $this->config->getAppValue($this->appName, 'new_user_group');
