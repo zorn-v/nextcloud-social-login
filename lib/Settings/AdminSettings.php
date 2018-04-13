@@ -35,7 +35,7 @@ class AdminSettings implements ISettings
         $paramsNames = [
             'new_user_group'
         ];
-        $defaultProviders = [
+        $oauthProviders = [
             'facebook',
             'google',
             'twitter',
@@ -47,8 +47,8 @@ class AdminSettings implements ISettings
             $groupNames[] = $group->getGid();
         }
         $providers = [];
-        $savedProviders = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true);
-        foreach ($defaultProviders as $provider) {
+        $savedProviders = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'. '{}'), true);
+        foreach ($oauthProviders as $provider) {
             if (isset($savedProviders[$provider])) {
                 $providers[$provider] = $savedProviders[$provider];
             } else {

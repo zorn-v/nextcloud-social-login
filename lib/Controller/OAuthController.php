@@ -60,7 +60,7 @@ class OAuthController extends Controller
      */
     public function login($provider)
     {
-        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true);
+        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '{}'), true);
         $config = [
             'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.oAuth.login', ['provider'=>$provider])
         ];
