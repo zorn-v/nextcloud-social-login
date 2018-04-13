@@ -60,7 +60,7 @@ class OAuthController extends Controller
      */
     public function login($provider)
     {
-        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '{}'), true);
+        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
         $config = [
             'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.oAuth.login', ['provider'=>$provider])
         ];
@@ -81,6 +81,10 @@ class OAuthController extends Controller
                 'keys' => $keys,
                 'scope' => 'email',
             ];
+        }
+        $providers = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
+        foreach ($providers as $title) {
+            $config['providers'][ucfirst($title)] = ['enabled' => true];
         }
         $auth = new Hybridauth($config, null, $this->storage);
         $adapter = $auth->authenticate(ucfirst($provider));

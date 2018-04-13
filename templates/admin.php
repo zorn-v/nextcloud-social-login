@@ -16,6 +16,10 @@
 		<?php foreach ($_['providers'] as $title=>$provider): ?>
 			<p>
 				<h2><?php p(ucfirst($title))?></h2>
+				<?php if (isset($provider['enabled'])): ?>
+					<input id="<?php p($title)?>_enabled" class="checkbox" type="checkbox" <?php p($provider['enabled'] ? 'checked' : '') ?> name="openid_providers[]" value="<?php p($title) ?>" />
+	            	<label for="<?php p($title)?>_enabled"><?php p($l->t('Enabled')) ?></label>
+				<?php else: ?>
 				<label>
 					<?php p('App id') ?><br>
 					<input type="text" name="providers[<?php p($title) ?>][appid]" value="<?php p($provider['appid']) ?>"/>
@@ -25,6 +29,7 @@
 					<?php p('Secret') ?><br>
 					<input type="password" name="providers[<?php p($title) ?>][secret]" value="<?php p($provider['secret']) ?>"/>
 				</label>
+				<?php endif ?>
 			</p>
 			<br/>
 		<?php endforeach ?>

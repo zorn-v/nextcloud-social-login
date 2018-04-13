@@ -41,13 +41,16 @@ class AdminSettings implements ISettings
             'twitter',
             'GitHub',
         ];
+        $openIdProviders = [
+            'PaypalOpenID',
+        ];
         $groupNames = [];
         $groups = $this->groupManager->search('');
         foreach ($groups as $group) {
             $groupNames[] = $group->getGid();
         }
         $providers = [];
-        $savedProviders = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'. '{}'), true);
+        $savedProviders = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
         foreach ($oauthProviders as $provider) {
             if (isset($savedProviders[$provider])) {
                 $providers[$provider] = $savedProviders[$provider];
@@ -56,6 +59,14 @@ class AdminSettings implements ISettings
                     'appid' => '',
                     'secret' => '',
                 ];
+            }
+        }
+        $enabledProviders = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
+        foreach ($openIdProviders as $provider) {
+            if (in_array($provider, $enabledProviders)) {
+                $providers[$provider]['enabled'] = true;
+            } else {
+                $providers[$provider]['enabled'] = false;
             }
         }
         $params = [
