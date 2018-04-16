@@ -23,4 +23,11 @@ jQuery(function ($) {
       true
     );
   });
+  $('#openid_add').click(function () {
+    var $tpl = $('#openid_provider_tpl');
+    var newId = $tpl.data('new-id');
+    $tpl.data('new-id', newId+1);
+    var html = $tpl.html().replace(/{{provider_id}}/g, newId);
+    $('#openid_break').before('<div class="provider-settings">'+html+'</div>');
+  })
 });

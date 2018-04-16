@@ -29,7 +29,12 @@
 			</div>
 		<?php endforeach ?>
 		<br/>
-		<h2>OpenID</h2>
+		<h2>
+			OpenID
+			<button id="openid_add" type="button">
+				<div class="icon-add"></div>
+			</button>
+		</h2>
 		<?php foreach ($_['openid_providers'] as $k=>$provider): ?>
 			<div class="provider-settings">
 				<div class="openid-remove">x</div>
@@ -44,7 +49,19 @@
 				</label>
 			</div>
 		<?php endforeach ?>
-		<br/>
+		<br id="openid_break"/>
 		<button><?php p($l->t('Save')); ?></button>
 	</form>
+	<div id="openid_provider_tpl" class="provider-settings" data-new-id="<?php p(count($_['openid_providers'])) ?>">
+		<div class="openid-remove">x</div>
+		<label>
+			<?php p('Title') ?><br>
+			<input type="text" name="openid_providers[{{provider_id}}][title]" required/>
+		</label>
+		<br>
+		<label>
+			<?php p('Identifier url') ?><br>
+			<input type="url" name="openid_providers[{{provider_id}}][url]" required/>
+		</label>
+	</div>
 </div>

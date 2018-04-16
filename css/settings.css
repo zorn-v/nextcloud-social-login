@@ -4,7 +4,7 @@
 #sociallogin_settings .provider-settings {
   display: inline-block;
   vertical-align: top;
-  margin-right: 20px;
+  margin-right: 15px;
   margin-bottom: 20px;
 }
 .provider-settings .openid-remove  {
@@ -14,4 +14,7 @@
   font-size: 16px;
   width: 20px;
   text-align: center;
+}
+#openid_provider_tpl {
+  display: none !important;
 }
