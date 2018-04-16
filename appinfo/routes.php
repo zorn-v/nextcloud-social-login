@@ -10,6 +10,7 @@
 return [
     'routes' => [
         ['name' => 'settings#saveAdmin', 'url' => '/settings/save-admin', 'verb' => 'POST'],
-        ['name' => 'oAuth#login', 'url' => '/oauth/{provider}', 'verb' => 'GET'],
+        ['name' => 'login#oauth', 'url' => '/oauth/{provider}', 'verb' => 'GET'],
+        ['name' => 'login#openid', 'url' => '/openid/{provider}', 'verb' => 'GET'],
     ]
 ];

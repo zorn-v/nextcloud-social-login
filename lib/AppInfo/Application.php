@@ -26,7 +26,7 @@ class Application extends App
             if ($provider['appid']) {
                 \OC_App::registerLogIn([
                     'name' => ucfirst($title),
-                    'href' => $urlGenerator->linkToRoute($this->appName.'.oAuth.login', ['provider'=>$title]),
+                    'href' => $urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$title]),
                 ]);
             }
         }
