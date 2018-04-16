@@ -9,6 +9,17 @@ class SessionStorage extends Session
     /**
     * {@inheritdoc}
     */
+    public function get($key)
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+        return parent::get($key);
+    }
+
+    /**
+    * {@inheritdoc}
+    */
     public function set($key, $value)
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -37,5 +48,16 @@ class SessionStorage extends Session
             session_start();
         }
         parent::deleteMatch($key);
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    public function clear()
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+        parent::clear();
     }
 }

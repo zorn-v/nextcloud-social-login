@@ -12,9 +12,9 @@ use OCP\IURLGenerator;
 use OCP\IAvatarManager;
 use OCP\IGroupManager;
 use OCA\SocialLogin\Storage\SessionStorage;
+use OCA\SocialLogin\Provider\OpenID;
 use Hybridauth\Hybridauth;
 use Hybridauth\User\Profile;
-use Hybridauth\Provider\OpenID;
 use Hybridauth\HttpClient\Curl;
 
 class LoginController extends Controller
@@ -109,7 +109,8 @@ class LoginController extends Controller
         $adapter = new OpenID($config, null, $this->storage);
         $adapter->authenticate();
         $profile = $adapter->getUserProfile();
-        $uid = preg_replace('#[^0-9a-z_.@-]#i', '', $provider).'-'.$profile->identifier;
+        $profileId = preg_replace('#.*/#', '', rtrim($profile->identifier, '/'));
+        $uid = preg_replace('#[^0-9a-z_.@-]#i', '', $provider.'-'.$profileId);
         return $this->login($uid, $profile);
     }
 
