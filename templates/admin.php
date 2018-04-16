@@ -35,6 +35,7 @@
 				<div class="icon-add"></div>
 			</button>
 		</h2>
+		<div id="openid_providers">
 		<?php foreach ($_['openid_providers'] as $k=>$provider): ?>
 			<div class="provider-settings">
 				<div class="openid-remove">x</div>
@@ -49,7 +50,8 @@
 				</label>
 			</div>
 		<?php endforeach ?>
-		<br id="openid_break"/>
+		</div>
+		<br/>
 		<button><?php p($l->t('Save')); ?></button>
 	</form>
 	<div id="openid_provider_tpl" class="provider-settings" data-new-id="<?php p(count($_['openid_providers'])) ?>">
