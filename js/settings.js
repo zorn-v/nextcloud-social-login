@@ -9,4 +9,18 @@ jQuery(function ($) {
         }
       });
   });
+  $('.openid-remove').click(function () {
+    var $provider = $(this).parents('.provider-settings');
+    OCdialogs.confirm(
+      t(appName, 'Do you realy want to remove this OpenID provider ?'),
+      t(appName, 'Confirm remove'),
+      function (confirmed) {
+        if (!confirmed) {
+          return
+        }
+        $provider.remove();
+      },
+      true
+    );
+  });
 });

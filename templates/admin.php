@@ -13,6 +13,7 @@
 			<?php endforeach ?>
 		</select>
 		</p>
+		<hr/>
 		<?php foreach ($_['providers'] as $title=>$provider): ?>
 			<div class="provider-settings">
 				<h2><?php p(ucfirst($title))?></h2>
@@ -24,6 +25,22 @@
 				<label>
 					<?php p('Secret') ?><br>
 					<input type="password" name="providers[<?php p($title) ?>][secret]" value="<?php p($provider['secret']) ?>"/>
+				</label>
+			</div>
+		<?php endforeach ?>
+		<br/>
+		<h2>OpenID</h2>
+		<?php foreach ($_['openid_providers'] as $k=>$provider): ?>
+			<div class="provider-settings">
+				<div class="openid-remove">x</div>
+				<label>
+					<?php p('Title') ?><br>
+					<input type="text" name="openid_providers[<?php p($k) ?>][title]" value="<?php p($provider['title']) ?>" required/>
+				</label>
+				<br>
+				<label>
+					<?php p('Identifier url') ?><br>
+					<input type="url" name="openid_providers[<?php p($k) ?>][url]" value="<?php p($provider['url']) ?>" required/>
 				</label>
 			</div>
 		<?php endforeach ?>
