@@ -13,6 +13,8 @@ use OCP\IAvatarManager;
 use OCP\IGroupManager;
 use OCA\SocialLogin\Storage\SessionStorage;
 use Hybridauth\Hybridauth;
+use Hybridauth\User\Profile;
+use Hybridauth\Provider\OpenID;
 use Hybridauth\HttpClient\Curl;
 
 class LoginController extends Controller
@@ -60,10 +62,10 @@ class LoginController extends Controller
      */
     public function oauth($provider)
     {
-        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
         $config = [
             'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.oauth', ['provider'=>$provider])
         ];
+        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
         foreach ($providers as $title=>$prov) {
             $idKey = in_array($title, ['twitter']) ? 'key' : 'id';
             $keys = [
@@ -80,6 +82,38 @@ class LoginController extends Controller
         $adapter = $auth->authenticate(ucfirst($provider));
         $profile = $adapter->getUserProfile();
         $uid = $provider.'-'.$profile->identifier;
+
+        return $this->login($uid, $profile);
+    }
+
+    /**
+     * @PublicPage
+     * @NoCSRFRequired
+     */
+    public function openid($provider)
+    {
+        $config = [
+            'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.openid', ['provider'=>$provider])
+        ];
+        $idUrl = null;
+        $providers = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
+        foreach ($providers as $prov) {
+            if ($prov['title'] === $provider) {
+                $idUrl = $prov['url'];
+            }
+        }
+        if (!$idUrl) {
+            throw new \InvalidArgumentException(sprintf('Unknown OpenID provider "%s"', $provider));
+        }
+        $config['openid_identifier'] = $idUrl;
+        $auth = new OpenID($config, null, $this->storage);
+        $adapter = $auth->authenticate();
+        $profile = $adapter->getUserProfile();
+        return $this->login($uid, $profile);
+    }
+
+    private function login($uid, Profile $profile)
+    {
         if (null === $this->userManager->get($uid)) {
             $password = substr(base64_encode(random_bytes(64)), 0, 10);
             $user = $this->userManager->createUser($uid, $password);
@@ -108,6 +142,7 @@ class LoginController extends Controller
         }
         $this->userSession->login($uid, $password);
         $this->userSession->createSessionToken($this->request, $uid, $uid, $password);
+
         return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
     }
 }
