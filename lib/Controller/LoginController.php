@@ -125,10 +125,9 @@ class LoginController extends Controller
 
     private function login($uid, Profile $profile)
     {
-        if (null === $this->userManager->get($uid)) {
-            $password = substr(base64_encode(random_bytes(64)), 0, 10);
+        if (null === $user = $this->userManager->get($uid)) {
+            $password = substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $password);
-            $this->config->setUserValue($uid, $this->appName, 'password', $password);
             $user->setDisplayName((string)$profile->displayName);
             $user->setEMailAddress((string)$profile->email);
 
@@ -148,11 +147,12 @@ class LoginController extends Controller
                     $avatar->set($photo);
                 } catch (\Exception $e) {}
             }
-        } else {
-            $password = $this->config->getUserValue($uid, $this->appName, 'password');
         }
-        $this->userSession->login($uid, $password);
-        $this->userSession->createSessionToken($this->request, $uid, $uid, $password);
+        //No longer need. Remove leavings of previous versions.
+        $this->config->deleteUserValue($uid, $this->appName, 'password');
+
+        $this->userSession->completeLogin($user, ['loginName' => $uid], false);
+        $this->userSession->createSessionToken($this->request, $uid, $uid);
 
         return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
     }

@@ -37,16 +37,6 @@ class Application extends App
                 'href' => $urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$provider['title']]),
             ]);
         }
-        $this->query(IUserManager::class)->listen('\OC\User', 'postSetPassword', [$this, 'postSetPassword']);
-    }
-
-    /** @internal */
-    public function postSetPassword(IUser $user, $password, $recoverPassword)
-    {
-        $config = $this->query(IConfig::class);
-        if ($config->getUserValue($user->getUID(), $this->appName, 'password')) {
-            $config->setUserValue($user->getUID(), $this->appName, 'password', $password);
-        }
     }
 
     private function query($className)
