@@ -11,6 +11,7 @@ use OCP\IUserManager;
 use OCP\IURLGenerator;
 use OCP\IAvatarManager;
 use OCP\IGroupManager;
+use OC\User\LoginException;
 use OCA\SocialLogin\Storage\SessionStorage;
 use OCA\SocialLogin\Provider\OpenID;
 use Hybridauth\Hybridauth;
@@ -78,9 +79,13 @@ class LoginController extends Controller
                 'scope' => 'email',
             ];
         }
-        $auth = new Hybridauth($config, null, $this->storage);
-        $adapter = $auth->authenticate(ucfirst($provider));
-        $profile = $adapter->getUserProfile();
+        try {
+            $auth = new Hybridauth($config, null, $this->storage);
+            $adapter = $auth->authenticate(ucfirst($provider));
+            $profile = $adapter->getUserProfile();
+        } catch (\Exception $e) {
+            throw new LoginException($e->getMessage());
+        }
         $uid = $provider.'-'.$profile->identifier;
 
         return $this->login($uid, $profile);
@@ -106,9 +111,13 @@ class LoginController extends Controller
             throw new \InvalidArgumentException(sprintf('Unknown OpenID provider "%s"', $provider));
         }
         $config['openid_identifier'] = $idUrl;
-        $adapter = new OpenID($config, null, $this->storage);
-        $adapter->authenticate();
-        $profile = $adapter->getUserProfile();
+        try {
+            $adapter = new OpenID($config, null, $this->storage);
+            $adapter->authenticate();
+            $profile = $adapter->getUserProfile();
+        }  catch (\Exception $e) {
+            throw new LoginException($e->getMessage());
+        }
         $profileId = preg_replace('#.*/#', '', rtrim($profile->identifier, '/'));
         $uid = preg_replace('#[^0-9a-z_.@-]#i', '', $provider.'-'.$profileId);
         return $this->login($uid, $profile);
