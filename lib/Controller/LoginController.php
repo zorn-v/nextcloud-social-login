@@ -106,8 +106,8 @@ class LoginController extends Controller
             throw new \InvalidArgumentException(sprintf('Unknown OpenID provider "%s"', $provider));
         }
         $config['openid_identifier'] = $idUrl;
-        $auth = new OpenID($config, null, $this->storage);
-        $adapter = $auth->authenticate();
+        $adapter = new OpenID($config, null, $this->storage);
+        $adapter->authenticate();
         $profile = $adapter->getUserProfile();
         return $this->login($uid, $profile);
     }
