@@ -1,3 +1,9 @@
 #sociallogin_settings input {
   width: 300px;
 }
+#sociallogin_settings .provider-settings {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}

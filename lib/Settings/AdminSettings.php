@@ -41,9 +41,6 @@ class AdminSettings implements ISettings
             'twitter',
             'GitHub',
         ];
-        $openIdProviders = [
-            'PaypalOpenID',
-        ];
         $groupNames = [];
         $groups = $this->groupManager->search('');
         foreach ($groups as $group) {
@@ -61,18 +58,12 @@ class AdminSettings implements ISettings
                 ];
             }
         }
-        $enabledProviders = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
-        foreach ($openIdProviders as $provider) {
-            if (in_array($provider, $enabledProviders)) {
-                $providers[$provider]['enabled'] = true;
-            } else {
-                $providers[$provider]['enabled'] = false;
-            }
-        }
+        $openIdProviders = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
         $params = [
             'action_url' => $this->urlGenerator->linkToRoute($this->appName.'.settings.saveAdmin'),
             'groups' => $groupNames,
             'providers' => $providers,
+            'openid_providers' => $openIdProviders,
         ];
         foreach ($paramsNames as $paramName) {
             $params[$paramName] = $this->config->getAppValue($this->appName, $paramName);

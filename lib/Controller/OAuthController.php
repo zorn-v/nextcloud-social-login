@@ -65,17 +65,11 @@ class OAuthController extends Controller
             'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.oAuth.login', ['provider'=>$provider])
         ];
         foreach ($providers as $title=>$prov) {
-            if ($title === 'twitter') {
-                $keys = [
-                    'key' => $prov['appid'],
-                    'secret' => $prov['secret'],
-                ];
-            } else {
-                $keys = [
-                    'id' => $prov['appid'],
-                    'secret' => $prov['secret'],
-                ];
-            }
+            $idKey = in_array($title, ['twitter']) ? 'key' : 'id';
+            $keys = [
+                $idKey   => $prov['appid'],
+                'secret' => $prov['secret'],
+            ];
             $config['providers'][ucfirst($title)] = [
                 'enabled' => true,
                 'keys' => $keys,

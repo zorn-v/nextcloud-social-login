@@ -30,13 +30,6 @@ class Application extends App
                 ]);
             }
         }
-        $providers = json_decode($config->getAppValue($this->appName, 'openid_providers', '[]'), true);
-        foreach ($providers as $title) {
-            \OC_App::registerLogIn([
-                'name' => ucfirst($title),
-                'href' => $urlGenerator->linkToRoute($this->appName.'.oAuth.login', ['provider'=>$title]),
-            ]);
-        }
         $this->query(IUserManager::class)->listen('\OC\User', 'postSetPassword', [$this, 'postSetPassword']);
     }
 
