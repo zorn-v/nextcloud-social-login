@@ -108,7 +108,7 @@ class LoginController extends Controller
             }
         }
         if (!$idUrl) {
-            throw new \InvalidArgumentException(sprintf('Unknown OpenID provider "%s"', $provider));
+            throw new LoginException(sprintf('Unknown OpenID provider "%s"', $provider));
         }
         $config['openid_identifier'] = $idUrl;
         try {
