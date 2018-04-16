@@ -109,6 +109,7 @@ class LoginController extends Controller
         $adapter = new OpenID($config, null, $this->storage);
         $adapter->authenticate();
         $profile = $adapter->getUserProfile();
+        $uid = preg_replace('#[^0-9a-z_.@-]#i', '', $provider).'-'.$profile->identifier;
         return $this->login($uid, $profile);
     }
 
