@@ -23,16 +23,18 @@ class Application extends App
         $config = $this->query(IConfig::class);
         $urlGenerator = $this->query(IURLGenerator::class);
         $providers = json_decode($config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
-        foreach ($providers as $title=>$provider) {
-            if ($provider['appid']) {
-                \OC_App::registerLogIn([
-                    'name' => ucfirst($title),
-                    'href' => $urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$title]),
-                ]);
+        if (is_array($providers)) {
+            foreach ($providers as $title=>$provider) {
+                if ($provider['appid']) {
+                    \OC_App::registerLogIn([
+                        'name' => ucfirst($title),
+                        'href' => $urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$title]),
+                    ]);
+                }
             }
         }
         $providers = json_decode($config->getAppValue($this->appName, 'openid_providers', '[]'), true);
-        if (is_array($providers) || is_object($providers))
+        if (is_array($providers)) {
             foreach ($providers as $provider) {
                 \OC_App::registerLogIn([
                     'name' => ucfirst($provider['title']),
