@@ -4,6 +4,7 @@ namespace OCA\SocialLogin\Controller;
 
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\RedirectResponse;
+use OCP\IL10N;
 use OCP\IRequest;
 use OCP\IConfig;
 use OCP\IUserSession;
@@ -34,6 +35,8 @@ class LoginController extends Controller
     private $avatarManager;
     /** @var IGroupManager */
     private $groupManager;
+    /** @var IL10N */
+    private $l;
 
 
     public function __construct(
@@ -45,7 +48,8 @@ class LoginController extends Controller
         IUserManager $userManager,
         IUserSession $userSession,
         IAvatarManager $avatarManager,
-        IGroupManager $groupManager
+        IGroupManager $groupManager,
+        IL10N $l
     ) {
         parent::__construct($appName, $request);
         $this->config = $config;
@@ -55,6 +59,7 @@ class LoginController extends Controller
         $this->userSession = $userSession;
         $this->avatarManager = $avatarManager;
         $this->groupManager = $groupManager;
+        $this->l = $l;
     }
 
     /**
@@ -108,7 +113,7 @@ class LoginController extends Controller
             }
         }
         if (!$idUrl) {
-            throw new LoginException(sprintf('Unknown OpenID provider "%s"', $provider));
+            throw new LoginException($this->l->t('Unknown OpenID provider: "%s"', $provider));
         }
         $config['openid_identifier'] = $idUrl;
         try {
@@ -128,13 +133,13 @@ class LoginController extends Controller
         $user = $this->userManager->get($uid);
         if ($this->userSession->isLoggedIn()) {
             if (null !== $user) {
-                throw new LoginException('This account already connected');
+                throw new LoginException($this->l->t('This account already connected'));
             }
             return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
         }
         if (null === $user) {
             if ($this->config->getAppValue($this->appName, 'disable_registration')) {
-                throw new LoginException('Auto creating new users is disabled');
+                throw new LoginException($this->l->t('Auto creating new users is disabled'));
             }
             $password = substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $password);
