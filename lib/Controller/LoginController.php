@@ -125,7 +125,14 @@ class LoginController extends Controller
 
     private function login($uid, Profile $profile)
     {
-        if (null === $user = $this->userManager->get($uid)) {
+        $user = $this->userManager->get($uid);
+        if ($this->userSession->isLoggedIn()) {
+            if (null !== $user) {
+                throw new LoginException('This account already connected');
+            }
+            return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
+        }
+        if (null === $user) {
             if ($this->config->getAppValue($this->appName, 'disable_registration')) {
                 throw new LoginException('Auto creating new users is disabled');
             }
@@ -155,7 +162,7 @@ class LoginController extends Controller
         $this->config->deleteUserValue($uid, $this->appName, 'password');
 
         $this->userSession->completeLogin($user, ['loginName' => $uid], false);
-        $this->userSession->createSessionToken($this->request, $uid, $uid);
+        $this->userSession->createSessionToken($this->request, $user->getUID(), $uid);
 
         return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
     }
