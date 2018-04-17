@@ -7,6 +7,7 @@
   "Disable auto create new users": "Отключить автоматическое создание новых пользователей",
   "Unknown OpenID provider: \"%s\"": "Неизвестный поставщик OpenID: \"%s\"",
   "Auto creating new users is disabled": "Автосоздание новых пользователей отключено",
-  "This account already connected": "Этот аккаунт уже соединен"
+  "This account already connected": "Этот аккаунт уже подключен",
+  "Allow users to connect social logins with their account": "Позволять пользователям подключать социальные логины к своим аккаунтам"
 },"pluralForm" :"nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);"
 }

@@ -33,7 +33,9 @@ class AdminSettings implements ISettings
         Util::addStyle($this->appName, 'settings');
         Util::addScript($this->appName, 'settings');
         $paramsNames = [
-            'new_user_group'
+            'new_user_group',
+            'disable_registration',
+            'allow_login_connect',
         ];
         $oauthProviders = [
             'facebook',

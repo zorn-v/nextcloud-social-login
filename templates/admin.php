@@ -13,8 +13,12 @@
 			<?php endforeach ?>
 		</select>
 		<div>
-			<input id="disable_registration" type="checkbox" class="checkbox" name="disable_registration" value="1" <?php p($_['disable_registration']) ? 'checked' : '' ?>/>
+			<input id="disable_registration" type="checkbox" class="checkbox" name="disable_registration" value="1" <?php p($_['disable_registration'] ? 'checked' : '') ?>/>
 			<label for="disable_registration"><?php p($l->t('Disable auto create new users')) ?></label>
+		</div>
+		<div>
+			<input id="allow_login_connect" type="checkbox" class="checkbox" name="allow_login_connect" value="1" <?php p($_['allow_login_connect'] ? 'checked' : '') ?>/>
+			<label for="allow_login_connect"><?php p($l->t('Allow users to connect social logins with their account')) ?></label>
 		</div>
 		</p>
 		<hr/>
