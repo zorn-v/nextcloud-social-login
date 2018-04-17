@@ -19,6 +19,7 @@
     </field>
 
     <index>
+      <name>sociallogin_connect_id</name>
       <unique>true</unique>
       <field>
         <name>identifier</name>
