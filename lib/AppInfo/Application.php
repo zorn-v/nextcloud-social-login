@@ -7,6 +7,7 @@ use OCP\IURLGenerator;
 use OCP\IConfig;
 use OCP\IUserManager;
 use OCP\IUser;
+use OCA\SocialLogin\Db\SocialConnectDAO;
 
 class Application extends App
 {
@@ -40,6 +41,13 @@ class Application extends App
         if ($config->getAppValue($this->appName, 'allow_login_connect')) {
             \OCP\App::registerPersonal($this->getContainer()->getAppName(), 'appinfo/personal');
         }
+
+        $this->query(IUserManager::class)->listen('\OC\User', 'preDelete', [$this, 'preDeleteUser']);
+    }
+
+    public function preDeleteUser(IUser $user)
+    {
+        $this->query(SocialConnectDAO::class)->disconnectAll($user->getUID());
     }
 
     private function query($className)
