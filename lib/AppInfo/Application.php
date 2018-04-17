@@ -37,6 +37,9 @@ class Application extends App
                 'href' => $urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$provider['title']]),
             ]);
         }
+        if ($config->getAppValue($this->appName, 'allow_login_connect')) {
+            \OCP\App::registerPersonal($this->getContainer()->getAppName(), 'appinfo/personal');
+        }
     }
 
     private function query($className)

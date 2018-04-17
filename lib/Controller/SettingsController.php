@@ -4,6 +4,7 @@ namespace OCA\SocialLogin\Controller;
 
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
 use OCP\IConfig;
 
@@ -25,5 +26,11 @@ class SettingsController extends Controller
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
         $this->config->setAppValue($this->appName, 'openid_providers', json_encode(array_values($openid_providers)));
         return new JSONResponse(['success' => true]);
+    }
+
+    public function renderPersonal()
+    {
+        $params = [];
+        return (new TemplateResponse($this->appName, 'personal', $params, ''))->render();
     }
 }
