@@ -65,7 +65,10 @@ class SettingsController extends Controller
             $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$title]);
         }
         $uid = $this->userSession->getUser()->getUID();
-
+        $connectedLogins = $this->socialConnect->getConnectedLogins($uid);
+        foreach ($connectedLogins as $login) {
+            $params['connected_logins'][$login] = '';
+        }
         return (new TemplateResponse($this->appName, 'personal', $params, ''))->render();
     }
 }

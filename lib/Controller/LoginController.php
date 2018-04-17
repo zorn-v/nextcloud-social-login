@@ -15,6 +15,7 @@ use OCP\IGroupManager;
 use OC\User\LoginException;
 use OCA\SocialLogin\Storage\SessionStorage;
 use OCA\SocialLogin\Provider\OpenID;
+use OCA\SocialLogin\Db\SocialConnectDAO;
 use Hybridauth\Hybridauth;
 use Hybridauth\User\Profile;
 use Hybridauth\HttpClient\Curl;
@@ -37,6 +38,8 @@ class LoginController extends Controller
     private $groupManager;
     /** @var IL10N */
     private $l;
+    /** @var SocialConnectDAO */
+    private $socialConnect;
 
 
     public function __construct(
@@ -49,7 +52,8 @@ class LoginController extends Controller
         IUserSession $userSession,
         IAvatarManager $avatarManager,
         IGroupManager $groupManager,
-        IL10N $l
+        IL10N $l,
+        SocialConnectDAO $socialConnect
     ) {
         parent::__construct($appName, $request);
         $this->config = $config;
@@ -60,6 +64,7 @@ class LoginController extends Controller
         $this->avatarManager = $avatarManager;
         $this->groupManager = $groupManager;
         $this->l = $l;
+        $this->socialConnect = $socialConnect;
     }
 
     /**
@@ -131,10 +136,16 @@ class LoginController extends Controller
     private function login($uid, Profile $profile)
     {
         $user = $this->userManager->get($uid);
+        if (null === $user) {
+            $connectedUid = $this->socialConnect->findUID($uid);
+            $user = $this->userManager->get($connectedUid);
+        }
         if ($this->userSession->isLoggedIn()) {
             if (null !== $user) {
                 throw new LoginException($this->l->t('This account already connected'));
             }
+            $currentUid = $this->userSession->getUser()->getUID();
+            $this->socialConnect->connectLogin($currentUid, $uid);
             return new RedirectResponse($this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section'=>'additional']));
         }
         if (null === $user) {

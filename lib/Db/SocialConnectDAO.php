@@ -29,7 +29,8 @@ class SocialConnectDAO
         $row = $stmt->fetch();
 
         $stmt->closeCursor();
-        return $row ? $row->uid : null;
+
+        return $row ? $row['uid'] : null;
     }
 
     public function connectLogin($uid, $identifier)
@@ -67,7 +68,7 @@ class SocialConnectDAO
 
         $result = [];
         while ($row = $stmt->fetch()) {
-            $result[] = $row->identifier;
+            $result[] = $row['identifier'];
         }
         $stmt->closeCursor();
 
