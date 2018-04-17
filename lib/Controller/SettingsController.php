@@ -5,10 +5,12 @@ namespace OCA\SocialLogin\Controller;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\AppFramework\Http\RedirectResponse;
 use OCP\IRequest;
 use OCP\IConfig;
 use OCP\IURLGenerator;
 use OCP\IUserSession;
+use OCP\Util;
 use OCA\SocialLogin\Db\SocialConnectDAO;
 
 class SettingsController extends Controller
@@ -67,8 +69,20 @@ class SettingsController extends Controller
         $uid = $this->userSession->getUser()->getUID();
         $connectedLogins = $this->socialConnect->getConnectedLogins($uid);
         foreach ($connectedLogins as $login) {
-            $params['connected_logins'][$login] = '';
+            $params['connected_logins'][$login] = $this->urlGenerator->linkToRoute($this->appName.'.settings.disconnectSocialLogin', [
+                'login' => $login,
+                'requesttoken' => Util::callRegister(),
+            ]);
         }
         return (new TemplateResponse($this->appName, 'personal', $params, ''))->render();
+    }
+
+    /**
+     * @NoAdminRequired
+     */
+    public function disconnectSocialLogin($login)
+    {
+        $this->socialConnect->disconnectLogin($login);
+        return new RedirectResponse($this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section'=>'additional']));
     }
 }
