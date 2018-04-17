@@ -17,9 +17,10 @@ class SettingsController extends Controller
         $this->config = $config;
     }
 
-    public function saveAdmin($new_user_group, $providers, $openid_providers)
+    public function saveAdmin($new_user_group, $disable_registration, $providers, $openid_providers)
     {
         $this->config->setAppValue($this->appName, 'new_user_group', $new_user_group);
+        $this->config->setAppValue($this->appName, 'disable_registration', $disable_registration);
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
         $this->config->setAppValue($this->appName, 'openid_providers', json_encode(array_values($openid_providers)));
         return new JSONResponse(['success' => true]);

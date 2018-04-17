@@ -126,6 +126,9 @@ class LoginController extends Controller
     private function login($uid, Profile $profile)
     {
         if (null === $user = $this->userManager->get($uid)) {
+            if ($this->config->getAppValue($this->appName, 'disable_registration')) {
+                throw new LoginException('Auto creating new users is disabled');
+            }
             $password = substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $password);
             $user->setDisplayName((string)$profile->displayName);

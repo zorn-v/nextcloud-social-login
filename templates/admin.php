@@ -12,6 +12,10 @@
 				<option value="<?php p($group) ?>" <?php p($_['new_user_group'] === $group ? 'selected' : '') ?>><?php p($group) ?></option>
 			<?php endforeach ?>
 		</select>
+		<div>
+			<input id="disable_registration" type="checkbox" class="checkbox" name="disable_registration" value="1" <?php p($_['disable_registration']) ? 'checked' : '' ?>/>
+			<label for="disable_registration"><?php p($l->t('Disable auto create new users')) ?></label>
+		</div>
 		</p>
 		<hr/>
 		<?php foreach ($_['providers'] as $title=>$provider): ?>
