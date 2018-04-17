@@ -4,7 +4,8 @@ namespace OCA\SocialLogin\Db;
 
 use OCP\IDBConnection;
 
-class SocialConnectDAO {
+class SocialConnectDAO
+{
 
     private $db;
 

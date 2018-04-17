@@ -135,7 +135,7 @@ class LoginController extends Controller
             if (null !== $user) {
                 throw new LoginException($this->l->t('This account already connected'));
             }
-            return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
+            return new RedirectResponse($this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section'=>'additional']));
         }
         if (null === $user) {
             if ($this->config->getAppValue($this->appName, 'disable_registration')) {

@@ -7,15 +7,34 @@ use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
 use OCP\IConfig;
+use OCP\IURLGenerator;
+use OCP\IUserSession;
+use OCA\SocialLogin\Db\SocialConnectDAO;
 
 class SettingsController extends Controller
 {
+    /** @var IConfig */
     private $config;
+    /** @var IURLGenerator */
+    private $urlGenerator;
+    /** @var IUserSession */
+    private $userSession;
+    /** @var SocialConnectDAO */
+    private $socialConnect;
 
-    public function __construct($appName, IRequest $request, IConfig $config)
-    {
+    public function __construct(
+        $appName,
+        IRequest $request,
+        IConfig $config,
+        IURLGenerator $urlGenerator,
+        IUserSession $userSession,
+        SocialConnectDAO $socialConnect
+    ) {
         parent::__construct($appName, $request);
         $this->config = $config;
+        $this->urlGenerator = $urlGenerator;
+        $this->userSession = $userSession;
+        $this->socialConnect = $socialConnect;
     }
 
     public function saveAdmin($new_user_group, $disable_registration, $allow_login_connect, $providers, $openid_providers)
@@ -30,7 +49,23 @@ class SettingsController extends Controller
 
     public function renderPersonal()
     {
-        $params = [];
+        $params = [
+            'providers' => [],
+            'connected_logins' => [],
+        ];
+        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
+        foreach ($providers as $title=>$provider) {
+            if ($provider['appid']) {
+                $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$title]);
+            }
+        }
+        $providers = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
+        foreach ($providers as $provider) {
+            $title = $provider['title'];
+            $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$title]);
+        }
+        $uid = $this->userSession->getUser()->getUID();
+
         return (new TemplateResponse($this->appName, 'personal', $params, ''))->render();
     }
 }
