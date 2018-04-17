@@ -56,15 +56,19 @@ class SettingsController extends Controller
             'connected_logins' => [],
         ];
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
-        foreach ($providers as $title=>$provider) {
-            if ($provider['appid']) {
-                $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$title]);
+        if (is_array($providers)) {
+            foreach ($providers as $title=>$provider) {
+                if ($provider['appid']) {
+                    $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$title]);
+                }
             }
         }
         $providers = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
-        foreach ($providers as $provider) {
-            $title = $provider['title'];
-            $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$title]);
+        if (is_array($providers)) {
+            foreach ($providers as $provider) {
+                $title = $provider['title'];
+                $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$title]);
+            }
         }
         $uid = $this->userSession->getUser()->getUID();
         $connectedLogins = $this->socialConnect->getConnectedLogins($uid);

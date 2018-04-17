@@ -51,7 +51,7 @@ class AdminSettings implements ISettings
         $providers = [];
         $savedProviders = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
         foreach ($oauthProviders as $provider) {
-            if (isset($savedProviders[$provider])) {
+            if (array_key_exists($provider, $savedProviders)) {
                 $providers[$provider] = $savedProviders[$provider];
             } else {
                 $providers[$provider] = [
@@ -61,6 +61,9 @@ class AdminSettings implements ISettings
             }
         }
         $openIdProviders = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
+        if (!is_array($openIdProviders)) {
+            $openIdProviders = [];
+        }
         $params = [
             'action_url' => $this->urlGenerator->linkToRoute($this->appName.'.settings.saveAdmin'),
             'groups' => $groupNames,

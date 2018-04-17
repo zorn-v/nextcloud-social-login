@@ -77,17 +77,19 @@ class LoginController extends Controller
             'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.oauth', ['provider'=>$provider])
         ];
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
-        foreach ($providers as $title=>$prov) {
-            $idKey = in_array($title, ['twitter']) ? 'key' : 'id';
-            $keys = [
-                $idKey   => $prov['appid'],
-                'secret' => $prov['secret'],
-            ];
-            $config['providers'][ucfirst($title)] = [
-                'enabled' => true,
-                'keys' => $keys,
-                'scope' => 'email',
-            ];
+        if (is_array($providers)) {
+            foreach ($providers as $title=>$prov) {
+                $idKey = in_array($title, ['twitter']) ? 'key' : 'id';
+                $keys = [
+                    $idKey   => $prov['appid'],
+                    'secret' => $prov['secret'],
+                ];
+                $config['providers'][ucfirst($title)] = [
+                    'enabled' => true,
+                    'keys' => $keys,
+                    'scope' => 'email',
+                ];
+            }
         }
         try {
             $auth = new Hybridauth($config, null, $this->storage);
@@ -112,9 +114,11 @@ class LoginController extends Controller
         ];
         $idUrl = null;
         $providers = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
-        foreach ($providers as $prov) {
-            if ($prov['title'] === $provider) {
-                $idUrl = $prov['url'];
+        if (is_array($providers)) {
+            foreach ($providers as $prov) {
+                if ($prov['title'] === $provider) {
+                    $idUrl = $prov['url'];
+                }
             }
         }
         if (!$idUrl) {

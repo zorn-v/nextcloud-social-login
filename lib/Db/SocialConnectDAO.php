@@ -58,6 +58,10 @@ class SocialConnectDAO
         $stmt->execute();
     }
 
+    /**
+     * @param string $uid
+     * @return array
+     */
     public function getConnectedLogins($uid)
     {
         $sql = 'SELECT * FROM `*PREFIX*sociallogin_connect` ' .
