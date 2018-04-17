@@ -32,11 +32,13 @@ class Application extends App
             }
         }
         $providers = json_decode($config->getAppValue($this->appName, 'openid_providers', '[]'), true);
-        foreach ($providers as $provider) {
-            \OC_App::registerLogIn([
-                'name' => ucfirst($provider['title']),
-                'href' => $urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$provider['title']]),
-            ]);
+        if (is_array($providers) || is_object($providers))
+            foreach ($providers as $provider) {
+                \OC_App::registerLogIn([
+                    'name' => ucfirst($provider['title']),
+                    'href' => $urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$provider['title']]),
+                ]);
+            }
         }
         if ($config->getAppValue($this->appName, 'allow_login_connect')) {
             \OCP\App::registerPersonal($this->getContainer()->getAppName(), 'appinfo/personal');
