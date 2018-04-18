@@ -79,17 +79,20 @@
 					<?php p('Authorize url') ?><br>
 					<input type="url" name="oauth2_providers[<?php p($k) ?>][authorizeUrl]" value="<?php p($provider['authorizeUrl']) ?>" required/>
 				</label>
+        <br>
         <label>
           <?php p('Token url') ?><br>
-          <input type="url" name="oauth2_providers[<?php p($k) ?>][tokenUrl]" value="<?php p($provider['authorizeUrl']) ?>" required/>
+          <input type="url" name="oauth2_providers[<?php p($k) ?>][tokenUrl]" value="<?php p($provider['tokenUrl']) ?>" required/>
         </label>
+        <br>
         <label>
           <?php p('Client Id') ?><br>
-          <input type="url" name="oauth2_providers[<?php p($k) ?>][authorizeUrl]" value="<?php p($provider['clientId']) ?>" required/>
+          <input type="text" name="oauth2_providers[<?php p($k) ?>][clientId]" value="<?php p($provider['clientId']) ?>" required/>
         </label>
+        <br>
         <label>
           <?php p('Client Secret') ?><br>
-          <input type="url" name="oauth2_providers[<?php p($k) ?>][authorizeUrl]" value="<?php p($provider['clientSecret']) ?>" required/>
+          <input type="text" name="oauth2_providers[<?php p($k) ?>][clientSecret]" value="<?php p($provider['clientSecret']) ?>" required/>
         </label>
 
 			</div>
@@ -119,12 +122,12 @@
 		<br>
     <label>
 			<?php p('Authorize URL') ?><br>
-			<input type="text" name="oauth2_providers[{{provider_id}}][authorizeURL]" required/>
+			<input type="url" name="oauth2_providers[{{provider_id}}][authorizeUrl]" required/>
 		</label>
 		<br>
     <label>
 			<?php p('Token URL') ?><br>
-			<input type="text" name="oauth2_providers[{{provider_id}}][tokenURL]" required/>
+			<input type="url" name="oauth2_providers[{{provider_id}}][tokenUrl]" required/>
 		</label>
 		<br>
     <label>

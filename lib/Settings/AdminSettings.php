@@ -64,11 +64,17 @@ class AdminSettings implements ISettings
         if (!is_array($openIdProviders)) {
             $openIdProviders = [];
         }
+        $oauth2Providers = json_decode($this->config->getAppValue($this->appName, 'oauth2_providers', '[]'), true);
+        if (!is_array($oauth2Providers)) {
+            $oauth2Providers = [];
+        }
+
         $params = [
             'action_url' => $this->urlGenerator->linkToRoute($this->appName.'.settings.saveAdmin'),
             'groups' => $groupNames,
             'providers' => $providers,
             'openid_providers' => $openIdProviders,
+            'oauth2_providers' => $oauth2Providers,            
         ];
         foreach ($paramsNames as $paramName) {
             $params[$paramName] = $this->config->getAppValue($this->appName, $paramName);

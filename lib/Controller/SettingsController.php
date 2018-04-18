@@ -39,13 +39,14 @@ class SettingsController extends Controller
         $this->socialConnect = $socialConnect;
     }
 
-    public function saveAdmin($new_user_group, $disable_registration, $allow_login_connect, $providers, $openid_providers)
+    public function saveAdmin($new_user_group, $disable_registration, $allow_login_connect, $providers, $openid_providers, $oauth2_providers)
     {
         $this->config->setAppValue($this->appName, 'new_user_group', $new_user_group);
         $this->config->setAppValue($this->appName, 'disable_registration', $disable_registration ? true : false);
         $this->config->setAppValue($this->appName, 'allow_login_connect', $allow_login_connect ? true : false);
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
         $this->config->setAppValue($this->appName, 'openid_providers', json_encode(array_values($openid_providers)));
+        $this->config->setAppValue($this->appName, 'oauth2_providers', json_encode(array_values($oauth2_providers)));
         return new JSONResponse(['success' => true]);
     }
 
@@ -70,6 +71,14 @@ class SettingsController extends Controller
                 $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$title]);
             }
         }
+        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth2_providers', '[]'), true);
+        if (is_array($providers)) {
+            foreach ($providers as $provider) {
+                $title = $provider['title'];
+                $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth2', ['provider'=>$title]);
+            }
+        }
+
         $uid = $this->userSession->getUser()->getUID();
         $connectedLogins = $this->socialConnect->getConnectedLogins($uid);
         foreach ($connectedLogins as $login) {
