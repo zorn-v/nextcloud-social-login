@@ -60,9 +60,45 @@
 		<?php endforeach ?>
 		</div>
 		<br/>
+    <h2>
+			OAuth2
+			<button id="oauth2_add" type="button">
+				<div class="icon-add"></div>
+			</button>
+		</h2>
+		<div id="oauth2_providers">
+		<?php foreach ($_['oauth2_providers'] as $k=>$provider): ?>
+			<div class="provider-settings">
+				<div class="oauth2-remove">x</div>
+				<label>
+					<?php p('Title') ?><br>
+					<input type="text" name="oauth2_providers[<?php p($k) ?>][title]" value="<?php p($provider['title']) ?>" required/>
+				</label>
+				<br>
+        <label>
+					<?php p('Authorize url') ?><br>
+					<input type="url" name="oauth2_providers[<?php p($k) ?>][authorizeUrl]" value="<?php p($provider['authorizeUrl']) ?>" required/>
+				</label>
+        <label>
+          <?php p('Token url') ?><br>
+          <input type="url" name="oauth2_providers[<?php p($k) ?>][tokenUrl]" value="<?php p($provider['authorizeUrl']) ?>" required/>
+        </label>
+        <label>
+          <?php p('Client Id') ?><br>
+          <input type="url" name="oauth2_providers[<?php p($k) ?>][authorizeUrl]" value="<?php p($provider['clientId']) ?>" required/>
+        </label>
+        <label>
+          <?php p('Client Secret') ?><br>
+          <input type="url" name="oauth2_providers[<?php p($k) ?>][authorizeUrl]" value="<?php p($provider['clientSecret']) ?>" required/>
+        </label>
+
+			</div>
+		<?php endforeach ?>
+		</div>
+		<br/>
 		<button><?php p($l->t('Save')); ?></button>
 	</form>
-	<div id="openid_provider_tpl" class="provider-settings" data-new-id="<?php p(count($_['openid_providers'])) ?>">
+  <div id="openid_provider_tpl" class="provider-settings" data-new-id="<?php p(count($_['openid_providers'])) ?>">
 		<div class="openid-remove">x</div>
 		<label>
 			<?php p('Title') ?><br>
@@ -74,4 +110,34 @@
 			<input type="url" name="openid_providers[{{provider_id}}][url]" required/>
 		</label>
 	</div>
+  <div id="oauth2_provider_tpl" class="provider-settings" data-new-id="<?php p(count($_['oauth2_providers'])) ?>">
+		<div class="oauth2-remove">x</div>
+    <label>
+			<?php p('Title') ?><br>
+			<input type="text" name="oauth2_providers[{{provider_id}}][title]" required/>
+		</label>
+		<br>
+    <label>
+			<?php p('Authorize URL') ?><br>
+			<input type="text" name="oauth2_providers[{{provider_id}}][authorizeURL]" required/>
+		</label>
+		<br>
+    <label>
+			<?php p('Token URL') ?><br>
+			<input type="text" name="oauth2_providers[{{provider_id}}][tokenURL]" required/>
+		</label>
+		<br>
+    <label>
+			<?php p('Client Id') ?><br>
+			<input type="text" name="oauth2_providers[{{provider_id}}][clientId]" required/>
+		</label>
+		<br>
+    <label>
+			<?php p('Client Secret') ?><br>
+			<input type="text" name="oauth2_providers[{{provider_id}}][clientSecret]" required/>
+		</label>
+		<br>
+
+	</div>
+
 </div>

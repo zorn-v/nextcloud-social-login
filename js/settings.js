@@ -9,30 +9,43 @@ jQuery(function ($) {
         }
       });
   });
-  $('#openid_providers').delegate('.openid-remove', 'click', function () {
-    var $provider = $(this).parents('.provider-settings');
-    var needConfirm = $provider.find('input').filter(function () {return this.value}).length > 0;
-    if (needConfirm) {
-      OCdialogs.confirm(
-        t(appName, 'Do you realy want to remove this OpenID provider ?'),
-        t(appName, 'Confirm remove'),
-        function (confirmed) {
-          if (!confirmed) {
-            return;
-          }
-          $provider.remove();
-        },
-        true
-      );
-    } else {
-      $provider.remove();
-    }
-  });
-  $('#openid_add').click(function () {
-    var $tpl = $('#openid_provider_tpl');
-    var newId = $tpl.data('new-id');
-    $tpl.data('new-id', newId+1);
-    var html = $tpl.html().replace(/{{provider_id}}/g, newId);
-    $('#openid_providers').append('<div class="provider-settings">'+html+'</div>');
-  })
+
+  initProviderType('openid');
+  initProviderType('oauth2');
+
+  function initProviderType(providerType){
+    createDelegate(providerType);
+    createAdd(providerType);
+  }
+
+  function createDelegate(providerType){
+    $('#'+providerType+'_providers').delegate('.'+providerType+'-remove', 'click', function () {
+      var $provider = $(this).parents('.provider-settings');
+      var needConfirm = $provider.find('input').filter(function () {return this.value}).length > 0;
+      if (needConfirm) {
+        OCdialogs.confirm(
+          t(appName, 'Do you realy want to remove this '+providerType+' provider ?'),
+          t(appName, 'Confirm remove'),
+          function (confirmed) {
+            if (!confirmed) {
+              return;
+            }
+            $provider.remove();
+          },
+          true
+        );
+      } else {
+        $provider.remove();
+      }
+    });
+  }
+  function createAdd(providerType){
+    $('#'+providerType+'_add').click(function () {
+      var $tpl = $('#'+providerType+'_provider_tpl');
+      var newId = $tpl.data('new-id');
+      $tpl.data('new-id', newId+1);
+      var html = $tpl.html().replace(/{{provider_id}}/g, newId);
+      $('#'+providerType+'_providers').append('<div class="provider-settings">'+html+'</div>');
+    })
+  }
 });
