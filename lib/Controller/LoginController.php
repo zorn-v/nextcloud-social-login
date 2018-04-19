@@ -15,10 +15,12 @@ use OCP\IGroupManager;
 use OC\User\LoginException;
 use OCA\SocialLogin\Storage\SessionStorage;
 use OCA\SocialLogin\Provider\OpenID;
+use OCA\SocialLogin\Provider\OAuth2;
 use OCA\SocialLogin\Db\SocialConnectDAO;
 use Hybridauth\Hybridauth;
 use Hybridauth\User\Profile;
 use Hybridauth\HttpClient\Curl;
+use Hybridauth\Data;
 
 class LoginController extends Controller
 {
@@ -136,6 +138,51 @@ class LoginController extends Controller
         $uid = preg_replace('#[^0-9a-z_.@-]#i', '', $provider.'-'.$profileId);
         return $this->login($uid, $profile);
     }
+
+    /**
+     * @PublicPage
+     * @NoCSRFRequired
+     */
+    public function oauth2($provider)
+    {
+        $config = [
+            'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.oauth2', ['provider'=>$provider])
+        ];
+
+        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth2_providers', '[]'), true);
+        if (is_array($providers)) {
+            foreach ($providers as $prov) {
+                if ($prov['title'] === $provider) {
+                    $keys                = [
+                      'key'    => $prov['clientId'],
+                      'secret' => $prov['clientSecret']
+                    ];
+                    $endpoints = new Data\Collection ([
+                      'authorize_url'    => $prov['authorizeUrl'],
+                      'access_token_url' => $prov['tokenUrl'],
+                      'api_base_url'     => 'TODO'
+                    ]);
+                    $config['keys']      = $keys;
+                    $config['scope']     = $prov['scope'];
+                    $config['endpoints'] = $endpoints;
+                }
+            }
+        }
+        if (!$config['keys']) {
+            throw new LoginException($this->l->t('Unknown OAuth2 provider: "%s"', $provider));
+        }
+        try {
+            $adapter = new OAuth2($config, null, $this->storage);
+            $adapter->authenticate();
+            $profile = $adapter->getUserProfile();
+        }  catch (\Exception $e) {
+            throw new LoginException($e->getMessage());
+        }
+        $profileId = preg_replace('#.*/#', '', rtrim($profile->identifier, '/'));
+        $uid = preg_replace('#[^0-9a-z_.@-]#i', '', $provider.'-'.$profileId);
+        return $this->login($uid, $profile);
+    }
+
 
     private function login($uid, Profile $profile)
     {

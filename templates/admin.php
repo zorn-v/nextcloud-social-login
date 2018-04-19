@@ -94,7 +94,11 @@
           <?php p('Client Secret') ?><br>
           <input type="text" name="oauth2_providers[<?php p($k) ?>][clientSecret]" value="<?php p($provider['clientSecret']) ?>" required/>
         </label>
-
+        <br>
+        <label>
+          <?php p('Scope') ?><br>
+          <input type="text" name="oauth2_providers[<?php p($k) ?>][scope]" value="<?php p($provider['scope']) ?>" required/>
+        </label>
 			</div>
 		<?php endforeach ?>
 		</div>
@@ -140,7 +144,11 @@
 			<input type="text" name="oauth2_providers[{{provider_id}}][clientSecret]" required/>
 		</label>
 		<br>
-
+    <label>
+			<?php p('Scope') ?><br>
+			<input type="text" name="oauth2_providers[{{provider_id}}][scope]" required/>
+		</label>
+		<br>
 	</div>
 
 </div>
