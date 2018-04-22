@@ -98,6 +98,9 @@ class LoginController extends Controller
         } catch (\Exception $e) {
             throw new LoginException($e->getMessage());
         }
+        if (empty($profile->identifier)) {
+            throw new LoginException($this->l->t('Can not get identifier from provider'));
+        }
         $uid = $provider.'-'.$profile->identifier;
 
         return $this->login($uid, $profile);
@@ -133,6 +136,9 @@ class LoginController extends Controller
             throw new LoginException($e->getMessage());
         }
         $profileId = preg_replace('#.*/#', '', rtrim($profile->identifier, '/'));
+        if (empty($profileId)) {
+            throw new LoginException($this->l->t('Can not get identifier from provider'));
+        }
         $uid = preg_replace('#[^0-9a-z_.@-]#i', '', $provider.'-'.$profileId);
         return $this->login($uid, $profile);
     }
