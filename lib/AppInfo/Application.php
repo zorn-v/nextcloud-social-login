@@ -42,12 +42,12 @@ class Application extends App
                 ]);
             }
         }
-        $providers = json_decode($config->getAppValue($this->appName, 'oauth2_providers', '[]'), true);
+        $providers = json_decode($config->getAppValue($this->appName, 'custom_oauth_providers', '[]'), true);
         if (is_array($providers)) {
             foreach ($providers as $provider) {
                 \OC_App::registerLogIn([
                     'name' => ucfirst($provider['title']),
-                    'href' => $urlGenerator->linkToRoute($this->appName.'.login.oauth2', ['provider'=>$provider['title']]),
+                    'href' => $urlGenerator->linkToRoute($this->appName.'.login.custom_oauth', ['provider'=>$provider['title']]),
                 ]);
             }
         }

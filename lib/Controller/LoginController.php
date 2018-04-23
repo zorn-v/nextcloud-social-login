@@ -143,13 +143,13 @@ class LoginController extends Controller
      * @PublicPage
      * @NoCSRFRequired
      */
-    public function oauth2($provider)
+    public function customOauth($provider)
     {
         $config = [
-            'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.oauth2', ['provider'=>$provider])
+            'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom_oauth', ['provider'=>$provider])
         ];
 
-        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth2_providers', '[]'), true);
+        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oauth_providers', '[]'), true);
         if (is_array($providers)) {
             foreach ($providers as $prov) {
                 if ($prov['title'] === $provider) {
@@ -160,7 +160,7 @@ class LoginController extends Controller
                     $endpoints = new Data\Collection ([
                       'authorize_url'    => $prov['authorizeUrl'],
                       'access_token_url' => $prov['tokenUrl'],
-                      'api_base_url'     => 'TODO'
+                      'api_base_url'     => ''
                     ]);
                     $config['keys']      = $keys;
                     $config['scope']     = $prov['scope'];
@@ -169,7 +169,7 @@ class LoginController extends Controller
             }
         }
         if (!$config['keys']) {
-            throw new LoginException($this->l->t('Unknown OAuth2 provider: "%s"', $provider));
+            throw new LoginException($this->l->t('Unknown custom OAuth2 provider: "%s"', $provider));
         }
         try {
             $adapter = new OAuth2($config, null, $this->storage);

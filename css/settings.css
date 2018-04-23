@@ -7,7 +7,7 @@
   margin-right: 15px;
   margin-bottom: 20px;
 }
-.provider-settings .openid-remove, .provider-settings .oauth2-remove   {
+.provider-settings .openid-remove, .provider-settings .custom_oauth-remove   {
   float: right;
   cursor: pointer;
   font-weight: bold;
@@ -15,6 +15,6 @@
   width: 20px;
   text-align: center;
 }
-#openid_provider_tpl, #oauth2_provider_tpl {
+#openid_provider_tpl, #custom_oauth_provider_tpl {
   display: none !important;
 }

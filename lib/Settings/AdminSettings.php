@@ -64,9 +64,9 @@ class AdminSettings implements ISettings
         if (!is_array($openIdProviders)) {
             $openIdProviders = [];
         }
-        $oauth2Providers = json_decode($this->config->getAppValue($this->appName, 'oauth2_providers', '[]'), true);
-        if (!is_array($oauth2Providers)) {
-            $oauth2Providers = [];
+        $custom_oauthProviders = json_decode($this->config->getAppValue($this->appName, 'custom_oauth_providers', '[]'), true);
+        if (!is_array($custom_oauthProviders)) {
+            $custom_oauthProviders = [];
         }
 
         $params = [
@@ -74,7 +74,7 @@ class AdminSettings implements ISettings
             'groups' => $groupNames,
             'providers' => $providers,
             'openid_providers' => $openIdProviders,
-            'oauth2_providers' => $oauth2Providers,            
+            'custom_oauth_providers' => $custom_oauthProviders,            
         ];
         foreach ($paramsNames as $paramName) {
             $params[$paramName] = $this->config->getAppValue($this->appName, $paramName);
