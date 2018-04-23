@@ -15,7 +15,7 @@ use OCP\IGroupManager;
 use OC\User\LoginException;
 use OCA\SocialLogin\Storage\SessionStorage;
 use OCA\SocialLogin\Provider\OpenID;
-use OCA\SocialLogin\Provider\OAuth2;
+use OCA\SocialLogin\Provider\CustomOpenIDConnect;
 use OCA\SocialLogin\Db\SocialConnectDAO;
 use Hybridauth\Hybridauth;
 use Hybridauth\User\Profile;
@@ -143,13 +143,13 @@ class LoginController extends Controller
      * @PublicPage
      * @NoCSRFRequired
      */
-    public function customOauth($provider)
+    public function customOidc($provider)
     {
         $config = [
-            'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom_oauth', ['provider'=>$provider])
+            'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom_oidc', ['provider'=>$provider])
         ];
 
-        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oauth_providers', '[]'), true);
+        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oidc_providers', '[]'), true);
         if (is_array($providers)) {
             foreach ($providers as $prov) {
                 if ($prov['title'] === $provider) {
@@ -169,10 +169,10 @@ class LoginController extends Controller
             }
         }
         if (!$config['keys']) {
-            throw new LoginException($this->l->t('Unknown custom OAuth2 provider: "%s"', $provider));
+            throw new LoginException($this->l->t('Unknown custom OpenID Connect provider: "%s"', $provider));
         }
         try {
-            $adapter = new OAuth2($config, null, $this->storage);
+            $adapter = new CustomOpenIDConnect($config, null, $this->storage);
             $adapter->authenticate();
             $profile = $adapter->getUserProfile();
         }  catch (\Exception $e) {

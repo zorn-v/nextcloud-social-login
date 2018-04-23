@@ -13,8 +13,8 @@ return [
         ['name' => 'login#oauth', 'url' => '/oauth/{provider}', 'verb' => 'GET'],
         ['name' => 'login#openid', 'url' => '/openid/{provider}', 'verb' => 'GET'],
         ['name' => 'login#openid', 'url' => '/openid/{provider}', 'postfix' => '.post', 'verb' => 'POST'],
-        ['name' => 'login#custom_oauth', 'url' => '/custom_oauth/{provider}', 'verb' => 'GET'],
-        ['name' => 'login#custom_oauth', 'url' => '/custom_oauth/{provider}', 'postfix' => '.post', 'verb' => 'POST'],
+        ['name' => 'login#custom_oidc', 'url' => '/custom_oidc/{provider}', 'verb' => 'GET'],
+        ['name' => 'login#custom_oidc', 'url' => '/custom_oidc/{provider}', 'postfix' => '.post', 'verb' => 'POST'],
         ['name' => 'settings#disconnectSocialLogin', 'url' => '/disconnect-social/{login}', 'verb' => 'GET'],
     ]
 ];

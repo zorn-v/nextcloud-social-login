@@ -11,7 +11,7 @@ jQuery(function ($) {
   });
 
   initProviderType('openid');
-  initProviderType('custom_oauth');
+  initProviderType('custom_oidc');
 
   function initProviderType(providerType){
     createDelegate(providerType);

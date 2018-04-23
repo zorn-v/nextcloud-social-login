@@ -6,7 +6,7 @@ use Hybridauth\User;
 use Hybridauth\Data;
 use Hybridauth\Exception\Exception;
 
-class OAuth2 extends \Hybridauth\Adapter\OAuth2
+class CustomOpenIDConnect extends \Hybridauth\Adapter\OAuth2
 {
     /**
     * {@inheritdoc}
