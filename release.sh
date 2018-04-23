@@ -7,7 +7,18 @@ VERSION=v`grep '<version>' appinfo/info.xml | sed 's/[^0-9.]//g'`
 UPLOAD_URL=`curl -sH "Authorization: token $GITHUB_TOKEN" -d "{\"tag_name\":\"$VERSION\"}" https://api.github.com/repos/zorn-v/nextcloud-social-login/releases | grep '"upload_url"' | sed 's/.*"\(https:.*\){.*/\1/'`
 [ -z "$UPLOAD_URL" ] && echo Can not get assets url && exit 1
 
-git archive master --prefix=sociallogin/ -o release.tar.gz
+git checkout -b release
+sed -i '/<description><\/description>/ {
+  a <description><![CDATA[
+  r README.md
+  a ]]></description>
+  d
+}' appinfo/info.xml
+git commit -am 'Release'
+git archive release --prefix=sociallogin/ -o release.tar.gz
+git checkout master
+git branch -D release
+
 curl -sH "Authorization: token $GITHUB_TOKEN" -H 'Content-Type: application/octet-stream' --data-binary '@release.tar.gz' ${UPLOAD_URL}?name=release.tar.gz > /dev/null
 DOWNLOAD_URL=https://github.com/zorn-v/nextcloud-social-login/releases/download/$VERSION/release.tar.gz
 

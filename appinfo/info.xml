@@ -4,8 +4,8 @@
     <id>sociallogin</id>
     <name>Social Login</name>
     <summary>Social login via OAuth</summary>
-    <description><![CDATA[Make possible create users and login via OAuth]]></description>
-    <version>1.3.4</version>
+    <description></description>
+    <version>1.3.5</version>
     <licence>agpl</licence>
     <author mail="zorn7@yandex.ru" homepage="https://github.com/zorn-v/nextcloud-social-login">Zorn</author>
     <namespace>SocialLogin</namespace>
