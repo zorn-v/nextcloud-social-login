@@ -36,6 +36,7 @@ class AdminSettings implements ISettings
             'new_user_group',
             'disable_registration',
             'allow_login_connect',
+            'auto_redirect'
         ];
         $oauthProviders = [
             'facebook',
