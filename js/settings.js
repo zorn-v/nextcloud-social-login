@@ -1,12 +1,22 @@
 jQuery(function ($) {
   var appName = 'sociallogin';
+  var showError = function(text) {
+      OC.Notification.showTemporary('<div style="font-weight:bold;color:red">'+text+'<div>', {isHTML: true});
+    }
   $('#sociallogin_settings').submit(function (e) {
     e.preventDefault();
     $.post(this.action, $(this).serialize())
       .success(function (data) {
-        if (data && data.success) {
-          OC.Notification.showTemporary(t(appName, 'Settings for social login successfully saved'));
+        if (data) {
+          if (data.success) {
+            OC.Notification.showTemporary(t(appName, 'Settings for social login successfully saved'));
+          } else {
+            showError(data.message);
+          }
         }
+      })
+      .error(function () {
+        showError(t(appName, 'Some error occurred while saving settings'));
       });
   });
 
@@ -24,7 +34,7 @@ jQuery(function ($) {
       var needConfirm = $provider.find('input').filter(function () {return this.value}).length > 0;
       if (needConfirm) {
         OCdialogs.confirm(
-          t(appName, 'Do you realy want to remove this '+providerType+' provider ?'),
+          t(appName, 'Do you realy want to remove this {providerType} provider ?', {'providerType': providerType}),
           t(appName, 'Confirm remove'),
           function (confirmed) {
             if (!confirmed) {

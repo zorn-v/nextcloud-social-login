@@ -6,6 +6,7 @@ use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\RedirectResponse;
+use OCP\IL10N;
 use OCP\IRequest;
 use OCP\IConfig;
 use OCP\IURLGenerator;
@@ -21,6 +22,8 @@ class SettingsController extends Controller
     private $urlGenerator;
     /** @var IUserSession */
     private $userSession;
+    /** @var IL10N */
+    private $l;
     /** @var SocialConnectDAO */
     private $socialConnect;
 
@@ -30,17 +33,25 @@ class SettingsController extends Controller
         IConfig $config,
         IURLGenerator $urlGenerator,
         IUserSession $userSession,
+        IL10N $l,
         SocialConnectDAO $socialConnect
     ) {
         parent::__construct($appName, $request);
         $this->config = $config;
         $this->urlGenerator = $urlGenerator;
         $this->userSession = $userSession;
+        $this->l = $l;
         $this->socialConnect = $socialConnect;
     }
 
     public function saveAdmin($new_user_group, $disable_registration, $allow_login_connect, $auto_redirect, $providers, $openid_providers, $custom_oidc_providers)
     {
+        try {
+            $this->checkProviders($openid_providers);
+            $this->checkProviders($custom_oidc_providers);
+        } catch (\Exception $e) {
+            return new JSONResponse(['message' => $e->getMessage()]);
+        }
         $this->config->setAppValue($this->appName, 'new_user_group', $new_user_group);
         $this->config->setAppValue($this->appName, 'disable_registration', $disable_registration ? true : false);
         $this->config->setAppValue($this->appName, 'allow_login_connect', $allow_login_connect ? true : false);
@@ -49,6 +60,21 @@ class SettingsController extends Controller
         $this->config->setAppValue($this->appName, 'openid_providers', json_encode(array_values($openid_providers)));
         $this->config->setAppValue($this->appName, 'custom_oidc_providers', json_encode(array_values($custom_oidc_providers)));
         return new JSONResponse(['success' => true]);
+    }
+
+    private function checkProviders(array $providers)
+    {
+        $titles = [];
+        foreach ($providers as $provider) {
+            $title = $provider['title'];
+            if (in_array($title, $titles)) {
+                throw new \Exception($this->l->t('Duplicate provider title "%s"', $title));
+            }
+            if (preg_match('#[^0-9a-z_.@-]#i', $title)) {
+                throw new \Exception($this->l->t('Invalid provider title "%s". Allowed characters "0-9a-z_.@-"', $title));
+            }
+            $titles[] = $title;
+        }
     }
 
     public function renderPersonal()
