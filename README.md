@@ -1,3 +1,5 @@
+## [GitHub](https://github.com/zorn-v/nextcloud-social-login)
+
 Make possible create users and login via OAuth or OpenID
 
 For OAuth you must create app for certain providers. Login button appear at login page if app id specified. Settings are in "Social login" section of settings page.
