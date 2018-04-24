@@ -104,7 +104,6 @@ class LoginController extends Controller
             throw new LoginException($this->l->t('Can not get identifier from provider'));
         }
         $uid = $provider.'-'.$profile->identifier;
-
         return $this->login($uid, $profile);
     }
 
@@ -128,7 +127,7 @@ class LoginController extends Controller
             }
         }
         if (!$idUrl) {
-            throw new LoginException($this->l->t('Unknown OpenID provider: "%s"', $provider));
+            throw new LoginException($this->l->t('Unknown "%s" provider: "%s"', 'OpenID', $provider));
         }
         $config['openid_identifier'] = $idUrl;
         try {
@@ -142,7 +141,7 @@ class LoginController extends Controller
         if (empty($profileId)) {
             throw new LoginException($this->l->t('Can not get identifier from provider'));
         }
-        $uid = preg_replace('#[^0-9a-z_.@-]#i', '', $provider.'-'.$profileId);
+        $uid = $provider.'-'.$profileId;
         return $this->login($uid, $profile);
     }
 
@@ -177,7 +176,7 @@ class LoginController extends Controller
             }
         }
         if (!$config['keys']) {
-            throw new LoginException($this->l->t('Unknown custom OpenID Connect provider: "%s"', $provider));
+            throw new LoginException($this->l->t('Unknown "%s" provider: "%s"', 'OpenID Connect', $provider));
         }
         try {
             $adapter = new CustomOpenIDConnect($config, null, $this->storage);
@@ -189,7 +188,7 @@ class LoginController extends Controller
         if (empty($profile->identifier)) {
             throw new LoginException($this->l->t('Can not get identifier from provider'));
         }
-        $uid = preg_replace('#[^0-9a-z_.@-]#i', '', $provider.'-'.$profile->identifier);
+        $uid = $provider.'-'.$profile->identifier;
         return $this->login($uid, $profile);
     }
 
