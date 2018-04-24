@@ -42,6 +42,16 @@ class Application extends App
                 ]);
             }
         }
+        $providers = json_decode($config->getAppValue($this->appName, 'custom_oidc_providers', '[]'), true);
+        if (is_array($providers)) {
+            foreach ($providers as $provider) {
+                \OC_App::registerLogIn([
+                    'name' => ucfirst($provider['title']),
+                    'href' => $urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', ['provider'=>$provider['title']]),
+                ]);
+            }
+        }
+
         if ($config->getAppValue($this->appName, 'allow_login_connect')) {
             \OCP\App::registerPersonal($this->getContainer()->getAppName(), 'appinfo/personal');
         }
