@@ -88,8 +88,8 @@ class LoginController extends Controller
                 ];
                 $config['providers'][ucfirst($title)] = [
                     'enabled' => true,
-                    'keys' => $keys,
-                    'scope' => 'email',
+                    'keys'    => $keys,
+                    'scope'   => 'email',
                 ];
             }
         }
@@ -123,6 +123,7 @@ class LoginController extends Controller
             foreach ($providers as $prov) {
                 if ($prov['title'] === $provider) {
                     $idUrl = $prov['url'];
+                    break;
                 }
             }
         }
@@ -159,8 +160,8 @@ class LoginController extends Controller
         if (is_array($providers)) {
             foreach ($providers as $prov) {
                 if ($prov['title'] === $provider) {
-                    $keys                = [
-                      'key'    => $prov['clientId'],
+                    $keys = [
+                      'id'     => $prov['clientId'],
                       'secret' => $prov['clientSecret']
                     ];
                     $endpoints = new Data\Collection ([
@@ -171,6 +172,7 @@ class LoginController extends Controller
                     $config['keys']      = $keys;
                     $config['scope']     = $prov['scope'];
                     $config['endpoints'] = $endpoints;
+                    break;
                 }
             }
         }
@@ -184,11 +186,12 @@ class LoginController extends Controller
         }  catch (\Exception $e) {
             throw new LoginException($e->getMessage());
         }
-        $profileId = preg_replace('#.*/#', '', rtrim($profile->identifier, '/'));
-        $uid = preg_replace('#[^0-9a-z_.@-]#i', '', $provider.'-'.$profileId);
+        if (empty($profile->identifier)) {
+            throw new LoginException($this->l->t('Can not get identifier from provider'));
+        }
+        $uid = preg_replace('#[^0-9a-z_.@-]#i', '', $provider.'-'.$profile->identifier);
         return $this->login($uid, $profile);
     }
-
 
     private function login($uid, Profile $profile)
     {
