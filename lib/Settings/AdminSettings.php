@@ -36,7 +36,6 @@ class AdminSettings implements ISettings
             'new_user_group',
             'disable_registration',
             'allow_login_connect',
-            'auto_redirect'
         ];
         $oauthProviders = [
             'facebook',
@@ -75,7 +74,7 @@ class AdminSettings implements ISettings
             'groups' => $groupNames,
             'providers' => $providers,
             'openid_providers' => $openIdProviders,
-            'custom_oidc_providers' => $custom_oidcProviders,            
+            'custom_oidc_providers' => $custom_oidcProviders,
         ];
         foreach ($paramsNames as $paramName) {
             $params[$paramName] = $this->config->getAppValue($this->appName, $paramName);

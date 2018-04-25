@@ -13,10 +13,6 @@
 			<?php endforeach ?>
 		</select>
 		<div>
-			<input id="auto_redirect" type="checkbox" class="checkbox" name="auto_redirect" value="1" <?php p($_['auto_redirect'] ? 'checked' : '') ?>/>
-			<label for="auto_redirect"><?php p($l->t('Automatically redirect if only one social login is configured')) ?></label>
-		</div>
-		<div>
 			<input id="disable_registration" type="checkbox" class="checkbox" name="disable_registration" value="1" <?php p($_['disable_registration'] ? 'checked' : '') ?>/>
 			<label for="disable_registration"><?php p($l->t('Disable auto create new users')) ?></label>
 		</div>

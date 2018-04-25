@@ -44,8 +44,14 @@ class SettingsController extends Controller
         $this->socialConnect = $socialConnect;
     }
 
-    public function saveAdmin($new_user_group, $disable_registration, $allow_login_connect, $auto_redirect, $providers, $openid_providers, $custom_oidc_providers)
-    {
+    public function saveAdmin(
+        $new_user_group,
+        $disable_registration,
+        $allow_login_connect,
+        $providers,
+        $openid_providers,
+        $custom_oidc_providers
+    ) {
         try {
             $this->checkProviders($openid_providers);
             $this->checkProviders($custom_oidc_providers);
@@ -55,15 +61,17 @@ class SettingsController extends Controller
         $this->config->setAppValue($this->appName, 'new_user_group', $new_user_group);
         $this->config->setAppValue($this->appName, 'disable_registration', $disable_registration ? true : false);
         $this->config->setAppValue($this->appName, 'allow_login_connect', $allow_login_connect ? true : false);
-        $this->config->setAppValue($this->appName, 'auto_redirect', $auto_redirect ? true : false);
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
         $this->config->setAppValue($this->appName, 'openid_providers', json_encode(array_values($openid_providers)));
         $this->config->setAppValue($this->appName, 'custom_oidc_providers', json_encode(array_values($custom_oidc_providers)));
         return new JSONResponse(['success' => true]);
     }
 
-    private function checkProviders(array $providers)
+    private function checkProviders($providers)
     {
+        if (!is_array($providers)) {
+            return;
+        }
         $titles = [];
         foreach ($providers as $provider) {
             $title = $provider['title'];
