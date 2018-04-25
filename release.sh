@@ -1,11 +1,15 @@
 #!/bin/bash
 
 cd `dirname $0`
+
+git diff --quiet --exit-code
+[ $? != 0 ] && echo There is unstaged changes && exit 1
+[ ! -f .credentials ] && echo No credentials file found && exit 1
 . .credentials
 
 VERSION=v`grep '<version>' appinfo/info.xml | sed 's/[^0-9.]//g'`
 UPLOAD_URL=`curl -sH "Authorization: token $GITHUB_TOKEN" -d "{\"tag_name\":\"$VERSION\"}" https://api.github.com/repos/zorn-v/nextcloud-social-login/releases | grep '"upload_url"' | sed 's/.*"\(https:.*\){.*/\1/'`
-[ -z "$UPLOAD_URL" ] && echo Can not get assets url && exit 1
+[ -z "$UPLOAD_URL" ] && echo Can not get upload url && exit 1
 
 git checkout -b release
 sed -i '/<description><\/description>/ {
