@@ -81,9 +81,8 @@ class LoginController extends Controller
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
         if (is_array($providers)) {
             foreach ($providers as $title=>$prov) {
-                $idKey = in_array($title, ['twitter']) ? 'key' : 'id';
                 $keys = [
-                    $idKey   => $prov['appid'],
+                    'id'     => $prov['appid'],
                     'secret' => $prov['secret'],
                 ];
                 $config['providers'][ucfirst($title)] = [
