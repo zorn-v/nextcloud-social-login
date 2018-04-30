@@ -52,6 +52,7 @@ return array(
     'Hybridauth\\Provider\\Google' => $vendorDir . '/hybridauth/hybridauth/src/Provider/Google.php',
     'Hybridauth\\Provider\\Instagram' => $vendorDir . '/hybridauth/hybridauth/src/Provider/Instagram.php',
     'Hybridauth\\Provider\\LinkedIn' => $vendorDir . '/hybridauth/hybridauth/src/Provider/LinkedIn.php',
+    'Hybridauth\\Provider\\Mailru' => $vendorDir . '/hybridauth/hybridauth/src/Provider/Mailru.php',
     'Hybridauth\\Provider\\Odnoklassniki' => $vendorDir . '/hybridauth/hybridauth/src/Provider/Odnoklassniki.php',
     'Hybridauth\\Provider\\OpenID' => $vendorDir . '/hybridauth/hybridauth/src/Provider/OpenID.php',
     'Hybridauth\\Provider\\PaypalOpenID' => $vendorDir . '/hybridauth/hybridauth/src/Provider/PaypalOpenID.php',

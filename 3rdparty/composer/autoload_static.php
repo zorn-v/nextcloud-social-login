@@ -67,6 +67,7 @@ class ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f
         'Hybridauth\\Provider\\Google' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Google.php',
         'Hybridauth\\Provider\\Instagram' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Instagram.php',
         'Hybridauth\\Provider\\LinkedIn' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/LinkedIn.php',
+        'Hybridauth\\Provider\\Mailru' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Mailru.php',
         'Hybridauth\\Provider\\Odnoklassniki' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Odnoklassniki.php',
         'Hybridauth\\Provider\\OpenID' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/OpenID.php',
         'Hybridauth\\Provider\\PaypalOpenID' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/PaypalOpenID.php',
