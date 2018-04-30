@@ -5,7 +5,7 @@
   "Save": "Сохранить",
   "Enabled": "Включено",
   "Disable auto create new users": "Отключить автоматическое создание новых пользователей",
-  "Unknown \"%s\" provider: \"%s\"": "Неизвестный поставщик \"%s\": \"%s\"",
+  "Unknown %s provider: \"%s\"": "Неизвестный поставщик %s: \"%s\"",
   "Auto creating new users is disabled": "Автосоздание новых пользователей отключено",
   "This account already connected": "Этот аккаунт уже подключен",
   "Allow users to connect social logins with their account": "Позволять пользователям подключать социальные логины к своим аккаунтам",

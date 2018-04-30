@@ -94,7 +94,7 @@ class LoginController extends Controller
             }
         }
         if (!in_array(ucfirst($provider), array_keys($config['providers']))) {
-            throw new LoginException($this->l->t('Unknown "%s" provider: "%s"', 'OAuth', $provider));
+            throw new LoginException($this->l->t('Unknown %s provider: "%s"', ['OAuth', $provider]));
         }
         try {
             $auth = new Hybridauth($config, null, $this->storage);
@@ -130,7 +130,7 @@ class LoginController extends Controller
             }
         }
         if (!$idUrl) {
-            throw new LoginException($this->l->t('Unknown "%s" provider: "%s"', 'OpenID', $provider));
+            throw new LoginException($this->l->t('Unknown %s provider: "%s"', ['OpenID', $provider]));
         }
         $config['openid_identifier'] = $idUrl;
         try {
@@ -179,7 +179,7 @@ class LoginController extends Controller
             }
         }
         if (!$config['keys']) {
-            throw new LoginException($this->l->t('Unknown "%s" provider: "%s"', 'OpenID Connect', $provider));
+            throw new LoginException($this->l->t('Unknown %s provider: "%s"', ['OpenID Connect', $provider]));
         }
         try {
             $adapter = new CustomOpenIDConnect($config, null, $this->storage);
