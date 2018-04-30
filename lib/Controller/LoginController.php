@@ -93,6 +93,9 @@ class LoginController extends Controller
                 ];
             }
         }
+        if (!in_array(ucfirst($provider), array_keys($config['providers']))) {
+            throw new LoginException($this->l->t('Unknown "%s" provider: "%s"', 'OAuth', $provider));
+        }
         try {
             $auth = new Hybridauth($config, null, $this->storage);
             $adapter = $auth->authenticate(ucfirst($provider));
