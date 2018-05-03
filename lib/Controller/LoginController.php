@@ -235,8 +235,6 @@ class LoginController extends Controller
                 } catch (\Exception $e) {}
             }
         }
-        //No longer need. Remove leavings of previous versions.
-        $this->config->deleteUserValue($uid, $this->appName, 'password');
 
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID()], false);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());

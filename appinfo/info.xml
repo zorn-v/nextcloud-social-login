@@ -5,7 +5,7 @@
     <name>Social Login</name>
     <summary>Social login via OAuth</summary>
     <description></description>
-    <version>1.5.1</version>
+    <version>1.5.2</version>
     <licence>agpl</licence>
     <author mail="zorn7@yandex.ru" homepage="https://github.com/zorn-v/nextcloud-social-login">Zorn</author>
     <namespace>SocialLogin</namespace>
@@ -18,7 +18,12 @@
         <nextcloud min-version="12" max-version="14" />
     </dependencies>
     <settings>
-  		<admin>OCA\SocialLogin\Settings\AdminSettings</admin>
-      <admin-section>OCA\SocialLogin\Settings\AdminSection</admin-section>
+    		<admin>OCA\SocialLogin\Settings\AdminSettings</admin>
+        <admin-section>OCA\SocialLogin\Settings\AdminSection</admin-section>
   	</settings>
+    <repair-steps>
+        <post-migration>
+            <step>OCA\SocialLogin\Migration\SeparateProvidersNameAndTitle</step>
+        </post-migration>
+    </repair-steps>
 </info>
