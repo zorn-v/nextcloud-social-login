@@ -14,11 +14,11 @@ use OCP\IAvatarManager;
 use OCP\IGroupManager;
 use OC\User\LoginException;
 use OCA\SocialLogin\Storage\SessionStorage;
-use OCA\SocialLogin\Provider\OpenID;
 use OCA\SocialLogin\Provider\CustomOpenIDConnect;
 use OCA\SocialLogin\Db\SocialConnectDAO;
 use Hybridauth\Hybridauth;
 use Hybridauth\User\Profile;
+use Hybridauth\Provider\OpenID;
 use Hybridauth\HttpClient\Curl;
 use Hybridauth\Data;
 
@@ -122,7 +122,7 @@ class LoginController extends Controller
         $providers = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
         if (is_array($providers)) {
             foreach ($providers as $prov) {
-                if ($prov['title'] === $provider) {
+                if ($prov['name'] === $provider) {
                     $idUrl = $prov['url'];
                     break;
                 }
@@ -160,7 +160,7 @@ class LoginController extends Controller
         $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oidc_providers', '[]'), true);
         if (is_array($providers)) {
             foreach ($providers as $prov) {
-                if ($prov['title'] === $provider) {
+                if ($prov['name'] === $provider) {
                     $keys = [
                       'id'     => $prov['clientId'],
                       'secret' => $prov['clientSecret']
@@ -177,7 +177,7 @@ class LoginController extends Controller
                 }
             }
         }
-        if (!$config['keys']) {
+        if (!isset($config['keys'])) {
             throw new LoginException($this->l->t('Unknown %s provider: "%s"', ['OpenID Connect', $provider]));
         }
         try {

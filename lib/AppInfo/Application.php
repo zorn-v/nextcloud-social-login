@@ -29,12 +29,12 @@ class Application extends App
         $providerUrl = '';
         $providers = json_decode($config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
         if (is_array($providers)) {
-            foreach ($providers as $title=>$provider) {
+            foreach ($providers as $name=>$provider) {
                 if ($provider['appid']) {
                     ++$providersCount;
-                    $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$title]);
+                    $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$name]);
                     \OC_App::registerLogIn([
-                        'name' => ucfirst($title),
+                        'name' => ucfirst($name),
                         'href' => $providerUrl,
                     ]);
                 }
@@ -44,9 +44,9 @@ class Application extends App
         if (is_array($providers)) {
             foreach ($providers as $provider) {
                 ++$providersCount;
-                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$provider['title']]);
+                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$provider['name']]);
                 \OC_App::registerLogIn([
-                    'name' => ucfirst($provider['title']),
+                    'name' => $provider['title'],
                     'href' => $providerUrl,
                 ]);
             }
@@ -55,9 +55,9 @@ class Application extends App
         if (is_array($providers)) {
             foreach ($providers as $provider) {
                 ++$providersCount;
-                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', ['provider'=>$provider['title']]);
+                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', ['provider'=>$provider['name']]);
                 \OC_App::registerLogIn([
-                    'name' => ucfirst($provider['title']),
+                    'name' => $provider['title'],
                     'href' => $providerUrl,
                 ]);
             }

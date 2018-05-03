@@ -72,16 +72,19 @@ class SettingsController extends Controller
         if (!is_array($providers)) {
             return;
         }
-        $titles = [];
+        $names = [];
         foreach ($providers as $provider) {
-            $title = $provider['title'];
-            if (in_array($title, $titles)) {
-                throw new \Exception($this->l->t('Duplicate provider title "%s"', $title));
+            $name = $provider['name'];
+            if (empty($name)) {
+                throw new \Exception($this->l->t('Provider name cannot be empty'));
             }
-            if (preg_match('#[^0-9a-z_.@-]#i', $title)) {
-                throw new \Exception($this->l->t('Invalid provider title "%s". Allowed characters "0-9a-z_.@-"', $title));
+            if (in_array($name, $names)) {
+                throw new \Exception($this->l->t('Duplicate provider name "%s"', $name));
             }
-            $titles[] = $title;
+            if (preg_match('#[^0-9a-z_.@-]#i', $name)) {
+                throw new \Exception($this->l->t('Invalid provider name "%s". Allowed characters "0-9a-z_.@-"', $name));
+            }
+            $names[] = $name;
         }
     }
 
@@ -93,24 +96,26 @@ class SettingsController extends Controller
         ];
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
         if (is_array($providers)) {
-            foreach ($providers as $title=>$provider) {
+            foreach ($providers as $name=>$provider) {
                 if ($provider['appid']) {
-                    $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$title]);
+                    $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$name]);
                 }
             }
         }
         $providers = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
         if (is_array($providers)) {
             foreach ($providers as $provider) {
+                $name = $provider['name'];
                 $title = $provider['title'];
-                $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$title]);
+                $params['providers'][$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$name]);
             }
         }
         $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oidc_providers', '[]'), true);
         if (is_array($providers)) {
             foreach ($providers as $provider) {
+                $name = $provider['name'];
                 $title = $provider['title'];
-                $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', ['provider'=>$title]);
+                $params['providers'][$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', ['provider'=>$name]);
             }
         }
 
