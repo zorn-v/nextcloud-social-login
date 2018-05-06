@@ -1,0 +1,18 @@
+{ "translations": {
+  "Social login": "Social login",
+  "Default group that all new users belong" : "Groupe par défaut des nouveaux utilisateurs :",
+  "None": "Aucun",
+  "Save": "Sauvegarder",
+  "Enabled": "Activé",
+  "Disable auto create new users": "Désactiver la création automatique de nouveaux utilisateurs",
+  "Unknown %s provider: \"%s\"": "Fournisseur %s inconnu : \"%s\"",
+  "Auto creating new users is disabled": "La création automatique de nouveaux utilisateurs est désactivée",
+  "This account already connected": "Ce compte est déjà connecté",
+  "Allow users to connect social logins with their account": "Autoriser les utilisateurs existants à se connecter via social login",
+  "Provider name cannot be empty": "Le nom du fournisseur ne peut pas être vide",
+  "Duplicate provider name \"%s\"": "Nom du fournisseur en double : \"%s\"",
+  "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "Nom du founisseur invalide : \"%s\". Caractères autorisés : \"0-9a-z_.@-\"",
+  "Social login connect": "Se connecter avec d'autres comptes",
+  "Available providers": "Fournisseurs disponibles"
+},"pluralForm" :"nplurals=2; plural=(n > 1);"
+}
