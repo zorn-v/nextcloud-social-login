@@ -98,7 +98,7 @@ class SettingsController extends Controller
         if (is_array($providers)) {
             foreach ($providers as $name=>$provider) {
                 if ($provider['appid']) {
-                    $params['providers'][ucfirst($title)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$name]);
+                    $params['providers'][ucfirst($name)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$name]);
                 }
             }
         }
