@@ -236,7 +236,7 @@ class LoginController extends Controller
             }
         }
 
-        $this->userSession->completeLogin($user, ['loginName' => $user->getUID()], false);
+        $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => null], false);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
 
         return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
