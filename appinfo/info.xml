@@ -5,7 +5,7 @@
     <name>Social Login</name>
     <summary>Social login via OAuth</summary>
     <description></description>
-    <version>1.5.2</version>
+    <version>1.5.3</version>
     <licence>agpl</licence>
     <author mail="zorn7@yandex.ru" homepage="https://github.com/zorn-v/nextcloud-social-login">Zorn</author>
     <namespace>SocialLogin</namespace>
