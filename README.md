@@ -12,6 +12,7 @@ You can create app by followed urls. You can copy link of certain login button t
 * [Google](https://console.developers.google.com)
 * [Twitter](https://apps.twitter.com/)
 * [GitHub](https://github.com/settings/developers)
+* [Discord](https://discordapp.com/developers/applications/me#top)
 
 ## Config
 

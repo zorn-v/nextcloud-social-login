@@ -88,7 +88,6 @@ class LoginController extends Controller
                 $config['providers'][ucfirst($title)] = [
                     'enabled' => true,
                     'keys'    => $keys,
-                    'scope'   => 'email',
                 ];
             }
         }
