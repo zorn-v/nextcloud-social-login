@@ -1,0 +1,29 @@
+a[href*="/sociallogin/oauth/"]::before {
+  content: "";
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 5px;
+}
+a[href$="/sociallogin/oauth/facebook"]::before {
+  background-image: url(../img/facebook.svg);
+}
+a[href$="/sociallogin/oauth/google"]::before {
+  background-image: url(../img/googleplus.svg);
+}
+a[href$="/sociallogin/oauth/twitter"]::before {
+  background-image: url(../img/twitter.svg);
+}
+a[href$="/sociallogin/oauth/GitHub"]::before {
+  background-image: url(../img/github.svg);
+}
+a[href$="/sociallogin/oauth/discord"]::before {
+  background-image: url(../img/discord.svg);
+}
+
+.sociallogin-connect li {
+  margin-bottom: 10px;
+}

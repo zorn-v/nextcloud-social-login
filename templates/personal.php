@@ -2,7 +2,7 @@
 /** @var array $_ */
 /** @var \OCP\IL10N $l */
 ?>
-<div class="section">
+<div class="section sociallogin-connect">
     <h2><?php p($l->t('Social login connect')); ?></h2>
     <ul>
         <?php foreach ($_['connected_logins'] as $title=>$url): ?>

@@ -22,6 +22,8 @@ class Application extends App
 
     public function register()
     {
+        \OCP\Util::addStyle($this->appName, 'style');
+
         $config = $this->query(IConfig::class);
         $urlGenerator = $this->query(IURLGenerator::class);
 
