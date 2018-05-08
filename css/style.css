@@ -8,6 +8,11 @@ a[href*="/sociallogin/oauth/"]::before {
   vertical-align: bottom;
   margin-right: 5px;
 }
+a[href*="/sociallogin/oauth/"]::after {
+  content: "";
+  width: 10px;
+  display: inline-block;
+}
 a[href$="/sociallogin/oauth/facebook"]::before {
   background-image: url(../img/facebook.svg);
 }
