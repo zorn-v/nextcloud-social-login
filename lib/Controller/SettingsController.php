@@ -52,27 +52,29 @@ class SettingsController extends Controller
         $openid_providers,
         $custom_oidc_providers
     ) {
-        try {
-            $this->checkProviders($openid_providers);
-            $this->checkProviders($custom_oidc_providers);
-        } catch (\Exception $e) {
-            return new JSONResponse(['message' => $e->getMessage()]);
-        }
         $this->config->setAppValue($this->appName, 'new_user_group', $new_user_group);
         $this->config->setAppValue($this->appName, 'disable_registration', $disable_registration ? true : false);
         $this->config->setAppValue($this->appName, 'allow_login_connect', $allow_login_connect ? true : false);
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
+
+        try {
+            $names = array_keys($providers);
+            $this->checkProviders($openid_providers, $names);
+            $this->checkProviders($custom_oidc_providers, $names);
+        } catch (\Exception $e) {
+            return new JSONResponse(['message' => $e->getMessage()]);
+        }
+
         $this->config->setAppValue($this->appName, 'openid_providers', json_encode(array_values($openid_providers)));
         $this->config->setAppValue($this->appName, 'custom_oidc_providers', json_encode(array_values($custom_oidc_providers)));
         return new JSONResponse(['success' => true]);
     }
 
-    private function checkProviders($providers)
+    private function checkProviders($providers, &$names)
     {
         if (!is_array($providers)) {
             return;
         }
-        $names = [];
         foreach ($providers as $provider) {
             $name = $provider['name'];
             if (empty($name)) {
