@@ -102,7 +102,7 @@
 		        <br/>
 		        <label>
 					<?php p('Client Secret') ?><br>
-					<input type="text" name="custom_oidc_providers[<?php p($k) ?>][clientSecret]" value="<?php p($provider['clientSecret']) ?>" required/>
+					<input type="password" name="custom_oidc_providers[<?php p($k) ?>][clientSecret]" value="<?php p($provider['clientSecret']) ?>" required/>
 		        </label>
 		        <br/>
 		        <label>
@@ -163,7 +163,7 @@
 		<br/>
     	<label>
 			<?php p('Client Secret') ?><br>
-			<input type="text" name="custom_oidc_providers[{{provider_id}}][clientSecret]" required/>
+			<input type="password" name="custom_oidc_providers[{{provider_id}}][clientSecret]" required/>
 		</label>
 		<br/>
     	<label>

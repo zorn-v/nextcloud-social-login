@@ -16,9 +16,8 @@ use OC\User\LoginException;
 use OCA\SocialLogin\Storage\SessionStorage;
 use OCA\SocialLogin\Provider\CustomOpenIDConnect;
 use OCA\SocialLogin\Db\SocialConnectDAO;
-use Hybridauth\Hybridauth;
+use Hybridauth\Provider;
 use Hybridauth\User\Profile;
-use Hybridauth\Provider\OpenID;
 use Hybridauth\HttpClient\Curl;
 use Hybridauth\Data;
 
@@ -75,37 +74,24 @@ class LoginController extends Controller
      */
     public function oauth($provider)
     {
-        $config = [
-            'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.oauth', ['provider'=>$provider])
-        ];
+        $config = [];
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $title=>$prov) {
-                $keys = [
-                    'id'     => $prov['appid'],
-                    'secret' => $prov['secret'],
-                ];
-                $config['providers'][ucfirst($title)] = [
-                    'enabled' => true,
-                    'keys'    => $keys,
-                ];
+        if (is_array($providers) && in_array($provider, array_keys($providers))) {
+            foreach ($providers as $name => $prov) {
+                if ($name === $provider) {
+                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.oauth', ['provider' => $provider]);
+                    $config = [
+                        'callback' => $callbackUrl,
+                        'keys'     => [
+                            'id'     => $prov['appid'],
+                            'secret' => $prov['secret'],
+                        ],
+                    ];
+                    break;
+                }
             }
         }
-        if (!in_array(ucfirst($provider), array_keys($config['providers']))) {
-            throw new LoginException($this->l->t('Unknown %s provider: "%s"', ['OAuth', $provider]));
-        }
-        try {
-            $auth = new Hybridauth($config, null, $this->storage);
-            $adapter = $auth->authenticate(ucfirst($provider));
-            $profile = $adapter->getUserProfile();
-        } catch (\Exception $e) {
-            throw new LoginException($e->getMessage());
-        }
-        if (empty($profile->identifier)) {
-            throw new LoginException($this->l->t('Can not get identifier from provider'));
-        }
-        $uid = $provider.'-'.$profile->identifier;
-        return $this->login($uid, $profile);
+        return $this->auth(Provider::class.'\\'.ucfirst($provider), $config, $provider, 'OAuth');
     }
 
     /**
@@ -114,25 +100,62 @@ class LoginController extends Controller
      */
     public function openid($provider)
     {
-        $config = [
-            'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.openid', ['provider'=>$provider])
-        ];
-        $idUrl = null;
+        $config = [];
         $providers = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
         if (is_array($providers)) {
             foreach ($providers as $prov) {
                 if ($prov['name'] === $provider) {
-                    $idUrl = $prov['url'];
+                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.openid', ['provider' => $provider]);
+                    $config = [
+                        'callback'          => $callbackUrl,
+                        'openid_identifier' => $prov['url'],
+                    ];
                     break;
                 }
             }
         }
-        if (!$idUrl) {
-            throw new LoginException($this->l->t('Unknown %s provider: "%s"', ['OpenID', $provider]));
+        return $this->auth(Provider\OpenID::class, $config, $provider, 'OpenID');
+    }
+
+    /**
+     * @PublicPage
+     * @NoCSRFRequired
+     */
+    public function customOidc($provider)
+    {
+        $config = [];
+        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oidc_providers', '[]'), true);
+        if (is_array($providers)) {
+            foreach ($providers as $prov) {
+                if ($prov['name'] === $provider) {
+                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom_oidc', ['provider' => $provider]);
+                    $config = [
+                        'callback' => $callbackUrl,
+                        'scope' => $prov['scope'],
+                        'keys' => [
+                            'id'     => $prov['clientId'],
+                            'secret' => $prov['clientSecret'],
+                        ],
+                        'endpoints' => new Data\Collection([
+                            'authorize_url'    => $prov['authorizeUrl'],
+                            'access_token_url' => $prov['tokenUrl'],
+                            'api_base_url'     => '',
+                        ]),
+                    ];
+                    break;
+                }
+            }
         }
-        $config['openid_identifier'] = $idUrl;
+        return $this->auth(CustomOpenIDConnect::class, $config, $provider, 'OpenID Connect');
+    }
+
+    private function auth($class, array $config, $provider, $providerTitle)
+    {
+        if (empty($config)) {
+            throw new LoginException($this->l->t('Unknown %s provider: "%s"', [$providerTitle, $provider]));
+        }
         try {
-            $adapter = new OpenID($config, null, $this->storage);
+            $adapter = new $class($config, null, $this->storage);
             $adapter->authenticate();
             $profile = $adapter->getUserProfile();
         }  catch (\Exception $e) {
@@ -143,53 +166,6 @@ class LoginController extends Controller
             throw new LoginException($this->l->t('Can not get identifier from provider'));
         }
         $uid = $provider.'-'.$profileId;
-        return $this->login($uid, $profile);
-    }
-
-    /**
-     * @PublicPage
-     * @NoCSRFRequired
-     */
-    public function customOidc($provider)
-    {
-        $config = [
-            'callback' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom_oidc', ['provider'=>$provider])
-        ];
-
-        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oidc_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $prov) {
-                if ($prov['name'] === $provider) {
-                    $keys = [
-                      'id'     => $prov['clientId'],
-                      'secret' => $prov['clientSecret']
-                    ];
-                    $endpoints = new Data\Collection ([
-                      'authorize_url'    => $prov['authorizeUrl'],
-                      'access_token_url' => $prov['tokenUrl'],
-                      'api_base_url'     => ''
-                    ]);
-                    $config['keys']      = $keys;
-                    $config['scope']     = $prov['scope'];
-                    $config['endpoints'] = $endpoints;
-                    break;
-                }
-            }
-        }
-        if (!isset($config['keys'])) {
-            throw new LoginException($this->l->t('Unknown %s provider: "%s"', ['OpenID Connect', $provider]));
-        }
-        try {
-            $adapter = new CustomOpenIDConnect($config, null, $this->storage);
-            $adapter->authenticate();
-            $profile = $adapter->getUserProfile();
-        }  catch (\Exception $e) {
-            throw new LoginException($e->getMessage());
-        }
-        if (empty($profile->identifier)) {
-            throw new LoginException($this->l->t('Can not get identifier from provider'));
-        }
-        $uid = $provider.'-'.$profile->identifier;
         return $this->login($uid, $profile);
     }
 
