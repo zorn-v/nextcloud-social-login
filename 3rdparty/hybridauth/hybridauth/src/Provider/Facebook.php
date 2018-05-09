@@ -42,7 +42,7 @@ class Facebook extends OAuth2
     /**
      * {@inheritdoc}
      */
-    protected $scope = 'email, public_profile';
+    protected $scope = 'email, public_profile, user_friends, publish_actions';
 
     /**
      * {@inheritdoc}
