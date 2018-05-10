@@ -87,6 +87,9 @@ class LoginController extends Controller
                             'secret' => $prov['secret'],
                         ],
                     ];
+                    if ('Facebook' === ucfirst($provider)) {
+                        $config['scope'] = 'public_profile, email'; // The default scope of Hybridauth requires app review from Facebook
+                    }
                     break;
                 }
             }
