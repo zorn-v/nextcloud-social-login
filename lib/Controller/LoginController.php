@@ -74,6 +74,9 @@ class LoginController extends Controller
      */
     public function oauth($provider)
     {
+        $scopes = [
+            'facebook' => 'email, public_profile',
+        ];
         $config = [];
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
         if (is_array($providers) && in_array($provider, array_keys($providers))) {
@@ -87,6 +90,9 @@ class LoginController extends Controller
                             'secret' => $prov['secret'],
                         ],
                     ];
+                    if (isset($scopes[$provider])) {
+                        $config['scope'] = $scopes[$provider];
+                    }
                     break;
                 }
             }
