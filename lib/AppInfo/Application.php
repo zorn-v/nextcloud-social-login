@@ -25,6 +25,17 @@ class Application extends App
         \OCP\Util::addStyle($this->appName, 'style');
 
         $config = $this->query(IConfig::class);
+
+        if ($config->getAppValue($this->appName, 'allow_login_connect')) {
+            \OCP\App::registerPersonal($this->appName, 'appinfo/personal');
+        }
+
+        $this->query(IUserManager::class)->listen('\OC\User', 'preDelete', [$this, 'preDeleteUser']);
+
+        if ($this->query(IUserSession::class)->isLoggedIn()) {
+            return;
+        }
+
         $urlGenerator = $this->query(IURLGenerator::class);
 
         $providersCount = 0;
@@ -66,16 +77,10 @@ class Application extends App
         }
 
         $useLoginRedirect = $providersCount === 1 && $config->getSystemValue('social_login_auto_redirect', false);
-        if ($useLoginRedirect && $this->query(IRequest::class)->getPathInfo() === '/login' && !$this->query(IUserSession::class)->isLoggedIn()) {
+        if ($useLoginRedirect && $this->query(IRequest::class)->getPathInfo() === '/login') {
             header('Location: ' . $providerUrl);
             exit();
         }
-
-        if ($config->getAppValue($this->appName, 'allow_login_connect')) {
-            \OCP\App::registerPersonal($this->getContainer()->getAppName(), 'appinfo/personal');
-        }
-
-        $this->query(IUserManager::class)->listen('\OC\User', 'preDelete', [$this, 'preDeleteUser']);
     }
 
     public function preDeleteUser(IUser $user)
