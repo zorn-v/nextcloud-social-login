@@ -1,4 +1,4 @@
-## [GitHub](https://github.com/zorn-v/nextcloud-social-login)
+# Social login
 
 Make possible create users and login via OAuth or OpenID
 

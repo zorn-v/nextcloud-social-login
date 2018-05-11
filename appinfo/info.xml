@@ -3,14 +3,15 @@
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>sociallogin</id>
     <name>Social Login</name>
-    <summary>Social login via OAuth</summary>
+    <summary>Social login via OAuth or OpenID</summary>
     <description></description>
     <version>1.6.3</version>
     <licence>agpl</licence>
-    <author mail="zorn7@yandex.ru" homepage="https://github.com/zorn-v/nextcloud-social-login">Zorn</author>
+    <author>zorn-v</author>
     <namespace>SocialLogin</namespace>
     <category>integration</category>
     <category>social</category>
+    <website>https://github.com/zorn-v/nextcloud-social-login</website>
     <bugs>https://github.com/zorn-v/nextcloud-social-login/issues</bugs>
     <repository>https://github.com/zorn-v/nextcloud-social-login</repository>
     <screenshot>https://raw.githubusercontent.com/zorn-v/nextcloud-social-login/master/appinfo/screenshot.png</screenshot>
