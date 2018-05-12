@@ -15,6 +15,10 @@ UPLOAD_URL=`curl -sH "Authorization: token $GITHUB_TOKEN" -d "{\"tag_name\":\"$V
 [ -z "$UPLOAD_URL" ] && echo Can not get upload url && exit 1
 
 git checkout -b release
+git pull origin master
+git tag $VERSION
+git log --format='%D- %s' | sed -e 's/HEAD -> release, //' -e 's/, origin\/master, origin\/HEAD, master//' -e 's/tag: v\([^-]*\)/\n## \1\n/' > CHANGELOG.md
+git add CHANGELOG.md
 sed -i '/<description><\/description>/ {
   a <description><![CDATA[
   r README.md
