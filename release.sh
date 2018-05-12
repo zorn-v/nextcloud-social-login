@@ -10,6 +10,9 @@ git diff --quiet --exit-code
 [ ! -f .credentials ] && echo No credentials file found && exit 1
 . .credentials
 
+[ -z "$GITHUB_TOKEN" ] && echo GITHUB_TOKEN var is missing. Go to https://github.com/settings/tokens get one and put it in .credentials && exit 1
+[ -z "$NC_TOKEN" ] && echo NC_TOKEN var is missing. Go to https://apps.nextcloud.com/account/token get one and put it in .credentials && exit 1
+
 VERSION=v`grep '<version>' appinfo/info.xml | sed 's/[^0-9.]//g'`
 UPLOAD_URL=`curl -sH "Authorization: token $GITHUB_TOKEN" -d "{\"tag_name\":\"$VERSION\"}" https://api.github.com/repos/$GITHUB_REPO/releases | grep '"upload_url"' | sed 's/.*"\(https:.*\){.*/\1/'`
 [ -z "$UPLOAD_URL" ] && echo Can not get upload url && exit 1
