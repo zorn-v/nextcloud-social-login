@@ -218,6 +218,7 @@ class LoginController extends Controller
                     $avatar->set($photo);
                 } catch (\Exception $e) {}
             }
+            $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', true);
         }
 
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => null], false);
