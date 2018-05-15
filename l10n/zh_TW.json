@@ -14,5 +14,5 @@
   "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "無效的提供者名稱 \"%s\". 提供者名稱只允許 \"0-9a-z_.@-\"這些字符",
   "Social login connect": "社交登錄連線",
   "Available providers": "可以使用的提供者"
-},"pluralForm" :"nplurals=2; plural=(n > 1);"
+},"pluralForm" :"nplurals=1; plural=0;"
 }

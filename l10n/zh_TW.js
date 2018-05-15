@@ -6,4 +6,4 @@ OC.L10N.register(
     "Some error occurred while saving settings": "儲存設定時發生了錯誤",
     "Confirm remove": "確定刪除"
   },
-"nplurals=2; plural=(n > 1);");
+"nplurals=1; plural=0;");
