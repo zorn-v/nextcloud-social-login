@@ -183,6 +183,9 @@ class LoginController extends Controller
             $user = $this->userManager->get($connectedUid);
         }
         if ($this->userSession->isLoggedIn()) {
+            if (!$this->config->getAppValue($this->appName, 'allow_login_connect')) {
+                throw new LoginException($this->l->t('Social login connect is disabled'));
+            }
             if (null !== $user) {
                 throw new LoginException($this->l->t('This account already connected'));
             }

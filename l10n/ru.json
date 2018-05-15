@@ -13,6 +13,7 @@
   "Duplicate provider name \"%s\"": "Дубликат названия поставщика \"%s\"",
   "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "Некорректное название поставщика \"%s\". Допустимые символы \"0-9a-z_.@-\"",
   "Social login connect": "Привязки социальных логинов",
-  "Available providers": "Доступные поставщики"
+  "Available providers": "Доступные поставщики",
+  "Social login connect is disabled": "Привязки социальных логинов отключены"
 },"pluralForm" :"nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);"
 }
