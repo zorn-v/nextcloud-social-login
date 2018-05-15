@@ -8,6 +8,7 @@ use OCP\IConfig;
 use OCP\IUserManager;
 use OCP\IUserSession;
 use OCP\IRequest;
+use OCP\ISession;
 use OCP\IUser;
 use OCA\SocialLogin\Db\SocialConnectDAO;
 
@@ -26,13 +27,16 @@ class Application extends App
 
         $config = $this->query(IConfig::class);
 
-        if ($config->getAppValue($this->appName, 'allow_login_connect')) {
-            \OCP\App::registerPersonal($this->appName, 'appinfo/personal');
-        }
+        \OCP\App::registerPersonal($this->appName, 'appinfo/personal');
 
         $this->query(IUserManager::class)->listen('\OC\User', 'preDelete', [$this, 'preDeleteUser']);
 
-        if ($this->query(IUserSession::class)->isLoggedIn()) {
+        $userSession = $this->query(IUserSession::class);
+        if ($userSession->isLoggedIn()) {
+            $uid = $userSession->getUser()->getUID();
+            if ($config->getUserValue($uid, $this->appName, 'disable_password_confirmation')) {
+                $this->query(ISession::class)->set('last-password-confirm', time());
+            }
             return;
         }
 

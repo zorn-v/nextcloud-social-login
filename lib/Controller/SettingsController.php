@@ -92,42 +92,46 @@ class SettingsController extends Controller
 
     public function renderPersonal()
     {
+        $uid = $this->userSession->getUser()->getUID();
         $params = [
             'providers' => [],
             'connected_logins' => [],
+            'allow_login_connect' => $this->config->getAppValue($this->appName, 'allow_login_connect', false),
+            'disable_password_confirmation' => $this->config->getUserValue($uid, $this->appName, 'disable_password_confirmation', false),
         ];
-        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $name=>$provider) {
-                if ($provider['appid']) {
-                    $params['providers'][ucfirst($name)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$name]);
+        if ($params['allow_login_connect']) {
+            $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
+            if (is_array($providers)) {
+                foreach ($providers as $name=>$provider) {
+                    if ($provider['appid']) {
+                        $params['providers'][ucfirst($name)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$name]);
+                    }
                 }
             }
-        }
-        $providers = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $provider) {
-                $name = $provider['name'];
-                $title = $provider['title'];
-                $params['providers'][$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$name]);
+            $providers = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
+            if (is_array($providers)) {
+                foreach ($providers as $provider) {
+                    $name = $provider['name'];
+                    $title = $provider['title'];
+                    $params['providers'][$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$name]);
+                }
             }
-        }
-        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oidc_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $provider) {
-                $name = $provider['name'];
-                $title = $provider['title'];
-                $params['providers'][$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', ['provider'=>$name]);
+            $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oidc_providers', '[]'), true);
+            if (is_array($providers)) {
+                foreach ($providers as $provider) {
+                    $name = $provider['name'];
+                    $title = $provider['title'];
+                    $params['providers'][$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', ['provider'=>$name]);
+                }
             }
-        }
 
-        $uid = $this->userSession->getUser()->getUID();
-        $connectedLogins = $this->socialConnect->getConnectedLogins($uid);
-        foreach ($connectedLogins as $login) {
-            $params['connected_logins'][$login] = $this->urlGenerator->linkToRoute($this->appName.'.settings.disconnectSocialLogin', [
-                'login' => $login,
-                'requesttoken' => Util::callRegister(),
-            ]);
+            $connectedLogins = $this->socialConnect->getConnectedLogins($uid);
+            foreach ($connectedLogins as $login) {
+                $params['connected_logins'][$login] = $this->urlGenerator->linkToRoute($this->appName.'.settings.disconnectSocialLogin', [
+                    'login' => $login,
+                    'requesttoken' => Util::callRegister(),
+                ]);
+            }
         }
         return (new TemplateResponse($this->appName, 'personal', $params, ''))->render();
     }
