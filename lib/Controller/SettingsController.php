@@ -92,10 +92,12 @@ class SettingsController extends Controller
 
     public function renderPersonal()
     {
+        Util::addScript($this->appName, 'personal');
         $uid = $this->userSession->getUser()->getUID();
         $params = [
             'providers' => [],
             'connected_logins' => [],
+            'action_url' => $this->urlGenerator->linkToRoute($this->appName.'.settings.savePersonal'),
             'allow_login_connect' => $this->config->getAppValue($this->appName, 'allow_login_connect', false),
             'disable_password_confirmation' => $this->config->getUserValue($uid, $this->appName, 'disable_password_confirmation', false),
         ];
@@ -134,6 +136,17 @@ class SettingsController extends Controller
             }
         }
         return (new TemplateResponse($this->appName, 'personal', $params, ''))->render();
+    }
+
+    /**
+     * @NoAdminRequired
+     * @PasswordConfirmationRequired
+     */
+    public function savePersonal($disable_password_confirmation)
+    {
+        $uid = $this->userSession->getUser()->getUID();
+        $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', $disable_password_confirmation ? 1 : 0);
+        return new JSONResponse(['success' => true]);
     }
 
     /**

@@ -1,8 +1,8 @@
 jQuery(function ($) {
   var appName = 'sociallogin';
   var showError = function(text) {
-      OC.Notification.showTemporary('<div style="font-weight:bold;color:red">'+text+'<div>', {isHTML: true});
-    }
+    OC.Notification.showTemporary('<div style="font-weight:bold;color:red">'+text+'<div>', {isHTML: true});
+  }
   $('#sociallogin_settings').submit(function (e) {
     e.preventDefault();
     $.post(this.action, $(this).serialize())
