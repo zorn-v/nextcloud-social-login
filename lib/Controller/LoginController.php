@@ -12,6 +12,7 @@ use OCP\IUserManager;
 use OCP\IURLGenerator;
 use OCP\IAvatarManager;
 use OCP\IGroupManager;
+use OCP\ISession;
 use OC\User\LoginException;
 use OCA\SocialLogin\Storage\SessionStorage;
 use OCA\SocialLogin\Provider\CustomOpenIDConnect;
@@ -37,6 +38,8 @@ class LoginController extends Controller
     private $avatarManager;
     /** @var IGroupManager */
     private $groupManager;
+    /** @var ISession */
+    private $session;
     /** @var IL10N */
     private $l;
     /** @var SocialConnectDAO */
@@ -53,6 +56,7 @@ class LoginController extends Controller
         IUserSession $userSession,
         IAvatarManager $avatarManager,
         IGroupManager $groupManager,
+        ISession $session,
         IL10N $l,
         SocialConnectDAO $socialConnect
     ) {
@@ -64,6 +68,7 @@ class LoginController extends Controller
         $this->userSession = $userSession;
         $this->avatarManager = $avatarManager;
         $this->groupManager = $groupManager;
+        $this->session = $session;
         $this->l = $l;
         $this->socialConnect = $socialConnect;
     }
@@ -223,6 +228,8 @@ class LoginController extends Controller
 
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => null], false);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
+
+        $this->session->set('last-password-confirm', time());
 
         return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
     }
