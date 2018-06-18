@@ -95,6 +95,11 @@
 					<input type="url" name="custom_oidc_providers[<?php p($k) ?>][tokenUrl]" value="<?php p($provider['tokenUrl']) ?>" required/>
 		        </label>
 		        <br/>
+				<label>
+					<?php p('User info URL (optional)') ?><br>
+					<input type="url" name="custom_oidc_providers[<?php p($k) ?>][userInfoUrl]" value="<?php p(isset($provider['userInfoUrl']) ? $provider['userInfoUrl'] : '') ?>" />
+				</label>
+				<br/>
 		        <label>
 					<?php p('Client Id') ?><br>
 					<input type="text" name="custom_oidc_providers[<?php p($k) ?>][clientId]" value="<?php p($provider['clientId']) ?>" required/>
@@ -154,6 +159,11 @@
     	<label>
 			<?php p('Token URL') ?><br>
 			<input type="url" name="custom_oidc_providers[{{provider_id}}][tokenUrl]" required/>
+		</label>
+		<br/>
+		<label>
+			<?php p('User info URL (optional)') ?><br>
+			<input type="url" name="custom_oidc_providers[{{provider_id}}][userInfoUrl]" />
 		</label>
 		<br/>
     	<label>
