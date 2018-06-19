@@ -26,12 +26,12 @@
 			<div class="provider-settings">
 				<h2><?php p(ucfirst($name))?></h2>
 				<label>
-					<?php p($l-t('App id')) ?><br>
+					<?php p($l->t('App id')) ?><br>
 					<input type="text" name="providers[<?php p($name) ?>][appid]" value="<?php p($provider['appid']) ?>"/>
 				</label>
 				<br/>
 				<label>
-					<?php p($l-t('Secret')) ?><br>
+					<?php p($l->t('Secret')) ?><br>
 					<input type="password" name="providers[<?php p($name) ?>][secret]" value="<?php p($provider['secret']) ?>"/>
 				</label>
 			</div>
@@ -48,17 +48,17 @@
 			<div class="provider-settings">
 				<div class="openid-remove">x</div>
 				<label>
-					<?php p($l-t('Internal name')) ?><br>
+					<?php p($l->t('Internal name')) ?><br>
 					<input type="text" name="openid_providers[<?php p($k) ?>][name]" value="<?php p($provider['name']) ?>" class="disabled" readonly/>
 				</label>
 				<br/>
 				<label>
-					<?php p($l-t('Title')) ?><br>
+					<?php p($l->t('Title')) ?><br>
 					<input type="text" name="openid_providers[<?php p($k) ?>][title]" value="<?php p($provider['title']) ?>" required/>
 				</label>
 				<br/>
 				<label>
-					<?php p($l-t('Identifier url')) ?><br>
+					<?php p($l->t('Identifier url')) ?><br>
 					<input type="url" name="openid_providers[<?php p($k) ?>][url]" value="<?php p($provider['url']) ?>" required/>
 				</label>
 			</div>
@@ -76,42 +76,42 @@
 			<div class="provider-settings">
 				<div class="custom_oidc-remove">x</div>
 				<label>
-					<?php p($l-t('Internal name')) ?><br>
+					<?php p($l->t('Internal name')) ?><br>
 					<input type="text" name="custom_oidc_providers[<?php p($k) ?>][name]" value="<?php p($provider['name']) ?>" readonly/>
 				</label>
 				<br/>
 				<label>
-					<?php p($l-t('Title')) ?><br>
+					<?php p($l->t('Title')) ?><br>
 					<input type="text" name="custom_oidc_providers[<?php p($k) ?>][title]" value="<?php p($provider['title']) ?>" required/>
 				</label>
 				<br/>
         		<label>
-					<?php p($l-t('Authorize url')) ?><br>
+					<?php p($l->t('Authorize url')) ?><br>
 					<input type="url" name="custom_oidc_providers[<?php p($k) ?>][authorizeUrl]" value="<?php p($provider['authorizeUrl']) ?>" required/>
 				</label>
 		        <br/>
 		        <label>
-					<?php p($l-t('Token url')) ?><br>
+					<?php p($l->t('Token url')) ?><br>
 					<input type="url" name="custom_oidc_providers[<?php p($k) ?>][tokenUrl]" value="<?php p($provider['tokenUrl']) ?>" required/>
 		        </label>
 		        <br/>
 				<label>
-					<?php p($l-t('User info URL (optional)')) ?><br>
+					<?php p($l->t('User info URL (optional)')) ?><br>
 					<input type="url" name="custom_oidc_providers[<?php p($k) ?>][userInfoUrl]" value="<?php p(isset($provider['userInfoUrl']) ? $provider['userInfoUrl'] : '') ?>" />
 				</label>
 				<br/>
 		        <label>
-					<?php p($l-t('Client Id')) ?><br>
+					<?php p($l->t('Client Id')) ?><br>
 					<input type="text" name="custom_oidc_providers[<?php p($k) ?>][clientId]" value="<?php p($provider['clientId']) ?>" required/>
 		        </label>
 		        <br/>
 		        <label>
-					<?php p($l-t('Client Secret')) ?><br>
+					<?php p($l->t('Client Secret')) ?><br>
 					<input type="password" name="custom_oidc_providers[<?php p($k) ?>][clientSecret]" value="<?php p($provider['clientSecret']) ?>" required/>
 		        </label>
 		        <br/>
 		        <label>
-					<?php p($l-t('Scope')) ?><br>
+					<?php p($l->t('Scope')) ?><br>
 					<input type="text" name="custom_oidc_providers[<?php p($k) ?>][scope]" value="<?php p($provider['scope']) ?>" required/>
 		        </label>
 			</div>
@@ -124,17 +124,17 @@
   	<div id="openid_provider_tpl" class="provider-settings" data-new-id="<?php p(count($_['openid_providers'])) ?>">
 		<div class="openid-remove">x</div>
 		<label>
-			<?php p($l-t('Internal name')) ?><br>
+			<?php p($l->t('Internal name')) ?><br>
 			<input type="text" name="openid_providers[{{provider_id}}][name]" required/>
 		</label>
 		<br/>
 		<label>
-			<?php p($l-t('Title')) ?><br>
+			<?php p($l->t('Title')) ?><br>
 			<input type="text" name="openid_providers[{{provider_id}}][title]" required/>
 		</label>
 		<br/>
 		<label>
-			<?php p($l-t('Identifier url')) ?><br>
+			<?php p($l->t('Identifier url')) ?><br>
 			<input type="url" name="openid_providers[{{provider_id}}][url]" required/>
 		</label>
 	</div>
@@ -142,42 +142,42 @@
   	<div id="custom_oidc_provider_tpl" class="provider-settings" data-new-id="<?php p(count($_['custom_oidc_providers'])) ?>">
 		<div class="custom_oidc-remove">x</div>
 		<label>
-			<?php p($l-t('Internal name')) ?><br>
+			<?php p($l->t('Internal name')) ?><br>
 			<input type="text" name="custom_oidc_providers[{{provider_id}}][name]" required/>
 		</label>
 		<br/>
 	    <label>
-			<?php p($l-t('Title')) ?><br>
+			<?php p($l->t('Title')) ?><br>
 			<input type="text" name="custom_oidc_providers[{{provider_id}}][title]" required/>
 		</label>
 		<br/>
 	    <label>
-			<?php p($l-t('Authorize URL')) ?><br>
+			<?php p($l->t('Authorize URL')) ?><br>
 			<input type="url" name="custom_oidc_providers[{{provider_id}}][authorizeUrl]" required/>
 		</label>
 		<br/>
     	<label>
-			<?php p($l-t('Token URL')) ?><br>
+			<?php p($l->t('Token URL')) ?><br>
 			<input type="url" name="custom_oidc_providers[{{provider_id}}][tokenUrl]" required/>
 		</label>
 		<br/>
 		<label>
-			<?php p($l-t('User info URL (optional)')) ?><br>
+			<?php p($l->t('User info URL (optional)')) ?><br>
 			<input type="url" name="custom_oidc_providers[{{provider_id}}][userInfoUrl]" />
 		</label>
 		<br/>
     	<label>
-			<?php p($l-t('Client Id')) ?><br>
+			<?php p($l->t('Client Id')) ?><br>
 			<input type="text" name="custom_oidc_providers[{{provider_id}}][clientId]" required/>
 		</label>
 		<br/>
     	<label>
-			<?php p($l-t('Client Secret')) ?><br>
+			<?php p($l->t('Client Secret')) ?><br>
 			<input type="password" name="custom_oidc_providers[{{provider_id}}][clientSecret]" required/>
 		</label>
 		<br/>
     	<label>
-			<?php p($l-t('Scope')) ?><br>
+			<?php p($l->t('Scope')) ?><br>
 			<input type="text" name="custom_oidc_providers[{{provider_id}}][scope]" required/>
 		</label>
 		<br/>
