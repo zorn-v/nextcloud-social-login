@@ -150,6 +150,7 @@ class LoginController extends Controller
                         'endpoints' => new Data\Collection([
                             'authorize_url'    => $prov['authorizeUrl'],
                             'access_token_url' => $prov['tokenUrl'],
+                            'user_info_url'    => $prov['userInfoUrl'],
                             'api_base_url'     => '',
                         ]),
                     ];
