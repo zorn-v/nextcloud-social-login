@@ -41,6 +41,8 @@ class Application extends App
         }
 
         $urlGenerator = $this->query(IURLGenerator::class);
+        $request = $this->query(IRequest::class);
+        $redirectUrl = $request->getParam('redirect_url');
 
         $providersCount = 0;
         $providerUrl = '';
@@ -49,7 +51,7 @@ class Application extends App
             foreach ($providers as $name=>$provider) {
                 if ($provider['appid']) {
                     ++$providersCount;
-                    $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$name]);
+                    $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$name, 'redirect_url'=>$redirectUrl]);
                     \OC_App::registerLogIn([
                         'name' => ucfirst($name),
                         'href' => $providerUrl,
@@ -61,7 +63,7 @@ class Application extends App
         if (is_array($providers)) {
             foreach ($providers as $provider) {
                 ++$providersCount;
-                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$provider['name']]);
+                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$provider['name'], 'redirect_url'=>$redirectUrl]);
                 \OC_App::registerLogIn([
                     'name' => $provider['title'],
                     'href' => $providerUrl,
@@ -72,7 +74,7 @@ class Application extends App
         if (is_array($providers)) {
             foreach ($providers as $provider) {
                 ++$providersCount;
-                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', ['provider'=>$provider['name']]);
+                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', ['provider'=>$provider['name'], 'redirect_url'=>$redirectUrl]);
                 \OC_App::registerLogIn([
                     'name' => $provider['title'],
                     'href' => $providerUrl,
@@ -81,7 +83,7 @@ class Application extends App
         }
 
         $useLoginRedirect = $providersCount === 1 && $config->getSystemValue('social_login_auto_redirect', false);
-        if ($useLoginRedirect && $this->query(IRequest::class)->getPathInfo() === '/login') {
+        if ($useLoginRedirect && $request->getPathInfo() === '/login') {
             header('Location: ' . $providerUrl);
             exit();
         }

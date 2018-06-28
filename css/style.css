@@ -13,19 +13,19 @@ a[href*="/sociallogin/oauth/"]::after {
   width: 10px;
   display: inline-block;
 }
-a[href$="/sociallogin/oauth/facebook"]::before {
+a[href*="/sociallogin/oauth/facebook"]::before {
   background-image: url(../img/facebook.svg);
 }
-a[href$="/sociallogin/oauth/google"]::before {
+a[href*="/sociallogin/oauth/google"]::before {
   background-image: url(../img/googleplus.svg);
 }
-a[href$="/sociallogin/oauth/twitter"]::before {
+a[href*="/sociallogin/oauth/twitter"]::before {
   background-image: url(../img/twitter.svg);
 }
-a[href$="/sociallogin/oauth/GitHub"]::before {
+a[href*="/sociallogin/oauth/GitHub"]::before {
   background-image: url(../img/github.svg);
 }
-a[href$="/sociallogin/oauth/discord"]::before {
+a[href*="/sociallogin/oauth/discord"]::before {
   background-image: url(../img/discord.svg);
 }
 

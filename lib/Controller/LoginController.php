@@ -13,10 +13,7 @@ use OCP\IURLGenerator;
 use OCP\IAvatarManager;
 use OCP\IGroupManager;
 use OCP\ISession;
-use OCP\Security\ISecureRandom;
 use OC\User\LoginException;
-use OC\Authentication\Token\IProvider;
-use OC\Authentication\Token\IToken;
 use OCA\SocialLogin\Storage\SessionStorage;
 use OCA\SocialLogin\Provider\CustomOpenIDConnect;
 use OCA\SocialLogin\Db\SocialConnectDAO;
@@ -45,10 +42,6 @@ class LoginController extends Controller
     private $session;
     /** @var IL10N */
     private $l;
-    /** @var IProvider */
-    private $tokenProvider;
-    /** @var ISecureRandom */
-    private $random;
     /** @var SocialConnectDAO */
     private $socialConnect;
 
@@ -65,8 +58,6 @@ class LoginController extends Controller
         IGroupManager $groupManager,
         ISession $session,
         IL10N $l,
-        IProvider $tokenProvider,
-        ISecureRandom $random,
         SocialConnectDAO $socialConnect
     ) {
         parent::__construct($appName, $request);
@@ -79,8 +70,6 @@ class LoginController extends Controller
         $this->groupManager = $groupManager;
         $this->session = $session;
         $this->l = $l;
-        $this->tokenProvider = $tokenProvider;
-        $this->random = $random;
         $this->socialConnect = $socialConnect;
     }
 
@@ -177,6 +166,9 @@ class LoginController extends Controller
         if (empty($config)) {
             throw new LoginException($this->l->t('Unknown %s provider: "%s"', [$providerTitle, $provider]));
         }
+        if ($redirectUrl = $this->request->getParam('redirect_url')) {
+            $this->storage->set('login_redirect_url', $redirectUrl);
+        }
         try {
             $adapter = new $class($config, null, $this->storage);
             $adapter->authenticate();
@@ -244,22 +236,8 @@ class LoginController extends Controller
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => null], false);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
 
-        if ($this->session->get('client.flow.state.token')) {
-            $token = $this->random->generate(72, ISecureRandom::CHAR_UPPER.ISecureRandom::CHAR_LOWER.ISecureRandom::CHAR_DIGITS);
-            $this->tokenProvider->generateToken(
-                $token,
-                $user->getUID(),
-                $user->getUID(),
-                null,
-                $this->getClientName(),
-                IToken::PERMANENT_TOKEN,
-                IToken::DO_NOT_REMEMBER
-            );
-            return new RedirectResponse(sprintf('nc://login/server:%s&user:%s&password:%s',
-                rtrim($this->urlGenerator->getAbsoluteURL('/'), '/'),
-                urlencode($user->getUID()),
-                urlencode($token)
-            ));
+        if ($redirectUrl = $this->storage->get('login_redirect_url')) {
+            return new RedirectResponse($redirectUrl);
         }
 
         $this->session->set('last-password-confirm', time());
