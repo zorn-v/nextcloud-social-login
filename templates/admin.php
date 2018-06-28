@@ -118,6 +118,69 @@
 		<?php endforeach ?>
 		</div>
 		<br/>
+    	<h2>
+			Custom OAuth2 Connect
+			<button id="custom_oauth2_add" type="button">
+				<div class="icon-add"></div>
+			</button>
+		</h2>
+		<div id="custom_oauth2_providers">
+		<?php foreach ($_['custom_oauth2_providers'] as $k=>$provider): ?>
+			<div class="provider-settings">
+				<div class="custom_oauth2-remove">x</div>
+				<label>
+					<?php p($l->t('Internal name')) ?><br>
+					<input type="text" name="custom_oauth2_providers[<?php p($k) ?>][name]" value="<?php p($provider['name']) ?>" readonly/>
+				</label>
+				<br/>
+				<label>
+					<?php p($l->t('Title')) ?><br>
+					<input type="text" name="custom_oauth2_providers[<?php p($k) ?>][title]" value="<?php p($provider['title']) ?>" required/>
+				</label>
+                <br/>
+                <label>
+                    <?php p($l->t('API Base URL')) ?><br>
+                    <input type="url" name="custom_oauth2_providers[<?php p($k) ?>][apiBaseUrl]" value="<?php p($provider['apiBaseUrl']) ?>" required/>
+                </label>
+				<br/>
+        		<label>
+					<?php p($l->t('Authorize url')) ?><br>
+					<input type="url" name="custom_oauth2_providers[<?php p($k) ?>][authorizeUrl]" value="<?php p($provider['authorizeUrl']) ?>" required/>
+				</label>
+		        <br/>
+		        <label>
+					<?php p($l->t('Token url')) ?><br>
+					<input type="url" name="custom_oauth2_providers[<?php p($k) ?>][tokenUrl]" value="<?php p($provider['tokenUrl']) ?>" required/>
+		        </label>
+                <br/>
+                <label>
+                    <?php p($l->t('Profile URL')) ?><br>
+                    <input type="url" name="custom_oauth2_providers[<?php p($k) ?>][profileUrl]" value="<?php p($provider['profileUrl']) ?>" required/>
+                </label>
+		        <br/>
+		        <label>
+					<?php p($l->t('Client Id')) ?><br>
+					<input type="text" name="custom_oauth2_providers[<?php p($k) ?>][clientId]" value="<?php p($provider['clientId']) ?>" required/>
+		        </label>
+		        <br/>
+		        <label>
+					<?php p($l->t('Client Secret')) ?><br>
+					<input type="password" name="custom_oauth2_providers[<?php p($k) ?>][clientSecret]" value="<?php p($provider['clientSecret']) ?>" required/>
+		        </label>
+		        <br/>
+		        <label>
+					<?php p($l->t('Scope')) ?><br>
+					<input type="text" name="custom_oauth2_providers[<?php p($k) ?>][scope]" value="<?php p($provider['scope']) ?>" />
+		        </label>
+                <br/>
+                <label>
+                    <?php p($l->t('Profile Fields (comma-separated)')) ?><br>
+                    <input type="text" name="custom_oauth2_providers[<?php p($k) ?>][profileFields]" value="<?php p($provider['profileFields']) ?>" />
+                </label>
+			</div>
+		<?php endforeach ?>
+		</div>
+		<br/>
 		<button><?php p($l->t('Save')); ?></button>
 	</form>
 
@@ -179,6 +242,60 @@
     	<label>
 			<?php p($l->t('Scope')) ?><br>
 			<input type="text" name="custom_oidc_providers[{{provider_id}}][scope]" required/>
+		</label>
+		<br/>
+	</div>
+
+  	<div id="custom_oauth2_provider_tpl" class="provider-settings" data-new-id="<?php p(count($_['custom_oauth2_providers'])) ?>">
+		<div class="custom_oauth2-remove">x</div>
+		<label>
+			<?php p($l->t('Internal name')) ?><br>
+			<input type="text" name="custom_oauth2_providers[{{provider_id}}][name]" required/>
+		</label>
+		<br/>
+	    <label>
+			<?php p($l->t('Title')) ?><br>
+			<input type="text" name="custom_oauth2_providers[{{provider_id}}][title]" required/>
+		</label>
+		<br/>
+	    <label>
+			<?php p($l->t('API Base URL')) ?><br>
+			<input type="url" name="custom_oauth2_providers[{{provider_id}}][apiBaseUrl]" required/>
+		</label>
+		<br/>
+	    <label>
+			<?php p($l->t('Authorize URL')) ?><br>
+			<input type="url" name="custom_oauth2_providers[{{provider_id}}][authorizeUrl]" required/>
+		</label>
+		<br/>
+    	<label>
+			<?php p($l->t('Token URL')) ?><br>
+			<input type="url" name="custom_oauth2_providers[{{provider_id}}][tokenUrl]" required/>
+		</label>
+		<br/>
+    	<label>
+			<?php p($l->t('Profile URL')) ?><br>
+			<input type="url" name="custom_oauth2_providers[{{provider_id}}][profileUrl]" required/>
+		</label>
+		<br/>
+    	<label>
+			<?php p($l->t('Client Id')) ?><br>
+			<input type="text" name="custom_oauth2_providers[{{provider_id}}][clientId]" required/>
+		</label>
+		<br/>
+    	<label>
+			<?php p($l->t('Client Secret')) ?><br>
+			<input type="password" name="custom_oauth2_providers[{{provider_id}}][clientSecret]" required/>
+		</label>
+		<br/>
+    	<label>
+			<?php p($l->t('Scope')) ?><br>
+			<input type="text" name="custom_oauth2_providers[{{provider_id}}][scope]"/>
+		</label>
+		<br/>
+    	<label>
+			<?php p($l->t('Profile Fields (comma-separated)')) ?><br>
+			<input type="text" name="custom_oauth2_providers[{{provider_id}}][profileFields]"/>
 		</label>
 		<br/>
 	</div>

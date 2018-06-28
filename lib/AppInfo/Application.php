@@ -79,6 +79,17 @@ class Application extends App
                 ]);
             }
         }
+        $providers = json_decode($config->getAppValue($this->appName, 'custom_oauth2_providers', '[]'), true);
+        if (is_array($providers)) {
+            foreach ($providers as $provider) {
+                ++$providersCount;
+                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom_oauth2', ['provider'=>$provider['name']]);
+                \OC_App::registerLogIn([
+                    'name' => $provider['title'],
+                    'href' => $providerUrl,
+                ]);
+            }
+        }
 
         $useLoginRedirect = $providersCount === 1 && $config->getSystemValue('social_login_auto_redirect', false);
         if ($useLoginRedirect && $this->query(IRequest::class)->getPathInfo() === '/login') {
