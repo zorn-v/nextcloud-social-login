@@ -39,18 +39,18 @@ class CustomOpenIDConnect extends OAuth2
 
         $userInfoUrl = trim($this->config->get('endpoints')->get('user_info_url'));
         if ((empty($userProfile->displayName) || empty($userProfile->photoURL) || empty($userProfile->email)) && !empty($userInfoUrl)) {
-            $profile = $this->apiRequest($userInfoUrl);
+            $profile = new Data\Collection( $this->apiRequest($userInfoUrl) );
             if (empty($userProfile->displayName)) {
-                $userProfile->displayName = $profile->name ?: $profile->nickname;
+                $userProfile->displayName = $profile->get('name') ?: $profile->get('nickname');
             }
             if (empty($userProfile->photoURL)) {
-                $userProfile->photoURL = $profile->picture ?: $profile->avatar;
+                $userProfile->photoURL = $profile->get('picture') ?: $profile->get('avatar');
                 if (preg_match('#<img.+src=["\'](.+?)["\']#', $userProfile->photoURL, $m)) {
                     $userProfile->photoURL = $m[1];
                 }
             }
             if (empty($userProfile->email)) {
-                $userProfile->email = $profile->email;
+                $userProfile->email = $profile->get('email');
             }
         }
 
