@@ -178,6 +178,9 @@ class LoginController extends Controller
             throw new LoginException($this->l->t('Can not get identifier from provider'));
         }
         $uid = $provider.'-'.$profileId;
+        if (strlen($uid) > 64) {
+            $uid = $provider.'-'.md5($profileId);
+        }
         return $this->login($uid, $profile);
     }
 
