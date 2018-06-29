@@ -16,6 +16,16 @@ class Application extends App
 {
     private $appName = 'sociallogin';
 
+    private $providersCount = 0;
+
+    private $providerUrl;
+
+    private $redirectUrl;
+    /** @var IConfig */
+    private $config;
+    /** @var IURLGenerator */
+    private $urlGenerator;
+
     public function __construct()
     {
         parent::__construct($this->appName);
@@ -25,7 +35,7 @@ class Application extends App
     {
         \OCP\Util::addStyle($this->appName, 'style');
 
-        $config = $this->query(IConfig::class);
+        $this->config = $this->query(IConfig::class);
 
         \OCP\App::registerPersonal($this->appName, 'appinfo/personal');
 
@@ -34,80 +44,40 @@ class Application extends App
         $userSession = $this->query(IUserSession::class);
         if ($userSession->isLoggedIn()) {
             $uid = $userSession->getUser()->getUID();
-            if ($config->getUserValue($uid, $this->appName, 'disable_password_confirmation')) {
+            if ($this->config->getUserValue($uid, $this->appName, 'disable_password_confirmation')) {
                 $this->query(ISession::class)->set('last-password-confirm', time());
             }
             return;
         }
 
-        $urlGenerator = $this->query(IURLGenerator::class);
+        $this->urlGenerator = $this->query(IURLGenerator::class);
         $request = $this->query(IRequest::class);
-        $redirectUrl = $request->getParam('redirect_url');
+        $this->redirectUrl = $request->getParam('redirect_url');
 
-        $providersCount = 0;
-        $providerUrl = '';
-        $providers = json_decode($config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
+        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
         if (is_array($providers)) {
-            foreach ($providers as $name=>$provider) {
+            foreach ($providers as $name => $provider) {
                 if ($provider['appid']) {
-                    ++$providersCount;
-                    $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.oauth', [
-                        'provider'=>$name,
-                        'login_redirect_url'=>$redirectUrl
+                    ++$this->providersCount;
+                    $this->providerUrl = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', [
+                        'provider' => $name,
+                        'login_redirect_url' => $this->redirectUrl
                     ]);
                     \OC_App::registerLogIn([
                         'name' => ucfirst($name),
-                        'href' => $providerUrl,
+                        'href' => $this->providerUrl,
                     ]);
                 }
             }
         }
-        $providers = json_decode($config->getAppValue($this->appName, 'openid_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $provider) {
-                ++$providersCount;
-                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.openid', [
-                    'provider'=>$provider['name'],
-                    'login_redirect_url'=>$redirectUrl
-                ]);
-                \OC_App::registerLogIn([
-                    'name' => $provider['title'],
-                    'href' => $providerUrl,
-                ]);
-            }
-        }
-        $providers = json_decode($config->getAppValue($this->appName, 'custom_oidc_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $provider) {
-                ++$providersCount;
-                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', [
-                    'provider'=>$provider['name'],
-                    'login_redirect_url'=>$redirectUrl
-                ]);
-                \OC_App::registerLogIn([
-                    'name' => $provider['title'],
-                    'href' => $providerUrl,
-                ]);
-            }
-        }
-        $providers = json_decode($config->getAppValue($this->appName, 'custom_oauth2_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $provider) {
-                ++$providersCount;
-                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom_oauth2', [
-                    'provider'=>$provider['name'],
-                    'login_redirect_url'=>$redirectUrl
-                ]);
-                \OC_App::registerLogIn([
-                    'name' => $provider['title'],
-                    'href' => $providerUrl,
-                ]);
-            }
-        }
 
-        $useLoginRedirect = $providersCount === 1 && $config->getSystemValue('social_login_auto_redirect', false);
+        $this->addAltLogins('openid');
+        $this->addAltLogins('custom_oidc');
+        $this->addAltLogins('custom_oauth2');
+
+        $useLoginRedirect = $this->providersCount === 1 && $this->config->getSystemValue('social_login_auto_redirect', false);
         if ($useLoginRedirect && $request->getPathInfo() === '/login') {
-            header('Location: ' . $providerUrl);
+            header('Location: ' . $this->providerUrl);
             exit();
         }
     }
@@ -115,6 +85,24 @@ class Application extends App
     public function preDeleteUser(IUser $user)
     {
         $this->query(SocialConnectDAO::class)->disconnectAll($user->getUID());
+    }
+
+    private function addAltLogins($providersType)
+    {
+        $providers = json_decode($this->config->getAppValue($this->appName, $providersType.'_providers', '[]'), true);
+        if (is_array($providers)) {
+            foreach ($providers as $provider) {
+                ++$this->providersCount;
+                $this->providerUrl = $this->urlGenerator->linkToRoute($this->appName.'.login.'.$providersType, [
+                    'provider' => $provider['name'],
+                    'login_redirect_url' => $this->redirectUrl
+                ]);
+                \OC_App::registerLogIn([
+                    'name' => $provider['title'],
+                    'href' => $this->providerUrl,
+                ]);
+            }
+        }
     }
 
     private function query($className)

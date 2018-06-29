@@ -1,303 +1,213 @@
 <?php
 /** @var array $_ */
 /** @var \OCP\IL10N $l */
+
+$providersData = [
+    'openid' => [
+        'title' => 'OpenID',
+        'fields' => [
+            'name' => [
+                'title' => 'Internal name',
+                'type' => 'text',
+                'required' => true,
+            ],
+            'title' => [
+                'title' => 'Title',
+                'type' => 'text',
+                'required' => true,
+            ],
+            'url' => [
+                'title' => 'Identifier url',
+                'type' => 'url',
+                'required' => true,
+            ],
+        ]
+    ],
+    'custom_oidc' => [
+        'title' => 'Custom OpenID Connect',
+        'fields' => [
+            'name' => [
+                'title' => 'Internal name',
+                'type' => 'text',
+                'required' => true,
+            ],
+            'title' => [
+                'title' => 'Title',
+                'type' => 'text',
+                'required' => true,
+            ],
+            'authorizeUrl' => [
+                'title' => 'Authorize url',
+                'type' => 'url',
+                'required' => true,
+            ],
+            'tokenUrl' => [
+                'title' => 'Token url',
+                'type' => 'url',
+                'required' => true,
+            ],
+            'userInfoUrl' => [
+                'title' => 'User info URL (optional)',
+                'type' => 'url',
+                'required' => false,
+            ],
+            'clientId' => [
+                'title' => 'Client Id',
+                'type' => 'text',
+                'required' => true,
+            ],
+            'clientSecret' => [
+                'title' => 'Client Secret',
+                'type' => 'password',
+                'required' => true,
+            ],
+            'scope' => [
+                'title' => 'Scope',
+                'type' => 'text',
+                'required' => true,
+            ],
+        ]
+    ],
+    'custom_oauth2' => [
+        'title' => 'Custom OAuth2',
+        'fields' => [
+            'name' => [
+                'title' => 'Internal name',
+                'type' => 'text',
+                'required' => true,
+            ],
+            'title' => [
+                'title' => 'Title',
+                'type' => 'text',
+                'required' => true,
+            ],
+            'apiBaseUrl' => [
+                'title' => 'API Base URL',
+                'type' => 'url',
+                'required' => true,
+            ],
+            'authorizeUrl' => [
+                'title' => 'Authorize url (can be relative to base URL)',
+                'type' => 'text',
+                'required' => true,
+            ],
+            'tokenUrl' => [
+                'title' => 'Token url (can be relative to base URL)',
+                'type' => 'text',
+                'required' => true,
+            ],
+            'profileUrl' => [
+                'title' => 'Profile url (can be relative to base URL)',
+                'type' => 'text',
+                'required' => true,
+            ],
+            'clientId' => [
+                'title' => 'Client Id',
+                'type' => 'text',
+                'required' => true,
+            ],
+            'clientSecret' => [
+                'title' => 'Client Secret',
+                'type' => 'password',
+                'required' => true,
+            ],
+            'scope' => [
+                'title' => 'Scope (optional)',
+                'type' => 'text',
+                'required' => false,
+            ],
+            'profileFields' => [
+                'title' => 'Profile Fields (optional, comma-separated)',
+                'type' => 'text',
+                'required' => false,
+            ],
+        ]
+    ],
+];
 ?>
 <div id="sociallogin" class="section">
-	<form id="sociallogin_settings" action="<?php print_unescaped($_['action_url']) ?>" method="post">
-		<p>
-		<label for="new_user_group"><?php p($l->t('Default group that all new users belong')); ?></label>
-		<select id="new_user_group" name="new_user_group">
-			<option value=""><?php p($l->t('None')); ?></option>
-			<?php foreach ($_['groups'] as $group): ?>
-				<option value="<?php p($group) ?>" <?php p($_['new_user_group'] === $group ? 'selected' : '') ?>><?php p($group) ?></option>
-			<?php endforeach ?>
-		</select>
-		<div>
-			<input id="disable_registration" type="checkbox" class="checkbox" name="disable_registration" value="1" <?php p($_['disable_registration'] ? 'checked' : '') ?>/>
-			<label for="disable_registration"><?php p($l->t('Disable auto create new users')) ?></label>
-		</div>
-		<div>
-			<input id="allow_login_connect" type="checkbox" class="checkbox" name="allow_login_connect" value="1" <?php p($_['allow_login_connect'] ? 'checked' : '') ?>/>
-			<label for="allow_login_connect"><?php p($l->t('Allow users to connect social logins with their account')) ?></label>
-		</div>
-		</p>
-		<hr/>
-		<?php foreach ($_['providers'] as $name=>$provider): ?>
-			<div class="provider-settings">
-				<h2><?php p(ucfirst($name))?></h2>
-				<label>
-					<?php p($l->t('App id')) ?><br>
-					<input type="text" name="providers[<?php p($name) ?>][appid]" value="<?php p($provider['appid']) ?>"/>
-				</label>
-				<br/>
-				<label>
-					<?php p($l->t('Secret')) ?><br>
-					<input type="password" name="providers[<?php p($name) ?>][secret]" value="<?php p($provider['secret']) ?>"/>
-				</label>
-			</div>
-		<?php endforeach ?>
-		<br/>
-		<h2>
-			OpenID
-			<button id="openid_add" type="button">
-				<div class="icon-add"></div>
-			</button>
-		</h2>
-		<div id="openid_providers">
-		<?php foreach ($_['openid_providers'] as $k=>$provider): ?>
-			<div class="provider-settings">
-				<div class="openid-remove">x</div>
-				<label>
-					<?php p($l->t('Internal name')) ?><br>
-					<input type="text" name="openid_providers[<?php p($k) ?>][name]" value="<?php p($provider['name']) ?>" class="disabled" readonly/>
-				</label>
-				<br/>
-				<label>
-					<?php p($l->t('Title')) ?><br>
-					<input type="text" name="openid_providers[<?php p($k) ?>][title]" value="<?php p($provider['title']) ?>" required/>
-				</label>
-				<br/>
-				<label>
-					<?php p($l->t('Identifier url')) ?><br>
-					<input type="url" name="openid_providers[<?php p($k) ?>][url]" value="<?php p($provider['url']) ?>" required/>
-				</label>
-			</div>
-		<?php endforeach ?>
-		</div>
-		<br/>
-    	<h2>
-			Custom OpenID Connect
-			<button id="custom_oidc_add" type="button">
-				<div class="icon-add"></div>
-			</button>
-		</h2>
-		<div id="custom_oidc_providers">
-		<?php foreach ($_['custom_oidc_providers'] as $k=>$provider): ?>
-			<div class="provider-settings">
-				<div class="custom_oidc-remove">x</div>
-				<label>
-					<?php p($l->t('Internal name')) ?><br>
-					<input type="text" name="custom_oidc_providers[<?php p($k) ?>][name]" value="<?php p($provider['name']) ?>" readonly/>
-				</label>
-				<br/>
-				<label>
-					<?php p($l->t('Title')) ?><br>
-					<input type="text" name="custom_oidc_providers[<?php p($k) ?>][title]" value="<?php p($provider['title']) ?>" required/>
-				</label>
-				<br/>
-        		<label>
-					<?php p($l->t('Authorize url')) ?><br>
-					<input type="url" name="custom_oidc_providers[<?php p($k) ?>][authorizeUrl]" value="<?php p($provider['authorizeUrl']) ?>" required/>
-				</label>
-		        <br/>
-		        <label>
-					<?php p($l->t('Token url')) ?><br>
-					<input type="url" name="custom_oidc_providers[<?php p($k) ?>][tokenUrl]" value="<?php p($provider['tokenUrl']) ?>" required/>
-		        </label>
-		        <br/>
-				<label>
-					<?php p($l->t('User info URL (optional)')) ?><br>
-					<input type="url" name="custom_oidc_providers[<?php p($k) ?>][userInfoUrl]" value="<?php p(isset($provider['userInfoUrl']) ? $provider['userInfoUrl'] : '') ?>" />
-				</label>
-				<br/>
-		        <label>
-					<?php p($l->t('Client Id')) ?><br>
-					<input type="text" name="custom_oidc_providers[<?php p($k) ?>][clientId]" value="<?php p($provider['clientId']) ?>" required/>
-		        </label>
-		        <br/>
-		        <label>
-					<?php p($l->t('Client Secret')) ?><br>
-					<input type="password" name="custom_oidc_providers[<?php p($k) ?>][clientSecret]" value="<?php p($provider['clientSecret']) ?>" required/>
-		        </label>
-		        <br/>
-		        <label>
-					<?php p($l->t('Scope')) ?><br>
-					<input type="text" name="custom_oidc_providers[<?php p($k) ?>][scope]" value="<?php p($provider['scope']) ?>" required/>
-		        </label>
-			</div>
-		<?php endforeach ?>
-		</div>
-		<br/>
-    	<h2>
-			Custom OAuth2
-			<button id="custom_oauth2_add" type="button">
-				<div class="icon-add"></div>
-			</button>
-		</h2>
-		<div id="custom_oauth2_providers">
-		<?php foreach ($_['custom_oauth2_providers'] as $k=>$provider): ?>
-			<div class="provider-settings">
-				<div class="custom_oauth2-remove">x</div>
-				<label>
-					<?php p($l->t('Internal name')) ?><br>
-					<input type="text" name="custom_oauth2_providers[<?php p($k) ?>][name]" value="<?php p($provider['name']) ?>" readonly/>
-				</label>
-				<br/>
-				<label>
-					<?php p($l->t('Title')) ?><br>
-					<input type="text" name="custom_oauth2_providers[<?php p($k) ?>][title]" value="<?php p($provider['title']) ?>" required/>
-				</label>
+    <form id="sociallogin_settings" action="<?php print_unescaped($_['action_url']) ?>" method="post">
+        <p>
+        <label for="new_user_group"><?php p($l->t('Default group that all new users belong')); ?></label>
+        <select id="new_user_group" name="new_user_group">
+            <option value=""><?php p($l->t('None')); ?></option>
+            <?php foreach ($_['groups'] as $group): ?>
+                <option value="<?php p($group) ?>" <?php p($_['new_user_group'] === $group ? 'selected' : '') ?>><?php p($group) ?></option>
+            <?php endforeach ?>
+        </select>
+        <div>
+            <input id="disable_registration" type="checkbox" class="checkbox" name="disable_registration" value="1" <?php p($_['disable_registration'] ? 'checked' : '') ?>/>
+            <label for="disable_registration"><?php p($l->t('Disable auto create new users')) ?></label>
+        </div>
+        <div>
+            <input id="allow_login_connect" type="checkbox" class="checkbox" name="allow_login_connect" value="1" <?php p($_['allow_login_connect'] ? 'checked' : '') ?>/>
+            <label for="allow_login_connect"><?php p($l->t('Allow users to connect social logins with their account')) ?></label>
+        </div>
+        </p>
+        <hr/>
+        <?php foreach ($_['providers'] as $name => $provider): ?>
+            <div class="provider-settings">
+                <h2><?php p(ucfirst($name))?></h2>
+                <label>
+                    <?php p($l->t('App id')) ?><br>
+                    <input type="text" name="providers[<?php p($name) ?>][appid]" value="<?php p($provider['appid']) ?>"/>
+                </label>
                 <br/>
                 <label>
-                    <?php p($l->t('API Base URL')) ?><br>
-                    <input type="url" name="custom_oauth2_providers[<?php p($k) ?>][apiBaseUrl]" value="<?php p($provider['apiBaseUrl']) ?>" required/>
+                    <?php p($l->t('Secret')) ?><br>
+                    <input type="password" name="providers[<?php p($name) ?>][secret]" value="<?php p($provider['secret']) ?>"/>
                 </label>
-				<br/>
-        		<label>
-					<?php p($l->t('Authorize url')) ?><br>
-					<input type="url" name="custom_oauth2_providers[<?php p($k) ?>][authorizeUrl]" value="<?php p($provider['authorizeUrl']) ?>" required/>
-				</label>
-		        <br/>
-		        <label>
-					<?php p($l->t('Token url')) ?><br>
-					<input type="url" name="custom_oauth2_providers[<?php p($k) ?>][tokenUrl]" value="<?php p($provider['tokenUrl']) ?>" required/>
-		        </label>
-                <br/>
-                <label>
-                    <?php p($l->t('Profile URL')) ?><br>
-                    <input type="url" name="custom_oauth2_providers[<?php p($k) ?>][profileUrl]" value="<?php p($provider['profileUrl']) ?>" required/>
-                </label>
-		        <br/>
-		        <label>
-					<?php p($l->t('Client Id')) ?><br>
-					<input type="text" name="custom_oauth2_providers[<?php p($k) ?>][clientId]" value="<?php p($provider['clientId']) ?>" required/>
-		        </label>
-		        <br/>
-		        <label>
-					<?php p($l->t('Client Secret')) ?><br>
-					<input type="password" name="custom_oauth2_providers[<?php p($k) ?>][clientSecret]" value="<?php p($provider['clientSecret']) ?>" required/>
-		        </label>
-		        <br/>
-		        <label>
-					<?php p($l->t('Scope')) ?><br>
-					<input type="text" name="custom_oauth2_providers[<?php p($k) ?>][scope]" value="<?php p($provider['scope']) ?>" />
-		        </label>
-                <br/>
-                <label>
-                    <?php p($l->t('Profile Fields (comma-separated)')) ?><br>
-                    <input type="text" name="custom_oauth2_providers[<?php p($k) ?>][profileFields]" value="<?php p($provider['profileFields']) ?>" />
-                </label>
-			</div>
-		<?php endforeach ?>
-		</div>
-		<br/>
-		<button><?php p($l->t('Save')); ?></button>
-	</form>
+            </div>
+        <?php endforeach ?>
+        <br/>
 
-  	<div id="openid_provider_tpl" class="provider-settings" data-new-id="<?php p(count($_['openid_providers'])) ?>">
-		<div class="openid-remove">x</div>
-		<label>
-			<?php p($l->t('Internal name')) ?><br>
-			<input type="text" name="openid_providers[{{provider_id}}][name]" required/>
-		</label>
-		<br/>
-		<label>
-			<?php p($l->t('Title')) ?><br>
-			<input type="text" name="openid_providers[{{provider_id}}][title]" required/>
-		</label>
-		<br/>
-		<label>
-			<?php p($l->t('Identifier url')) ?><br>
-			<input type="url" name="openid_providers[{{provider_id}}][url]" required/>
-		</label>
-	</div>
+        <?php foreach ($providersData as $provType => $provData): ?>
+        <h2>
+            <?php p($l->t($provData['title'])) ?>
+            <button id="<?php p($provType)?>_add" type="button">
+                <div class="icon-add"></div>
+            </button>
+        </h2>
+        <div id="<?php p($provType)?>_providers">
+        <?php foreach ($_[$provType.'_providers'] as $k => $provider): ?>
+            <div class="provider-settings">
+                <div class="<?php p($provType)?>-remove">x</div>
+                <?php foreach ($provData['fields'] as $fieldName => $fieldData): ?>
+                    <label>
+                        <?php p($l->t($fieldData['title'])) ?><br>
+                        <input
+                            type="<?php p($fieldData['type'])?>"
+                            name="<?php p($provType)?>_providers[<?php p($k) ?>][<?php p($fieldName)?>]"
+                            value="<?php p($provider[$fieldName]) ?>"
+                            <?php p($fieldName == 'name' ? 'readonly' : ($fieldData['required'] ? 'required' : '' )) ?>
+                        />
+                    </label>
+                    <br/>
+                <?php endforeach ?>
+            </div>
+        <?php endforeach ?>
+        </div>
+        <br/>
+        <?php endforeach ?>
 
-  	<div id="custom_oidc_provider_tpl" class="provider-settings" data-new-id="<?php p(count($_['custom_oidc_providers'])) ?>">
-		<div class="custom_oidc-remove">x</div>
-		<label>
-			<?php p($l->t('Internal name')) ?><br>
-			<input type="text" name="custom_oidc_providers[{{provider_id}}][name]" required/>
-		</label>
-		<br/>
-	    <label>
-			<?php p($l->t('Title')) ?><br>
-			<input type="text" name="custom_oidc_providers[{{provider_id}}][title]" required/>
-		</label>
-		<br/>
-	    <label>
-			<?php p($l->t('Authorize URL')) ?><br>
-			<input type="url" name="custom_oidc_providers[{{provider_id}}][authorizeUrl]" required/>
-		</label>
-		<br/>
-    	<label>
-			<?php p($l->t('Token URL')) ?><br>
-			<input type="url" name="custom_oidc_providers[{{provider_id}}][tokenUrl]" required/>
-		</label>
-		<br/>
-		<label>
-			<?php p($l->t('User info URL (optional)')) ?><br>
-			<input type="url" name="custom_oidc_providers[{{provider_id}}][userInfoUrl]" />
-		</label>
-		<br/>
-    	<label>
-			<?php p($l->t('Client Id')) ?><br>
-			<input type="text" name="custom_oidc_providers[{{provider_id}}][clientId]" required/>
-		</label>
-		<br/>
-    	<label>
-			<?php p($l->t('Client Secret')) ?><br>
-			<input type="password" name="custom_oidc_providers[{{provider_id}}][clientSecret]" required/>
-		</label>
-		<br/>
-    	<label>
-			<?php p($l->t('Scope')) ?><br>
-			<input type="text" name="custom_oidc_providers[{{provider_id}}][scope]" required/>
-		</label>
-		<br/>
-	</div>
+        <button><?php p($l->t('Save')); ?></button>
+    </form>
 
-  	<div id="custom_oauth2_provider_tpl" class="provider-settings" data-new-id="<?php p(count($_['custom_oauth2_providers'])) ?>">
-		<div class="custom_oauth2-remove">x</div>
-		<label>
-			<?php p($l->t('Internal name')) ?><br>
-			<input type="text" name="custom_oauth2_providers[{{provider_id}}][name]" required/>
-		</label>
-		<br/>
-	    <label>
-			<?php p($l->t('Title')) ?><br>
-			<input type="text" name="custom_oauth2_providers[{{provider_id}}][title]" required/>
-		</label>
-		<br/>
-	    <label>
-			<?php p($l->t('API Base URL')) ?><br>
-			<input type="url" name="custom_oauth2_providers[{{provider_id}}][apiBaseUrl]" required/>
-		</label>
-		<br/>
-	    <label>
-			<?php p($l->t('Authorize URL')) ?><br>
-			<input type="url" name="custom_oauth2_providers[{{provider_id}}][authorizeUrl]" required/>
-		</label>
-		<br/>
-    	<label>
-			<?php p($l->t('Token URL')) ?><br>
-			<input type="url" name="custom_oauth2_providers[{{provider_id}}][tokenUrl]" required/>
-		</label>
-		<br/>
-    	<label>
-			<?php p($l->t('Profile URL')) ?><br>
-			<input type="url" name="custom_oauth2_providers[{{provider_id}}][profileUrl]" required/>
-		</label>
-		<br/>
-    	<label>
-			<?php p($l->t('Client Id')) ?><br>
-			<input type="text" name="custom_oauth2_providers[{{provider_id}}][clientId]" required/>
-		</label>
-		<br/>
-    	<label>
-			<?php p($l->t('Client Secret')) ?><br>
-			<input type="password" name="custom_oauth2_providers[{{provider_id}}][clientSecret]" required/>
-		</label>
-		<br/>
-    	<label>
-			<?php p($l->t('Scope')) ?><br>
-			<input type="text" name="custom_oauth2_providers[{{provider_id}}][scope]"/>
-		</label>
-		<br/>
-    	<label>
-			<?php p($l->t('Profile Fields (comma-separated)')) ?><br>
-			<input type="text" name="custom_oauth2_providers[{{provider_id}}][profileFields]"/>
-		</label>
-		<br/>
-	</div>
+<?php foreach ($providersData as $provType => $provData): ?>
+    <div id="<?php p($provType) ?>_provider_tpl" class="provider-settings" data-new-id="<?php p(count($_[$provType.'_providers'])) ?>">
+        <div class="<?php p($provType) ?>-remove">x</div>
+        <?php foreach ($provData['fields'] as $fieldName => $fieldData): ?>
+        <label>
+            <?php p($l->t($fieldData['title'])) ?><br>
+            <input
+                type="<?php p($fieldData['type'])?>"
+                name="<?php p($provType) ?>_providers[{{provider_id}}][<?php p($fieldName) ?>]"
+                <?php p($fieldData['required'] ? 'required' : '' ) ?>
+            />
+        </label>
+        <br/>
+        <?php endforeach ?>
+    </div>
+<?php endforeach ?>
 
 </div>
