@@ -62,6 +62,7 @@ class SettingsController extends Controller
             $names = array_keys($providers);
             $this->checkProviders($openid_providers, $names);
             $this->checkProviders($custom_oidc_providers, $names);
+            $this->checkProviders($custom_oauth2_providers, $names);
         } catch (\Exception $e) {
             return new JSONResponse(['message' => $e->getMessage()]);
         }
@@ -106,36 +107,15 @@ class SettingsController extends Controller
         if ($params['allow_login_connect']) {
             $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
             if (is_array($providers)) {
-                foreach ($providers as $name=>$provider) {
+                foreach ($providers as $name => $provider) {
                     if ($provider['appid']) {
-                        $params['providers'][ucfirst($name)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$name]);
+                        $params['providers'][ucfirst($name)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider' => $name]);
                     }
                 }
             }
-            $providers = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
-            if (is_array($providers)) {
-                foreach ($providers as $provider) {
-                    $name = $provider['name'];
-                    $title = $provider['title'];
-                    $params['providers'][$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$name]);
-                }
-            }
-            $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oidc_providers', '[]'), true);
-            if (is_array($providers)) {
-                foreach ($providers as $provider) {
-                    $name = $provider['name'];
-                    $title = $provider['title'];
-                    $params['providers'][$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', ['provider'=>$name]);
-                }
-            }
-            $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oauth2_providers', '[]'), true);
-            if (is_array($providers)) {
-                foreach ($providers as $provider) {
-                    $name = $provider['name'];
-                    $title = $provider['title'];
-                    $params['providers'][$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.custom_oauth2', ['provider'=>$name]);
-                }
-            }
+            $params['providers'] = array_merge($params['providers'], $this->getProviders('openid'));
+            $params['providers'] = array_merge($params['providers'], $this->getProviders('custom_oidc'));
+            $params['providers'] = array_merge($params['providers'], $this->getProviders('custom_oauth2'));
 
             $connectedLogins = $this->socialConnect->getConnectedLogins($uid);
             foreach ($connectedLogins as $login) {
@@ -146,6 +126,20 @@ class SettingsController extends Controller
             }
         }
         return (new TemplateResponse($this->appName, 'personal', $params, ''))->render();
+    }
+
+    private function getProviders($providersType)
+    {
+        $result = [];
+        $providers = json_decode($this->config->getAppValue($this->appName, $providersType.'_providers', '[]'), true);
+        if (is_array($providers)) {
+            foreach ($providers as $provider) {
+                $name = $provider['name'];
+                $title = $provider['title'];
+                $result[$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.'.$providersType, ['provider' => $name]);
+            }
+        }
+        return $result;
     }
 
     /**
