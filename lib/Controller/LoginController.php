@@ -76,6 +76,7 @@ class LoginController extends Controller
     /**
      * @PublicPage
      * @NoCSRFRequired
+     * @UseSession
      */
     public function oauth($provider)
     {
@@ -108,6 +109,7 @@ class LoginController extends Controller
     /**
      * @PublicPage
      * @NoCSRFRequired
+     * @UseSession
      */
     public function openid($provider)
     {
@@ -131,6 +133,7 @@ class LoginController extends Controller
     /**
      * @PublicPage
      * @NoCSRFRequired
+     * @UseSession
      */
     public function customOidc($provider)
     {
@@ -233,7 +236,7 @@ class LoginController extends Controller
             $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
         }
 
-        $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => null], false);
+        $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => null]);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
 
         if ($redirectUrl = $this->storage->get('login_redirect_url')) {
