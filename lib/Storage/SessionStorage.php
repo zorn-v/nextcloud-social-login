@@ -2,19 +2,25 @@
 
 namespace OCA\SocialLogin\Storage;
 
-use Hybridauth\Storage\Session;
+use Hybridauth\Storage\StorageInterface;
+use OCP\ISession;
 
-class SessionStorage extends Session
+class SessionStorage implements StorageInterface
 {
+    /** @var ISession */
+    private $session;
+
+    public function __construct(ISession $session)
+    {
+        $this->session = $session;
+    }
+
     /**
     * {@inheritdoc}
     */
     public function get($key)
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
-        }
-        return parent::get($key);
+        return $this->session->get($key);
     }
 
     /**
@@ -22,10 +28,7 @@ class SessionStorage extends Session
     */
     public function set($key, $value)
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
-        }
-        parent::set($key, $value);
+        $this->session->set($key, $value);
     }
 
     /**
@@ -33,10 +36,7 @@ class SessionStorage extends Session
     */
     public function delete($key)
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
-        }
-        parent::delete($key);
+        $this->session->remove($key);
     }
 
     /**
@@ -44,10 +44,11 @@ class SessionStorage extends Session
     */
     public function deleteMatch($key)
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
+        foreach ($this->session as $k => $v) {
+            if (strstr($k, $key)) {
+                $this->delete($k);
+            }
         }
-        parent::deleteMatch($key);
     }
 
     /**
@@ -55,9 +56,6 @@ class SessionStorage extends Session
     */
     public function clear()
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
-        }
-        parent::clear();
+        $this->session->clear();
     }
 }
