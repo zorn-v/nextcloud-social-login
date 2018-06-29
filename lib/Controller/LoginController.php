@@ -15,7 +15,7 @@ use OCP\IGroupManager;
 use OCP\ISession;
 use OC\User\LoginException;
 use OCA\SocialLogin\Storage\SessionStorage;
-use OCA\SocialLogin\Provider\CustomOAuth2Connect;
+use OCA\SocialLogin\Provider\CustomOAuth2;
 use OCA\SocialLogin\Provider\CustomOpenIDConnect;
 use OCA\SocialLogin\Db\SocialConnectDAO;
 use Hybridauth\Provider;
@@ -168,6 +168,7 @@ class LoginController extends Controller
     /**
      * @PublicPage
      * @NoCSRFRequired
+     * @UseSession
      */
     public function customOauth2($provider)
     {
@@ -189,14 +190,14 @@ class LoginController extends Controller
                             'authorize_url'    => $prov['authorizeUrl'],
                             'access_token_url' => $prov['tokenUrl'],
                             'profile_url'      => $prov['profileUrl'],
-                            'profile_fields'   => $prov['profileFields']
                         ]),
+                        'profile_fields'   => $prov['profileFields'],
                     ];
                     break;
                 }
             }
         }
-        return $this->auth(CustomOAuth2Connect::class, $config, $provider, 'OAuth2 Connect');
+        return $this->auth(CustomOAuth2::class, $config, $provider, 'Custom OAuth2');
     }
 
     private function auth($class, array $config, $provider, $providerTitle)

@@ -119,7 +119,7 @@
 		</div>
 		<br/>
     	<h2>
-			Custom OAuth2 Connect
+			Custom OAuth2
 			<button id="custom_oauth2_add" type="button">
 				<div class="icon-add"></div>
 			</button>

@@ -94,7 +94,10 @@ class Application extends App
         if (is_array($providers)) {
             foreach ($providers as $provider) {
                 ++$providersCount;
-                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom_oauth2', ['provider'=>$provider['name']]);
+                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom_oauth2', [
+                    'provider'=>$provider['name'],
+                    'login_redirect_url'=>$redirectUrl
+                ]);
                 \OC_App::registerLogIn([
                     'name' => $provider['title'],
                     'href' => $providerUrl,
