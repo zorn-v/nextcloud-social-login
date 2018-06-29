@@ -169,8 +169,8 @@ class LoginController extends Controller
         if (empty($config)) {
             throw new LoginException($this->l->t('Unknown %s provider: "%s"', [$providerTitle, $provider]));
         }
-        if ($redirectUrl = $this->request->getParam('redirect_url')) {
-            $this->storage->set('login_redirect_url', $redirectUrl);
+        if ($redirectUrl = $this->request->getParam('login_redirect_url')) {
+            $this->session->set('login_redirect_url', $redirectUrl);
         }
         try {
             $adapter = new $class($config, null, $this->storage);
@@ -239,7 +239,7 @@ class LoginController extends Controller
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => null]);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
 
-        if ($redirectUrl = $this->storage->get('login_redirect_url')) {
+        if ($redirectUrl = $this->session->get('login_redirect_url')) {
             return new RedirectResponse($redirectUrl);
         }
 

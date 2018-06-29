@@ -51,7 +51,10 @@ class Application extends App
             foreach ($providers as $name=>$provider) {
                 if ($provider['appid']) {
                     ++$providersCount;
-                    $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider'=>$name, 'redirect_url'=>$redirectUrl]);
+                    $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.oauth', [
+                        'provider'=>$name,
+                        'login_redirect_url'=>$redirectUrl
+                    ]);
                     \OC_App::registerLogIn([
                         'name' => ucfirst($name),
                         'href' => $providerUrl,
@@ -63,7 +66,10 @@ class Application extends App
         if (is_array($providers)) {
             foreach ($providers as $provider) {
                 ++$providersCount;
-                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.openid', ['provider'=>$provider['name'], 'redirect_url'=>$redirectUrl]);
+                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.openid', [
+                    'provider'=>$provider['name'],
+                    'login_redirect_url'=>$redirectUrl
+                ]);
                 \OC_App::registerLogIn([
                     'name' => $provider['title'],
                     'href' => $providerUrl,
@@ -74,7 +80,10 @@ class Application extends App
         if (is_array($providers)) {
             foreach ($providers as $provider) {
                 ++$providersCount;
-                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', ['provider'=>$provider['name'], 'redirect_url'=>$redirectUrl]);
+                $providerUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', [
+                    'provider'=>$provider['name'],
+                    'login_redirect_url'=>$redirectUrl
+                ]);
                 \OC_App::registerLogIn([
                     'name' => $provider['title'],
                     'href' => $providerUrl,
