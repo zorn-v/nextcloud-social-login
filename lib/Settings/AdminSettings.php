@@ -69,6 +69,10 @@ class AdminSettings implements ISettings
         if (!is_array($custom_oidcProviders)) {
             $custom_oidcProviders = [];
         }
+        $custom_oauth2Providers = json_decode($this->config->getAppValue($this->appName, 'custom_oauth2_providers', '[]'), true);
+        if (!is_array($custom_oauth2Providers)) {
+            $custom_oauth2Providers = [];
+        }
 
         $params = [
             'action_url' => $this->urlGenerator->linkToRoute($this->appName.'.settings.saveAdmin'),
@@ -76,6 +80,7 @@ class AdminSettings implements ISettings
             'providers' => $providers,
             'openid_providers' => $openIdProviders,
             'custom_oidc_providers' => $custom_oidcProviders,
+            'custom_oauth2_providers' => $custom_oauth2Providers,
         ];
         foreach ($paramsNames as $paramName) {
             $params[$paramName] = $this->config->getAppValue($this->appName, $paramName);

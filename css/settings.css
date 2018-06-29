@@ -7,7 +7,9 @@
   margin-right: 15px;
   margin-bottom: 20px;
 }
-.provider-settings .openid-remove, .provider-settings .custom_oidc-remove   {
+.provider-settings .openid-remove,
+.provider-settings .custom_oidc-remove,
+.provider-settings .custom_oauth2-remove   {
   float: right;
   cursor: pointer;
   font-weight: bold;
@@ -15,7 +17,9 @@
   width: 20px;
   text-align: center;
 }
-#openid_provider_tpl, #custom_oidc_provider_tpl {
+#openid_provider_tpl,
+#custom_oidc_provider_tpl,
+#custom_oauth2_provider_tpl {
   display: none !important;
 }
 input[readonly] {

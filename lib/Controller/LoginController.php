@@ -15,6 +15,7 @@ use OCP\IGroupManager;
 use OCP\ISession;
 use OC\User\LoginException;
 use OCA\SocialLogin\Storage\SessionStorage;
+use OCA\SocialLogin\Provider\CustomOAuth2Connect;
 use OCA\SocialLogin\Provider\CustomOpenIDConnect;
 use OCA\SocialLogin\Db\SocialConnectDAO;
 use Hybridauth\Provider;
@@ -162,6 +163,40 @@ class LoginController extends Controller
             }
         }
         return $this->auth(CustomOpenIDConnect::class, $config, $provider, 'OpenID Connect');
+    }
+
+    /**
+     * @PublicPage
+     * @NoCSRFRequired
+     */
+    public function customOauth2($provider)
+    {
+        $config = [];
+        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oauth2_providers', '[]'), true);
+        if (is_array($providers)) {
+            foreach ($providers as $prov) {
+                if ($prov['name'] === $provider) {
+                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom_oauth2', ['provider' => $provider]);
+                    $config = [
+                        'callback' => $callbackUrl,
+                        'scope' => $prov['scope'],
+                        'keys' => [
+                            'id'     => $prov['clientId'],
+                            'secret' => $prov['clientSecret'],
+                        ],
+                        'endpoints' => new Data\Collection([
+                            'api_base_url'     => $prov['apiBaseUrl'],
+                            'authorize_url'    => $prov['authorizeUrl'],
+                            'access_token_url' => $prov['tokenUrl'],
+                            'profile_url'      => $prov['profileUrl'],
+                            'profile_fields'   => $prov['profileFields']
+                        ]),
+                    ];
+                    break;
+                }
+            }
+        }
+        return $this->auth(CustomOAuth2Connect::class, $config, $provider, 'OAuth2 Connect');
     }
 
     private function auth($class, array $config, $provider, $providerTitle)

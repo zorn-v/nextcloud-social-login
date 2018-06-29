@@ -50,7 +50,8 @@ class SettingsController extends Controller
         $allow_login_connect,
         $providers,
         $openid_providers,
-        $custom_oidc_providers
+        $custom_oidc_providers,
+        $custom_oauth2_providers
     ) {
         $this->config->setAppValue($this->appName, 'new_user_group', $new_user_group);
         $this->config->setAppValue($this->appName, 'disable_registration', $disable_registration ? true : false);
@@ -67,6 +68,7 @@ class SettingsController extends Controller
 
         $this->config->setAppValue($this->appName, 'openid_providers', json_encode(array_values($openid_providers)));
         $this->config->setAppValue($this->appName, 'custom_oidc_providers', json_encode(array_values($custom_oidc_providers)));
+        $this->config->setAppValue($this->appName, 'custom_oauth2_providers', json_encode(array_values($custom_oauth2_providers)));
         return new JSONResponse(['success' => true]);
     }
 
@@ -124,6 +126,14 @@ class SettingsController extends Controller
                     $name = $provider['name'];
                     $title = $provider['title'];
                     $params['providers'][$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.custom_oidc', ['provider'=>$name]);
+                }
+            }
+            $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oauth2_providers', '[]'), true);
+            if (is_array($providers)) {
+                foreach ($providers as $provider) {
+                    $name = $provider['name'];
+                    $title = $provider['title'];
+                    $params['providers'][$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.custom_oauth2', ['provider'=>$name]);
                 }
             }
 

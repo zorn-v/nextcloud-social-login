@@ -2,7 +2,7 @@ jQuery(function ($) {
   var appName = 'sociallogin';
   var showError = function(text) {
     OC.Notification.showTemporary('<div style="font-weight:bold;color:red">'+text+'<div>', {isHTML: true});
-  }
+  };
   $('#sociallogin_settings').submit(function (e) {
     e.preventDefault();
     $.post(this.action, $(this).serialize())
@@ -22,6 +22,7 @@ jQuery(function ($) {
 
   initProviderType('openid');
   initProviderType('custom_oidc');
+  initProviderType('custom_oauth2');
 
   function initProviderType(providerType){
     createDelegate(providerType);
