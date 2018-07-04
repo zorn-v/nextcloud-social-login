@@ -67,9 +67,15 @@ class SettingsController extends Controller
             return new JSONResponse(['message' => $e->getMessage()]);
         }
 
-        $this->config->setAppValue($this->appName, 'openid_providers', json_encode(array_values($openid_providers)));
-        $this->config->setAppValue($this->appName, 'custom_oidc_providers', json_encode(array_values($custom_oidc_providers)));
-        $this->config->setAppValue($this->appName, 'custom_oauth2_providers', json_encode(array_values($custom_oauth2_providers)));
+        if (is_array($openid_providers)) {
+            $this->config->setAppValue($this->appName, 'openid_providers', json_encode(array_values($openid_providers)));
+        }
+        if (is_array($custom_oidc_providers)) {
+            $this->config->setAppValue($this->appName, 'custom_oidc_providers', json_encode(array_values($custom_oidc_providers)));
+        }
+        if (is_array($custom_oauth2_providers)) {
+            $this->config->setAppValue($this->appName, 'custom_oauth2_providers', json_encode(array_values($custom_oauth2_providers)));
+        }
         return new JSONResponse(['success' => true]);
     }
 
