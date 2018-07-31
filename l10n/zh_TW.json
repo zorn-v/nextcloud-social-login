@@ -1,18 +1,18 @@
 { "translations": {
-  "Social login": "社交登錄",
-  "Default group that all new users belong" : "新使用者預設的群組 :",
+  "Social login": "社交登入",
+  "Default group that all new users belong" : "自動新增使用者預設的群組 :",
   "None": "無",
   "Save": "儲存",
   "Enabled": "啟用",
   "Disable auto create new users": "關閉自動新增使用者",
   "Unknown %s provider: \"%s\"": "未知的提供者 \"%s\"",
-  "Auto creating new users is disabled": "關閉自動新增使用者已關閉",
-  "This account already connected": "這個帳戶已經連結",
-  "Allow users to connect social logins with their account": "允許一般使用者連接社交登錄",
+  "Auto creating new users is disabled": "自動新增使用者已關閉",
+  "This account already connected": "您已經連結此項目的社交登入",
+  "Allow users to connect social logins with their account": "允許使用者使用社交登入",
   "Provider name cannot be empty": "提供者名稱不能沒有內容",
   "Duplicate provider name \"%s\"": "重複的提供者名稱 \"%s\"",
   "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "無效的提供者名稱 \"%s\". 提供者名稱只允許 \"0-9a-z_.@-\"這些字符",
-  "Social login connect": "社交登錄連線",
-  "Available providers": "可以使用的提供者"
+  "Social login connect": "社交登入連線",
+  "Available providers": "請點選下方的項目來進行連結"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
