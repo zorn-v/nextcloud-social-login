@@ -75,7 +75,9 @@ class Application extends App
         $this->addAltLogins('custom_oidc');
         $this->addAltLogins('custom_oauth2');
 
-        $useLoginRedirect = $this->providersCount === 1 && $this->config->getSystemValue('social_login_auto_redirect', false);
+        $useLoginRedirect = $this->providersCount === 1
+            && PHP_SAPI !== 'cli'
+            && $this->config->getSystemValue('social_login_auto_redirect', false);
         if ($useLoginRedirect && $request->getPathInfo() === '/login') {
             header('Location: ' . $this->providerUrl);
             exit();
