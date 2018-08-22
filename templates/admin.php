@@ -143,6 +143,10 @@ $providersData = [
             <input id="allow_login_connect" type="checkbox" class="checkbox" name="allow_login_connect" value="1" <?php p($_['allow_login_connect'] ? 'checked' : '') ?>/>
             <label for="allow_login_connect"><?php p($l->t('Allow users to connect social logins with their account')) ?></label>
         </div>
+        <div>
+            <input id="prevent_create_email_exists" type="checkbox" class="checkbox" name="prevent_create_email_exists" value="1" <?php p($_['prevent_create_email_exists'] ? 'checked' : '') ?>/>
+            <label for="prevent_create_email_exists"><?php p($l->t('Prevent creating an account if the email address exists in another account')) ?></label>
+        </div>
         </p>
         <hr/>
         <?php foreach ($_['providers'] as $name => $provider): ?>
