@@ -20,6 +20,14 @@ jQuery(function ($) {
       });
   });
 
+  $('#disable_registration').change(function () {
+    if (this.checked) {
+      $('#prevent_create_email_exists').attr('disabled', true);
+    } else {
+      $('#prevent_create_email_exists').attr('disabled', false);
+    }
+  }).change();
+
   initProviderType('openid');
   initProviderType('custom_oidc');
   initProviderType('custom_oauth2');

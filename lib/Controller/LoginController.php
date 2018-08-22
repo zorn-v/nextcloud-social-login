@@ -248,9 +248,11 @@ class LoginController extends Controller
             if ($this->config->getAppValue($this->appName, 'disable_registration')) {
                 throw new LoginException($this->l->t('Auto creating new users is disabled'));
             }
-            if ($this->config->getAppValue($this->appName, 'prevent_create_email_exists') &&
-            	count($this->userManager->getByEmail($profile->email)) !== 0) {
-            	throw new LoginException($this->l->t('Email already registered'));
+            if (
+                $this->config->getAppValue($this->appName, 'prevent_create_email_exists')
+                && count($this->userManager->getByEmail($profile->email)) !== 0
+            ) {
+                throw new LoginException($this->l->t('Email already registered'));
             }
             $password = substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $password);
