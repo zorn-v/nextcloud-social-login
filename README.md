@@ -14,7 +14,7 @@ You can create app by followed urls. You can copy link of certain login button t
 * [GitHub](https://github.com/settings/developers)
 * [Discord](https://discordapp.com/developers/applications/me#top)
 
-Custom providers is on your own. Officially don't supported
+Custom providers is on your own. Officially not supported
 
 ## Config
 
