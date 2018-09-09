@@ -60,6 +60,9 @@ class SettingsController extends Controller
         $this->config->setAppValue($this->appName, 'prevent_create_email_exists', $prevent_create_email_exists ? true : false);
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
 
+        $openid_providers = $openid_providers ?: [];
+        $custom_oidc_providers = $custom_oidc_providers ?: [];
+        $custom_oauth2_providers = $custom_oauth2_providers ?: [];
         try {
             $names = array_keys($providers);
             $this->checkProviders($openid_providers, $names);
