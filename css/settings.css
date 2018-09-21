@@ -26,3 +26,11 @@ input[readonly] {
   background-color: #ebebeb;
   color: rgba(0, 0, 0, 0.4);
 }
+.section h2.provider-title {
+  margin-bottom: 10px;
+}
+.provider-title img {
+  width: 20px;
+  height: 20px;
+  margin-bottom: -2px;
+}

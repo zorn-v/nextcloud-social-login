@@ -151,7 +151,7 @@ $providersData = [
         <hr/>
         <?php foreach ($_['providers'] as $name => $provider): ?>
             <div class="provider-settings">
-                <h2><?php p(ucfirst($name))?></h2>
+                <h2 class="provider-title"><img src="<?php print_unescaped(image_path('sociallogin', strtolower($name).'.svg')); ?>" />  <?php p(ucfirst($name))?></h2>
                 <label>
                     <?php p($l->t('App id')) ?><br>
                     <input type="text" name="providers[<?php p($name) ?>][appid]" value="<?php p($provider['appid']) ?>"/>
