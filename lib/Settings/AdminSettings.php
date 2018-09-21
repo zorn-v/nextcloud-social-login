@@ -39,8 +39,8 @@ class AdminSettings implements ISettings
             'prevent_create_email_exists',
         ];
         $oauthProviders = [
-            'facebook',
             'google',
+            'facebook',
             'twitter',
             'GitHub',
             'discord',

@@ -127,6 +127,7 @@ $providersData = [
 ?>
 <div id="sociallogin" class="section">
     <form id="sociallogin_settings" action="<?php print_unescaped($_['action_url']) ?>" method="post">
+
         <p>
         <label for="new_user_group"><?php p($l->t('Default group that all new users belong')); ?></label>
         <select id="new_user_group" name="new_user_group">
@@ -148,6 +149,7 @@ $providersData = [
             <label for="prevent_create_email_exists"><?php p($l->t('Prevent creating an account if the email address exists in another account')) ?></label>
         </div>
         </p>
+        <button><?php p($l->t('Save')); ?></button>
         <hr/>
         <?php foreach ($_['providers'] as $name => $provider): ?>
             <div class="provider-settings">
@@ -161,6 +163,13 @@ $providersData = [
                     <?php p($l->t('Secret')) ?><br>
                     <input type="password" name="providers[<?php p($name) ?>][secret]" value="<?php p($provider['secret']) ?>"/>
                 </label>
+                <?php if ($name === 'google'): ?>
+                    <br/>
+                    <label>
+                        <?php p($l->t('Allow login only from specified domain')) ?><br>
+                        <input type="text" name="providers[<?php p($name) ?>][auth_params][hd]" value="<?php p(isset($provider['auth_params']['hd']) ? $provider['auth_params']['hd'] : '') ?>"/>
+                    </label>
+                <?php endif ?>
             </div>
         <?php endforeach ?>
         <br/>

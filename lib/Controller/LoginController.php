@@ -100,6 +100,9 @@ class LoginController extends Controller
                     if (isset($scopes[$provider])) {
                         $config['scope'] = $scopes[$provider];
                     }
+                    if (!empty($prov['auth_params'])) {
+                        $config['authorize_url_parameters'] = $prov['auth_params'];
+                    }
                     break;
                 }
             }
