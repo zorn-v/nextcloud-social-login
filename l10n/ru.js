@@ -2,7 +2,7 @@ OC.L10N.register(
   "sociallogin",
   {
     "Settings for social login successfully saved": "Настройки social login успешно сохранены",
-    "Do you realy want to remove this {providerType} provider ?": "Вы действительно хотите удалить этого {providerType} провайдера ?",
+    "Do you realy want to remove {providerTitle} provider ?": "Вы действительно хотите удалить поставщика {providerTitle} ?",
     "Some error occurred while saving settings": "Во время сохранения настроек произошла ошибка",
     "Confirm remove": "Подтверждение удаления"
   },

@@ -40,10 +40,11 @@ jQuery(function ($) {
   function createDelegate(providerType){
     $('#'+providerType+'_providers').delegate('.'+providerType+'-remove', 'click', function () {
       var $provider = $(this).parents('.provider-settings');
+      var providerTitle = $provider.find('[name$="[title]"]').val();
       var needConfirm = $provider.find('input').filter(function () {return this.value}).length > 0;
       if (needConfirm) {
         OCdialogs.confirm(
-          t(appName, 'Do you realy want to remove this {providerType} provider ?', {'providerType': providerType}),
+          t(appName, 'Do you realy want to remove {providerTitle} provider ?', {'providerTitle': providerTitle}),
           t(appName, 'Confirm remove'),
           function (confirmed) {
             if (!confirmed) {
