@@ -14,7 +14,9 @@ You can create app by followed urls. You can copy link of certain login button t
 * [GitHub](https://github.com/settings/developers)
 * [Discord](https://discordapp.com/developers/applications/me#top)
 
-Custom providers is on your own. Officially don't supported
+Details about "Allow login only from specified domain" google setting you can find here [#44](https://github.com/zorn-v/nextcloud-social-login/issues/44)
+
+Custom providers is on your own. Officially not supported
 
 ## Config
 

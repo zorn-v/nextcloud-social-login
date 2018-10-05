@@ -127,6 +127,7 @@ $providersData = [
 ?>
 <div id="sociallogin" class="section">
     <form id="sociallogin_settings" action="<?php print_unescaped($_['action_url']) ?>" method="post">
+
         <p>
         <label for="new_user_group"><?php p($l->t('Default group that all new users belong')); ?></label>
         <select id="new_user_group" name="new_user_group">
@@ -143,11 +144,16 @@ $providersData = [
             <input id="allow_login_connect" type="checkbox" class="checkbox" name="allow_login_connect" value="1" <?php p($_['allow_login_connect'] ? 'checked' : '') ?>/>
             <label for="allow_login_connect"><?php p($l->t('Allow users to connect social logins with their account')) ?></label>
         </div>
+        <div>
+            <input id="prevent_create_email_exists" type="checkbox" class="checkbox" name="prevent_create_email_exists" value="1" <?php p($_['prevent_create_email_exists'] ? 'checked' : '') ?>/>
+            <label for="prevent_create_email_exists"><?php p($l->t('Prevent creating an account if the email address exists in another account')) ?></label>
+        </div>
         </p>
+        <button><?php p($l->t('Save')); ?></button>
         <hr/>
         <?php foreach ($_['providers'] as $name => $provider): ?>
             <div class="provider-settings">
-                <h2><?php p(ucfirst($name))?></h2>
+                <h2 class="provider-title"><img src="<?php print_unescaped(image_path('sociallogin', strtolower($name).'.svg')); ?>" />  <?php p(ucfirst($name))?></h2>
                 <label>
                     <?php p($l->t('App id')) ?><br>
                     <input type="text" name="providers[<?php p($name) ?>][appid]" value="<?php p($provider['appid']) ?>"/>
@@ -157,6 +163,13 @@ $providersData = [
                     <?php p($l->t('Secret')) ?><br>
                     <input type="password" name="providers[<?php p($name) ?>][secret]" value="<?php p($provider['secret']) ?>"/>
                 </label>
+                <?php if ($name === 'google'): ?>
+                    <br/>
+                    <label>
+                        <?php p($l->t('Allow login only from specified domain')) ?><br>
+                        <input type="text" name="providers[<?php p($name) ?>][auth_params][hd]" value="<?php p(isset($provider['auth_params']['hd']) ? $provider['auth_params']['hd'] : '') ?>"/>
+                    </label>
+                <?php endif ?>
             </div>
         <?php endforeach ?>
         <br/>

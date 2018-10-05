@@ -100,6 +100,13 @@ class LoginController extends Controller
                     if (isset($scopes[$provider])) {
                         $config['scope'] = $scopes[$provider];
                     }
+                    if (isset($prov['auth_params']) && is_array($prov['auth_params'])) {
+                        foreach ($prov['auth_params'] as $k => $v) {
+                            if (!empty($v)) {
+                                $config['authorize_url_parameters'][$k] = $v;
+                            }
+                        }
+                    }
                     break;
                 }
             }
@@ -247,6 +254,12 @@ class LoginController extends Controller
         if (null === $user) {
             if ($this->config->getAppValue($this->appName, 'disable_registration')) {
                 throw new LoginException($this->l->t('Auto creating new users is disabled'));
+            }
+            if (
+                $this->config->getAppValue($this->appName, 'prevent_create_email_exists')
+                && count($this->userManager->getByEmail($profile->email)) !== 0
+            ) {
+                throw new LoginException($this->l->t('Email already registered'));
             }
             $password = substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $password);

@@ -48,6 +48,7 @@ class SettingsController extends Controller
         $new_user_group,
         $disable_registration,
         $allow_login_connect,
+        $prevent_create_email_exists,
         $providers,
         $openid_providers,
         $custom_oidc_providers,
@@ -56,8 +57,12 @@ class SettingsController extends Controller
         $this->config->setAppValue($this->appName, 'new_user_group', $new_user_group);
         $this->config->setAppValue($this->appName, 'disable_registration', $disable_registration ? true : false);
         $this->config->setAppValue($this->appName, 'allow_login_connect', $allow_login_connect ? true : false);
+        $this->config->setAppValue($this->appName, 'prevent_create_email_exists', $prevent_create_email_exists ? true : false);
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
 
+        $openid_providers = $openid_providers ?: [];
+        $custom_oidc_providers = $custom_oidc_providers ?: [];
+        $custom_oauth2_providers = $custom_oauth2_providers ?: [];
         try {
             $names = array_keys($providers);
             $this->checkProviders($openid_providers, $names);

@@ -20,6 +20,14 @@ jQuery(function ($) {
       });
   });
 
+  $('#disable_registration').change(function () {
+    if (this.checked) {
+      $('#prevent_create_email_exists').attr('disabled', true);
+    } else {
+      $('#prevent_create_email_exists').attr('disabled', false);
+    }
+  }).change();
+
   initProviderType('openid');
   initProviderType('custom_oidc');
   initProviderType('custom_oauth2');
@@ -32,10 +40,11 @@ jQuery(function ($) {
   function createDelegate(providerType){
     $('#'+providerType+'_providers').delegate('.'+providerType+'-remove', 'click', function () {
       var $provider = $(this).parents('.provider-settings');
+      var providerTitle = $provider.find('[name$="[title]"]').val();
       var needConfirm = $provider.find('input').filter(function () {return this.value}).length > 0;
       if (needConfirm) {
         OCdialogs.confirm(
-          t(appName, 'Do you realy want to remove this {providerType} provider ?', {'providerType': providerType}),
+          t(appName, 'Do you realy want to remove {providerTitle} provider ?', {'providerTitle': providerTitle}),
           t(appName, 'Confirm remove'),
           function (confirmed) {
             if (!confirmed) {
