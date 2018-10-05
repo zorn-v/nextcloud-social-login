@@ -29,6 +29,35 @@ class Application extends App
     public function __construct()
     {
         parent::__construct($this->appName);
+
+        $container = $this->getContainer();
+        $server = $container->getServer();
+
+        $user = $server->getUserManager()->get($server->getSession()->get('user_id'));
+        $isAdmin = $user !== null ? $server->getGroupManager()->isAdmin($user->getUID()) : false;
+        $isSubAdmin = $user !== null ? $server->getGroupManager()->getSubAdmin()->isSubAdmin($user) : false;
+
+        if ($isAdmin || $isSubAdmin) {
+            // the app provisioning_api is responsible for the "users" rest api endpoint -> in detail we talk about the
+            // class \OCA\Provisioning_API\Controller\UsersController
+            // -> most of the CRUD actions in that class have the annotation @PasswordConfirmationRequired, which
+            //    results in an intercepting middleware class from core during api requests
+            //    -> this \OC\AppFramework\Middleware\Security\PasswordConfirmationMiddleware checks:
+            //       1. the backend class name of the current user session
+            //       2. the last-password-confirm timestamp value in the current user session
+            //       -> if the current user is not a SAML authenticated user and the last-password-confirm timestamp
+            //          is more than 30 minutes ago a \OC\AppFramework\Middleware\Security\Exceptions\NotConfirmedException
+            //          will be thrown
+            // => social/ OAuth2 authenticated users are a in some way like SAML authenticated users, as the real
+            //    authentication is done (checked against) on another website
+            //    => but the PasswordConfirmationMiddleware in the core above only checks for the "user_saml" backend
+            //       class name and the last-password-confirm timestamp, to prevent from the NotConfirmedException
+            //       => we don't want to change the backend class name on the fly here, because of unknown side effects,
+            //          but we can temporary set the last-password-confirm session value to NOW to prevent the
+            //          NotConfirmedException within the rest api context, when we want to pre-add/ update/ delete
+            //          social registered users as admin via rest api
+            $server->getSession()->set('last-password-confirm', time());
+        }
     }
 
     public function register()
