@@ -1,0 +1,19 @@
+{ "translations": {
+  "Social login": "社交账号登录",
+  "Default group that all new users belong" : "新用户的默认群组",
+  "None": "无",
+  "Save": "保存",
+  "Enabled": "启用",
+  "Disable auto create new users": "取消自动创建使用者",
+  "Unknown %s provider: \"%s\"": "未知的提供者 \"%s\"",
+  "Auto creating new users is disabled": "自动创建使用者功能已被关闭",
+  "This account already connected": "使用者账号已经与该社交账号建立过连接",
+  "Allow users to connect social logins with their account": "允许使用者使用社交账号登录",
+  "Provider name cannot be empty": "提供者名称不可为空",
+  "Duplicate provider name \"%s\"": "提供者名称重复 \"%s\"",
+  "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "提供者名称 \"%s\" 无效。 只允许包含 \"0-9a-z_.@-\"",
+  "Social login connect": "连接社交账号登录",
+  "Available providers": "请点击下方项目进行登录",
+  "Prevent creating an account if the email address exists in another account":"如果社交账号的邮箱已经注册过Nextcloud,则不自动创建新的使用者"
+},"pluralForm" :"nplurals=1; plural=0;"
+}
