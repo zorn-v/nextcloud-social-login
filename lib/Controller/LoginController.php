@@ -83,7 +83,6 @@ class LoginController extends Controller
     {
         $scopes = [
             'facebook' => 'email, public_profile',
-            'google' => 'email profile',
         ];
         $config = [];
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);

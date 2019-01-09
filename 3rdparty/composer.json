@@ -7,6 +7,6 @@
 		"classmap-authoritative": true
 	},
 	"require": {
-		"hybridauth/hybridauth": "^3.0.0-rc.5"
+		"hybridauth/hybridauth": "^3.0.0-rc.9"
 	}
 }
