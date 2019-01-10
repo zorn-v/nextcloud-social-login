@@ -54,6 +54,14 @@ class Application extends App
         $request = $this->query(IRequest::class);
         $this->redirectUrl = $request->getParam('redirect_url');
 
+        if ($tgBot = $this->config->getAppValue($this->appName, 'tg_bot')) {
+            \OCP\Util::addHeader('tg-data', [
+                'login' => $tgBot,
+                'redirect_url' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.telegram', ['login_redirect_url' => $this->redirectUrl]),
+            ]);
+            \OCP\Util::addScript($this->appName, 'telegram');
+        }
+
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
         if (is_array($providers)) {
             foreach ($providers as $name => $provider) {

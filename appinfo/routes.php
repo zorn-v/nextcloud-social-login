@@ -17,6 +17,7 @@ return [
         ['name' => 'login#custom_oidc', 'url' => '/custom_oidc/{provider}', 'postfix' => '.post', 'verb' => 'POST'],
         ['name' => 'login#custom_oauth2', 'url' => '/custom_oauth2/{provider}', 'verb' => 'GET'],
         ['name' => 'login#custom_oauth2', 'url' => '/custom_oauth2/{provider}', 'postfix' => '.post', 'verb' => 'POST'],
+        ['name' => 'login#telegram', 'url' => '/telegram', 'verb' => 'GET'],
         ['name' => 'settings#disconnectSocialLogin', 'url' => '/disconnect-social/{login}', 'verb' => 'GET'],
         ['name' => 'settings#savePersonal', 'url' => '/settings/save-personal', 'verb' => 'POST'],
     ]

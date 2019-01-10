@@ -78,6 +78,8 @@ class AdminSettings implements ISettings
         $params = [
             'action_url' => $this->urlGenerator->linkToRoute($this->appName.'.settings.saveAdmin'),
             'groups' => $groupNames,
+            'tg_bot' => $this->config->getAppValue($this->appName, 'tg_bot'),
+            'tg_token' => $this->config->getAppValue($this->appName, 'tg_token'),
             'providers' => $providers,
             'openid_providers' => $openIdProviders,
             'custom_oidc_providers' => $custom_oidcProviders,

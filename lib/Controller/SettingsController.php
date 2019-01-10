@@ -50,6 +50,8 @@ class SettingsController extends Controller
         $allow_login_connect,
         $prevent_create_email_exists,
         $providers,
+        $tg_bot,
+        $tg_token,
         $openid_providers,
         $custom_oidc_providers,
         $custom_oauth2_providers
@@ -59,6 +61,8 @@ class SettingsController extends Controller
         $this->config->setAppValue($this->appName, 'allow_login_connect', $allow_login_connect ? true : false);
         $this->config->setAppValue($this->appName, 'prevent_create_email_exists', $prevent_create_email_exists ? true : false);
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
+        $this->config->setAppValue($this->appName, 'tg_bot', $tg_bot);
+        $this->config->setAppValue($this->appName, 'tg_token', $tg_token);
 
         $openid_providers = $openid_providers ?: [];
         $custom_oidc_providers = $custom_oidc_providers ?: [];
