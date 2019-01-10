@@ -55,9 +55,16 @@ class Application extends App
         $this->redirectUrl = $request->getParam('redirect_url');
 
         if ($tgBot = $this->config->getAppValue($this->appName, 'tg_bot')) {
+            $csp = new \OCP\AppFramework\Http\ContentSecurityPolicy();
+            $csp->addAllowedScriptDomain('telegram.org')
+                ->addAllowedFrameDomain('oauth.telegram.org')
+            ;
+            $manager = \OC::$server->getContentSecurityPolicyManager();
+            $manager->addDefaultPolicy($csp);
+
             \OCP\Util::addHeader('tg-data', [
-                'login' => $tgBot,
-                'redirect_url' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.telegram', ['login_redirect_url' => $this->redirectUrl]),
+                'data-login' => $tgBot,
+                'data-redirect-url' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.telegram', ['login_redirect_url' => $this->redirectUrl]),
             ]);
             \OCP\Util::addScript($this->appName, 'telegram');
         }
