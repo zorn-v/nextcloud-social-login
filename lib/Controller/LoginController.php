@@ -229,7 +229,7 @@ class LoginController extends Controller
         if ($hash !== $checkHash) {
             throw new LoginException($this->l->t('Telegram auth data check failed'));
         }
-        if ((time() - $this->request->getParam['auth_date']) > 300) {
+        if ((time() - $this->request->getParam('auth_date')) > 300) {
             throw new LoginException($this->l->t('Telegram auth data expired'));
         }
         if (null === $tgId = $this->request->getParam('id')) {
