@@ -207,6 +207,42 @@ class LoginController extends Controller
         return $this->auth(CustomOAuth2::class, $config, $provider, 'Custom OAuth2');
     }
 
+    /**
+     * @PublicPage
+     * @NoCSRFRequired
+     * @UseSession
+     */
+    public function telegram()
+    {
+        if ($redirectUrl = $this->request->getParam('login_redirect_url')) {
+            $this->session->set('login_redirect_url', $redirectUrl);
+        }
+        $botToken = $this->config->getAppValue($this->appName, 'tg_token');
+        $checkHash = $this->request->getParam('hash');
+        $authData = $_GET;
+        unset($authData['hash'], $authData['login_redirect_url']);
+        ksort($authData);
+        array_walk($authData, function (&$value, $key) {$value = $key.'='.$value;});
+        $dataCheckStr = implode("\n", $authData);
+        $secretKey = hash('sha256', $botToken, true);
+        $hash = hash_hmac('sha256', $dataCheckStr, $secretKey);
+        if ($hash !== $checkHash) {
+            throw new LoginException($this->l->t('Telegram auth data check failed'));
+        }
+        if ((time() - $this->request->getParam['auth_date']) > 300) {
+            throw new LoginException($this->l->t('Telegram auth data expired'));
+        }
+        if (null === $tgId = $this->request->getParam('id')) {
+            throw new LoginException($this->l->t('Missing mandatory "id" param'));
+        }
+        $uid = 'tg-' . $tgId;
+        $profile = new Profile();
+        $profile->identifier = $tgId;
+        $profile->displayName = $this->request->getParam('first_name').' '.$this->request->getParam('last_name');
+        $profile->photoURL = $this->request->getParam('photo_url');
+        return $this->login($uid, $profile);
+    }
+
     private function auth($class, array $config, $provider, $providerTitle)
     {
         if (empty($config)) {
@@ -256,7 +292,7 @@ class LoginController extends Controller
                 throw new LoginException($this->l->t('Auto creating new users is disabled'));
             }
             if (
-                $this->config->getAppValue($this->appName, 'prevent_create_email_exists')
+                $profile->email && $this->config->getAppValue($this->appName, 'prevent_create_email_exists')
                 && count($this->userManager->getByEmail($profile->email)) !== 0
             ) {
                 throw new LoginException($this->l->t('Email already registered'));
@@ -276,8 +312,8 @@ class LoginController extends Controller
 
             if ($profile->photoURL) {
                 $curl = new Curl();
-                $photo = $curl->request($profile->photoURL);
                 try {
+                    $photo = $curl->request($profile->photoURL);
                     $avatar = $this->avatarManager->getAvatar($uid);
                     $avatar->set($photo);
                 } catch (\Exception $e) {}
