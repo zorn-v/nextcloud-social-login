@@ -299,7 +299,7 @@ class LoginController extends Controller
             }
             $password = substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $password);
-            $user->setDisplayName((string)$profile->displayName);
+            $user->setDisplayName($profile->displayName ?: $profile->identifier);
             $user->setEMailAddress((string)$profile->email);
 
             $newUserGroup = $this->config->getAppValue($this->appName, 'new_user_group');
