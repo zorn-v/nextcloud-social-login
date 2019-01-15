@@ -40,6 +40,7 @@ class AdminSettings implements ISettings
         ];
         $oauthProviders = [
             'google',
+            'amazon',
             'facebook',
             'twitter',
             'GitHub',

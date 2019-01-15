@@ -40,6 +40,7 @@ return array(
     'Hybridauth\\Logger\\LoggerInterface' => $vendorDir . '/hybridauth/hybridauth/src/Logger/LoggerInterface.php',
     'Hybridauth\\Logger\\Psr3LoggerWrapper' => $vendorDir . '/hybridauth/hybridauth/src/Logger/Psr3LoggerWrapper.php',
     'Hybridauth\\Provider\\AOLOpenID' => $vendorDir . '/hybridauth/hybridauth/src/Provider/AOLOpenID.php',
+    'Hybridauth\\Provider\\Amazon' => $vendorDir . '/hybridauth/hybridauth/src/Provider/Amazon.php',
     'Hybridauth\\Provider\\Authentiq' => $vendorDir . '/hybridauth/hybridauth/src/Provider/Authentiq.php',
     'Hybridauth\\Provider\\BitBucket' => $vendorDir . '/hybridauth/hybridauth/src/Provider/BitBucket.php',
     'Hybridauth\\Provider\\Blizzard' => $vendorDir . '/hybridauth/hybridauth/src/Provider/Blizzard.php',

@@ -55,6 +55,7 @@ class ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f
         'Hybridauth\\Logger\\LoggerInterface' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Logger/LoggerInterface.php',
         'Hybridauth\\Logger\\Psr3LoggerWrapper' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Logger/Psr3LoggerWrapper.php',
         'Hybridauth\\Provider\\AOLOpenID' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/AOLOpenID.php',
+        'Hybridauth\\Provider\\Amazon' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Amazon.php',
         'Hybridauth\\Provider\\Authentiq' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Authentiq.php',
         'Hybridauth\\Provider\\BitBucket' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/BitBucket.php',
         'Hybridauth\\Provider\\Blizzard' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Blizzard.php',
