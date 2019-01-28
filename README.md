@@ -10,6 +10,8 @@ For using telegram login you need create bot and connect it to domain as describ
 
 Then specify bot login and token in "Social login" section of admin settings page
 
+**Telegram auth will not work everywhere another than browser.***
+
 ## Built-in OAuth providers
 
 You can create app by followed urls. You can copy link of certain login button to get proper "redirect url" for OAuth app setting.
