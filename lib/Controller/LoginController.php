@@ -299,8 +299,7 @@ class LoginController extends Controller
             }
             $password = substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $password);
-            $user->setDisplayName($profile->displayName ?: $profile->identifier);
-            $user->setEMailAddress((string)$profile->email);
+            
 
             $newUserGroup = $this->config->getAppValue($this->appName, 'new_user_group');
             if ($newUserGroup) {
@@ -309,8 +308,14 @@ class LoginController extends Controller
                     $group->addUser($user);
                 } catch (\Exception $e) {}
             }
-
-            if ($profile->photoURL) {
+            
+            $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
+        }
+        
+        $user->setDisplayName($profile->displayName ?: $profile->identifier);
+        $user->setEMailAddress((string)$profile->email);
+        
+         if ($profile->photoURL) {
                 $curl = new Curl();
                 try {
                     $photo = $curl->request($profile->photoURL);
@@ -318,8 +323,6 @@ class LoginController extends Controller
                     $avatar->set($photo);
                 } catch (\Exception $e) {}
             }
-            $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
-        }
 
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => null]);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
