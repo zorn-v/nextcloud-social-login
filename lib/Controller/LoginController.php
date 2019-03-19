@@ -251,6 +251,7 @@ class LoginController extends Controller
         if ($redirectUrl = $this->request->getParam('login_redirect_url')) {
             $this->session->set('login_redirect_url', $redirectUrl);
         }
+
         try {
             $adapter = new $class($config, null, $this->storage);
             $adapter->authenticate();
@@ -262,6 +263,18 @@ class LoginController extends Controller
         if (empty($profileId)) {
             throw new LoginException($this->l->t('Can not get identifier from provider'));
         }
+
+		if (
+			isset($config['authorize_url_parameters']) &&
+			isset($config['authorize_url_parameters']['hd']) &&
+			!empty($config['authorize_url_parameters']['hd'])
+		) {
+			$profileHd = explode('@', $profile->email)[1];
+			if ($config['authorize_url_parameters']['hd'] !== $profileHd) {
+				throw new LoginException('Bad domain');
+			}
+		}
+
         $uid = $provider.'-'.$profileId;
         if (strlen($uid) > 64) {
             $uid = $provider.'-'.md5($profileId);
