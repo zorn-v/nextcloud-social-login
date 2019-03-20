@@ -332,9 +332,4 @@ class LoginController extends Controller
 
         return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
     }
-
-    private function getClientName() {
-        $userAgent = $this->request->getHeader('USER_AGENT');
-        return $userAgent !== null ? $userAgent : 'unknown';
-    }
 }
