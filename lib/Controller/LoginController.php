@@ -204,6 +204,7 @@ class LoginController extends Controller
                             'authorize_url'    => $prov['authorizeUrl'],
                             'access_token_url' => $prov['tokenUrl'],
                             'profile_url'      => $prov['profileUrl'],
+                            'groups_url'       => $prov['groupsUrl']
                         ]),
                         'profile_fields'   => $prov['profileFields'],
                     ];
@@ -329,11 +330,13 @@ class LoginController extends Controller
             $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
         }
 
-        $groups = $this->adapter->getUserGroups();
-        foreach($groups as $key=>$value){
-            $guid = $this->provider .'-'. $value->name;
-            $group = $this->groupManager->createGroup($guid);
-            $group->addUser($user);
+        if($this->adapter instanceof CustomOAuth2) {
+            $groups = $this->adapter->getUserGroups();
+            foreach($groups as $key=>$value){
+                $guid = $this->provider .'-'. $value->name;
+                $group = $this->groupManager->createGroup($guid);
+                $group->addUser($user);
+            }
         }
 
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => null]);
