@@ -58,4 +58,10 @@ class CustomOAuth2 extends OAuth2
 
         return $userProfile;
     }
+
+    public function getUserGroups()
+    {
+        $response = $this->apiRequest('http://localhost:3000/v1/users/me/nextcloud_groups');
+        return $response;
+    }
 }

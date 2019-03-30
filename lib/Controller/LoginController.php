@@ -2,6 +2,7 @@
 
 namespace OCA\SocialLogin\Controller;
 
+use Hybridauth\Adapter\AdapterInterface;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\RedirectResponse;
 use OCP\IL10N;
@@ -45,6 +46,10 @@ class LoginController extends Controller
     private $l;
     /** @var SocialConnectDAO */
     private $socialConnect;
+    /** @var Provider */
+    private $provider;
+    /** @var AdapterInterface */
+    private $adapter;
 
 
     public function __construct(
@@ -72,6 +77,8 @@ class LoginController extends Controller
         $this->session = $session;
         $this->l = $l;
         $this->socialConnect = $socialConnect;
+        $this->provider = null;
+        $this->adapter = null;
     }
 
     /**
@@ -245,6 +252,7 @@ class LoginController extends Controller
 
     private function auth($class, array $config, $provider, $providerTitle)
     {
+        $this->provider = $provider;
         if (empty($config)) {
             throw new LoginException($this->l->t('Unknown %s provider: "%s"', [$providerTitle, $provider]));
         }
@@ -252,9 +260,9 @@ class LoginController extends Controller
             $this->session->set('login_redirect_url', $redirectUrl);
         }
         try {
-            $adapter = new $class($config, null, $this->storage);
-            $adapter->authenticate();
-            $profile = $adapter->getUserProfile();
+            $this->adapter = new $class($config, null, $this->storage);
+            $this->adapter->authenticate();
+            $profile = $this->adapter->getUserProfile();
         }  catch (\Exception $e) {
             throw new LoginException($e->getMessage());
         }
@@ -319,6 +327,13 @@ class LoginController extends Controller
                 } catch (\Exception $e) {}
             }
             $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
+        }
+
+        $groups = $this->adapter->getUserGroups();
+        foreach($groups as $key=>$value){
+            $guid = $this->provider .'-'. $value->name;
+            $group = $this->groupManager->createGroup($guid);
+            $group->addUser($user);
         }
 
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => null]);
