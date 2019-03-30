@@ -49,6 +49,7 @@ class SettingsController extends Controller
         $disable_registration,
         $allow_login_connect,
         $prevent_create_email_exists,
+        $update_on_login,
         $providers,
         $tg_bot,
         $tg_token,
@@ -60,6 +61,7 @@ class SettingsController extends Controller
         $this->config->setAppValue($this->appName, 'disable_registration', $disable_registration ? true : false);
         $this->config->setAppValue($this->appName, 'allow_login_connect', $allow_login_connect ? true : false);
         $this->config->setAppValue($this->appName, 'prevent_create_email_exists', $prevent_create_email_exists ? true : false);
+        $this->config->setAppValue($this->appName, 'update_on_login', $update_on_login ? true : false);
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
         $this->config->setAppValue($this->appName, 'tg_bot', $tg_bot);
         $this->config->setAppValue($this->appName, 'tg_token', $tg_token);
