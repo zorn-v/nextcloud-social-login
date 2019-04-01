@@ -286,6 +286,9 @@ class LoginController extends Controller
             $this->socialConnect->connectLogin($currentUid, $uid);
             return new RedirectResponse($this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section'=>'additional']));
         }
+
+        $updateUserProfile = $this->config->getAppValue($this->appName, 'update_profile_on_login');
+
         if (null === $user) {
             if ($this->config->getAppValue($this->appName, 'disable_registration')) {
                 throw new LoginException($this->l->t('Auto creating new users is disabled'));
@@ -298,8 +301,6 @@ class LoginController extends Controller
             }
             $password = substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $password);
-            $user->setDisplayName($profile->displayName ?: $profile->identifier);
-            $user->setEMailAddress((string)$profile->email);
 
             $newUserGroup = $this->config->getAppValue($this->appName, 'new_user_group');
             if ($newUserGroup) {
@@ -309,19 +310,11 @@ class LoginController extends Controller
                 } catch (\Exception $e) {}
             }
 
-            if ($profile->photoURL) {
-                $curl = new Curl();
-                try {
-                    $photo = $curl->request($profile->photoURL);
-                    $avatar = $this->avatarManager->getAvatar($uid);
-                    $avatar->set($photo);
-                } catch (\Exception $e) {}
-            }
-
             $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
+            $updateUserProfile = true;
         }
 
-        if($this->config->getAppValue($this->appName, 'update_on_login')){
+        if ($updateUserProfile) {
             $user->setDisplayName($profile->displayName ?: $profile->identifier);
             $user->setEMailAddress((string)$profile->email);
 
