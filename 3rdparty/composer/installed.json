@@ -1,17 +1,17 @@
 [
     {
         "name": "hybridauth/hybridauth",
-        "version": "v3.0.0-rc.9",
-        "version_normalized": "3.0.0.0-RC9",
+        "version": "v3.0.0-rc.10",
+        "version_normalized": "3.0.0.0-RC10",
         "source": {
             "type": "git",
             "url": "https://github.com/hybridauth/hybridauth.git",
-            "reference": "6123c31700bda7acd49cef7f1f0c138b60f39070"
+            "reference": "877f0388ace7f54be48f59a9be744f1a84794338"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/6123c31700bda7acd49cef7f1f0c138b60f39070",
-            "reference": "6123c31700bda7acd49cef7f1f0c138b60f39070",
+            "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/877f0388ace7f54be48f59a9be744f1a84794338",
+            "reference": "877f0388ace7f54be48f59a9be744f1a84794338",
             "shasum": ""
         },
         "require": {
@@ -21,7 +21,7 @@
             "ext-curl": "*",
             "phpunit/phpunit": "~4.8.35"
         },
-        "time": "2019-01-03T11:08:24+00:00",
+        "time": "2019-03-25T21:44:58+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
