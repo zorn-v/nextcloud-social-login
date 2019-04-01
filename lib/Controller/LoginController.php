@@ -21,7 +21,6 @@ use OCA\SocialLogin\Db\SocialConnectDAO;
 use Hybridauth\Provider;
 use Hybridauth\User\Profile;
 use Hybridauth\HttpClient\Curl;
-use Hybridauth\Data;
 
 class LoginController extends Controller
 {
@@ -158,12 +157,12 @@ class LoginController extends Controller
                             'id'     => $prov['clientId'],
                             'secret' => $prov['clientSecret'],
                         ],
-                        'endpoints' => new Data\Collection([
+                        'endpoints' => [
                             'authorize_url'    => $prov['authorizeUrl'],
                             'access_token_url' => $prov['tokenUrl'],
                             'user_info_url'    => $prov['userInfoUrl'],
                             'api_base_url'     => '',
-                        ]),
+                        ],
                     ];
                     break;
                 }
@@ -192,12 +191,12 @@ class LoginController extends Controller
                             'id'     => $prov['clientId'],
                             'secret' => $prov['clientSecret'],
                         ],
-                        'endpoints' => new Data\Collection([
+                        'endpoints' => [
                             'api_base_url'     => $prov['apiBaseUrl'],
                             'authorize_url'    => $prov['authorizeUrl'],
                             'access_token_url' => $prov['tokenUrl'],
                             'profile_url'      => $prov['profileUrl'],
-                        ]),
+                        ],
                         'profile_fields'   => $prov['profileFields'],
                     ];
                     break;
@@ -318,7 +317,7 @@ class LoginController extends Controller
                     $avatar->set($photo);
                 } catch (\Exception $e) {}
             }
-            
+
             $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
         }
 
