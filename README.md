@@ -37,3 +37,14 @@ You can use `'social_login_auto_redirect' => true` setting in `config.php` for a
 You can copy link from specific login button on login page and paste it on provider's website as callback url!
 Some users may get strange reply(Callback) url error from provider even if you pasted the right url, that's because your nextcloud server may generate http urls when you are actually using https.
 Please set 'overwriteprotocol' => 'https', in your config.php file.
+
+### Groups
+This app also allows the possibility to sync groups to Nextcloud from your OAuth provider. Just provide the following additional payload in your users endpoint:
+
+```json
+{
+  ** the normal user data
+  "data": ["groups": [{"id": 1},{"id": 2}]]
+}
+
+```
