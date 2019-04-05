@@ -101,11 +101,6 @@ $providersData = [
                 'type' => 'text',
                 'required' => true,
             ],
-            'groupsUrl' => [
-                'title' => 'Groups url (can be relative to base URL, optional)',
-                'type' => 'text',
-                'required' => false,
-            ],
             'clientId' => [
                 'title' => 'Client Id',
                 'type' => 'text',

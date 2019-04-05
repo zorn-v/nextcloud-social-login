@@ -58,14 +58,4 @@ class CustomOAuth2 extends OAuth2
 
         return $userProfile;
     }
-
-    public function getUserGroups()
-    {
-        $groups_url = $this->config->get('endpoints')->get('groups_url');
-        if($groups_url){
-            $response = $this->apiRequest($groups_url);
-            return $response;
-        }
-        return [];
-    }
 }
