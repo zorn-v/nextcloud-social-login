@@ -330,13 +330,33 @@ class LoginController extends Controller
             $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
         }
 
-        if($this->adapter instanceof CustomOAuth2) {
-            $groups = $this->adapter->getUserGroups();
-            foreach($groups as $key=>$value){
-                $guid = $this->provider .'-'. $value->name;
-                $group = $this->groupManager->createGroup($guid);
-                $group->addUser($user);
-            }
+        # Create groups via the provider
+        $group_ids = [];
+        foreach($profile->data->groups as $provider_group) {
+            # Link the user to the group
+            $guid = $this->provider . '-' . $provider_group->id;
+            $group = $this->groupManager->createGroup($guid);
+            $group->addUser($user);
+            array_push($group_ids, $guid);
+
+//            # Create a directory for this group
+//            $folder = \OC::$server->getUserFolder('admin');
+//            if($provider_group->baseDir){
+//                $folder->newFolder($provider_group->baseDir .'/'. $provider_group->name);
+//
+//            }
+        }
+
+
+        # Remove all provider groups that this user is not longer attached to
+        foreach($this->groupManager->getUserGroups($user) as $group){
+            # Check if the group is provided by this provider
+           if(strpos($group->getGID(), $this->provider) === 0){
+               # If the group is in NC but not in the provider
+               if(!in_array($group->getGID(), $group_ids)){
+                   $group->removeUser($user);
+               }
+           }
         }
 
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => null]);
