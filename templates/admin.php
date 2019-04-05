@@ -148,6 +148,10 @@ $providersData = [
             <input id="prevent_create_email_exists" type="checkbox" class="checkbox" name="prevent_create_email_exists" value="1" <?php p($_['prevent_create_email_exists'] ? 'checked' : '') ?>/>
             <label for="prevent_create_email_exists"><?php p($l->t('Prevent creating an account if the email address exists in another account')) ?></label>
         </div>
+        <div>
+            <input id="update_profile_on_login" type="checkbox" class="checkbox" name="update_profile_on_login" value="1" <?php p($_['update_profile_on_login'] ? 'checked' : '') ?>/>
+            <label for="update_profile_on_login"><?php p($l->t('Update user profile every login')) ?></label>
+        </div>
         </p>
         <button><?php p($l->t('Save')); ?></button>
         <hr/>

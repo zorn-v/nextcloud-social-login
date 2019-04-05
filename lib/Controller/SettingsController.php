@@ -49,6 +49,7 @@ class SettingsController extends Controller
         $disable_registration,
         $allow_login_connect,
         $prevent_create_email_exists,
+        $update_profile_on_login,
         $providers,
         $tg_bot,
         $tg_token,
@@ -60,6 +61,7 @@ class SettingsController extends Controller
         $this->config->setAppValue($this->appName, 'disable_registration', $disable_registration ? true : false);
         $this->config->setAppValue($this->appName, 'allow_login_connect', $allow_login_connect ? true : false);
         $this->config->setAppValue($this->appName, 'prevent_create_email_exists', $prevent_create_email_exists ? true : false);
+        $this->config->setAppValue($this->appName, 'update_profile_on_login', $update_profile_on_login ? true : false);
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
         $this->config->setAppValue($this->appName, 'tg_bot', $tg_bot);
         $this->config->setAppValue($this->appName, 'tg_token', $tg_token);
@@ -106,65 +108,6 @@ class SettingsController extends Controller
             }
             $names[] = $name;
         }
-    }
-
-    public function renderPersonal()
-    {
-        Util::addScript($this->appName, 'personal');
-        $uid = $this->userSession->getUser()->getUID();
-        $params = [
-            'providers' => [],
-            'connected_logins' => [],
-            'action_url' => $this->urlGenerator->linkToRoute($this->appName.'.settings.savePersonal'),
-            'allow_login_connect' => $this->config->getAppValue($this->appName, 'allow_login_connect', false),
-            'disable_password_confirmation' => $this->config->getUserValue($uid, $this->appName, 'disable_password_confirmation', false),
-        ];
-        if ($params['allow_login_connect']) {
-            if ($params['tg_bot'] = $this->config->getAppValue($this->appName, 'tg_bot')) {
-                $params['tg_redirect_url'] = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.telegram');
-                $csp = new \OCP\AppFramework\Http\ContentSecurityPolicy();
-                $csp->addAllowedScriptDomain('telegram.org')
-                    ->addAllowedFrameDomain('oauth.telegram.org')
-                ;
-                $manager = \OC::$server->getContentSecurityPolicyManager();
-                $manager->addDefaultPolicy($csp);
-            }
-
-            $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
-            if (is_array($providers)) {
-                foreach ($providers as $name => $provider) {
-                    if ($provider['appid']) {
-                        $params['providers'][ucfirst($name)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider' => $name]);
-                    }
-                }
-            }
-            $params['providers'] = array_merge($params['providers'], $this->getProviders('openid'));
-            $params['providers'] = array_merge($params['providers'], $this->getProviders('custom_oidc'));
-            $params['providers'] = array_merge($params['providers'], $this->getProviders('custom_oauth2'));
-
-            $connectedLogins = $this->socialConnect->getConnectedLogins($uid);
-            foreach ($connectedLogins as $login) {
-                $params['connected_logins'][$login] = $this->urlGenerator->linkToRoute($this->appName.'.settings.disconnectSocialLogin', [
-                    'login' => $login,
-                    'requesttoken' => Util::callRegister(),
-                ]);
-            }
-        }
-        return (new TemplateResponse($this->appName, 'personal', $params, ''))->render();
-    }
-
-    private function getProviders($providersType)
-    {
-        $result = [];
-        $providers = json_decode($this->config->getAppValue($this->appName, $providersType.'_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $provider) {
-                $name = $provider['name'];
-                $title = $provider['title'];
-                $result[$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.'.$providersType, ['provider' => $name]);
-            }
-        }
-        return $result;
     }
 
     /**

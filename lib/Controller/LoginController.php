@@ -21,7 +21,6 @@ use OCA\SocialLogin\Db\SocialConnectDAO;
 use Hybridauth\Provider;
 use Hybridauth\User\Profile;
 use Hybridauth\HttpClient\Curl;
-use Hybridauth\Data;
 
 class LoginController extends Controller
 {
@@ -161,12 +160,12 @@ class LoginController extends Controller
                             'id'     => $prov['clientId'],
                             'secret' => $prov['clientSecret'],
                         ],
-                        'endpoints' => new Data\Collection([
+                        'endpoints' => [
                             'authorize_url'    => $prov['authorizeUrl'],
                             'access_token_url' => $prov['tokenUrl'],
                             'user_info_url'    => $prov['userInfoUrl'],
                             'api_base_url'     => '',
-                        ]),
+                        ],
                     ];
                     break;
                 }
@@ -195,12 +194,12 @@ class LoginController extends Controller
                             'id'     => $prov['clientId'],
                             'secret' => $prov['clientSecret'],
                         ],
-                        'endpoints' => new Data\Collection([
+                        'endpoints' => [
                             'api_base_url'     => $prov['apiBaseUrl'],
                             'authorize_url'    => $prov['authorizeUrl'],
                             'access_token_url' => $prov['tokenUrl'],
                             'profile_url'      => $prov['profileUrl'],
-                        ]),
+                        ],
                         'profile_fields'   => $prov['profileFields'],
                     ];
                     break;
@@ -291,6 +290,9 @@ class LoginController extends Controller
             $this->socialConnect->connectLogin($currentUid, $uid);
             return new RedirectResponse($this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section'=>'additional']));
         }
+
+        $updateUserProfile = $this->config->getAppValue($this->appName, 'update_profile_on_login');
+
         if (null === $user) {
             if ($this->config->getAppValue($this->appName, 'disable_registration')) {
                 throw new LoginException($this->l->t('Auto creating new users is disabled'));
@@ -303,8 +305,6 @@ class LoginController extends Controller
             }
             $password = substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $password);
-            $user->setDisplayName($profile->displayName ?: $profile->identifier);
-            $user->setEMailAddress((string)$profile->email);
 
             $newUserGroup = $this->config->getAppValue($this->appName, 'new_user_group');
             if ($newUserGroup) {
@@ -314,6 +314,14 @@ class LoginController extends Controller
                 } catch (\Exception $e) {}
             }
 
+            $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
+            $updateUserProfile = true;
+        }
+
+        if ($updateUserProfile) {
+            $user->setDisplayName($profile->displayName ?: $profile->identifier);
+            $user->setEMailAddress((string)$profile->email);
+
             if ($profile->photoURL) {
                 $curl = new Curl();
                 try {
@@ -322,7 +330,6 @@ class LoginController extends Controller
                     $avatar->set($photo);
                 } catch (\Exception $e) {}
             }
-            $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
         }
 
         # Create groups via the provider
@@ -357,10 +364,5 @@ class LoginController extends Controller
         $this->session->set('last-password-confirm', time());
 
         return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
-    }
-
-    private function getClientName() {
-        $userAgent = $this->request->getHeader('USER_AGENT');
-        return $userAgent !== null ? $userAgent : 'unknown';
     }
 }
