@@ -338,13 +338,6 @@ class LoginController extends Controller
             $group = $this->groupManager->createGroup($guid);
             $group->addUser($user);
             array_push($group_ids, $guid);
-
-//            # Create a directory for this group
-//            $folder = \OC::$server->getUserFolder('admin');
-//            if($provider_group->baseDir){
-//                $folder->newFolder($provider_group->baseDir .'/'. $provider_group->name);
-//
-//            }
         }
 
 
