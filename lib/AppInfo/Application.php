@@ -37,8 +37,6 @@ class Application extends App
 
         $this->config = $this->query(IConfig::class);
 
-        \OCP\App::registerPersonal($this->appName, 'appinfo/personal');
-
         $this->query(IUserManager::class)->listen('\OC\User', 'preDelete', [$this, 'preDeleteUser']);
 
         $userSession = $this->query(IUserSession::class);

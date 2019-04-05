@@ -16,11 +16,12 @@
     <repository>https://github.com/zorn-v/nextcloud-social-login</repository>
     <screenshot>https://raw.githubusercontent.com/zorn-v/nextcloud-social-login/master/appinfo/screenshot.png</screenshot>
     <dependencies>
-        <nextcloud min-version="12" max-version="15" />
+        <nextcloud min-version="13" max-version="16" />
     </dependencies>
     <settings>
     		<admin>OCA\SocialLogin\Settings\AdminSettings</admin>
         <admin-section>OCA\SocialLogin\Settings\AdminSection</admin-section>
+        <personal>OCA\SocialLogin\Settings\PersonalSettings</personal>
   	</settings>
     <repair-steps>
         <post-migration>
