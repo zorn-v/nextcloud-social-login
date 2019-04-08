@@ -242,10 +242,10 @@ class LoginController extends Controller
         return $this->login($uid, $profile);
     }
 
-    private function auth($class, array $config, $provider, $providerTitle)
+    private function auth($class, array $config, $provider, $providerType)
     {
         if (empty($config)) {
-            throw new LoginException($this->l->t('Unknown %s provider: "%s"', [$providerTitle, $provider]));
+            throw new LoginException($this->l->t('Unknown %s provider: "%s"', [$providerType, $provider]));
         }
         if ($redirectUrl = $this->request->getParam('login_redirect_url')) {
             $this->session->set('login_redirect_url', $redirectUrl);
@@ -263,14 +263,10 @@ class LoginController extends Controller
             throw new LoginException($this->l->t('Can not get identifier from provider'));
         }
 
-		if (
-			isset($config['authorize_url_parameters']) &&
-			isset($config['authorize_url_parameters']['hd']) &&
-			!empty($config['authorize_url_parameters']['hd'])
-		) {
-			$profileHd = explode('@', $profile->email)[1];
+		if (!empty($config['authorize_url_parameters']['hd'])) {
+			$profileHd = preg_match('#@(.+)#', $profile->email, $m) ? $m[1] : null;
 			if ($config['authorize_url_parameters']['hd'] !== $profileHd) {
-				throw new LoginException('Bad domain');
+				throw new LoginException($this->l->t('Login from %s domain is not allowed for %s provider', [$profileHd, $provider]));
 			}
 		}
 
