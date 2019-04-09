@@ -44,8 +44,6 @@ class LoginController extends Controller
     private $l;
     /** @var SocialConnectDAO */
     private $socialConnect;
-    /** @var Provider */
-    private $provider;
 
 
     public function __construct(
@@ -73,7 +71,6 @@ class LoginController extends Controller
         $this->session = $session;
         $this->l = $l;
         $this->socialConnect = $socialConnect;
-        $this->provider = null;
     }
 
     /**
@@ -242,12 +239,11 @@ class LoginController extends Controller
         $profile->identifier = $tgId;
         $profile->displayName = $this->request->getParam('first_name').' '.$this->request->getParam('last_name');
         $profile->photoURL = $this->request->getParam('photo_url');
-        return $this->login($uid, $profile);
+        return $this->login($uid, $profile, 'tg-');
     }
 
     private function auth($class, array $config, $provider, $providerTitle)
     {
-        $this->provider = $provider;
         if (empty($config)) {
             throw new LoginException($this->l->t('Unknown %s provider: "%s"', [$providerTitle, $provider]));
         }
@@ -269,10 +265,10 @@ class LoginController extends Controller
         if (strlen($uid) > 64) {
             $uid = $provider.'-'.md5($profileId);
         }
-        return $this->login($uid, $profile);
+        return $this->login($uid, $profile, $provider);
     }
 
-    private function login($uid, Profile $profile)
+    private function login($uid, Profile $profile, $provider)
     {
         $user = $this->userManager->get($uid);
         if (null === $user) {
@@ -336,7 +332,7 @@ class LoginController extends Controller
         $group_ids = [];
         foreach($profile->data->groups as $provider_group) {
             # Link the user to the group
-            $guid = $this->provider . '-' . $provider_group->id;
+            $guid = $provider . '-' . $provider_group->id;
             $group = $this->groupManager->createGroup($guid);
             $group->addUser($user);
             array_push($group_ids, $guid);
@@ -346,7 +342,7 @@ class LoginController extends Controller
         # Remove all provider groups that this user is not longer attached to
         foreach($this->groupManager->getUserGroups($user) as $group){
             # Check if the group is provided by this provider
-           if(strpos($group->getGID(), $this->provider) === 0){
+           if(strpos($group->getGID(), $provider) === 0){
                # If the group is in NC but not in the provider
                if(!in_array($group->getGID(), $group_ids)){
                    $group->removeUser($user);
