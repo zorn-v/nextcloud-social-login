@@ -263,12 +263,12 @@ class LoginController extends Controller
             throw new LoginException($this->l->t('Can not get identifier from provider'));
         }
 
-		if (!empty($config['authorize_url_parameters']['hd'])) {
-			$profileHd = preg_match('#@(.+)#', $profile->email, $m) ? $m[1] : null;
-			if ($config['authorize_url_parameters']['hd'] !== $profileHd) {
-				throw new LoginException($this->l->t('Login from %s domain is not allowed for %s provider', [$profileHd, $provider]));
-			}
-		}
+        if (!empty($config['authorize_url_parameters']['hd'])) {
+            $profileHd = preg_match('#@(.+)#', $profile->email, $m) ? $m[1] : null;
+            if ($config['authorize_url_parameters']['hd'] !== $profileHd) {
+                throw new LoginException($this->l->t('Login from %s domain is not allowed for %s provider', [$profileHd, $provider]));
+            }
+        }
 
         $uid = $provider.'-'.$profileId;
         if (strlen($uid) > 64) {
