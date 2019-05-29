@@ -98,7 +98,7 @@ class PersonalSettings implements ISettings
 
     public function getSection()
     {
-        return 'additional';
+        return 'sociallogin';
     }
 
     public function getPriority()
