@@ -294,7 +294,7 @@ class LoginController extends Controller
             }
             $currentUid = $this->userSession->getUser()->getUID();
             $this->socialConnect->connectLogin($currentUid, $uid);
-            return new RedirectResponse($this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section'=>'additional']));
+            return new RedirectResponse($this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section'=>'sociallogin']));
         }
 
         $updateUserProfile = $this->config->getAppValue($this->appName, 'update_profile_on_login');
