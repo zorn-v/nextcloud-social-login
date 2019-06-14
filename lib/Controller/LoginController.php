@@ -313,11 +313,8 @@ class LoginController extends Controller
             $user = $this->userManager->createUser($uid, $password);
 
             $newUserGroup = $this->config->getAppValue($this->appName, 'new_user_group');
-            if ($newUserGroup) {
-                try {
-                    $group = $this->groupManager->get($newUserGroup);
-                    $group->addUser($user);
-                } catch (\Exception $e) {}
+            if ($newUserGroup && $group = $this->groupManager->get($newUserGroup)) {
+                $group->addUser($user);
             }
 
             $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
@@ -335,6 +332,38 @@ class LoginController extends Controller
                     $avatar = $this->avatarManager->getAvatar($uid);
                     $avatar->set($photo);
                 } catch (\Exception $e) {}
+            }
+
+            if (!empty($profile->data['groups']) && is_array($profile->data['groups'])) {
+                $groupNames = $profile->data['groups'];
+                $groupMapping = isset($profile->data['group_mapping']) ? $profile->data['group_mapping'] : null;
+                $userGroups = $this->groupManager->getUserGroups($user);
+
+                if ($groupMapping) {
+                    foreach ($groupNames as $k => $v) {
+                        if (isset($groupMapping[$v])) {
+                            $groupNames[$k] = $groupMapping[$v];
+                        } else {
+                            unset($groupNames[$k]);
+                        }
+                    }
+                }
+
+                foreach ($userGroups as $group) {
+                    if (!in_array($group->getGID(), $groupNames)) {
+                        $group->removeUser($user);
+                    }
+                }
+
+                foreach ($groupName as $groupName) {
+                    $group = $groupMapping
+                        ? $this->groupManager->get($groupName)
+                        : $this->groupManager->createGroup($groupName)
+                    ;
+                    if ($group) {
+                        $group->addUser($user);
+                    }
+                }
             }
         }
 

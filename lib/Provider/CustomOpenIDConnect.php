@@ -39,6 +39,9 @@ class CustomOpenIDConnect extends OAuth2
         if ($groups = $this->getGroups($data)) {
             $userProfile->data['groups'] = $groups;
         }
+        if ($groupMapping = $this->config->get('group_mapping')) {
+            $userProfile->data['group_mapping'] = $groupMapping;
+        }
 
         $userInfoUrl = trim($this->config->get('endpoints')['user_info_url']);
         if (!empty($userInfoUrl) && !isset(
