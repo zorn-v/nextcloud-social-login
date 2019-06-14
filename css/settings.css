@@ -9,7 +9,7 @@
 }
 .provider-settings .openid-remove,
 .provider-settings .custom_oidc-remove,
-.provider-settings .custom_oauth2-remove   {
+.provider-settings .custom_oauth2-remove {
   float: right;
   cursor: pointer;
   font-weight: bold;

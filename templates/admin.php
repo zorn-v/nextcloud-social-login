@@ -230,6 +230,25 @@ $providersData = [
                         </select>
                         <span class="group-mapping-remove">x</span>
                     </div>
+                    <?php if (isset($provider['groupMapping']) && is_array($provider['groupMapping'])): ?>
+                        <?php foreach ($provider['groupMapping'] as $foreignGroup => $localGroup): ?>
+                            <div>
+                                <input type="text" class="foreign-group" value="<?php p($foreignGroup) ?>"
+                                    data-name-tpl="<?php p($provType) ?>_providers[<?php p($k) ?>][groupMapping]"
+                                />
+                                <select class="local-group"
+                                    name="<?php p($provType) ?>_providers[<?php p($k) ?>][groupMapping][<?php p($foreignGroup) ?>]"
+                                >
+                                    <?php foreach ($_['groups'] as $group): ?>
+                                        <option value="<?php p($group) ?>" <?php p($localGroup === $group ? 'selected' : '') ?>>
+                                            <?php p($group) ?>
+                                        </option>
+                                    <?php endforeach ?>
+                                </select>
+                                <span class="group-mapping-remove">x</span>
+                            </div>
+                        <?php endforeach ?>
+                    <?php endif ?>
                 <?php endif ?>
             </div>
         <?php endforeach ?>
