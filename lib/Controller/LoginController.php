@@ -276,10 +276,10 @@ class LoginController extends Controller
         if (strlen($uid) > 64) {
             $uid = $provider.'-'.md5($profileId);
         }
-        return $this->login($uid, $profile);
+        return $this->login($uid, $profile, $provider.'-');
     }
 
-    private function login($uid, Profile $profile)
+    private function login($uid, Profile $profile, $newGroupPrefix = '')
     {
         $user = $this->userManager->get($uid);
         if (null === $user) {
@@ -359,7 +359,7 @@ class LoginController extends Controller
                 foreach ($groupNames as $groupName) {
                     $group = $groupMapping
                         ? $this->groupManager->get($groupName)
-                        : $this->groupManager->createGroup($groupName)
+                        : $this->groupManager->createGroup($newGroupPrefix.$groupName)
                     ;
                     if ($group) {
                         $group->addUser($user);
