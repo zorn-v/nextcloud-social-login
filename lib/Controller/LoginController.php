@@ -356,7 +356,7 @@ class LoginController extends Controller
                     }
                 }
 
-                foreach ($groupName as $groupName) {
+                foreach ($groupNames as $groupName) {
                     $group = $groupMapping
                         ? $this->groupManager->get($groupName)
                         : $this->groupManager->createGroup($groupName)
