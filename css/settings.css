@@ -17,6 +17,10 @@
   width: 20px;
   text-align: center;
 }
+.provider-settings .group-mapping-remove {
+  cursor: pointer;
+  font-weight: bold;
+}
 .group-mapping-tpl,
 #openid_provider_tpl,
 #custom_oidc_provider_tpl,

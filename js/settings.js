@@ -61,6 +61,8 @@ jQuery(function ($) {
       var $provider = $(this).parents('.provider-settings');
       var $tpl = $provider.find('.group-mapping-tpl');
       $provider.append('<div>'+$tpl.html()+'</div>');
+    }).delegate('.group-mapping-remove', 'click', function () {
+      $(this).parent().remove();
     });
   }
 
