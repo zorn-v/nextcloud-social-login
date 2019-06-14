@@ -161,8 +161,9 @@ class LoginController extends Controller
                             'authorize_url'    => $prov['authorizeUrl'],
                             'access_token_url' => $prov['tokenUrl'],
                             'user_info_url'    => $prov['userInfoUrl'],
-                            'api_base_url'     => '',
                         ],
+                        'groups_claim' => isset($prov['groupsClaim']) ? $prov['groupsClaim'] : null,
+                        'group_mapping' => isset($prov['groupMapping']) ? $prov['groupMapping'] : null,
                     ];
                     break;
                 }

@@ -66,6 +66,11 @@ $providersData = [
                 'type' => 'text',
                 'required' => true,
             ],
+            'groupsClaim' => [
+                'title' => 'Groups claim (optional)',
+                'type' => 'text',
+                'required' => false,
+            ],
         ]
     ],
     'custom_oauth2' => [
