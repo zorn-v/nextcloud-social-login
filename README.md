@@ -4,6 +4,25 @@ Make possible create users and login via Telegram, OAuth or OpenID
 
 For OAuth you must create app for certain providers. Login button appear at login page if app id specified. Settings are in "Social login" section of settings page.
 
+## Custom OIDC groups
+
+You can use groups from your OpenID Connect provider. For that you should specify "Groups claim" in custom OIDC provider settings. That claim should be returned from provider in `id_token` or at user info endpoint. Format should be `array` or comma separated string. Eg (with claim named `roles`)
+
+```json
+{"roles": ["admin", "user"]}
+or
+{"roles": "admin,user"}
+```
+
+You can use provider groups in two ways:
+
+1. Create provider groups in nextcloud and associate it to user
+2. Map provider groups to existing nexcloud groups
+
+If you want sync groups on every login do not forget to check "Update user profile every login" setting
+
+You can find example how to configure WSO2IS for return roles claim with OIDC at https://medium.com/@dewni.matheesha/claim-mapping-and-retrieving-end-user-information-in-wso2is-cffd5f3937ff
+
 ## Telegram
 
 For using telegram login you need create bot and connect it to domain as described here https://core.telegram.org/widgets/login
