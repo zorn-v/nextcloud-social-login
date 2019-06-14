@@ -17,6 +17,7 @@
   width: 20px;
   text-align: center;
 }
+.group-mapping-tpl,
 #openid_provider_tpl,
 #custom_oidc_provider_tpl,
 #custom_oauth2_provider_tpl {
@@ -33,4 +34,11 @@ input[readonly] {
   width: 20px;
   height: 20px;
   margin-bottom: -2px;
+}
+.group-mapping-add {
+  width: 100%;
+}
+#sociallogin_settings .foreign-group,
+#sociallogin_settings .local-group {
+  width: 133px;
 }

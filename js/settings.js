@@ -57,8 +57,13 @@ jQuery(function ($) {
       } else {
         $provider.remove();
       }
+    }).delegate('.group-mapping-add', 'click', function () {
+      var $provider = $(this).parents('.provider-settings');
+      var $tpl = $provider.find('.group-mapping-tpl');
+      $provider.append('<div>'+$tpl.html()+'</div>');
     });
   }
+
   function createAdd(providerType){
     $('#'+providerType+'_add').click(function () {
       var $tpl = $('#'+providerType+'_provider_tpl');

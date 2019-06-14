@@ -219,6 +219,18 @@ $providersData = [
                     </label>
                     <br/>
                 <?php endforeach ?>
+                <?php if ($provType === 'custom_oidc'): ?>
+                    <button class="group-mapping-add" type="button">Add group mapping</button>
+                    <div class="group-mapping-tpl">
+                        <input type="text" class="foreign-group" data-name-tpl="<?php p($provType) ?>_providers[<?php p($k) ?>][groupMapping]"  />
+                        <select class="local-group">
+                            <?php foreach ($_['groups'] as $group): ?>
+                                <option value="<?php p($group) ?>"><?php p($group) ?></option>
+                            <?php endforeach ?>
+                        </select>
+                        <span class="group-mapping-remove">x</span>
+                    </div>
+                <?php endif ?>
             </div>
         <?php endforeach ?>
         </div>
@@ -242,7 +254,18 @@ $providersData = [
         </label>
         <br/>
         <?php endforeach ?>
+        <?php if ($provType === 'custom_oidc'): ?>
+            <button class="group-mapping-add" type="button">Add group mapping</button>
+            <div class="group-mapping-tpl">
+                <input type="text" class="foreign-group" data-name-tpl="<?php p($provType) ?>_providers[{{provider_id}}][groupMapping]" />
+                <select class="local-group">
+                    <?php foreach ($_['groups'] as $group): ?>
+                        <option value="<?php p($group) ?>"><?php p($group) ?></option>
+                    <?php endforeach ?>
+                </select>
+                <span class="group-mapping-remove">x</span>
+            </div>
+        <?php endif ?>
     </div>
 <?php endforeach ?>
-
 </div>
