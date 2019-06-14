@@ -36,9 +36,17 @@ class CustomOpenIDConnect extends OAuth2
         $userProfile->displayName = $data->get('name');
         $userProfile->photoURL    = $data->get('picture');
         $userProfile->email       = $data->get('email');
+        if ($groups = $this->getGroups($data)) {
+            $userProfile->data['groups'] = $groups;
+        }
 
         $userInfoUrl = trim($this->config->get('endpoints')['user_info_url']);
-        if ((empty($userProfile->displayName) || empty($userProfile->photoURL) || empty($userProfile->email)) && !empty($userInfoUrl)) {
+        if (!empty($userInfoUrl) && !isset(
+            $userProfile->displayName,
+            $userProfile->photoURL,
+            $userProfile->email,
+            $userProfile->data['groups']
+        )) {
             $profile = new Data\Collection( $this->apiRequest($userInfoUrl) );
             if (empty($userProfile->displayName)) {
                 $userProfile->displayName = $profile->get('name') ?: $profile->get('nickname');
@@ -52,8 +60,27 @@ class CustomOpenIDConnect extends OAuth2
             if (empty($userProfile->email)) {
                 $userProfile->email = $profile->get('email');
             }
+            if (empty($userProfile->data['groups']) && $groups = $this->getGroups($profile)) {
+                $userProfile->data['groups'] = $groups;
+            }
         }
 
         return $userProfile;
+    }
+
+    private function getGroups(Data\Collection $data)
+    {
+        $groupsClaim = $this->config->get('groups_claim');
+        if ($groups = $data->get($groupsClaim)) {
+            if (is_array($groups)) {
+                return $groups;
+            } elseif (is_string($groups)) {
+                return array_filter(
+                    array_map('trim', explode(',', $groups)),
+                    function ($val) { return !empty($val); }
+                );
+            }
+        }
+        return null;
     }
 }
