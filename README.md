@@ -17,7 +17,7 @@ or
 You can use provider groups in two ways:
 
 1. Create provider groups in nextcloud and associate it to user
-2. Map provider groups to existing nexcloud groups
+2. Map provider groups to existing nextcloud groups
 
 If you want sync groups on every login do not forget to check "Update user profile every login" setting
 
