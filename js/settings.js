@@ -63,6 +63,10 @@ jQuery(function ($) {
       $provider.append('<div>'+$tpl.html()+'</div>');
     }).delegate('.group-mapping-remove', 'click', function () {
       $(this).parent().remove();
+    }).delegate('.foreign-group', 'input', function () {
+      var $this = $(this);
+      var newName = this.value ? $this.data('name-tpl')+'['+this.value+']' : '';
+      $this.next('.local-group').attr('name', newName)
     });
   }
 
