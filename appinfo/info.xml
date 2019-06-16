@@ -27,6 +27,7 @@
     <repair-steps>
         <post-migration>
             <step>OCA\SocialLogin\Migration\SeparateProvidersNameAndTitle</step>
+            <step>OCA\SocialLogin\Migration\ProvidersDefaultGroup</step>
         </post-migration>
     </repair-steps>
 </info>
