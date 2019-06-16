@@ -95,6 +95,7 @@ class LoginController extends Controller
                             'id'     => $prov['appid'],
                             'secret' => $prov['secret'],
                         ],
+                        'default_group' => $prov['defaultGroup'],
                     ];
                     if (isset($scopes[$provider])) {
                         $config['scope'] = $scopes[$provider];
@@ -129,6 +130,7 @@ class LoginController extends Controller
                     $config = [
                         'callback'          => $callbackUrl,
                         'openid_identifier' => $prov['url'],
+                        'default_group'     => $prov['defaultGroup'],
                     ];
                     break;
                 }
@@ -162,7 +164,8 @@ class LoginController extends Controller
                             'access_token_url' => $prov['tokenUrl'],
                             'user_info_url'    => $prov['userInfoUrl'],
                         ],
-                        'groups_claim' => isset($prov['groupsClaim']) ? $prov['groupsClaim'] : null,
+                        'default_group' => $prov['defaultGroup'],
+                        'groups_claim'  => isset($prov['groupsClaim']) ? $prov['groupsClaim'] : null,
                         'group_mapping' => isset($prov['groupMapping']) ? $prov['groupMapping'] : null,
                     ];
                     break;
@@ -198,7 +201,8 @@ class LoginController extends Controller
                             'access_token_url' => $prov['tokenUrl'],
                             'profile_url'      => $prov['profileUrl'],
                         ],
-                        'profile_fields'   => $prov['profileFields'],
+                        'profile_fields' => $prov['profileFields'],
+                        'default_group'  => $prov['defaultGroup'],
                     ];
                     break;
                 }
@@ -240,6 +244,7 @@ class LoginController extends Controller
         $profile->identifier = $tgId;
         $profile->displayName = $this->request->getParam('first_name').' '.$this->request->getParam('last_name');
         $profile->photoURL = $this->request->getParam('photo_url');
+        $profile->data['default_group'] = $this->config->getAppValue($this->appName, 'tg_group');
         return $this->login($uid, $profile);
     }
 
@@ -271,6 +276,8 @@ class LoginController extends Controller
                 throw new LoginException($this->l->t('Login from %s domain is not allowed for %s provider', [$profileHd, $provider]));
             }
         }
+
+        $profile->data['default_group'] = $config['default_group'];
 
         $uid = $provider.'-'.$profileId;
         if (strlen($uid) > 64) {
@@ -360,6 +367,11 @@ class LoginController extends Controller
                         $group->addUser($user);
                     }
                 }
+            }
+
+            $defaultGroup = $profile->data['default_group'];
+            if ($defaultGroup && $group = $this->groupManager->get($defaultGroup)) {
+                $group->addUser($user);
             }
         }
 
