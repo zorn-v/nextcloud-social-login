@@ -153,6 +153,79 @@ $providersData = [
         </p>
         <button><?php p($l->t('Save')); ?></button>
         <hr/>
+
+        <?php foreach ($providersData as $provType => $provData): ?>
+        <h2>
+            <?php p($l->t($provData['title'])) ?>
+            <button id="<?php p($provType)?>_add" type="button">
+                <div class="icon-add"></div>
+            </button>
+        </h2>
+        <div id="<?php p($provType)?>_providers">
+            <?php foreach ($_[$provType.'_providers'] as $k => $provider): ?>
+                <div class="provider-settings">
+                    <div class="<?php p($provType)?>-remove">x</div>
+                    <?php foreach ($provData['fields'] as $fieldName => $fieldData): ?>
+                        <label>
+                            <?php p($l->t($fieldData['title'])) ?><br>
+                            <input
+                                type="<?php p($fieldData['type'])?>"
+                                name="<?php p($provType)?>_providers[<?php p($k) ?>][<?php p($fieldName)?>]"
+                                value="<?php p($provider[$fieldName]) ?>"
+                                <?php p($fieldName == 'name' ? 'readonly' : ($fieldData['required'] ? 'required' : '' )) ?>
+                            />
+                        </label>
+                        <br/>
+                    <?php endforeach ?>
+                    <label>
+                        <?php p($l->t('Default group')) ?><br>
+                        <select name="<?php p($provType) ?>_providers[<?php p($k) ?>][defaultGroup]">
+                            <option value=""><?php p($l->t('None')); ?></option>
+                            <?php foreach ($_['groups'] as $group): ?>
+                                <option value="<?php p($group) ?>" <?php p($provider['defaultGroup'] === $group ? 'selected' : '') ?>>
+                                    <?php p($group) ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select>
+                    </label>
+                    <br/>
+                    <?php if ($provType === 'custom_oidc'): ?>
+                        <button class="group-mapping-add" type="button">Add group mapping</button>
+                        <div class="group-mapping-tpl">
+                            <input type="text" class="foreign-group" data-name-tpl="<?php p($provType) ?>_providers[<?php p($k) ?>][groupMapping]"  />
+                            <select class="local-group">
+                                <?php foreach ($_['groups'] as $group): ?>
+                                    <option value="<?php p($group) ?>"><?php p($group) ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <span class="group-mapping-remove">x</span>
+                        </div>
+                        <?php if (isset($provider['groupMapping']) && is_array($provider['groupMapping'])): ?>
+                            <?php foreach ($provider['groupMapping'] as $foreignGroup => $localGroup): ?>
+                                <div>
+                                    <input type="text" class="foreign-group" value="<?php p($foreignGroup) ?>"
+                                        data-name-tpl="<?php p($provType) ?>_providers[<?php p($k) ?>][groupMapping]"
+                                    />
+                                    <select class="local-group"
+                                        name="<?php p($provType) ?>_providers[<?php p($k) ?>][groupMapping][<?php p($foreignGroup) ?>]"
+                                    >
+                                        <?php foreach ($_['groups'] as $group): ?>
+                                            <option value="<?php p($group) ?>" <?php p($localGroup === $group ? 'selected' : '') ?>>
+                                                <?php p($group) ?>
+                                            </option>
+                                        <?php endforeach ?>
+                                    </select>
+                                    <span class="group-mapping-remove">x</span>
+                                </div>
+                            <?php endforeach ?>
+                        <?php endif ?>
+                    <?php endif ?>
+                </div>
+            <?php endforeach ?>
+        </div>
+        <br/>
+        <?php endforeach ?>
+
         <?php foreach ($_['providers'] as $name => $provider): ?>
             <div class="provider-settings">
                 <h2 class="provider-title"><img src="<?php print_unescaped(image_path('sociallogin', strtolower($name).'.svg')); ?>" />  <?php p(ucfirst($name))?></h2>
@@ -187,6 +260,7 @@ $providersData = [
             </div>
         <?php endforeach ?>
         <br/>
+
         <div class="provider-settings">
             <h2 class="provider-title"><img src="<?php print_unescaped(image_path('sociallogin', 'telegram.svg')); ?>" /> Telegram</h2>
             <label>
@@ -212,78 +286,6 @@ $providersData = [
             </label>
         </div>
         <br/>
-
-        <?php foreach ($providersData as $provType => $provData): ?>
-        <h2>
-            <?php p($l->t($provData['title'])) ?>
-            <button id="<?php p($provType)?>_add" type="button">
-                <div class="icon-add"></div>
-            </button>
-        </h2>
-        <div id="<?php p($provType)?>_providers">
-        <?php foreach ($_[$provType.'_providers'] as $k => $provider): ?>
-            <div class="provider-settings">
-                <div class="<?php p($provType)?>-remove">x</div>
-                <?php foreach ($provData['fields'] as $fieldName => $fieldData): ?>
-                    <label>
-                        <?php p($l->t($fieldData['title'])) ?><br>
-                        <input
-                            type="<?php p($fieldData['type'])?>"
-                            name="<?php p($provType)?>_providers[<?php p($k) ?>][<?php p($fieldName)?>]"
-                            value="<?php p($provider[$fieldName]) ?>"
-                            <?php p($fieldName == 'name' ? 'readonly' : ($fieldData['required'] ? 'required' : '' )) ?>
-                        />
-                    </label>
-                    <br/>
-                <?php endforeach ?>
-                <label>
-                    <?php p($l->t('Default group')) ?><br>
-                    <select name="<?php p($provType) ?>_providers[<?php p($k) ?>][defaultGroup]">
-                        <option value=""><?php p($l->t('None')); ?></option>
-                        <?php foreach ($_['groups'] as $group): ?>
-                            <option value="<?php p($group) ?>" <?php p($provider['defaultGroup'] === $group ? 'selected' : '') ?>>
-                                <?php p($group) ?>
-                            </option>
-                        <?php endforeach ?>
-                    </select>
-                </label>
-                <br/>
-                <?php if ($provType === 'custom_oidc'): ?>
-                    <button class="group-mapping-add" type="button">Add group mapping</button>
-                    <div class="group-mapping-tpl">
-                        <input type="text" class="foreign-group" data-name-tpl="<?php p($provType) ?>_providers[<?php p($k) ?>][groupMapping]"  />
-                        <select class="local-group">
-                            <?php foreach ($_['groups'] as $group): ?>
-                                <option value="<?php p($group) ?>"><?php p($group) ?></option>
-                            <?php endforeach ?>
-                        </select>
-                        <span class="group-mapping-remove">x</span>
-                    </div>
-                    <?php if (isset($provider['groupMapping']) && is_array($provider['groupMapping'])): ?>
-                        <?php foreach ($provider['groupMapping'] as $foreignGroup => $localGroup): ?>
-                            <div>
-                                <input type="text" class="foreign-group" value="<?php p($foreignGroup) ?>"
-                                    data-name-tpl="<?php p($provType) ?>_providers[<?php p($k) ?>][groupMapping]"
-                                />
-                                <select class="local-group"
-                                    name="<?php p($provType) ?>_providers[<?php p($k) ?>][groupMapping][<?php p($foreignGroup) ?>]"
-                                >
-                                    <?php foreach ($_['groups'] as $group): ?>
-                                        <option value="<?php p($group) ?>" <?php p($localGroup === $group ? 'selected' : '') ?>>
-                                            <?php p($group) ?>
-                                        </option>
-                                    <?php endforeach ?>
-                                </select>
-                                <span class="group-mapping-remove">x</span>
-                            </div>
-                        <?php endforeach ?>
-                    <?php endif ?>
-                <?php endif ?>
-            </div>
-        <?php endforeach ?>
-        </div>
-        <br/>
-        <?php endforeach ?>
 
         <button><?php p($l->t('Save')); ?></button>
     </form>
