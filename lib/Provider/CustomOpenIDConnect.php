@@ -80,7 +80,7 @@ class CustomOpenIDConnect extends OAuth2
             } elseif (is_string($groups)) {
                 return array_filter(
                     array_map('trim', explode(',', $groups)),
-                    function ($val) { return !empty($val); }
+                    function ($val) { return $val !== ''; }
                 );
             }
         }

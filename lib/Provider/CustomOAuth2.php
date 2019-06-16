@@ -21,7 +21,7 @@ class CustomOAuth2 extends OAuth2
     {
         $profileFields = array_filter(
             array_map('trim', explode(',', $this->config->get('profile_fields'))),
-            function ($val) { return !empty($val); }
+            function ($val) { return $val !== ''; }
         );
         $profileUrl = $this->config->get('endpoints')['profile_url'];
 
