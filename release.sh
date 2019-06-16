@@ -5,6 +5,9 @@ APP_NAME=sociallogin
 
 cd `dirname $0`
 
+git checkout master
+git pull origin master
+
 git diff --quiet --exit-code
 [ $? != 0 ] && echo There is unstaged changes && exit 1
 [ ! -f .credentials ] && echo No credentials file found && exit 1
@@ -17,8 +20,6 @@ VERSION=v`grep '<version>' appinfo/info.xml | sed 's/[^0-9.]//g'`
 UPLOAD_URL=`curl -sH "Authorization: token $GITHUB_TOKEN" -d "{\"tag_name\":\"$VERSION\"}" https://api.github.com/repos/$GITHUB_REPO/releases | grep '"upload_url"' | sed 's/.*"\(https:.*\){.*/\1/'`
 [ -z "$UPLOAD_URL" ] && echo Can not get upload url && exit 1
 
-git checkout master
-git pull origin master
 git checkout -b release
 git tag $VERSION
 git log --format='%D- %s' | sed -e 's/HEAD -> release, //' -e 's/, origin\/master, origin\/HEAD, master//' -e 's/tag: v\([^-]*\)/\n## \1\n/' > CHANGELOG.md
