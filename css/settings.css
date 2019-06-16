@@ -1,4 +1,5 @@
-#sociallogin_settings input {
+#sociallogin_settings input,
+#sociallogin_settings select {
   width: 285px;
 }
 #sociallogin_settings .provider-settings {

@@ -172,6 +172,18 @@ $providersData = [
                     <?php p($l->t('Secret')) ?><br>
                     <input type="password" name="providers[<?php p($name) ?>][secret]" value="<?php p($provider['secret']) ?>"/>
                 </label>
+                <br/>
+                <label>
+                    <?php p($l->t('Default group')) ?><br>
+                    <select name="providers[<?php p($name) ?>][defaultGroup]">
+                        <option value=""><?php p($l->t('None')); ?></option>
+                        <?php foreach ($_['groups'] as $group): ?>
+                            <option value="<?php p($group) ?>" <?php p($provider['defaultGroup'] === $group ? 'selected' : '') ?>>
+                                <?php p($group) ?>
+                            </option>
+                        <?php endforeach ?>
+                    </select>
+                </label>
                 <?php if ($name === 'google'): ?>
                     <br/>
                     <label>
@@ -192,6 +204,18 @@ $providersData = [
             <label>
                 <?php p($l->t('Token')) ?><br>
                 <input type="password" name="tg_token" value="<?php p($_['tg_token']) ?>"/>
+            </label>
+            <br/>
+            <label>
+                <?php p($l->t('Default group')) ?><br>
+                <select name="tg_group">
+                    <option value=""><?php p($l->t('None')); ?></option>
+                    <?php foreach ($_['groups'] as $group): ?>
+                        <option value="<?php p($group) ?>" <?php p($_['tg_group'] === $group ? 'selected' : '') ?>>
+                            <?php p($group) ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
             </label>
         </div>
         <br/>
@@ -219,6 +243,18 @@ $providersData = [
                     </label>
                     <br/>
                 <?php endforeach ?>
+                <label>
+                    <?php p($l->t('Default group')) ?><br>
+                    <select name="<?php p($provType) ?>_providers[<?php p($k) ?>][defaultGroup]">
+                        <option value=""><?php p($l->t('None')); ?></option>
+                        <?php foreach ($_['groups'] as $group): ?>
+                            <option value="<?php p($group) ?>" <?php p($provider['defaultGroup'] === $group ? 'selected' : '') ?>>
+                                <?php p($group) ?>
+                            </option>
+                        <?php endforeach ?>
+                    </select>
+                </label>
+                <br/>
                 <?php if ($provType === 'custom_oidc'): ?>
                     <button class="group-mapping-add" type="button">Add group mapping</button>
                     <div class="group-mapping-tpl">
@@ -273,6 +309,18 @@ $providersData = [
         </label>
         <br/>
         <?php endforeach ?>
+        <label>
+            <?php p($l->t('Default group')) ?><br>
+            <select name="<?php p($provType) ?>_providers[{{provider_id}}][defaultGroup]">
+                <option value=""><?php p($l->t('None')); ?></option>
+                <?php foreach ($_['groups'] as $group): ?>
+                    <option value="<?php p($group) ?>">
+                        <?php p($group) ?>
+                    </option>
+                <?php endforeach ?>
+            </select>
+        </label>
+        <br/>
         <?php if ($provType === 'custom_oidc'): ?>
             <button class="group-mapping-add" type="button">Add group mapping</button>
             <div class="group-mapping-tpl">

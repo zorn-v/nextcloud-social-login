@@ -82,6 +82,7 @@ class AdminSettings implements ISettings
             'groups' => $groupNames,
             'tg_bot' => $this->config->getAppValue($this->appName, 'tg_bot'),
             'tg_token' => $this->config->getAppValue($this->appName, 'tg_token'),
+            'tg_group' => $this->config->getAppValue($this->appName, 'tg_group'),
             'providers' => $providers,
             'openid_providers' => $openIdProviders,
             'custom_oidc_providers' => $custom_oidcProviders,

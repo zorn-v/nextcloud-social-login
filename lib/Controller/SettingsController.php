@@ -53,6 +53,7 @@ class SettingsController extends Controller
         $providers,
         $tg_bot,
         $tg_token,
+        $tg_group,
         $openid_providers,
         $custom_oidc_providers,
         $custom_oauth2_providers
@@ -65,6 +66,7 @@ class SettingsController extends Controller
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
         $this->config->setAppValue($this->appName, 'tg_bot', $tg_bot);
         $this->config->setAppValue($this->appName, 'tg_token', $tg_token);
+        $this->config->setAppValue($this->appName, 'tg_group', $tg_group);
 
         $openid_providers = $openid_providers ?: [];
         $custom_oidc_providers = $custom_oidc_providers ?: [];
