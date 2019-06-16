@@ -313,11 +313,6 @@ class LoginController extends Controller
             $password = substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $password);
 
-            $newUserGroup = $this->config->getAppValue($this->appName, 'new_user_group');
-            if ($newUserGroup && $group = $this->groupManager->get($newUserGroup)) {
-                $group->addUser($user);
-            }
-
             $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
             $updateUserProfile = true;
         }

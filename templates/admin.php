@@ -134,29 +134,22 @@ $providersData = [
     <form id="sociallogin_settings" action="<?php print_unescaped($_['action_url']) ?>" method="post">
 
         <p>
-        <label for="new_user_group"><?php p($l->t('Default group that all new users belong')); ?></label>
-        <select id="new_user_group" name="new_user_group">
-            <option value=""><?php p($l->t('None')); ?></option>
-            <?php foreach ($_['groups'] as $group): ?>
-                <option value="<?php p($group) ?>" <?php p($_['new_user_group'] === $group ? 'selected' : '') ?>><?php p($group) ?></option>
-            <?php endforeach ?>
-        </select>
-        <div>
-            <input id="disable_registration" type="checkbox" class="checkbox" name="disable_registration" value="1" <?php p($_['disable_registration'] ? 'checked' : '') ?>/>
-            <label for="disable_registration"><?php p($l->t('Disable auto create new users')) ?></label>
-        </div>
-        <div>
-            <input id="allow_login_connect" type="checkbox" class="checkbox" name="allow_login_connect" value="1" <?php p($_['allow_login_connect'] ? 'checked' : '') ?>/>
-            <label for="allow_login_connect"><?php p($l->t('Allow users to connect social logins with their account')) ?></label>
-        </div>
-        <div>
-            <input id="prevent_create_email_exists" type="checkbox" class="checkbox" name="prevent_create_email_exists" value="1" <?php p($_['prevent_create_email_exists'] ? 'checked' : '') ?>/>
-            <label for="prevent_create_email_exists"><?php p($l->t('Prevent creating an account if the email address exists in another account')) ?></label>
-        </div>
-        <div>
-            <input id="update_profile_on_login" type="checkbox" class="checkbox" name="update_profile_on_login" value="1" <?php p($_['update_profile_on_login'] ? 'checked' : '') ?>/>
-            <label for="update_profile_on_login"><?php p($l->t('Update user profile every login')) ?></label>
-        </div>
+            <div>
+                <input id="disable_registration" type="checkbox" class="checkbox" name="disable_registration" value="1" <?php p($_['disable_registration'] ? 'checked' : '') ?>/>
+                <label for="disable_registration"><?php p($l->t('Disable auto create new users')) ?></label>
+            </div>
+            <div>
+                <input id="allow_login_connect" type="checkbox" class="checkbox" name="allow_login_connect" value="1" <?php p($_['allow_login_connect'] ? 'checked' : '') ?>/>
+                <label for="allow_login_connect"><?php p($l->t('Allow users to connect social logins with their account')) ?></label>
+            </div>
+            <div>
+                <input id="prevent_create_email_exists" type="checkbox" class="checkbox" name="prevent_create_email_exists" value="1" <?php p($_['prevent_create_email_exists'] ? 'checked' : '') ?>/>
+                <label for="prevent_create_email_exists"><?php p($l->t('Prevent creating an account if the email address exists in another account')) ?></label>
+            </div>
+            <div>
+                <input id="update_profile_on_login" type="checkbox" class="checkbox" name="update_profile_on_login" value="1" <?php p($_['update_profile_on_login'] ? 'checked' : '') ?>/>
+                <label for="update_profile_on_login"><?php p($l->t('Update user profile every login')) ?></label>
+            </div>
         </p>
         <button><?php p($l->t('Save')); ?></button>
         <hr/>

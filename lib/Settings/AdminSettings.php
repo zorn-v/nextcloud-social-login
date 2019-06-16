@@ -33,7 +33,6 @@ class AdminSettings implements ISettings
         Util::addStyle($this->appName, 'settings');
         Util::addScript($this->appName, 'settings');
         $paramsNames = [
-            'new_user_group',
             'disable_registration',
             'allow_login_connect',
             'prevent_create_email_exists',

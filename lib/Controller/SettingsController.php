@@ -45,7 +45,6 @@ class SettingsController extends Controller
     }
 
     public function saveAdmin(
-        $new_user_group,
         $disable_registration,
         $allow_login_connect,
         $prevent_create_email_exists,
@@ -58,7 +57,6 @@ class SettingsController extends Controller
         $custom_oidc_providers,
         $custom_oauth2_providers
     ) {
-        $this->config->setAppValue($this->appName, 'new_user_group', $new_user_group);
         $this->config->setAppValue($this->appName, 'disable_registration', $disable_registration ? true : false);
         $this->config->setAppValue($this->appName, 'allow_login_connect', $allow_login_connect ? true : false);
         $this->config->setAppValue($this->appName, 'prevent_create_email_exists', $prevent_create_email_exists ? true : false);
