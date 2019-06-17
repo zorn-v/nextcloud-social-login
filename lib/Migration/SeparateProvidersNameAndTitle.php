@@ -14,6 +14,8 @@ class SeparateProvidersNameAndTitle implements IRepairStep
     /** @var IDBConnection */
     private $db;
 
+    private $appName = 'sociallogin';
+
     public function __construct(IConfig $config, IDBConnection $db)
     {
         $this->config = $config;
@@ -27,6 +29,10 @@ class SeparateProvidersNameAndTitle implements IRepairStep
 
     public function run(IOutput $output)
     {
+        if (version_compare($this->config->getAppValue($this->appName, 'installed_version'), '1.15.1') >= 0) {
+            return;
+        }
+
         $this->setProvidersName('openid_providers');
         $this->setProvidersName('custom_oidc_providers');
 
@@ -37,14 +43,14 @@ class SeparateProvidersNameAndTitle implements IRepairStep
 
     private function setProvidersName($configKey)
     {
-        $providers = json_decode($this->config->getAppValue('sociallogin', $configKey), true);
+        $providers = json_decode($this->config->getAppValue($this->appName, $configKey), true);
         if (is_array($providers)) {
             foreach ($providers as &$provider) {
                 if (!isset($provider['name'])) {
                     $provider['name'] = $provider['title'];
                 }
             }
-            $this->config->setAppValue('sociallogin', $configKey, json_encode($providers));
+            $this->config->setAppValue($this->appName, $configKey, json_encode($providers));
         }
     }
 }

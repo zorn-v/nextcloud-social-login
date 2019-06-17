@@ -29,6 +29,10 @@ class ProvidersDefaultGroup implements IRepairStep
 
     public function run(IOutput $output)
     {
+        if (version_compare($this->config->getAppValue($this->appName, 'installed_version'), '1.15.1') >= 0) {
+            return;
+        }
+
         $defaultGroup = $this->config->getAppValue($this->appName, 'new_user_group');
 
         $this->setProvidersGroup('oauth_providers', $defaultGroup);
