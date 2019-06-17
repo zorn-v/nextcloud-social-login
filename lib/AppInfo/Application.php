@@ -42,8 +42,15 @@ class Application extends App
         $userSession = $this->query(IUserSession::class);
         if ($userSession->isLoggedIn()) {
             $uid = $userSession->getUser()->getUID();
+            $session = $this->query(ISession::class);
             if ($this->config->getUserValue($uid, $this->appName, 'disable_password_confirmation')) {
-                $this->query(ISession::class)->set('last-password-confirm', time());
+                $session->set('last-password-confirm', time());
+            }
+            if ($logoutUrl = $session->get('sociallogin_logout_url')) {
+                $userSession->listen('\OC\User', 'postLogout', function () use ($logoutUrl) {
+                    header('Location: ' . $logoutUrl);
+                    exit();
+                });
             }
             return;
         }

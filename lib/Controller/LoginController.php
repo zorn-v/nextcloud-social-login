@@ -172,6 +172,7 @@ class LoginController extends Controller
                         'default_group' => $prov['defaultGroup'],
                         'groups_claim'  => isset($prov['groupsClaim']) ? $prov['groupsClaim'] : null,
                         'group_mapping' => isset($prov['groupMapping']) ? $prov['groupMapping'] : null,
+                        'logout_url'    => isset($prov['logoutUrl']) ? $prov['logoutUrl'] : null,
                     ];
                     break;
                 }
@@ -280,6 +281,12 @@ class LoginController extends Controller
                 $this->storage->clear();
                 throw new LoginException($this->l->t('Login from %s domain is not allowed for %s provider', [$profileHd, $provider]));
             }
+        }
+
+        if (!empty($config['logout_url'])) {
+            $this->session->set('sociallogin_logout_url', $config['logout_url']);
+        } else {
+            $this->session->remove('sociallogin_logout_url', $config['logout_url']);
         }
 
         $profile->data['default_group'] = $config['default_group'];

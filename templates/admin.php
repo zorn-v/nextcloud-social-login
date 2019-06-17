@@ -51,6 +51,11 @@ $providersData = [
                 'type' => 'url',
                 'required' => false,
             ],
+            'logoutUrl' => [
+                'title' => 'Logout URL (optional)',
+                'type' => 'url',
+                'required' => false,
+            ],
             'clientId' => [
                 'title' => 'Client Id',
                 'type' => 'text',
