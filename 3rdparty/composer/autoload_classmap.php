@@ -60,6 +60,7 @@ return array(
     'Hybridauth\\Provider\\MicrosoftGraph' => $vendorDir . '/hybridauth/hybridauth/src/Provider/MicrosoftGraph.php',
     'Hybridauth\\Provider\\Odnoklassniki' => $vendorDir . '/hybridauth/hybridauth/src/Provider/Odnoklassniki.php',
     'Hybridauth\\Provider\\OpenID' => $vendorDir . '/hybridauth/hybridauth/src/Provider/OpenID.php',
+    'Hybridauth\\Provider\\Paypal' => $vendorDir . '/hybridauth/hybridauth/src/Provider/Paypal.php',
     'Hybridauth\\Provider\\PaypalOpenID' => $vendorDir . '/hybridauth/hybridauth/src/Provider/PaypalOpenID.php',
     'Hybridauth\\Provider\\Reddit' => $vendorDir . '/hybridauth/hybridauth/src/Provider/Reddit.php',
     'Hybridauth\\Provider\\Spotify' => $vendorDir . '/hybridauth/hybridauth/src/Provider/Spotify.php',

@@ -75,6 +75,7 @@ class ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f
         'Hybridauth\\Provider\\MicrosoftGraph' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/MicrosoftGraph.php',
         'Hybridauth\\Provider\\Odnoklassniki' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Odnoklassniki.php',
         'Hybridauth\\Provider\\OpenID' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/OpenID.php',
+        'Hybridauth\\Provider\\Paypal' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Paypal.php',
         'Hybridauth\\Provider\\PaypalOpenID' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/PaypalOpenID.php',
         'Hybridauth\\Provider\\Reddit' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Reddit.php',
         'Hybridauth\\Provider\\Spotify' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Spotify.php',
