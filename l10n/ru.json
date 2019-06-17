@@ -19,6 +19,8 @@
   "Allow login only from specified domain": "Позволять вход только с указаного домена",
   "Login from %s domain is not allowed for %s provider": "Вход с домена %s не разрешен для поставщика %s",
   "Update user profile every login": "Обновлять профиль пользователя при каждом логине",
-  "Disable password confirmation on settings change": "Отключить подтверждение паролем изменения настроек"
+  "Disable password confirmation on settings change": "Отключить подтверждение паролем изменения настроек",
+  "New user created": "Создан новый пользователь",
+  "User %s (%s) just created via social login": "Пользователь %s (%s) создан через social login"
 },"pluralForm" :"nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);"
 }

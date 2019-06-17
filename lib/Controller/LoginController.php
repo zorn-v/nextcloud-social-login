@@ -13,6 +13,7 @@ use OCP\IURLGenerator;
 use OCP\IAvatarManager;
 use OCP\IGroupManager;
 use OCP\ISession;
+use OCP\Mail\IMailer;
 use OC\User\LoginException;
 use OCA\SocialLogin\Storage\SessionStorage;
 use OCA\SocialLogin\Provider\CustomOAuth2;
@@ -42,6 +43,8 @@ class LoginController extends Controller
     private $session;
     /** @var IL10N */
     private $l;
+    /** @var IMailer */
+    private $mailer;
     /** @var SocialConnectDAO */
     private $socialConnect;
 
@@ -58,6 +61,7 @@ class LoginController extends Controller
         IGroupManager $groupManager,
         ISession $session,
         IL10N $l,
+        IMailer $mailer,
         SocialConnectDAO $socialConnect
     ) {
         parent::__construct($appName, $request);
@@ -70,6 +74,7 @@ class LoginController extends Controller
         $this->groupManager = $groupManager;
         $this->session = $session;
         $this->l = $l;
+        $this->mailer = $mailer;
         $this->socialConnect = $socialConnect;
     }
 
@@ -322,6 +327,8 @@ class LoginController extends Controller
 
             $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
             $updateUserProfile = true;
+
+            $this->notifyAdmins($uid, $profile->displayName ?: $profile->identifier, $profile->data['default_group']);
         }
 
         if ($updateUserProfile) {
@@ -386,5 +393,41 @@ class LoginController extends Controller
         $this->session->set('last-password-confirm', time());
 
         return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
+    }
+
+    private function notifyAdmins($uid, $displayName, $groupId)
+    {
+        $admins = $this->groupManager->get('admin')->getUsers();
+        if ($groupId) {
+            $group = $this->groupManager->get($groupId);
+            $subAdmins = $this->groupManager->getSubAdmin()->getGroupsSubAdmins($group);
+            foreach ($subAdmins as $user) {
+                if (!in_array($user, $admins)) {
+                    $admins[] = $user;
+                }
+            }
+        }
+
+        $sendTo = [];
+        foreach ($admins as $user) {
+            $email = $user->getEMailAddress();
+            if ($email && $user->isEnabled()) {
+                $sendTo[$email] = $user->getDisplayName() ?: $user->getUID();
+            }
+        }
+
+        if ($sendTo) {
+            $template = $this->mailer->createEMailTemplate('sociallogin.NewUser');
+
+            $template->setSubject($this->l->t('New user created'));
+            $template->addHeader();
+            $template->addBodyText($this->l->t('User %s (%s) just created via social login', [$displayName, $uid]));
+            $template->addFooter();
+
+            $message = $this->mailer->createMessage();
+            $message->setTo($sendTo);
+            $message->useTemplate($template);
+            $errors = $this->mailer->send($message);
+        }
     }
 }
