@@ -111,6 +111,11 @@ $providersData = [
                 'type' => 'text',
                 'required' => true,
             ],
+            'logoutUrl' => [
+                'title' => 'Logout URL (optional)',
+                'type' => 'url',
+                'required' => false,
+            ],
             'clientId' => [
                 'title' => 'Client Id',
                 'type' => 'text',
@@ -128,6 +133,11 @@ $providersData = [
             ],
             'profileFields' => [
                 'title' => 'Profile Fields (optional, comma-separated)',
+                'type' => 'text',
+                'required' => false,
+            ],
+            'groupsClaim' => [
+                'title' => 'Groups claim (optional)',
                 'type' => 'text',
                 'required' => false,
             ],
@@ -194,7 +204,7 @@ $providersData = [
                         </select>
                     </label>
                     <br/>
-                    <?php if ($provType === 'custom_oidc'): ?>
+                    <?php if (in_array($provType, ['custom_oidc', 'custom_oauth2'])): ?>
                         <button class="group-mapping-add" type="button">Add group mapping</button>
                         <div class="group-mapping-tpl">
                             <input type="text" class="foreign-group" data-name-tpl="<?php p($provType) ?>_providers[<?php p($k) ?>][groupMapping]"  />
@@ -321,7 +331,7 @@ $providersData = [
             </select>
         </label>
         <br/>
-        <?php if ($provType === 'custom_oidc'): ?>
+        <?php if (in_array($provType, ['custom_oidc', 'custom_oauth2'])): ?>
             <button class="group-mapping-add" type="button">Add group mapping</button>
             <div class="group-mapping-tpl">
                 <input type="text" class="foreign-group" data-name-tpl="<?php p($provType) ?>_providers[{{provider_id}}][groupMapping]" />

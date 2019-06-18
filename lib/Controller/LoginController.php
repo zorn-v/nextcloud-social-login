@@ -209,6 +209,9 @@ class LoginController extends Controller
                         ],
                         'profile_fields' => $prov['profileFields'],
                         'default_group'  => $prov['defaultGroup'],
+                        'groups_claim'  => isset($prov['groupsClaim']) ? $prov['groupsClaim'] : null,
+                        'group_mapping' => isset($prov['groupMapping']) ? $prov['groupMapping'] : null,
+                        'logout_url'    => isset($prov['logoutUrl']) ? $prov['logoutUrl'] : null,
                     ];
                     break;
                 }

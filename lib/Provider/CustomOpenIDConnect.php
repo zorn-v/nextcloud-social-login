@@ -5,9 +5,8 @@ namespace OCA\SocialLogin\Provider;
 use Hybridauth\User;
 use Hybridauth\Data;
 use Hybridauth\Exception\Exception;
-use Hybridauth\Adapter\OAuth2;
 
-class CustomOpenIDConnect extends OAuth2
+class CustomOpenIDConnect extends CustomOAuth2
 {
     protected function validateAccessTokenExchange($response)
     {
@@ -69,21 +68,5 @@ class CustomOpenIDConnect extends OAuth2
         }
 
         return $userProfile;
-    }
-
-    private function getGroups(Data\Collection $data)
-    {
-        $groupsClaim = $this->config->get('groups_claim');
-        if ($groups = $data->get($groupsClaim)) {
-            if (is_array($groups)) {
-                return $groups;
-            } elseif (is_string($groups)) {
-                return array_filter(
-                    array_map('trim', explode(',', $groups)),
-                    function ($val) { return $val !== ''; }
-                );
-            }
-        }
-        return null;
     }
 }

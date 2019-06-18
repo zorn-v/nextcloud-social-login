@@ -4,9 +4,9 @@ Make possible create users and login via Telegram, OAuth or OpenID
 
 For OAuth you must create app for certain providers. Login button appear at login page if app id specified. Settings are in "Social login" section of settings page.
 
-## Custom OIDC groups
+## Custom OAuth2/OIDC groups
 
-You can use groups from your OpenID Connect provider. For that you should specify "Groups claim" in custom OIDC provider settings. That claim should be returned from provider in `id_token` or at user info endpoint. Format should be `array` or comma separated string. Eg (with claim named `roles`)
+You can use groups from your custom provider. For that you should specify "Groups claim" in custom OAuth2/OIDC provider settings. That claim should be returned from provider in `id_token` or at user info endpoint. Format should be `array` or comma separated string. Eg (with claim named `roles`)
 
 ```json
 {"roles": ["admin", "user"]}

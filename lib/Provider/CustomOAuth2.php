@@ -9,7 +9,6 @@ use Hybridauth\User;
 
 class CustomOAuth2 extends OAuth2
 {
-
     /**
      * @return User\Profile
      * @throws UnexpectedApiResponseException
@@ -19,10 +18,7 @@ class CustomOAuth2 extends OAuth2
      */
     public function getUserProfile()
     {
-        $profileFields = array_filter(
-            array_map('trim', explode(',', $this->config->get('profile_fields'))),
-            function ($val) { return $val !== ''; }
-        );
+        $profileFields = $this->strToArray($this->config->get('profile_fields'));
         $profileUrl = $this->config->get('endpoints')['profile_url'];
 
         if (count($profileFields) > 0) {
@@ -42,20 +38,45 @@ class CustomOAuth2 extends OAuth2
 
         $data = new Data\Collection($response);
 
-        if (! $data->exists('identifier')) {
+        if (!$data->exists('identifier')) {
             throw new UnexpectedApiResponseException('Provider API returned an unexpected response.');
         }
 
         $userProfile = new User\Profile();
         foreach ($data->toArray() as $key => $value) {
-            if (property_exists($userProfile, $key)) {
+            if ($key !== 'data' && property_exists($userProfile, $key)) {
                 $userProfile->$key = $value;
             }
         }
-        if (!empty($userProfile->email)) {
-            $userProfile->emailVerified = $userProfile->email;
+
+        if ($groups = $this->getGroups($data)) {
+            $userProfile->data['groups'] = $groups;
+        }
+        if ($groupMapping = $this->config->get('group_mapping')) {
+            $userProfile->data['group_mapping'] = $groupMapping;
         }
 
         return $userProfile;
+    }
+
+    protected function getGroups(Data\Collection $data)
+    {
+        $groupsClaim = $this->config->get('groups_claim');
+        if ($groups = $data->get($groupsClaim)) {
+            if (is_array($groups)) {
+                return $groups;
+            } elseif (is_string($groups)) {
+                return $this->strToArray($groups);
+            }
+        }
+        return null;
+    }
+
+    private function strToArray($str)
+    {
+        return array_filter(
+            array_map('trim', explode(',', $str)),
+            function ($val) { return $val !== ''; }
+        );
     }
 }
