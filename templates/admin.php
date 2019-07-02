@@ -165,6 +165,10 @@ $providersData = [
                 <input id="update_profile_on_login" type="checkbox" class="checkbox" name="update_profile_on_login" value="1" <?php p($_['update_profile_on_login'] ? 'checked' : '') ?>/>
                 <label for="update_profile_on_login"><?php p($l->t('Update user profile every login')) ?></label>
             </div>
+            <div>
+                <input id="auto_create_groups" type="checkbox" class="checkbox" name="auto_create_groups" value="1" <?php p($_['auto_create_groups'] ? 'checked' : '') ?>/>
+                <label for="auto_create_groups"><?php p($l->t('Automatically create groups if they do not exists.')) ?></label>
+            </div>
         </p>
         <button><?php p($l->t('Save')); ?></button>
         <hr/>

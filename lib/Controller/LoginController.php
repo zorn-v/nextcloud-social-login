@@ -358,32 +358,40 @@ class LoginController extends Controller
                 $groupNames = $profile->data['groups'];
                 $groupMapping = isset($profile->data['group_mapping']) ? $profile->data['group_mapping'] : null;
                 $userGroups = $this->groupManager->getUserGroups($user);
+                $autoCreateGroups = $this->config->getAppValue($this->appName, 'auto_create_groups');
 
                 if ($groupMapping) {
+                    foreach ($userGroups as $group) {
+                        if (in_array($group->getGID(), array_values($groupMapping))) {
+                            $group->removeUser($user);
+                        }
+                    }
+
                     foreach ($groupNames as $k => $v) {
                         if (isset($groupMapping[$v])) {
-                            $groupNames[$k] = $groupMapping[$v];
-                        } else {
-                            unset($groupNames[$k]);
+                            $group = $this->groupManager->get($groupMapping[$v]);
+                            if($group) {
+                                $group->addUser($user);
+                            }
                         }
                     }
                 }
 
-                foreach ($userGroups as $group) {
-                    if (!in_array($group->getGID(), $groupNames)) {
-                        $group->removeUser($user);
+                if($autoCreateGroups){
+                    foreach ($userGroups as $group) {
+                        if (strpos($group->getGID(), $newGroupPrefix) !== false) {
+                            $group->removeUser($user);
+                        }
+                    }
+
+                    foreach ($groupNames as $groupName) {
+                        $group = $this->groupManager->createGroup($newGroupPrefix.$groupName);
+                        if ($group) {
+                            $group->addUser($user);
+                        }
                     }
                 }
 
-                foreach ($groupNames as $groupName) {
-                    $group = $groupMapping
-                        ? $this->groupManager->get($groupName)
-                        : $this->groupManager->createGroup($newGroupPrefix.$groupName)
-                    ;
-                    if ($group) {
-                        $group->addUser($user);
-                    }
-                }
             }
 
             $defaultGroup = $profile->data['default_group'];
