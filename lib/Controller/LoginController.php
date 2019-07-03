@@ -359,36 +359,27 @@ class LoginController extends Controller
                 $groupMapping = isset($profile->data['group_mapping']) ? $profile->data['group_mapping'] : null;
                 $userGroups = $this->groupManager->getUserGroups($user);
                 $autoCreateGroups = $this->config->getAppValue($this->appName, 'auto_create_groups');
+                $groups = [];
 
-                if ($groupMapping) {
-                    foreach ($userGroups as $group) {
-                        if (in_array($group->getGID(), array_values($groupMapping))) {
-                            $group->removeUser($user);
-                        }
+                foreach ($groupNames as $k => $v) {
+                    if ($groupMapping && isset($groupMapping[$v])) {
+                        array_push($groups, $groupMapping[$v]);
                     }
-
-                    foreach ($groupNames as $k => $v) {
-                        if (isset($groupMapping[$v])) {
-                            $group = $this->groupManager->get($groupMapping[$v]);
-                            if($group) {
-                                $group->addUser($user);
-                            }
-                        }
+                    if($autoCreateGroups){
+                        array_push($groups, $newGroupPrefix.$v);
                     }
                 }
 
-                if($autoCreateGroups){
-                    foreach ($userGroups as $group) {
-                        if (strpos($group->getGID(), $newGroupPrefix) !== false) {
-                            $group->removeUser($user);
-                        }
+                foreach ($userGroups as $group) {
+                    if (!in_array($group->getGID(), $groups)) {
+                        $group->removeUser($user);
                     }
+                }
 
-                    foreach ($groupNames as $groupName) {
-                        $group = $this->groupManager->createGroup($newGroupPrefix.$groupName);
-                        if ($group) {
-                            $group->addUser($user);
-                        }
+                foreach ($groups as $groupName) {
+                    $group = $this->groupManager->createGroup($groupName);
+                    if ($group) {
+                        $group->addUser($user);
                     }
                 }
 
