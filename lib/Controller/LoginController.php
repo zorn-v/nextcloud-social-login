@@ -359,26 +359,25 @@ class LoginController extends Controller
                 $groupMapping = isset($profile->data['group_mapping']) ? $profile->data['group_mapping'] : null;
                 $userGroups = $this->groupManager->getUserGroups($user);
                 $autoCreateGroups = $this->config->getAppValue($this->appName, 'auto_create_groups');
-                $groups = [];
+                $syncGroupNames = [];
 
                 foreach ($groupNames as $k => $v) {
                     if ($groupMapping && isset($groupMapping[$v])) {
-                        array_push($groups, $groupMapping[$v]);
+                        $syncGroupNames[] = $groupMapping[$v];
                     }
-                    if($autoCreateGroups){
-                        array_push($groups, $newGroupPrefix.$v);
+                    if ($autoCreateGroups) {
+                        $syncGroupNames[] = $newGroupPrefix.$v;
                     }
                 }
 
                 foreach ($userGroups as $group) {
-                    if (!in_array($group->getGID(), $groups)) {
+                    if (!in_array($group->getGID(), $syncGroupNames)) {
                         $group->removeUser($user);
                     }
                 }
 
-                foreach ($groups as $groupName) {
-                    $group = $this->groupManager->createGroup($groupName);
-                    if ($group) {
+                foreach ($syncGroupNames as $groupName) {
+                    if ($group = $this->groupManager->createGroup($groupName)) {
                         $group->addUser($user);
                     }
                 }
