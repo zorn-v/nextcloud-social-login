@@ -50,6 +50,7 @@ class SettingsController extends Controller
         $prevent_create_email_exists,
         $update_profile_on_login,
         $auto_create_groups,
+        $restrict_users_wo_mapped_groups,
         $providers,
         $tg_bot,
         $tg_token,
@@ -64,6 +65,7 @@ class SettingsController extends Controller
         $this->config->setAppValue($this->appName, 'prevent_create_email_exists', $prevent_create_email_exists ? true : false);
         $this->config->setAppValue($this->appName, 'update_profile_on_login', $update_profile_on_login ? true : false);
         $this->config->setAppValue($this->appName, 'auto_create_groups', $auto_create_groups ? true : false);
+        $this->config->setAppValue($this->appName, 'restrict_users_wo_mapped_groups', $restrict_users_wo_mapped_groups ? true : false);
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
         $this->config->setAppValue($this->appName, 'tg_bot', $tg_bot);
         $this->config->setAppValue($this->appName, 'tg_token', $tg_token);

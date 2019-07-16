@@ -37,7 +37,8 @@ class AdminSettings implements ISettings
             'allow_login_connect',
             'prevent_create_email_exists',
             'update_profile_on_login',
-            'auto_create_groups'
+            'auto_create_groups',
+            'restrict_users_wo_mapped_groups',
         ];
         $oauthProviders = [
             'google',

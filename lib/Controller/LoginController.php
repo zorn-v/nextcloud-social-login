@@ -320,6 +320,14 @@ class LoginController extends Controller
             return new RedirectResponse($this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section'=>'sociallogin']));
         }
 
+        if ($this->config->getAppValue($this->appName, 'restrict_users_wo_mapped_groups') && isset($profile->data['group_mapping'])) {
+            $groups = isset($profile->data['groups']) ? $profile->data['groups'] : [];
+            $mappedGroups = array_intersect($groups, array_keys($profile->data['group_mapping']));
+            if (!$mappedGroups) {
+                throw new LoginException($this->l->t('Your user group is not allowed to login, please contact support'));
+            }
+        }
+
         $updateUserProfile = $this->config->getAppValue($this->appName, 'update_profile_on_login');
 
         if (null === $user) {

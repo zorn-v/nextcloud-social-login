@@ -167,7 +167,11 @@ $providersData = [
             </div>
             <div>
                 <input id="auto_create_groups" type="checkbox" class="checkbox" name="auto_create_groups" value="1" <?php p($_['auto_create_groups'] ? 'checked' : '') ?>/>
-                <label for="auto_create_groups"><?php p($l->t('Automatically create groups if they do not exists.')) ?></label>
+                <label for="auto_create_groups"><?php p($l->t('Automatically create groups if they do not exists')) ?></label>
+            </div>
+            <div>
+                <input id="restrict_users_wo_mapped_groups" type="checkbox" class="checkbox" name="restrict_users_wo_mapped_groups" value="1" <?php p($_['restrict_users_wo_mapped_groups'] ? 'checked' : '') ?>/>
+                <label for="restrict_users_wo_mapped_groups"><?php p($l->t('Restrict login for users without mapped groups')) ?></label>
             </div>
         </p>
         <button><?php p($l->t('Save')); ?></button>
