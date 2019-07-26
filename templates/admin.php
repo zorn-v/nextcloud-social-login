@@ -166,6 +166,10 @@ $providersData = [
                 <label for="update_profile_on_login"><?php p($l->t('Update user profile every login')) ?></label>
             </div>
             <div>
+                <input id="no_prune_user_groups" type="checkbox" class="checkbox" name="no_prune_user_groups" value="1" <?php p($_['no_prune_user_groups'] ? 'checked' : '') ?>/>
+                <label for="no_prune_user_groups"><?php p($l->t('Do not prune not available user groups on login')) ?></label>
+            </div>
+            <div>
                 <input id="auto_create_groups" type="checkbox" class="checkbox" name="auto_create_groups" value="1" <?php p($_['auto_create_groups'] ? 'checked' : '') ?>/>
                 <label for="auto_create_groups"><?php p($l->t('Automatically create groups if they do not exists')) ?></label>
             </div>

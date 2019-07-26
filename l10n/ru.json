@@ -19,6 +19,7 @@
   "Allow login only from specified domain": "Позволять вход только с указаного домена",
   "Login from %s domain is not allowed for %s provider": "Вход с домена %s не разрешен для поставщика %s",
   "Update user profile every login": "Обновлять профиль пользователя при каждом логине",
+  "Do not prune not available user groups on login": "Не вычищать недоступные пользователю группы при логине",
   "Disable password confirmation on settings change": "Отключить подтверждение паролем изменения настроек",
   "New user created": "Создан новый пользователь",
   "Automatically create groups if they do not exists": "Автоматически создавать несуществующие группы",

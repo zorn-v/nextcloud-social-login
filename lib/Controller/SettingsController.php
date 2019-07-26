@@ -49,6 +49,7 @@ class SettingsController extends Controller
         $allow_login_connect,
         $prevent_create_email_exists,
         $update_profile_on_login,
+        $no_prune_user_groups,
         $auto_create_groups,
         $restrict_users_wo_mapped_groups,
         $providers,
@@ -64,6 +65,7 @@ class SettingsController extends Controller
         $this->config->setAppValue($this->appName, 'allow_login_connect', $allow_login_connect ? true : false);
         $this->config->setAppValue($this->appName, 'prevent_create_email_exists', $prevent_create_email_exists ? true : false);
         $this->config->setAppValue($this->appName, 'update_profile_on_login', $update_profile_on_login ? true : false);
+        $this->config->setAppValue($this->appName, 'no_prune_user_groups', $no_prune_user_groups ? true : false);
         $this->config->setAppValue($this->appName, 'auto_create_groups', $auto_create_groups ? true : false);
         $this->config->setAppValue($this->appName, 'restrict_users_wo_mapped_groups', $restrict_users_wo_mapped_groups ? true : false);
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));

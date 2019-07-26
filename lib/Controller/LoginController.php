@@ -378,9 +378,11 @@ class LoginController extends Controller
                     }
                 }
 
-                foreach ($userGroups as $group) {
-                    if (!in_array($group->getGID(), $syncGroupNames)) {
-                        $group->removeUser($user);
+                if (!$this->config->getAppValue($this->appName, 'no_prune_user_groups')) {
+                    foreach ($userGroups as $group) {
+                        if (!in_array($group->getGID(), $syncGroupNames)) {
+                            $group->removeUser($user);
+                        }
                     }
                 }
 
