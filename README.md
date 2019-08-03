@@ -6,7 +6,7 @@ For OAuth you must create app for certain providers. Login button appear at logi
 
 ## Contribute
 
-I don't want to hear "it doesn't work for me". If something do not work with your configuration - be kind to provide something like testing server or docker image.
+I don't want to hear "it doesn't work for me" (if it really does, not like "forget to check option"). If something do not work with your configuration - be kind to provide something like testing server or docker image.
 
 ## Custom OAuth2/OIDC groups
 
