@@ -157,6 +157,7 @@ class LoginController extends Controller
             foreach ($providers as $prov) {
                 if ($prov['name'] === $provider) {
                     $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom_oidc', ['provider' => $provider]);
+                    list($authUrl, $authQuery) = explode('?', $prov['authorizeUrl']);
                     $config = [
                         'callback' => $callbackUrl,
                         'scope' => $prov['scope'],
@@ -165,7 +166,7 @@ class LoginController extends Controller
                             'secret' => $prov['clientSecret'],
                         ],
                         'endpoints' => [
-                            'authorize_url'    => $prov['authorizeUrl'],
+                            'authorize_url'    => $authUrl,
                             'access_token_url' => $prov['tokenUrl'],
                             'user_info_url'    => $prov['userInfoUrl'],
                         ],
@@ -174,6 +175,9 @@ class LoginController extends Controller
                         'group_mapping' => isset($prov['groupMapping']) ? $prov['groupMapping'] : null,
                         'logout_url'    => isset($prov['logoutUrl']) ? $prov['logoutUrl'] : null,
                     ];
+                    if ($authQuery) {
+                        parse_str($authQuery, $config['authorize_url_parameters']);
+                    }
                     break;
                 }
             }
