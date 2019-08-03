@@ -4,9 +4,7 @@ Make possible create users and login via Telegram, OAuth or OpenID
 
 For OAuth you must create app for certain providers. Login button appear at login page if app id specified. Settings are in "Social login" section of settings page.
 
-## Contribute
-
-I don't want to hear "it doesn't work for me" (if it really does, not like "forget to check option"). If something do not work with your configuration - be kind to provide something like testing server or docker image.
+Feel free to contact with me for your custom config.
 
 ## Custom OAuth2/OIDC groups
 
