@@ -4,6 +4,10 @@ Make possible create users and login via Telegram, OAuth or OpenID
 
 For OAuth you must create app for certain providers. Login button appear at login page if app id specified. Settings are in "Social login" section of settings page.
 
+## Contribute
+
+I don't want to hear "it doesn't work for me". If something do not work with your configuration - be kind to provide something like testing server or docker image.
+
 ## Custom OAuth2/OIDC groups
 
 You can use groups from your custom provider. For that you should specify "Groups claim" in custom OAuth2/OIDC provider settings. That claim should be returned from provider in `id_token` or at user info endpoint. Format should be `array` or comma separated string. Eg (with claim named `roles`)
@@ -43,8 +47,6 @@ You can create app by followed urls. You can copy link of certain login button t
 * [Discord](https://discordapp.com/developers/applications/me#top)
 
 Details about "Allow login only from specified domain" google setting you can find here [#44](https://github.com/zorn-v/nextcloud-social-login/issues/44)
-
-Custom providers is on your own. Officially not supported
 
 ## Config
 
