@@ -157,7 +157,7 @@ class LoginController extends Controller
             foreach ($providers as $prov) {
                 if ($prov['name'] === $provider) {
                     $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom_oidc', ['provider' => $provider]);
-                    list($authUrl, $authQuery) = explode('?', $prov['authorizeUrl']);
+                    list($authUrl, $authQuery) = explode('?', $prov['authorizeUrl']) + [1 => null];
                     $config = [
                         'callback' => $callbackUrl,
                         'scope' => $prov['scope'],
