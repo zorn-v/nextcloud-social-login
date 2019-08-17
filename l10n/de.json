@@ -15,7 +15,18 @@
   "Available providers": "Verfügbare Anbieter",
   "Social login connect is disabled": "Social login ist deaktiviert",
   "Email already registered": "Die E-Mail Adresse ist bereits registiert",
-  "Prevent creating an account if the email address exists in another account": "Verhindere die Erstellung eines Kontos, wenn die E-Mail bereits bereits in einem anderen Konto hinterlegt ist",
-  "Disable password confirmation on settings change": "Deaktiviere Passwortbestätigung bei der Änderung von Einstellungen"
+  "Prevent creating an account if the email address exists in another account": "Verhindere die Erstellung eines Kontos, wenn die E-Mail bereits in einem anderen Konto hinterlegt ist",
+  "Disable password confirmation on settings change": "Deaktiviere Passwortbestätigung bei der Änderung von Einstellungen",
+  "Update user profile every login": "Aktualisiere Benutzer-Profil nach jeder Anmeldung",
+  "Automatically create groups if they do not exists": "Nicht existierende Gruppen automatisch erstellen",
+  "Restrict login for users without mapped groups": "Anmeldung auf Benutzer in festgelegten Gruppen beschränken",
+  "Do not prune not available user groups on login": "Bei der Anmeldung nicht verfügbare Gruppen nicht löschen",
+  "Internal name": "Interner Name",
+  "Title": "Name",
+  "Authorize url": "URL zur Authentifizierung",
+  "User info URL (optional)": "URL für Benutzerinformationen (optional)",
+  "Default group": "Standard Gruppe für Benutzer",
+  "Add group mapping": "Neue Gruppe zuweisen",
+  "Custom OAuth2": "Eigener OAuth Server"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }
