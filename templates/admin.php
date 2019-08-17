@@ -217,7 +217,7 @@ $providersData = [
                     </label>
                     <br/>
                     <?php if (in_array($provType, ['custom_oidc', 'custom_oauth2'])): ?>
-                        <button class="group-mapping-add" type="button">Add group mapping</button>
+                        <button class="group-mapping-add" type="button"><?php p($l->t('Add group mapping')) ?></button>
                         <div class="group-mapping-tpl">
                             <input type="text" class="foreign-group" data-name-tpl="<?php p($provType) ?>_providers[<?php p($k) ?>][groupMapping]"  />
                             <select class="local-group">
@@ -344,7 +344,7 @@ $providersData = [
         </label>
         <br/>
         <?php if (in_array($provType, ['custom_oidc', 'custom_oauth2'])): ?>
-            <button class="group-mapping-add" type="button">Add group mapping</button>
+            <button class="group-mapping-add" type="button"><?php $l->t('Add group mapping') ?></button>
             <div class="group-mapping-tpl">
                 <input type="text" class="foreign-group" data-name-tpl="<?php p($provType) ?>_providers[{{provider_id}}][groupMapping]" />
                 <select class="local-group">
