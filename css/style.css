@@ -1,37 +1,80 @@
-a[href*="/sociallogin/oauth/"]::before {
-  content: "";
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 18px;
-  height: 18px;
-  display: inline-block;
-  vertical-align: bottom;
-  margin-right: 5px;
-}
 a[href*="/sociallogin/oauth/"]::after {
   content: "";
-  width: 10px;
+  height: 10px;
   display: inline-block;
 }
 a[href*="/sociallogin/oauth/facebook"]::before {
-  background-image: url(../img/facebook.svg);
+  background-image: url(../img/button/facebook.svg);
+  width: 9px;
 }
 a[href*="/sociallogin/oauth/google"]::before {
-  background-image: url(../img/google.svg);
+  background-image: url(../img/button/google.svg);
 }
 a[href*="/sociallogin/oauth/amazon"]::before {
-  background-image: url(../img/amazon.svg);
+  background-image: url(../img/button/amazon.svg);
+  width: 21px;
 }
 a[href*="/sociallogin/oauth/twitter"]::before {
-  background-image: url(../img/twitter.svg);
+  background-image: url(../img/button/twitter.svg);
+  width: 20px;
 }
 a[href*="/sociallogin/oauth/GitHub"]::before {
-  background-image: url(../img/github.svg);
+  background-image: url(../img/button/github.svg);
 }
 a[href*="/sociallogin/oauth/discord"]::before {
-  background-image: url(../img/discord.svg);
+  background-image: url(../img/button/discord.svg);
+  width: 16px;
 }
 
 .sociallogin-connect li {
   margin-bottom: 10px;
+}
+
+
+/* Button colors */
+a.button[href*="/sociallogin/oauth/facebook"] {
+  background-color: #3c5a99;
+}
+a.button[href*="/sociallogin/oauth/google"] {
+  background-color: #DB4437;
+}
+a.button[href*="/sociallogin/oauth/amazon"] {
+  background-color: #ff9900;
+}
+a.button[href*="/sociallogin/oauth/twitter"] {
+  background-color: #1da1f2;
+}
+a.button[href*="/sociallogin/oauth/GitHub"] {
+  background-color: #333333;
+}
+a.button[href*="/sociallogin/oauth/discord"] {
+  background-color: #7289DA;
+}
+
+/* Predefined buttons icons */
+a.button.gitlab::before {
+  background-image: url(../img/button/gitlab.svg);
+  width: 16px;
+}
+
+a.button.gitlab {
+  background-color: #3f3177;
+}
+
+a.button.openid::before {
+  background-image: url(../img/button/openid.svg);
+  width: 16px;
+}
+
+a.button.openid {
+  background-color: #b3b3b3;
+}
+
+a.button.paypal::before {
+  background-image: url(../img/button/paypal.svg);
+  width: 16px;
+}
+
+a.button.paypal {
+  background-color: #253B80;
 }

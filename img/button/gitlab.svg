@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2408" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="728.271px"
+	 height="673.403px" viewBox="0.852 0 728.271 673.403" enable-background="new 0.852 0 728.271 673.403" xml:space="preserve">
+<filter  color-interpolation-filters="sRGB" id="filter3174">
+	<feGaussianBlur  stdDeviation="1.71" id="feGaussianBlur3176"></feGaussianBlur>
+</filter>
+<g id="layer2" display="none">
+	<g id="rect3745" display="inline" opacity="0.9" filter="url(#filter3174)" enable-background="new    ">
+
+			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="117.3425" y1="-460.8921" x2="117.3425" y2="-375.3965" gradientTransform="matrix(1.0059 0 0 -0.9942 -70.0358 -366.2195)">
+			<stop  offset="0" style="stop-color:#000000"/>
+			<stop  offset="1" style="stop-color:#000000;stop-opacity:0.5882"/>
+		</linearGradient>
+		<path fill="url(#SVGID_1_)" d="M11,7h74c3.312,0,6,2.687,6,6v73c0,3.313-2.688,6-6,6H11c-3.312,0-6-2.687-6-6V13
+			C5,9.687,7.687,7,11,7z"/>
+	</g>
+</g>
+<path fill="#FFFFFF" d="M726.959,377.201L688.76,259.832c-0.202-1.081-0.512-2.139-0.925-3.159L611.201,20.776
+	C607.013,8.292,595.28-0.088,582.111,0c-13.141-0.08-24.796,8.415-28.745,20.947l-73.047,224.791H249.77L176.617,20.947
+	C172.682,8.461,161.092-0.022,147.999,0h-0.171c-13.179,0.002-24.869,8.455-29.004,20.969l-76.7,236.177
+	c0,0.214-0.171,0.387-0.235,0.602L3.002,377.221c-5.861,17.978,0.533,37.684,15.835,48.793l335.972,244.125
+	c6.067,4.393,14.279,4.35,20.303-0.108l336.035-244.017C726.455,414.9,732.843,395.178,726.959,377.201 M224.763,280.242
+	l93.65,288.233L93.601,280.242 M411.677,568.54l89.804-276.332l3.866-11.967h131.271l-203.395,260.56 M582.412,43.077
+	l65.807,202.661H516.498 M469.168,280.113l-65.247,200.791L364.99,600.488L260.965,280.113 M147.677,43.077l65.937,202.661H81.98
+	 M39.053,398.212c-3.251-2.365-4.606-6.559-3.353-10.377l28.876-88.73l211.771,271.497 M690.951,398.212L453.635,570.538
+	l0.795-1.031l210.975-270.402l28.877,88.687c1.268,3.821-0.077,8.025-3.33,10.399"/>
+</svg>
