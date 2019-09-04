@@ -3,25 +3,26 @@ a[href*="/sociallogin/oauth/"]::after {
   height: 10px;
   display: inline-block;
 }
-a[href*="/sociallogin/oauth/facebook"]::before {
+
+#alternative-logins a[href*="/sociallogin/oauth/facebook"]::before {
   background-image: url(../img/button/facebook.svg);
   width: 9px;
 }
-a[href*="/sociallogin/oauth/google"]::before {
+#alternative-logins a[href*="/sociallogin/oauth/google"]::before {
   background-image: url(../img/button/google.svg);
 }
-a[href*="/sociallogin/oauth/amazon"]::before {
+#alternative-logins a[href*="/sociallogin/oauth/amazon"]::before {
   background-image: url(../img/button/amazon.svg);
   width: 21px;
 }
-a[href*="/sociallogin/oauth/twitter"]::before {
+#alternative-logins a[href*="/sociallogin/oauth/twitter"]::before {
   background-image: url(../img/button/twitter.svg);
   width: 20px;
 }
-a[href*="/sociallogin/oauth/GitHub"]::before {
+#alternative-logins a[href*="/sociallogin/oauth/GitHub"]::before {
   background-image: url(../img/button/github.svg);
 }
-a[href*="/sociallogin/oauth/discord"]::before {
+#alternative-logins a[href*="/sociallogin/oauth/discord"]::before {
   background-image: url(../img/button/discord.svg);
   width: 16px;
 }
@@ -52,29 +53,29 @@ a.button[href*="/sociallogin/oauth/discord"] {
 }
 
 /* Predefined buttons icons */
-a.button.gitlab::before {
+#alternative-logins a.button.gitlab::before {
   background-image: url(../img/button/gitlab.svg);
   width: 16px;
 }
 
-a.button.gitlab {
+#alternative-logins a.button.gitlab {
   background-color: #3f3177;
 }
 
-a.button.openid::before {
+#alternative-logins a.button.openid::before {
   background-image: url(../img/button/openid.svg);
   width: 16px;
 }
 
-a.button.openid {
+#alternative-logins a.button.openid {
   background-color: #b3b3b3;
 }
 
-a.button.paypal::before {
+#alternative-logins a.button.paypal::before {
   background-image: url(../img/button/paypal.svg);
   width: 16px;
 }
 
-a.button.paypal {
+#alternative-logins a.button.paypal {
   background-color: #253B80;
 }
