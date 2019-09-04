@@ -354,7 +354,7 @@ $styleClass = [
         <?php endforeach ?>
         <label>
             <?php p($l->t('Button style')) ?><br>
-            <select name="<?php p($provType) ?>_providers[<?php p($k) ?>][style]">
+            <select name="<?php p($provType) ?>_providers[{{provider_id}}][style]">
                 <option value=""><?php p($l->t('None')); ?></option>
                 <?php foreach ($styleClass as $style): ?>
                     <option value="<?php p($style[0]) ?>" <?php p($provider['style'] === $style[0] ? 'selected' : '') ?>>

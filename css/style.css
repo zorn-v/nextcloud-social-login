@@ -55,7 +55,7 @@ a.button[href*="/sociallogin/oauth/discord"] {
 /* Predefined buttons icons */
 #alternative-logins a.button.gitlab::before {
   background-image: url(../img/button/gitlab.svg);
-  width: 16px;
+  width: 19px;
 }
 
 #alternative-logins a.button.gitlab {
@@ -64,7 +64,7 @@ a.button[href*="/sociallogin/oauth/discord"] {
 
 #alternative-logins a.button.openid::before {
   background-image: url(../img/button/openid.svg);
-  width: 16px;
+  width: 19px;
 }
 
 #alternative-logins a.button.openid {
@@ -78,4 +78,31 @@ a.button[href*="/sociallogin/oauth/discord"] {
 
 #alternative-logins a.button.paypal {
   background-color: #253B80;
+}
+
+#alternative-logins a.button.yahoo::before {
+  background-image: url(../img/button/yahoo.svg);
+  width: 26px;
+}
+
+#alternative-logins a.button.yahoo {
+  background-color: #4d00ae;
+}
+
+#alternative-logins a.button.stackoverflow::before {
+  background-image: url(../img/button/stackoverflow.svg);
+  width: 15px;
+}
+
+#alternative-logins a.button.stackoverflow {
+  background-color: #BCBBBB;
+}
+
+#alternative-logins a.button.salesforce::before {
+  background-image: url(../img/button/salesforce.svg);
+  width: 24px;
+}
+
+#alternative-logins a.button.salesforce {
+  background-color: #009EDB;
 }
