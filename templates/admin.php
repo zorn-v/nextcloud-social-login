@@ -144,6 +144,15 @@ $providersData = [
         ]
     ],
 ];
+
+$styleClass = [
+    ['gitlab','Gitlab'],
+    ['openid','OpenID'],
+    ['paypal','PayPal'],
+    ['salesforce','SalesForce'],
+    ['stackoverflow','Stackoverflow'],
+    ['yahoo','Yahoo']
+];
 ?>
 <div id="sociallogin" class="section">
     <form id="sociallogin_settings" action="<?php print_unescaped($_['action_url']) ?>" method="post">
@@ -204,6 +213,18 @@ $providersData = [
                         </label>
                         <br/>
                     <?php endforeach ?>
+                    <label>
+                        <?php p($l->t('Button style')) ?><br>
+                        <select name="<?php p($provType) ?>_providers[<?php p($k) ?>][style]">
+                            <option value=""><?php p($l->t('None')); ?></option>
+                            <?php foreach ($styleClass as $style): ?>
+                                <option value="<?php p($style[0]) ?>" <?php p($provider['style'] === $style[0] ? 'selected' : '') ?>>
+                                    <?php p($style[1]) ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select>
+                    </label>
+                    <br/>
                     <label>
                         <?php p($l->t('Default group')) ?><br>
                         <select name="<?php p($provType) ?>_providers[<?php p($k) ?>][defaultGroup]">
@@ -332,6 +353,18 @@ $providersData = [
         <br/>
         <?php endforeach ?>
         <label>
+            <?php p($l->t('Button style')) ?><br>
+            <select name="<?php p($provType) ?>_providers[<?php p($k) ?>][style]">
+                <option value=""><?php p($l->t('None')); ?></option>
+                <?php foreach ($styleClass as $style): ?>
+                    <option value="<?php p($style[0]) ?>" <?php p($provider['style'] === $style[0] ? 'selected' : '') ?>>
+                        <?php p($style[1]) ?>
+                    </option>
+                <?php endforeach ?>
+            </select>
+        </label>
+        <br/>
+        <label>
             <?php p($l->t('Default group')) ?><br>
             <select name="<?php p($provType) ?>_providers[{{provider_id}}][defaultGroup]">
                 <option value=""><?php p($l->t('None')); ?></option>
@@ -344,7 +377,7 @@ $providersData = [
         </label>
         <br/>
         <?php if (in_array($provType, ['custom_oidc', 'custom_oauth2'])): ?>
-            <button class="group-mapping-add" type="button"><?php $l->t('Add group mapping') ?></button>
+            <button class="group-mapping-add" type="button"><?php p($l->t('Add group mapping')) ?></button>
             <div class="group-mapping-tpl">
                 <input type="text" class="foreign-group" data-name-tpl="<?php p($provType) ?>_providers[{{provider_id}}][groupMapping]" />
                 <select class="local-group">
