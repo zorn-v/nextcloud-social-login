@@ -16,9 +16,9 @@
         <?php endforeach ?>
     </ul>
     <h3><?php p($l->t('Available providers')) ?></h3>
-    <ul>
-        <?php foreach ($_['providers'] as $title=>$url): ?>
-        <li><a href="<?php print_unescaped($url) ?>"><?php p($title) ?></a></li>
+    <ul id="alternative-logins">
+        <?php foreach ($_['providers'] as $title=>$data): ?>
+        <li><a class="button primary <?php p(isset($data['style']) ? $data['style'] : '') ?>" href="<?php print_unescaped($data['url']) ?>"><?php p($title) ?></a></li>
         <?php endforeach ?>
     </ul>
         <?php if ($_['tg_bot']): ?>

@@ -63,7 +63,9 @@ class PersonalSettings implements ISettings
             if (is_array($providers)) {
                 foreach ($providers as $name => $provider) {
                     if ($provider['appid']) {
-                        $params['providers'][ucfirst($name)] = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider' => $name]);
+                        $params['providers'][ucfirst($name)] = [
+                            'url' => $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider' => $name])
+                        ];
                     }
                 }
             }
@@ -90,7 +92,10 @@ class PersonalSettings implements ISettings
             foreach ($providers as $provider) {
                 $name = $provider['name'];
                 $title = $provider['title'];
-                $result[$title] = $this->urlGenerator->linkToRoute($this->appName.'.login.'.$providersType, ['provider' => $name]);
+                $result[$title] = [
+                    'url' => $this->urlGenerator->linkToRoute($this->appName.'.login.'.$providersType, ['provider' => $name]),
+                    'style' => isset($provider['style']) ? $provider['style'] : '',
+                ];
             }
         }
         return $result;
