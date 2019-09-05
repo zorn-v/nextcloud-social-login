@@ -124,7 +124,7 @@ class Application extends App
                 \OC_App::registerLogIn([
                     'name' => $l->t('Log in with') . ' ' . $provider['title'],
                     'href' => $this->providerUrl,
-                    'style' => $provider['style'],
+                    'style' => isset($provider['style']) ? $provider['style'] : '',
                 ]);
             }
         }
