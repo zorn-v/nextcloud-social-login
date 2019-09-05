@@ -1,3 +1,14 @@
+a[href*="/sociallogin/oauth/"]::before {
+  content: "";
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 5px;
+}
+
 a[href*="/sociallogin/oauth/"]::after {
   content: "";
   height: 10px;
@@ -27,32 +38,48 @@ a[href*="/sociallogin/oauth/"]::after {
   width: 16px;
 }
 
-.sociallogin-connect li {
-  margin-bottom: 10px;
+.sociallogin-connect #alternative-logins li {
+  height: unset;
+  display: inline-flex;
+}
+
+.sociallogin-connect li a {
+  padding: 12px 24px;
 }
 
 
 /* Button colors */
-a.button[href*="/sociallogin/oauth/facebook"] {
+#alternative-logins a.button[href*="/sociallogin/oauth/facebook"] {
   background-color: #3c5a99;
 }
-a.button[href*="/sociallogin/oauth/google"] {
+#alternative-logins a.button[href*="/sociallogin/oauth/google"] {
   background-color: #DB4437;
 }
-a.button[href*="/sociallogin/oauth/amazon"] {
+#alternative-logins a.button[href*="/sociallogin/oauth/amazon"] {
   background-color: #ff9900;
 }
-a.button[href*="/sociallogin/oauth/twitter"] {
+#alternative-logins a.button[href*="/sociallogin/oauth/twitter"] {
   background-color: #1da1f2;
 }
-a.button[href*="/sociallogin/oauth/GitHub"] {
+#alternative-logins a.button[href*="/sociallogin/oauth/GitHub"] {
   background-color: #333333;
 }
-a.button[href*="/sociallogin/oauth/discord"] {
+#alternative-logins a.button[href*="/sociallogin/oauth/discord"] {
   background-color: #7289DA;
 }
 
 /* Predefined buttons icons */
+#alternative-logins a::before {
+  content: "";
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 5px;
+}
+
 #alternative-logins a.button.gitlab::before {
   background-image: url(../img/button/gitlab.svg);
   width: 19px;
