@@ -34,6 +34,7 @@ class Application extends App
     public function register()
     {
         \OCP\Util::addStyle($this->appName, 'style');
+        $l = \OC::$server->getL10N('sociallogin');
 
         $this->config = $this->query(IConfig::class);
 
@@ -84,7 +85,7 @@ class Application extends App
                         'login_redirect_url' => $this->redirectUrl
                     ]);
                     \OC_App::registerLogIn([
-                        'name' => ucfirst($name),
+                        'name' => $l->t('Log in with') . ' ' . ucfirst($name),
                         'href' => $this->providerUrl,
                     ]);
                 }
@@ -111,6 +112,7 @@ class Application extends App
 
     private function addAltLogins($providersType)
     {
+        $l = \OC::$server->getL10N('sociallogin');
         $providers = json_decode($this->config->getAppValue($this->appName, $providersType.'_providers', '[]'), true);
         if (is_array($providers)) {
             foreach ($providers as $provider) {
@@ -120,7 +122,7 @@ class Application extends App
                     'login_redirect_url' => $this->redirectUrl
                 ]);
                 \OC_App::registerLogIn([
-                    'name' => $provider['title'],
+                    'name' => $l->t('Log in with') . ' ' . $provider['title'],
                     'href' => $this->providerUrl,
                     'style' => $provider['style'],
                 ]);
