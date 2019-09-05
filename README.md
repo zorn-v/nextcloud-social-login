@@ -41,7 +41,7 @@ Then specify bot login and token in "Social login" section of admin settings pag
 
 You can create app by followed urls. You can copy link of certain login button to get proper "redirect url" for OAuth app setting.
 
-* [Google](https://console.developers.google.com)
+* [Google](docs/sso/google.md)
 * [Amazon](https://developer.amazon.com/loginwithamazon/console/site/lwa/overview.html)
 * [Facebook](https://developers.facebook.com/)
 * [Twitter](https://apps.twitter.com/)
