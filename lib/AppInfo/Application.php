@@ -85,7 +85,7 @@ class Application extends App
                         'login_redirect_url' => $this->redirectUrl
                     ]);
                     \OC_App::registerLogIn([
-                        'name' => $l->t('Log in with') . ' ' . ucfirst($name),
+                        'name' => '<span class="label-prefix">' . $l->t('Log in with') . '</span> ' . ucfirst($name),
                         'href' => $this->providerUrl,
                     ]);
                 }
@@ -122,7 +122,7 @@ class Application extends App
                     'login_redirect_url' => $this->redirectUrl
                 ]);
                 \OC_App::registerLogIn([
-                    'name' => $l->t('Log in with') . ' ' . $provider['title'],
+                    'name' => '<span class="label-prefix">' . $l->t('Log in with') . '</span> ' . $provider['title'],
                     'href' => $this->providerUrl,
                     'style' => isset($provider['style']) ? $provider['style'] : '',
                 ]);

@@ -11,6 +11,7 @@ a[href*="/sociallogin/oauth/"]::before {
 
 a[href*="/sociallogin/oauth/"]::after {
   content: "";
+  width: 18px;
   height: 10px;
   display: inline-block;
 }
@@ -21,6 +22,7 @@ a[href*="/sociallogin/oauth/"]::after {
 }
 #alternative-logins a[href*="/sociallogin/oauth/google"]::before {
   background-image: url(../img/button/google.svg);
+  width: 18px;
 }
 #alternative-logins a[href*="/sociallogin/oauth/amazon"]::before {
   background-image: url(../img/button/amazon.svg);
@@ -32,6 +34,7 @@ a[href*="/sociallogin/oauth/"]::after {
 }
 #alternative-logins a[href*="/sociallogin/oauth/GitHub"]::before {
   background-image: url(../img/button/github.svg);
+  width: 18px;
 }
 #alternative-logins a[href*="/sociallogin/oauth/discord"]::before {
   background-image: url(../img/button/discord.svg);
@@ -45,6 +48,24 @@ a[href*="/sociallogin/oauth/"]::after {
 
 .sociallogin-connect li a {
   padding: 12px 24px;
+}
+
+
+#alternative-logins a.button[href*="/sociallogin/oauth/facebook"],
+#alternative-logins a.button[href*="/sociallogin/oauth/google"],
+#alternative-logins a.button[href*="/sociallogin/oauth/amazon"],
+#alternative-logins a.button[href*="/sociallogin/oauth/twitter"],
+#alternative-logins a.button[href*="/sociallogin/oauth/GitHub"],
+#alternative-logins a.button[href*="/sociallogin/oauth/discord"],
+#alternative-logins a.button.gitlab,
+#alternative-logins a.button.openid,
+#alternative-logins a.button.paypal,
+#alternative-logins a.button.stackoverflow,
+#alternative-logins a.button.salesforce,
+#alternative-logins a.button.yahoo {
+  border: 0;
+  color: #ffffff;
+  margin-right: 5px;
 }
 
 
