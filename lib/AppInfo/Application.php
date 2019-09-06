@@ -57,6 +57,8 @@ class Application extends App
             return;
         }
 
+        \OCP\Util::addStyle($this->appName, 'guest');
+
         $this->urlGenerator = $this->query(IURLGenerator::class);
         $request = $this->query(IRequest::class);
         $this->redirectUrl = $request->getParam('redirect_url');

@@ -1,0 +1,10 @@
+.wrapper, form {
+  width: auto !important;
+}
+form fieldset {
+  text-align: center !important;
+}
+#submit-wrapper {
+  width: 260px !important;
+  margin: 0 auto !important;
+}
