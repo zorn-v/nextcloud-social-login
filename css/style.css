@@ -9,12 +9,6 @@ a[href*="/sociallogin/oauth/"]::before {
   margin-right: 5px;
 }
 
-a[href*="/sociallogin/oauth/"]::after {
-  content: "";
-  height: 10px;
-  display: inline-block;
-}
-
 #alternative-logins a[href*="/sociallogin/oauth/facebook"]::before {
   background-image: url(../img/button/facebook.svg);
   width: 9px;
@@ -42,9 +36,25 @@ a[href*="/sociallogin/oauth/"]::after {
   height: unset;
   display: inline-flex;
 }
-
-.sociallogin-connect li a {
+.sociallogin-connect #alternative-logins li a {
   padding: 12px 24px;
+  border: 0;
+}
+.disconnect-logins li {
+  margin-bottom: 5px;
+}
+.disconnect-logins a:hover {
+  color: var(--color-primary-element);
+}
+.disconnect-logins a::before {
+  content: "";
+  width: 25px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+  vertical-align: middle;
+  background-image: url(../img/close.svg);
 }
 
 
@@ -73,7 +83,6 @@ a[href*="/sociallogin/oauth/"]::after {
   content: "";
   background-repeat: no-repeat;
   background-size: contain;
-  width: 18px;
   height: 18px;
   display: inline-block;
   vertical-align: bottom;
@@ -84,7 +93,6 @@ a[href*="/sociallogin/oauth/"]::after {
   background-image: url(../img/button/gitlab.svg);
   width: 19px;
 }
-
 #alternative-logins a.button.gitlab {
   background-color: #3f3177;
 }
@@ -93,7 +101,6 @@ a[href*="/sociallogin/oauth/"]::after {
   background-image: url(../img/button/openid.svg);
   width: 19px;
 }
-
 #alternative-logins a.button.openid {
   background-color: #b3b3b3;
 }
@@ -102,7 +109,6 @@ a[href*="/sociallogin/oauth/"]::after {
   background-image: url(../img/button/paypal.svg);
   width: 16px;
 }
-
 #alternative-logins a.button.paypal {
   background-color: #253B80;
 }
@@ -111,7 +117,6 @@ a[href*="/sociallogin/oauth/"]::after {
   background-image: url(../img/button/yahoo.svg);
   width: 26px;
 }
-
 #alternative-logins a.button.yahoo {
   background-color: #4d00ae;
 }
@@ -120,7 +125,6 @@ a[href*="/sociallogin/oauth/"]::after {
   background-image: url(../img/button/stackoverflow.svg);
   width: 15px;
 }
-
 #alternative-logins a.button.stackoverflow {
   background-color: #BCBBBB;
 }
@@ -129,7 +133,6 @@ a[href*="/sociallogin/oauth/"]::after {
   background-image: url(../img/button/salesforce.svg);
   width: 24px;
 }
-
 #alternative-logins a.button.salesforce {
   background-color: #009EDB;
 }

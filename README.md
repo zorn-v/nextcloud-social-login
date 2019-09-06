@@ -44,7 +44,7 @@ You can create app by followed urls. You can copy link of certain login button t
 * [Google](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/google.md)
 * [Amazon](https://developer.amazon.com/loginwithamazon/console/site/lwa/overview.html)
 * [Facebook](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/facebook.md)
-* [Twitter](https://apps.twitter.com/)
+* [Twitter](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/twitter.md)
 * [GitHub](https://github.com/settings/developers)
 * [Discord](https://discordapp.com/developers/applications/me#top)
 

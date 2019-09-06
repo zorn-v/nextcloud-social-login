@@ -10,7 +10,7 @@
     <br/>
     <?php if ($_['allow_login_connect']): ?>
     <h2><?php p($l->t('Social login connect')); ?></h2>
-    <ul>
+    <ul class="disconnect-logins">
         <?php foreach ($_['connected_logins'] as $title=>$url): ?>
         <li><a href="<?php print_unescaped($url) ?>"><?php p($title) ?></a></li>
         <?php endforeach ?>
