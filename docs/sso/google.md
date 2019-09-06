@@ -20,7 +20,7 @@
     8. Click "Web application" for application type and enter values:
         * Name: something relevant
         * Authorized JavaScript origins: https://example.com (then hit ENTER; see setup of authorized domains if there's an error)
-        * Authorized redirect URIs: https://example.com (then hit ENTER; see setup of authorized domains if there's an error)
+        * Authorized redirect URIs: https://example.com/apps/sociallogin/oauth/google (then hit ENTER; see setup of authorized domains if there's an error)
     9. Click "Save"
     10. You should see a "client ID" and "client secret"; store these somewhere safe
 4. Configure "Social Login" in NextCloud
