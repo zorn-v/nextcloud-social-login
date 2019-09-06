@@ -39,7 +39,7 @@ Then specify bot login and token in "Social login" section of admin settings pag
 
 ## Built-in OAuth providers
 
-You can create app by followed urls. You can copy link of certain login button to get proper "redirect url" for OAuth app setting.
+You can copy link of certain login button to get proper "redirect url" for OAuth app setting.
 
 * [Google](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/google.md)
 * [Amazon](https://developer.amazon.com/loginwithamazon/console/site/lwa/overview.html)
