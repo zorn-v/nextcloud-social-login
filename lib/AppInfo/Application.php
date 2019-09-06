@@ -10,6 +10,7 @@ use OCP\IUserSession;
 use OCP\IRequest;
 use OCP\ISession;
 use OCP\IUser;
+use OCP\IL10N;
 use OCA\SocialLogin\Db\SocialConnectDAO;
 
 class Application extends App
@@ -34,7 +35,7 @@ class Application extends App
     public function register()
     {
         \OCP\Util::addStyle($this->appName, 'style');
-        $l = \OC::$server->getL10N('sociallogin');
+        $l = $this->query(IL10N::class);
 
         $this->config = $this->query(IConfig::class);
 
@@ -55,6 +56,8 @@ class Application extends App
             }
             return;
         }
+
+        \OCP\Util::addStyle($this->appName, 'guest');
 
         $this->urlGenerator = $this->query(IURLGenerator::class);
         $request = $this->query(IRequest::class);
@@ -112,7 +115,7 @@ class Application extends App
 
     private function addAltLogins($providersType)
     {
-        $l = \OC::$server->getL10N('sociallogin');
+        $l = $this->query(IL10N::class);
         $providers = json_decode($this->config->getAppValue($this->appName, $providersType.'_providers', '[]'), true);
         if (is_array($providers)) {
             foreach ($providers as $provider) {
