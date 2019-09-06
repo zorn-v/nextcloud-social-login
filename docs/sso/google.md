@@ -1,5 +1,7 @@
 # How to Setup Google SSO
 
+These instructions assume "https://example.com/" is the base URL for your NextCloud. Adjust according to your setup.
+
 1. Install the app (see README.md)
 2. Setup a Google Authorized Domain
     1. Go to Google Webmaster Tools: https://www.google.com/webmasters/tools/
@@ -29,7 +31,6 @@
     3. In the bottom section under "Google" enter:
         * App id: the "client ID" provided earlier
         * Secret: the "client secret" provided earlier
-        * Default group: "admin" or whatever user group you want new users assigned to
-        * Allow login only from specified domain: (you can leave this blank)
+        * Default group: Select the group you want users to be assigned
     4. Click "Save" at the very bottom
 5. Now, open up a new browser to test the login. On the login screen you should now see "Google" underneath the typical NextCloud login prompt.
