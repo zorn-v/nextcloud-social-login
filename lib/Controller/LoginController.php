@@ -366,7 +366,11 @@ class LoginController extends Controller
                 } catch (\Exception $e) {}
             }
 
-            if (!empty($profile->data['groups']) && is_array($profile->data['groups'])) {
+            # we assume here that $profile->data['groups'] can either be:
+            # - null, when there is no information on groups the user is a member of
+            # - empty array, which means the user explicitly is not a member of any groups
+            # - a non-empty array, listing the groups the user is a member of
+            if (is_array($profile->data['groups'])) {
                 $groupNames = $profile->data['groups'];
                 $groupMapping = isset($profile->data['group_mapping']) ? $profile->data['group_mapping'] : null;
                 $userGroups = $this->groupManager->getUserGroups($user);
