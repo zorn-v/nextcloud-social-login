@@ -88,7 +88,6 @@ class Application extends App
                     ]);
                     \OC_App::registerLogIn([
                         'name' => $l->t('Log in with') . ' ' . ucfirst($name),
-                        'label' => $l->t('Alternate log in with') . ' ' . ucfirst($name),
                         'href' => $this->providerUrl,
                     ]);
                 }
@@ -126,7 +125,6 @@ class Application extends App
                 ]);
                 \OC_App::registerLogIn([
                     'name' => $l->t('Log in with') . ' ' . $provider['title'],
-                    'label' => $l->t('Alternate log in with') . ' ' . $provider['title'],
                     'href' => $this->providerUrl,
                     'style' => isset($provider['style']) ? $provider['style'] : '',
                 ]);
