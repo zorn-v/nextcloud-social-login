@@ -63,7 +63,15 @@ class CustomOpenIDConnect extends CustomOAuth2
             if (empty($userProfile->email)) {
                 $userProfile->email = $profile->get('email');
             }
-            if (!is_array($userProfile->data['groups'])) {
+            # using empty() here instead of is_array()
+            # since the call to getGroups() above could have returned
+            # an empty array since relevant claims might have not been
+            # included in the particular response
+            # 
+            # this is a follow-up going to userinfo URL
+            # so it's fine to make sure if there are no groups
+            # for this user
+            if (empty($userProfile->data['groups'])) {
                 $groups = $this->getGroups($profile);
                 if ($groups !== null) {
                     $userProfile->data['groups'] = $groups;
