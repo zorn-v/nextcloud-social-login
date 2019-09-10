@@ -366,7 +366,7 @@ class LoginController extends Controller
                 } catch (\Exception $e) {}
             }
 
-            if (!empty($profile->data['groups']) && is_array($profile->data['groups'])) {
+            if (isset($profile->data['groups']) && is_array($profile->data['groups'])) {
                 $groupNames = $profile->data['groups'];
                 $groupMapping = isset($profile->data['group_mapping']) ? $profile->data['group_mapping'] : null;
                 $userGroups = $this->groupManager->getUserGroups($user);
