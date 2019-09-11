@@ -12,6 +12,7 @@ use OCP\ISession;
 use OCP\IUser;
 use OCP\IL10N;
 use OCA\SocialLogin\Db\SocialConnectDAO;
+use OCP\Util;
 
 class Application extends App
 {
@@ -34,7 +35,7 @@ class Application extends App
 
     public function register()
     {
-        \OCP\Util::addStyle($this->appName, 'style');
+        Util::addStyle($this->appName, 'style');
         $l = $this->query(IL10N::class);
 
         $this->config = $this->query(IConfig::class);
@@ -57,8 +58,6 @@ class Application extends App
             return;
         }
 
-        \OCP\Util::addStyle($this->appName, 'guest');
-
         $this->urlGenerator = $this->query(IURLGenerator::class);
         $request = $this->query(IRequest::class);
         $this->redirectUrl = $request->getParam('redirect_url');
@@ -71,11 +70,11 @@ class Application extends App
             $manager = \OC::$server->getContentSecurityPolicyManager();
             $manager->addDefaultPolicy($csp);
 
-            \OCP\Util::addHeader('tg-data', [
+            Util::addHeader('tg-data', [
                 'data-login' => $tgBot,
                 'data-redirect-url' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.telegram', ['login_redirect_url' => $this->redirectUrl]),
             ]);
-            \OCP\Util::addScript($this->appName, 'telegram');
+            Util::addScript($this->appName, 'telegram');
         }
 
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
