@@ -405,7 +405,7 @@ class LoginController extends Controller
         }
 
 
-        $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => null]);
+        $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => '']);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
 
         if ($redirectUrl = $this->session->get('login_redirect_url')) {
