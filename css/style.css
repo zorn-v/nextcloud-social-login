@@ -1,72 +1,35 @@
-a[href*="/sociallogin/oauth/"]::before {
+#alternative-logins a.button::before {
   content: "";
   background-repeat: no-repeat;
   background-size: contain;
-  width: 18px;
   height: 18px;
   display: inline-block;
   vertical-align: bottom;
-  margin-right: 5px;
-}
-
-a[href*="/sociallogin/oauth/"]::after {
-  content: "";
-  width: 18px;
-  height: 10px;
-  display: inline-block;
 }
 
 #alternative-logins a.button[href*="/sociallogin/oauth/facebook"]::before {
   background-image: url(../img/button/facebook.svg);
-  width: 9px;
+  width: 14px;
 }
 #alternative-logins a.button[href*="/sociallogin/oauth/google"]::before {
   background-image: url(../img/button/google.svg);
-  width: 18px;
+  width: 23px;
 }
 #alternative-logins a.button[href*="/sociallogin/oauth/amazon"]::before {
   background-image: url(../img/button/amazon.svg);
-  width: 21px;
+  width: 26px;
 }
 #alternative-logins a.button[href*="/sociallogin/oauth/twitter"]::before {
   background-image: url(../img/button/twitter.svg);
-  width: 20px;
+  width: 25px;
 }
 #alternative-logins a.button[href*="/sociallogin/oauth/GitHub"]::before {
   background-image: url(../img/button/github.svg);
-  width: 18px;
+  width: 23px;
 }
 #alternative-logins a.button[href*="/sociallogin/oauth/discord"]::before {
   background-image: url(../img/button/discord.svg);
-  width: 16px;
-}
-
-.sociallogin-connect #alternative-logins li {
-  height: unset;
-  display: inline-flex;
-}
-
-.sociallogin-connect li a {
-  padding: 12px 24px;
-}
-
-.disconnect-logins li {
-  margin-bottom: 5px;
-}
-
-.disconnect-logins a:hover {
-  color: var(--color-primary-element);
-}
-
-.disconnect-logins a::before {
-  content: "";
-  width: 25px;
-  height: 20px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  display: inline-block;
-  vertical-align: middle;
-  background-image: url(../img/close.svg);
+  width: 21px;
 }
 
 #alternative-logins a.button[href*="/sociallogin/oauth/facebook"],
@@ -84,22 +47,6 @@ a[href*="/sociallogin/oauth/"]::after {
   border: 0;
   color: #ffffff;
 }
-
-#alternative-logins a.button[href*="/sociallogin/oauth/facebook"]::before,
-#alternative-logins a.button[href*="/sociallogin/oauth/google"]::before,
-#alternative-logins a.button[href*="/sociallogin/oauth/amazon"]::before,
-#alternative-logins a.button[href*="/sociallogin/oauth/twitter"]::before,
-#alternative-logins a.button[href*="/sociallogin/oauth/GitHub"]::before,
-#alternative-logins a.button[href*="/sociallogin/oauth/discord"]::before,
-#alternative-logins a.button.gitlab::before,
-#alternative-logins a.button.openid::before,
-#alternative-logins a.button.paypal::before,
-#alternative-logins a.button.stackoverflow::before,
-#alternative-logins a.button.salesforce::before,
-#alternative-logins a.button.yahoo::before {
-  margin-right: 5px;
-}
-
 
 /* Button colors */
 #alternative-logins a.button[href*="/sociallogin/oauth/facebook"] {
@@ -120,76 +67,79 @@ a[href*="/sociallogin/oauth/"]::after {
 #alternative-logins a.button[href*="/sociallogin/oauth/discord"] {
   background-color: #7289DA;
 }
-
-/* Predefined buttons icons */
-#alternative-logins a::before {
-  content: "";
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 18px;
-  height: 18px;
-  display: inline-block;
-  vertical-align: bottom;
-  margin-right: 5px;
-}
-
-#alternative-logins a.button.gitlab::before {
-  background-image: url(../img/button/gitlab.svg);
-  width: 19px;
-}
-
 #alternative-logins a.button.gitlab {
   background-color: #3f3177;
 }
-
-#alternative-logins a.button.openid::before {
-  background-image: url(../img/button/openid.svg);
-  width: 19px;
-}
-
 #alternative-logins a.button.openid {
   background-color: #b3b3b3;
 }
-
-#alternative-logins a.button.paypal::before {
-  background-image: url(../img/button/paypal.svg);
-  width: 16px;
-}
-
 #alternative-logins a.button.paypal {
   background-color: #253B80;
 }
-
-#alternative-logins a.button.yahoo::before {
-  background-image: url(../img/button/yahoo.svg);
-  width: 26px;
-}
-
 #alternative-logins a.button.yahoo {
   background-color: #4d00ae;
 }
-
-#alternative-logins a.button.stackoverflow::before {
-  background-image: url(../img/button/stackoverflow.svg);
-  width: 15px;
-}
-
 #alternative-logins a.button.stackoverflow {
   background-color: #BCBBBB;
 }
-
-#alternative-logins a.button.salesforce::before {
-  background-image: url(../img/button/salesforce.svg);
-  width: 24px;
-}
-
 #alternative-logins a.button.salesforce {
   background-color: #009EDB;
 }
 
-@media only screen and (max-width: 1024px) {
-  #alternative-logins a.button::before {
-    margin-right: 0;
-    width: 0;
-  }
+/* Predefined buttons icons */
+#alternative-logins a.button.gitlab::before {
+  background-image: url(../img/button/gitlab.svg);
+  width: 24px;
+}
+#alternative-logins a.button.openid::before {
+  background-image: url(../img/button/openid.svg);
+  width: 24px;
+}
+#alternative-logins a.button.paypal::before {
+  background-image: url(../img/button/paypal.svg);
+  width: 21px;
+}
+#alternative-logins a.button.yahoo::before {
+  background-image: url(../img/button/yahoo.svg);
+  width: 31px;
+}
+#alternative-logins a.button.stackoverflow::before {
+  background-image: url(../img/button/stackoverflow.svg);
+  width: 21px;
+}
+#alternative-logins a.button.salesforce::before {
+  background-image: url(../img/button/salesforce.svg);
+  width: 29px;
+}
+
+/* Personal settings styles */
+.disconnect-logins a::before {
+  content: "";
+  width: 25px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+  vertical-align: middle;
+  background-image: url(../img/close.svg);
+}
+.disconnect-logins a:hover {
+  color: var(--color-primary-element);
+}
+.disconnect-logins li {
+  margin-bottom: 5px;
+}
+.disconnect-logins li:last-child {
+  margin-bottom: 20px;
+}
+.disconnect-logins li a {
+  font-size: 14px;
+}
+
+.sociallogin-connect #alternative-logins li {
+  height: unset;
+  display: inline-flex;
+}
+.sociallogin-connect #alternative-logins li a {
+  padding: 12px 24px;
 }
