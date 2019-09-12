@@ -35,7 +35,7 @@ class CustomOpenIDConnect extends CustomOAuth2
         $userProfile->displayName = $data->get('name');
         $userProfile->photoURL    = $data->get('picture');
         $userProfile->email       = $data->get('email');
-        if ($groups = $this->getGroups($data)) {
+        if (null !== $groups = $this->getGroups($data)) {
             $userProfile->data['groups'] = $groups;
         }
         if ($groupMapping = $this->config->get('group_mapping')) {
@@ -62,7 +62,7 @@ class CustomOpenIDConnect extends CustomOAuth2
             if (empty($userProfile->email)) {
                 $userProfile->email = $profile->get('email');
             }
-            if (empty($userProfile->data['groups']) && $groups = $this->getGroups($profile)) {
+            if (empty($userProfile->data['groups']) && null !== $groups = $this->getGroups($profile)) {
                 $userProfile->data['groups'] = $groups;
             }
         }
