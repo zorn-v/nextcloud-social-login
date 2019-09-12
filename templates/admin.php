@@ -208,7 +208,7 @@ $styleClass = [
                                 type="<?php p($fieldData['type'])?>"
                                 name="<?php p($provType)?>_providers[<?php p($k) ?>][<?php p($fieldName)?>]"
                                 value="<?php p($provider[$fieldName]) ?>"
-                                <?php p($fieldName == 'name' ? 'readonly' : ($fieldData['required'] ? 'required' : '' )) ?>
+                                <?php p($fieldName === 'name' ? 'readonly' : ($fieldData['required'] ? 'required' : '' )) ?>
                             />
                         </label>
                         <br/>

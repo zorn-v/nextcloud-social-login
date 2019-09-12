@@ -25,7 +25,7 @@ git checkout -b release
 git tag $VERSION
 git log --format='%D- %s' | sed -e 's/HEAD -> release, //' -e 's/, origin\/master, origin\/HEAD, master//' -e 's/tag: v\([^-]*\)/\n## \1\n/' > CHANGELOG.md
 git add CHANGELOG.md
-sed -i '/<description><\/description>/ {
+sed -i '/<description> <\/description>/ {
   a <description><![CDATA[
   r README.md
   a ]]></description>
