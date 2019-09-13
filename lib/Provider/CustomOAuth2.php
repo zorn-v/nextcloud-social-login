@@ -62,7 +62,17 @@ class CustomOAuth2 extends OAuth2
     protected function getGroups(Data\Collection $data)
     {
         if ($groupsClaim = $this->config->get('groups_claim')) {
-            $groups = $data->get($groupsClaim);
+            $nestedClaims = explode('.', $groupsClaim);
+            $claim = array_shift($nestedClaims);
+            $groups = $data->get($claim);
+            while (count($nestedClaims) > 0) {
+                $claim = array_shift($nestedClaims);
+                if (!isset($groups[$claim])) {
+                    $groups = [];
+                    break;
+                }
+                $groups = $groups[$claim];
+            }
             if (is_array($groups)) {
                 return $groups;
             } elseif (is_string($groups)) {

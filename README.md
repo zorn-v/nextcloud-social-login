@@ -20,6 +20,20 @@ or
 {"roles": "admin,user"}
 ```
 
+Also nested claims is supported. For example `resource_access.client-id.roles` for
+
+```json
+"resource_access": {
+   "client-id": {
+     "roles": [
+       "client-role-1",
+       "client-role-2"
+     ]
+   }
+}
+```
+
+
 You can use provider groups in two ways:
 
 1. Map provider groups to existing nextcloud groups
