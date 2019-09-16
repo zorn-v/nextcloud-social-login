@@ -67,11 +67,11 @@ class CustomOAuth2 extends OAuth2
             $groups = $data->get($claim);
             while (count($nestedClaims) > 0) {
                 $claim = array_shift($nestedClaims);
-                if (!isset($groups[$claim])) {
+                if (!isset($groups->{$claim})) {
                     $groups = [];
                     break;
                 }
-                $groups = $groups[$claim];
+                $groups = $groups->{$claim};
             }
             if (is_array($groups)) {
                 return $groups;
