@@ -32,7 +32,7 @@ class CustomOpenIDConnect extends CustomOAuth2
 
         $userProfile = new User\Profile();
         $userProfile->identifier  = $data->get('sub');
-        $userProfile->displayName = $data->get('name');
+        $userProfile->displayName = $data->get('name') ?: $data->get('preferred_username');
         $userProfile->photoURL    = $data->get('picture');
         $userProfile->email       = $data->get('email');
         if (null !== $groups = $this->getGroups($data)) {
