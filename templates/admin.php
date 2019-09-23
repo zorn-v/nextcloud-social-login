@@ -146,12 +146,12 @@ $providersData = [
 ];
 
 $styleClass = [
-    ['gitlab','Gitlab'],
-    ['openid','OpenID'],
-    ['paypal','PayPal'],
-    ['salesforce','SalesForce'],
-    ['stackoverflow','Stackoverflow'],
-    ['yahoo','Yahoo']
+    'gitlab' => 'Gitlab',
+    'openid' => 'OpenID',
+    'paypal' => 'PayPal',
+    'salesforce' => 'SalesForce',
+    'stackoverflow' => 'Stackoverflow',
+    'yahoo' => 'Yahoo',
 ];
 ?>
 <div id="sociallogin" class="section">
@@ -217,9 +217,9 @@ $styleClass = [
                         <?php p($l->t('Button style')) ?><br>
                         <select name="<?php p($provType) ?>_providers[<?php p($k) ?>][style]">
                             <option value=""><?php p($l->t('None')); ?></option>
-                            <?php foreach ($styleClass as $style): ?>
-                                <option value="<?php p($style[0]) ?>" <?php p($provider['style'] === $style[0] ? 'selected' : '') ?>>
-                                    <?php p($style[1]) ?>
+                            <?php foreach ($styleClass as $style => $styleTitle): ?>
+                                <option value="<?php p($style) ?>" <?php p(isset($provider['style']) && $provider['style'] === $style ? 'selected' : '') ?>>
+                                    <?php p($styleTitle) ?>
                                 </option>
                             <?php endforeach ?>
                         </select>
@@ -356,9 +356,9 @@ $styleClass = [
             <?php p($l->t('Button style')) ?><br>
             <select name="<?php p($provType) ?>_providers[{{provider_id}}][style]">
                 <option value=""><?php p($l->t('None')); ?></option>
-                <?php foreach ($styleClass as $style): ?>
-                    <option value="<?php p($style[0]) ?>" <?php p($provider['style'] === $style[0] ? 'selected' : '') ?>>
-                        <?php p($style[1]) ?>
+                <?php foreach ($styleClass as $style => $styleTitle): ?>
+                    <option value="<?php p($style) ?>">
+                        <?php p($styleTitle) ?>
                     </option>
                 <?php endforeach ?>
             </select>
