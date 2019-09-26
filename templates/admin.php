@@ -292,7 +292,7 @@ $styleClass = [
                     <select name="providers[<?php p($name) ?>][defaultGroup]">
                         <option value=""><?php p($l->t('None')); ?></option>
                         <?php foreach ($_['groups'] as $group): ?>
-                            <option value="<?php p($group) ?>" <?php p($provider['defaultGroup'] === $group ? 'selected' : '') ?>>
+                            <option value="<?php p($group) ?>" <?php p(isset($provider['defaultGroup']) && $provider['defaultGroup'] === $group ? 'selected' : '') ?>>
                                 <?php p($group) ?>
                             </option>
                         <?php endforeach ?>
