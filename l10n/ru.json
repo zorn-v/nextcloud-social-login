@@ -26,6 +26,7 @@
   "Restrict login for users without mapped groups": "Запрещать вход пользователям без ассоциированных групп",
   "Your user group is not allowed to login, please contact support": "Вход для вашей группы пользователей запрещен, пожалуйста свяжитесь с техподдержкой",
   "User %s (%s) just created via social login": "Пользователь %s (%s) создан через social login",
-  "Log in with": "Войти через"
+  "Log in with": "Войти через",
+  "Disable notify admins about new users": "Отключить оповещение администраторов о новых пользователях"
 },"pluralForm" :"nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);"
 }

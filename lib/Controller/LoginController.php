@@ -351,7 +351,9 @@ class LoginController extends Controller
             $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
             $updateUserProfile = true;
 
-            $this->notifyAdmins($uid, $profile->displayName ?: $profile->identifier, $profile->data['default_group']);
+            if (!$this->config->getAppValue($this->appName, 'disable_notify_admins')) {
+                $this->notifyAdmins($uid, $profile->displayName ?: $profile->identifier, $profile->data['default_group']);
+            }
         }
 
         if ($updateUserProfile) {

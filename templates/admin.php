@@ -186,6 +186,10 @@ $styleClass = [
                 <input id="restrict_users_wo_mapped_groups" type="checkbox" class="checkbox" name="restrict_users_wo_mapped_groups" value="1" <?php p($_['restrict_users_wo_mapped_groups'] ? 'checked' : '') ?>/>
                 <label for="restrict_users_wo_mapped_groups"><?php p($l->t('Restrict login for users without mapped groups')) ?></label>
             </div>
+            <div>
+                <input id="disable_notify_admins" type="checkbox" class="checkbox" name="disable_notify_admins" value="1" <?php p($_['disable_notify_admins'] ? 'checked' : '') ?>/>
+                <label for="disable_notify_admins"><?php p($l->t('Disable notify admins about new users')) ?></label>
+            </div>
         </p>
         <button><?php p($l->t('Save')); ?></button>
         <hr/>

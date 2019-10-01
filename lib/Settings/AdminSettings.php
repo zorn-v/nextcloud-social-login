@@ -40,6 +40,7 @@ class AdminSettings implements ISettings
             'no_prune_user_groups',
             'auto_create_groups',
             'restrict_users_wo_mapped_groups',
+            'disable_notify_admins',
         ];
         $oauthProviders = [
             'google',

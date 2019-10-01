@@ -52,6 +52,7 @@ class SettingsController extends Controller
         $no_prune_user_groups,
         $auto_create_groups,
         $restrict_users_wo_mapped_groups,
+        $disable_notify_admins,
         $providers,
         $tg_bot,
         $tg_token,
@@ -68,6 +69,7 @@ class SettingsController extends Controller
         $this->config->setAppValue($this->appName, 'no_prune_user_groups', $no_prune_user_groups ? true : false);
         $this->config->setAppValue($this->appName, 'auto_create_groups', $auto_create_groups ? true : false);
         $this->config->setAppValue($this->appName, 'restrict_users_wo_mapped_groups', $restrict_users_wo_mapped_groups ? true : false);
+        $this->config->setAppValue($this->appName, 'disable_notify_admins', $disable_notify_admins ? true : false);
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
         $this->config->setAppValue($this->appName, 'tg_bot', $tg_bot);
         $this->config->setAppValue($this->appName, 'tg_token', $tg_token);
