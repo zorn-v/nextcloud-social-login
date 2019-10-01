@@ -284,7 +284,7 @@ class LoginController extends Controller
 
         if (!empty($config['authorize_url_parameters']['hd'])) {
             $profileHd = preg_match('#@(.+)#', $profile->email, $m) ? $m[1] : null;
-            $allowedHd = explode(',', $config['authorize_url_parameters']['hd']);
+            $allowedHd = array_map('trim', explode(',', $config['authorize_url_parameters']['hd']));
             if (!in_array($profileHd, $allowedHd)) {
                 $this->storage->clear();
                 throw new LoginException($this->l->t('Login from %s domain is not allowed for %s provider', [$profileHd, $provider]));
