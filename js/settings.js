@@ -43,7 +43,7 @@ jQuery(function ($) {
       var providerTitle = $provider.find('[name$="[title]"]').val();
       var needConfirm = $provider.find('input').filter(function () {return this.value}).length > 0;
       if (needConfirm) {
-        OCdialogs.confirm(
+        OC.dialogs.confirm(
           t(appName, 'Do you realy want to remove {providerTitle} provider ?', {'providerTitle': providerTitle}),
           t(appName, 'Confirm remove'),
           function (confirmed) {
