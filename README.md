@@ -10,6 +10,43 @@ Login to your NextCloud installation as an administrator and under "Apps" click 
 
 See below for setup and configuration instructions.
 
+
+
+## Custom OAuth2/OIDC groups
+
+You can use groups from your custom provider. For that you should specify "Groups claim" in custom OAuth2/OIDC provider settings. That claim should be returned from provider in `id_token` or at user info endpoint. Format should be `array` or comma separated string. Eg (with claim named `roles`)
+
+```json
+{"roles": ["admin", "user"]}
+or
+{"roles": "admin,user"}
+```
+
+Also nested claims is supported. For example `resource_access.client-id.roles` for
+
+```json
+"resource_access": {
+   "client-id": {
+     "roles": [
+       "client-role-1",
+       "client-role-2"
+     ]
+   }
+}
+```
+
+
+You can use provider groups in two ways:
+
+1. Map provider groups to existing nextcloud groups
+2. Create provider groups in nextcloud and associate it to user (if appropriate option specified)
+
+If you want sync groups on every login do not forget to check "Update user profile every login" setting
+
+You can find example how to configure WSO2IS for return roles claim with OIDC at https://medium.com/@dewni.matheesha/claim-mapping-and-retrieving-end-user-information-in-wso2is-cffd5f3937ff
+
+## Telegram
+
 Add [BotFather](https://telegram.me/BotFather)
 ```
 /newbot
@@ -48,41 +85,6 @@ nameof_bot
 and your API key that you copied when you created your bot
 
 And thats it
-
-## Custom OAuth2/OIDC groups
-
-You can use groups from your custom provider. For that you should specify "Groups claim" in custom OAuth2/OIDC provider settings. That claim should be returned from provider in `id_token` or at user info endpoint. Format should be `array` or comma separated string. Eg (with claim named `roles`)
-
-```json
-{"roles": ["admin", "user"]}
-or
-{"roles": "admin,user"}
-```
-
-Also nested claims is supported. For example `resource_access.client-id.roles` for
-
-```json
-"resource_access": {
-   "client-id": {
-     "roles": [
-       "client-role-1",
-       "client-role-2"
-     ]
-   }
-}
-```
-
-
-You can use provider groups in two ways:
-
-1. Map provider groups to existing nextcloud groups
-2. Create provider groups in nextcloud and associate it to user (if appropriate option specified)
-
-If you want sync groups on every login do not forget to check "Update user profile every login" setting
-
-You can find example how to configure WSO2IS for return roles claim with OIDC at https://medium.com/@dewni.matheesha/claim-mapping-and-retrieving-end-user-information-in-wso2is-cffd5f3937ff
-
-## Telegram
 
 For using telegram login you need create bot and connect it to domain as described here https://core.telegram.org/widgets/login
 
