@@ -58,7 +58,7 @@ nameof_bot
 [Go here](https://core.telegram.org/widgets/login)
 
 Add your bot username and change the authoriazation type to "Redirect to URL"
-Enter your nextcloud domain followerd by: 
+Enter your nextcloud domain followed by: 
 
 `/apps/sociallogin/oauth/telegram`
 
