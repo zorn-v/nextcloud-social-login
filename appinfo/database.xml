@@ -15,6 +15,7 @@
     <field>
       <name>identifier</name>
       <type>text</type>
+      <length>190</length>
       <notnull>true</notnull>
     </field>
 
