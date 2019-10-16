@@ -294,7 +294,7 @@ class LoginController extends Controller
         if (!empty($config['logout_url'])) {
             $this->session->set('sociallogin_logout_url', $config['logout_url']);
         } else {
-            $this->session->remove('sociallogin_logout_url', $config['logout_url']);
+            $this->session->remove('sociallogin_logout_url');
         }
 
         $profile->data['default_group'] = $config['default_group'];
