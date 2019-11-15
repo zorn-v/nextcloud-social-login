@@ -163,6 +163,10 @@ $styleClass = [
                 <label for="disable_registration"><?php p($l->t('Disable auto create new users')) ?></label>
             </div>
             <div>
+                <input id="create_disabled_users" type="checkbox" class="checkbox" name="create_disabled_users" value="1" <?php p($_['create_disabled_users'] ? 'checked' : '') ?>/>
+                <label for="create_disabled_users"><?php p($l->t('Create users with disabled account')) ?></label>
+            </div>
+            <div>
                 <input id="allow_login_connect" type="checkbox" class="checkbox" name="allow_login_connect" value="1" <?php p($_['allow_login_connect'] ? 'checked' : '') ?>/>
                 <label for="allow_login_connect"><?php p($l->t('Allow users to connect social logins with their account')) ?></label>
             </div>

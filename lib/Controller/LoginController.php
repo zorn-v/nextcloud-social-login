@@ -348,6 +348,10 @@ class LoginController extends Controller
             $password = substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $password);
 
+            if ($this->config->getAppValue($this->appName, 'create_disabled_users')) {
+                $user->setEnabled(false);
+            }
+
             $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
             $updateUserProfile = true;
 

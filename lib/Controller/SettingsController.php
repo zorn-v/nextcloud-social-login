@@ -46,6 +46,7 @@ class SettingsController extends Controller
 
     public function saveAdmin(
         $disable_registration,
+        $create_disabled_users,
         $allow_login_connect,
         $prevent_create_email_exists,
         $update_profile_on_login,
@@ -63,6 +64,7 @@ class SettingsController extends Controller
     ) {
 
         $this->config->setAppValue($this->appName, 'disable_registration', $disable_registration ? true : false);
+        $this->config->setAppValue($this->appName, 'create_disabled_users', $create_disabled_users ? true : false);
         $this->config->setAppValue($this->appName, 'allow_login_connect', $allow_login_connect ? true : false);
         $this->config->setAppValue($this->appName, 'prevent_create_email_exists', $prevent_create_email_exists ? true : false);
         $this->config->setAppValue($this->appName, 'update_profile_on_login', $update_profile_on_login ? true : false);

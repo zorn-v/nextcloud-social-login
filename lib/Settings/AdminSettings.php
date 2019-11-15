@@ -34,6 +34,7 @@ class AdminSettings implements ISettings
         Util::addScript($this->appName, 'settings');
         $paramsNames = [
             'disable_registration',
+            'create_disabled_users',
             'allow_login_connect',
             'prevent_create_email_exists',
             'update_profile_on_login',
