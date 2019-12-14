@@ -50,6 +50,7 @@ class AdminSettings implements ISettings
             'twitter',
             'GitHub',
             'discord',
+            'slack',
         ];
         $groupNames = [];
         $groups = $this->groupManager->search('');
