@@ -6,9 +6,10 @@ These instructions assume "https://example.com/" is the base URL for your NextCl
 2. Setup a Google Authorized Domain
     1. Go to Google Webmaster Tools: https://www.google.com/webmasters/tools/
     2. Click "Add Property" and enter the full domain that your NextCloud will be accessible at, e.g. example.com
-    3. Verify your site ownership via the various methods shown here https://support.google.com/webmasters/answer/9008080?visit_id=637032436952938937-2175615075&rd=1
-    4. Wait a while.
-    5. Confirm that in Google Webmaster Tools you see the property (i.e. domain) you've entered is verified
+    3. Optionally verify your site.
+        1. Verify your site ownership via the various methods shown here https://support.google.com/webmasters/answer/9008080?visit_id=637032436952938937-2175615075&rd=1
+        2. Wait a while.
+        3. Confirm that in Google Webmaster Tools you see the property (i.e. domain) you've entered is verified
 3. Setup a Google app
     1. Go to https://console.developers.google.com/
     2. Click the list of projects at the top then "New project"
