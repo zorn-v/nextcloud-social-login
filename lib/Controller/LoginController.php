@@ -300,7 +300,7 @@ class LoginController extends Controller
         $profile->data['default_group'] = $config['default_group'];
 
         $uid = $provider.'-'.$profileId;
-        if (strlen($uid) > 64) {
+        if (strlen($uid) > 64 || !preg_match('#^[a-z0-9_.@-]+$#i', $profileId)) {
             $uid = $provider.'-'.md5($profileId);
         }
         return $this->login($uid, $profile, $provider.'-');
