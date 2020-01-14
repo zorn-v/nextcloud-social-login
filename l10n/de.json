@@ -28,6 +28,6 @@
   "Default group": "Standard Gruppe für Benutzer",
   "Add group mapping": "Neue Gruppe zuweisen",
   "Custom OAuth2": "Eigener OAuth Server",
-  "Log in with": "Anmelden mit"
+  "Log in with %s": "Anmelden mit %s"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }
