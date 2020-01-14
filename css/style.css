@@ -81,7 +81,7 @@
   background-color: #611f69;
 }
 #alternative-logins a.button[href*="/sociallogin/oauth/QQ"] {
-  background-color: #333333;
+  background-color: #0052d9;
 }
 #alternative-logins a.button.gitlab {
   background-color: #3f3177;
