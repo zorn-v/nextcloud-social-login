@@ -35,6 +35,10 @@
   background-image: url(../img/button/slack.svg);
   width: 21px;
 }
+#alternative-logins a.button[href*="/sociallogin/oauth/QQ"]::before {
+  background-image: url(../img/button/QQ.svg);
+  width: 21px;
+}
 
 #alternative-logins a.button[href*="/sociallogin/oauth/facebook"],
 #alternative-logins a.button[href*="/sociallogin/oauth/google"],
@@ -43,6 +47,7 @@
 #alternative-logins a.button[href*="/sociallogin/oauth/GitHub"],
 #alternative-logins a.button[href*="/sociallogin/oauth/discord"],
 #alternative-logins a.button[href*="/sociallogin/oauth/slack"],
+#alternative-logins a.button[href*="/sociallogin/oauth/QQ"],
 #alternative-logins a.button.gitlab,
 #alternative-logins a.button.openid,
 #alternative-logins a.button.paypal,
@@ -73,6 +78,9 @@
   background-color: #7289DA;
 }
 #alternative-logins a.button[href*="/sociallogin/oauth/slack"] {
+  background-color: #333333;
+}
+#alternative-logins a.button[href*="/sociallogin/oauth/QQ"] {
   background-color: #333333;
 }
 #alternative-logins a.button.gitlab {
