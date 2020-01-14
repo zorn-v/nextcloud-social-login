@@ -36,7 +36,7 @@
   width: 21px;
 }
 #alternative-logins a.button[href*="/sociallogin/oauth/QQ"]::before {
-  background-image: url(../img/button/QQ.svg);
+  background-image: url(../img/button/qq.svg);
   width: 21px;
 }
 
@@ -78,7 +78,7 @@
   background-color: #7289DA;
 }
 #alternative-logins a.button[href*="/sociallogin/oauth/slack"] {
-  background-color: #333333;
+  background-color: #611f69;
 }
 #alternative-logins a.button[href*="/sociallogin/oauth/QQ"] {
   background-color: #333333;
