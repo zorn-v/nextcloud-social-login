@@ -31,10 +31,7 @@ class Application extends App
     public function __construct()
     {
         parent::__construct($this->appName);
-    }
 
-    public function register()
-    {
         Util::addStyle($this->appName, 'style');
         $l = $this->query(IL10N::class);
 
