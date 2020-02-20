@@ -48,6 +48,7 @@
 #alternative-logins a.button[href*="/sociallogin/oauth/discord"],
 #alternative-logins a.button[href*="/sociallogin/oauth/slack"],
 #alternative-logins a.button[href*="/sociallogin/oauth/QQ"],
+#alternative-logins a.button.midata,
 #alternative-logins a.button.gitlab,
 #alternative-logins a.button.openid,
 #alternative-logins a.button.paypal,
@@ -55,7 +56,7 @@
 #alternative-logins a.button.salesforce,
 #alternative-logins a.button.yahoo {
   border: 0;
-  color: #ffffff;
+  color: #008040;
 }
 
 /* Button colors */
@@ -83,6 +84,9 @@
 #alternative-logins a.button[href*="/sociallogin/oauth/QQ"] {
   background-color: #0052d9;
 }
+#alternative-logins a.button.midata {
+  background-color: #8fb45c;
+}
 #alternative-logins a.button.gitlab {
   background-color: #3f3177;
 }
@@ -103,6 +107,11 @@
 }
 
 /* Predefined buttons icons */
+#alternative-logins a.button.midata::before {
+  background-image: url(../img/button/midata.svg);
+  width: 30px;
+  height: 24px;
+}
 #alternative-logins a.button.gitlab::before {
   background-image: url(../img/button/gitlab.svg);
   width: 24px;

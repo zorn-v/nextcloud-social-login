@@ -5,6 +5,7 @@ namespace OCA\SocialLogin\Provider;
 use Hybridauth\Adapter\OAuth2;
 use Hybridauth\Data;
 use Hybridauth\Exception\UnexpectedApiResponseException;
+use Hybridauth\Exception\AuthorizationDeniedException;
 use Hybridauth\User;
 
 class CustomOAuth2 extends OAuth2
@@ -18,50 +19,50 @@ class CustomOAuth2 extends OAuth2
      */
     public function getUserProfile()
     {
-        $profileFields = $this->strToArray($this->config->get('profile_fields'));
         $profileUrl = $this->config->get('endpoints')['profile_url'];
-
-        if (count($profileFields) > 0) {
-            $profileUrl .= (strpos($profileUrl, '?') !== false ? '&' : '?') . 'fields=' . implode(',', $profileFields);
-        }
-
-        $response = $this->apiRequest($profileUrl);
-        if (!isset($response->identifier) && isset($response->id)) {
-            $response->identifier = $response->id;
-        }
-        if (!isset($response->identifier) && isset($response->data->id)) {
-            $response->identifier = $response->data->id;
-        }
-        if (!isset($response->identifier) && isset($response->user_id)) {
-            $response->identifier = $response->user_id;
-        }
-
+	$headers = ['X-Scope' => $this->config->get('scope')];
+  
+        $response = $this->apiRequest($profileUrl, 'GET', [], $headers);       
+ 
         $data = new Data\Collection($response);
 
-        if (!$data->exists('identifier')) {
-            throw new UnexpectedApiResponseException('Provider API returned an unexpected response.');
-        }
-
         $userProfile = new User\Profile();
-        foreach ($data->toArray() as $key => $value) {
-            if ($key !== 'data' && property_exists($userProfile, $key)) {
-                $userProfile->$key = $value;
-            }
-        }
+	
+	$userProfile->identifier = $response->id;
+	$userProfile->email = $response->email;
+        $userProfile->displayName = $response->first_name . ' ' . $response->last_name . ' / ' . $response->nickname;
+	$userProfile->firstName = $response->first_name;
+	$userProfile->lastName = $response->last_name;
+        $userProfile->language = $response->correspondence_language;
 
-        if (null !== $groups = $this->getGroups($data)) {
-            $userProfile->data['groups'] = $groups;
+        if($response->kantonalverband_id !== 3) {
+           $userProfile->data['groups'] = ['extern'];
+        } elseif (null !== $groups = $this->getGroups($data)) {
+           $userProfile->data['groups'] = $groups;
         }
-        if ($groupMapping = $this->config->get('group_mapping')) {
-            $userProfile->data['group_mapping'] = $groupMapping;
+        
+	if ($groupMapping = $this->config->get('group_mapping')) {        
+    	    $userProfile->data['group_mapping'] = $this->mapGroup($groupMapping);
         }
-
+	
         return $userProfile;
+    }
+
+    protected function mapGroup($groups) {
+	foreach($groups as $num => $group) {
+	   if(sizeof($this->strToArray($num)) > 1) {
+	      unset($groups[$num]);
+	      foreach($this->strToArray($num) as $key => $val) {
+                $groups[$val] = $group;
+ 	      }
+	   }
+        }
+	return $groups;
     }
 
     protected function getGroups(Data\Collection $data)
     {
-        if ($groupsClaim = $this->config->get('groups_claim')) {
+	if ($groupsClaim = $this->config->get('groups_claim')) {
             $nestedClaims = explode('.', $groupsClaim);
             $claim = array_shift($nestedClaims);
             $groups = $data->get($claim);
@@ -73,13 +74,16 @@ class CustomOAuth2 extends OAuth2
                 }
                 $groups = $groups->{$claim};
             }
-            if (is_array($groups)) {
-                return $groups;
-            } elseif (is_string($groups)) {
-                return $this->strToArray($groups);
-            }
-            return [];
-        }
+	   
+            foreach ($groups as $num => $role) {
+		if(preg_match('[Biber|Wolf|Leitwolf|Pfadi|Leitpfadi|Pio]', $groups[$num]->role_name)) {
+		   throw new AuthorizationDeniedException('Zugriff nicht erlaubt!');
+		} else {
+		   $groups[$num] = $groups[$num]->group_id;
+		}
+	    }
+	    return $groups;
+	}
         return null;
     }
 

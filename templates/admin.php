@@ -146,6 +146,7 @@ $providersData = [
 ];
 
 $styleClass = [
+    'midata' => 'MiData',
     'gitlab' => 'Gitlab',
     'openid' => 'OpenID',
     'paypal' => 'PayPal',
