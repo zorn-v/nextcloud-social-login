@@ -58,7 +58,7 @@ nameof_bot
 [Go here](https://core.telegram.org/widgets/login)
 
 Add your bot username and change the authoriazation type to "Redirect to URL"
-Enter your nextcloud domain followed by: 
+Enter your nextcloud domain followed by:
 
 `/apps/sociallogin/oauth/telegram`
 
@@ -109,6 +109,7 @@ You can use comma separated list for multiple domains
 ## Config
 
 You can use `'social_login_auto_redirect' => true` setting in `config.php` for auto redirect unauthorized users to social login if only one provider is configured.
+If you want to temporary disable this function (e.g. for login as local admin), you can add `noredir=1` query parameter in url for login page. Something like `https://cloud.domain.com/login?noredir=1`
 
 ## Hint
 
