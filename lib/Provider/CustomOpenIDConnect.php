@@ -36,6 +36,7 @@ class CustomOpenIDConnect extends CustomOAuth2
         $userProfile->displayName = $data->get('name') ?: $data->get('preferred_username');
         $userProfile->photoURL    = $data->get('picture');
         $userProfile->email       = $data->get('email');
+        $userProfile->data['preferred_username'] = $data->get('preferred_username');
         if (null !== $groups = $this->getGroups($data)) {
             $userProfile->data['groups'] = $groups;
         }

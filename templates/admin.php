@@ -76,6 +76,10 @@ $providersData = [
                 'type' => 'text',
                 'required' => false,
             ],
+            'usePreferredUsername' => [
+                'title' => 'Use preferred_username',
+                'type' => 'checkbox',
+            ],
         ]
     ],
     'custom_oauth2' => [
@@ -215,7 +219,8 @@ $styleClass = [
                             <input
                                 type="<?php p($fieldData['type'])?>"
                                 name="<?php p($provType)?>_providers[<?php p($k) ?>][<?php p($fieldName)?>]"
-                                value="<?php p($provider[$fieldName]) ?>"
+                                value="<?php p($fieldData['type'] === 'checkbox' ? '1' : $provider[$fieldName]) ?>"
+                                <?php p($fieldData['type'] === 'checkbox' && $provider[$fieldName] === '1' ? 'checked' : '') ?> 
                                 <?php p($fieldName === 'name' ? 'readonly' : ($fieldData['required'] ? 'required' : '' )) ?>
                             />
                         </label>
@@ -355,6 +360,7 @@ $styleClass = [
             <input
                 type="<?php p($fieldData['type'])?>"
                 name="<?php p($provType) ?>_providers[{{provider_id}}][<?php p($fieldName) ?>]"
+                value="<?php p($fieldData['type'] === 'checkbox' ? '1' : '') ?>"
                 <?php p($fieldData['required'] ? 'required' : '' ) ?>
             />
         </label>

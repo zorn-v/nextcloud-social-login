@@ -174,6 +174,7 @@ class LoginController extends Controller
                         'groups_claim'  => isset($prov['groupsClaim']) ? $prov['groupsClaim'] : null,
                         'group_mapping' => isset($prov['groupMapping']) ? $prov['groupMapping'] : null,
                         'logout_url'    => isset($prov['logoutUrl']) ? $prov['logoutUrl'] : null,
+                        'use_preferred_username' => $prov['usePreferredUsername'] === '1',
                     ];
                     if ($authQuery) {
                         parse_str($authQuery, $config['authorize_url_parameters']);
@@ -277,9 +278,17 @@ class LoginController extends Controller
         }  catch (\Exception $e) {
             throw new LoginException($e->getMessage());
         }
-        $profileId = preg_replace('#.*/#', '', rtrim($profile->identifier, '/'));
-        if (empty($profileId)) {
-            throw new LoginException($this->l->t('Can not get identifier from provider'));
+        if ($config['use_preferred_username'] && isset($profile->data['preferred_username'])) {
+            $uid = $profile->data['preferred_username'];
+        } else {
+            $profileId = preg_replace('#.*/#', '', rtrim($profile->identifier, '/'));
+            if (empty($profileId)) {
+                throw new LoginException($this->l->t('Can not get identifier from provider'));
+            }
+            $uid = $provider.'-'.$profileId;
+            if (strlen($uid) > 64 || !preg_match('#^[a-z0-9_.@-]+$#i', $profileId)) {
+                $uid = $provider.'-'.md5($profileId);
+            }
         }
 
         if (!empty($config['authorize_url_parameters']['hd'])) {
@@ -299,10 +308,6 @@ class LoginController extends Controller
 
         $profile->data['default_group'] = $config['default_group'];
 
-        $uid = $provider.'-'.$profileId;
-        if (strlen($uid) > 64 || !preg_match('#^[a-z0-9_.@-]+$#i', $profileId)) {
-            $uid = $provider.'-'.md5($profileId);
-        }
         return $this->login($uid, $profile, $provider.'-');
     }
 
