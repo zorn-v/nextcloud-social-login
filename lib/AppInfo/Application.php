@@ -100,6 +100,7 @@ class Application extends App
 
         $useLoginRedirect = $this->providersCount === 1
             && PHP_SAPI !== 'cli'
+            && $request->getMethod() === 'GET'
             && !$request->getParam('noredir')
             && $this->config->getSystemValue('social_login_auto_redirect', false);
         if ($useLoginRedirect && $request->getPathInfo() === '/login') {
