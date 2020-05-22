@@ -456,7 +456,9 @@ class LoginController extends Controller
             $message = $this->mailer->createMessage();
             $message->setTo($sendTo);
             $message->useTemplate($template);
-            $errors = $this->mailer->send($message);
+            try {
+                $this->mailer->send($message);
+            } catch (\Exception $e) {}
         }
     }
 }
