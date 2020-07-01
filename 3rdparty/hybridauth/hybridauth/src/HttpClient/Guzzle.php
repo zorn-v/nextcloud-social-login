@@ -99,8 +99,10 @@ class Guzzle implements HttpClientInterface
     protected $client = null;
 
     /**
-    * ..
-    */
+     * ..
+     * @param null  $client
+     * @param array $config
+     */
     public function __construct($client = null, $config = [])
     {
         $this->client = $client ? $client : new Client($config);
@@ -109,7 +111,7 @@ class Guzzle implements HttpClientInterface
     /**
     * {@inheritdoc}
     */
-    public function request($uri, $method = 'GET', $parameters = [], $headers = [])
+    public function request($uri, $method = 'GET', $parameters = [], $headers = [], $multipart = false)
     {
         $this->requestHeader = array_replace($this->requestHeader, (array) $headers);
 
@@ -133,17 +135,32 @@ class Guzzle implements HttpClientInterface
                     break;
                 case 'PUT':
                 case 'POST':
-                    $body_content = 'form_params';
+                    $body_type = $multipart ? 'multipart' : 'form_params';
 
                     if (isset($this->requestHeader['Content-Type'])
                         && $this->requestHeader['Content-Type'] === 'application/json'
                     ) {
-                        $body_content = 'json';
+                        $body_type = 'json';
+                    }
+
+                    $body_content = $parameters;
+                    if ($multipart) {
+                        $body_content = [];
+                        foreach ($parameters as $key => $val) {
+                            if ($val instanceof \CURLFile) {
+                                $val = fopen($val->getFilename(), 'r');
+                            }
+
+                            $body_content[] = [
+                                'name' => $key,
+                                'contents' => $val,
+                            ];
+                        }
                     }
 
                     $response = $this->client->request($method, $uri, [
-                      $body_content => $parameters,
-                      'headers' => $this->requestHeader,
+                        $body_type => $body_content,
+                        'headers' => $this->requestHeader,
                     ]);
                     break;
             }
@@ -153,16 +170,18 @@ class Guzzle implements HttpClientInterface
             $this->responseClientError = $e->getMessage();
         }
 
-        if (! $this->responseClientError) {
+        if (!$this->responseClientError) {
             $this->responseBody     = $response->getBody();
             $this->responseHttpCode = $response->getStatusCode();
             $this->responseHeader   = $response->getHeaders();
         }
 
         if ($this->logger) {
+            // phpcs:ignore
             $this->logger->debug(sprintf('%s::request( %s, %s ), response:', get_class($this), $uri, $method), $this->getResponse());
 
             if ($this->responseClientError) {
+                // phpcs:ignore
                 $this->logger->error(sprintf('%s::request( %s, %s ), error:', get_class($this), $uri, $method), [$this->responseClientError]);
             }
         }
