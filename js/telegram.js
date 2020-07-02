@@ -1,6 +1,18 @@
-jQuery(function ($) {
-  var tgData = $('tg-data');
-  var login = tgData.data('login');
-  var redirectUrl = tgData.data('redirect-url');
-  $('#alternative-logins').before('<script src="https://telegram.org/js/telegram-widget.js?5" data-size="large" data-telegram-login="'+login+'" data-auth-url="'+redirectUrl+'"/>');
-});
+document.addEventListener('DOMContentLoaded', function () {
+  var tgData = document.getElementById('tg-data')
+  if (!tgData) {
+    return
+  }
+  var login = tgData.dataset.login
+  var redirectUrl = tgData.dataset.redirectUrl
+
+  var altLogins = document.getElementById('alternative-logins')
+  if (altLogins) {
+    var script = document.createElement('script')
+    script.src = 'https://telegram.org/js/telegram-widget.js?5'
+    script.dataset.size = 'large'
+    script.dataset.telegramLogin = login
+    script.dataset.authUrl = redirectUrl
+    altLogins.parentNode.insertBefore(script, altLogins)
+  }
+})

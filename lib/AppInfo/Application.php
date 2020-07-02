@@ -70,7 +70,8 @@ class Application extends App
             $manager = \OC::$server->getContentSecurityPolicyManager();
             $manager->addDefaultPolicy($csp);
 
-            Util::addHeader('tg-data', [
+            Util::addHeader('meta', [
+                'id' => 'tg-data',
                 'data-login' => $tgBot,
                 'data-redirect-url' => $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.telegram', ['login_redirect_url' => $this->redirectUrl]),
             ]);
