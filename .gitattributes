@@ -1,5 +1,6 @@
-.credentials export-ignore
-.gitattributes export-ignore
-.gitignore export-ignore
-release.sh export-ignore
+.* export-ignore
+*.sh export-ignore
 /docs export-ignore
+/src export-ignore
+/package* export-ignore
+/node_modules
