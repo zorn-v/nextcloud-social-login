@@ -8,5 +8,13 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(__dirname, './js/'),
+	},
+	module: {
+		rules: [
+			{
+				test: /\.scss$/,
+				use: ['css-loader', 'sass-loader']
+			},
+		]
 	}
 }

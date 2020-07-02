@@ -1,3 +1,4 @@
+import '@nextcloud/dialogs/styles/toast.scss'
 import { showError, showInfo } from '@nextcloud/dialogs'
 import axios from '@nextcloud/axios'
 import E from 'oui-dom-events'
