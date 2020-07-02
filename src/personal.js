@@ -4,7 +4,7 @@ import axios from '@nextcloud/axios'
 
 document.addEventListener('DOMContentLoaded', function () {
   var appName = 'sociallogin';
-  const form = document.getElementById('sociallogin_personal_settings')
+  var form = document.getElementById('sociallogin_personal_settings')
   function saveSettings() {
     confirmPassword().then(function () {
       axios.post(form.action, new FormData(form))
