@@ -154,7 +154,9 @@ $styleClass = [
     'yahoo' => 'Yahoo',
 ];
 ?>
-<div id="sociallogin" class="section">
+<div id="sociallogin" class="section" data-settings="<?php p(json_encode($_)) ?>">
+    <div id="sociallogin_settings_app"></div>
+<!--
     <form id="sociallogin_settings" action="<?php print_unescaped($_['action_url']) ?>" method="post">
 
         <p>
@@ -398,4 +400,5 @@ $styleClass = [
         <?php endif ?>
     </div>
 <?php endforeach ?>
+-->
 </div>

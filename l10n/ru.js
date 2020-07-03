@@ -1,6 +1,20 @@
 OC.L10N.register(
   "sociallogin",
   {
+    "Disable auto create new users": "Отключить автоматическое создание новых пользователей",
+    "Create users with disabled account": "Создавать пользователей с отключенным аккаунтом",
+    "Allow users to connect social logins with their account": "Позволять пользователям подключать социальные логины к своим аккаунтам",
+    "Prevent creating an account if the email address exists in another account": "Не позволять создавать аккаунт, если пользователь с таким email адресом уже существует",
+    "Update user profile every login": "Обновлять профиль пользователя при каждом логине",
+    "Do not prune not available user groups on login": "Не вычищать недоступные пользователю группы при логине",
+    "Automatically create groups if they do not exists": "Автоматически создавать несуществующие группы",
+    "Restrict login for users without mapped groups": "Запрещать вход пользователям без ассоциированных групп",
+    "Disable notify admins about new users": "Отключить оповещение администраторов о новых пользователях",
+
+    "None": "Отсутствует",
+    "Save": "Сохранить",
+    "Allow login only from specified domain": "Позволять вход только с указаного домена",
+
     "Settings for social login successfully saved": "Настройки social login успешно сохранены",
     "Do you realy want to remove {providerTitle} provider ?": "Вы действительно хотите удалить поставщика {providerTitle} ?",
     "Some error occurred while saving settings": "Во время сохранения настроек произошла ошибка",

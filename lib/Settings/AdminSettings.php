@@ -30,7 +30,6 @@ class AdminSettings implements ISettings
 
     public function getForm()
     {
-        Util::addStyle($this->appName, 'settings');
         Util::addScript($this->appName, 'settings');
         $paramsNames = [
             'disable_registration',
@@ -84,18 +83,21 @@ class AdminSettings implements ISettings
         }
 
         $params = [
+            'app_name' => $this->appName,
             'action_url' => $this->urlGenerator->linkToRoute($this->appName.'.settings.saveAdmin'),
             'groups' => $groupNames,
             'tg_bot' => $this->config->getAppValue($this->appName, 'tg_bot'),
             'tg_token' => $this->config->getAppValue($this->appName, 'tg_token'),
             'tg_group' => $this->config->getAppValue($this->appName, 'tg_group'),
             'providers' => $providers,
-            'openid_providers' => $openIdProviders,
-            'custom_oidc_providers' => $custom_oidcProviders,
-            'custom_oauth2_providers' => $custom_oauth2Providers,
+            'custom_providers' => [
+                'openid' => $openIdProviders,
+                'custom_oidc' => $custom_oidcProviders,
+                'custom_oauth2' => $custom_oauth2Providers,
+            ]
         ];
         foreach ($paramsNames as $paramName) {
-            $params[$paramName] = $this->config->getAppValue($this->appName, $paramName);
+            $params['options'][$paramName] = $this->config->getAppValue($this->appName, $paramName);
         }
         return new TemplateResponse($this->appName, 'admin', $params);
     }

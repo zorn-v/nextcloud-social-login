@@ -1,18 +1,13 @@
 { "translations": {
   "Social login": "社交登入",
-  "None": "無",
-  "Save": "儲存",
   "Enabled": "啟用",
-  "Disable auto create new users": "關閉自動新增使用者",
   "Unknown %s provider: \"%s\"": "未知的提供者 \"%s\"",
   "Auto creating new users is disabled": "自動新增使用者已關閉",
   "This account already connected": "您已經連結此項目的社交登入",
-  "Allow users to connect social logins with their account": "允許使用者使用社交登入",
   "Provider name cannot be empty": "提供者名稱不能沒有內容",
   "Duplicate provider name \"%s\"": "重複的提供者名稱 \"%s\"",
   "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "無效的提供者名稱 \"%s\". 提供者名稱只允許 \"0-9a-z_.@-\"這些字符",
   "Social login connect": "社交登入連線",
-  "Available providers": "請點選下方的項目來進行連結",
-  "Prevent creating an account if the email address exists in another account":"若登入帳號的電子郵件與已註冊用戶之相符，則暫停註冊帳戶"
+  "Available providers": "請點選下方的項目來進行連結"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

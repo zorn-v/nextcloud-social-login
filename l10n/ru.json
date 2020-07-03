@@ -1,13 +1,9 @@
 { "translations": {
   "Social login": "Social login",
-  "None": "Отсутствует",
-  "Save": "Сохранить",
   "Enabled": "Включено",
-  "Disable auto create new users": "Отключить автоматическое создание новых пользователей",
   "Unknown %s provider: \"%s\"": "Неизвестный поставщик %s: \"%s\"",
   "Auto creating new users is disabled": "Автосоздание новых пользователей отключено",
   "This account already connected": "Этот аккаунт уже подключен",
-  "Allow users to connect social logins with their account": "Позволять пользователям подключать социальные логины к своим аккаунтам",
   "Provider name cannot be empty": "Название поставщика не может быть пустым",
   "Duplicate provider name \"%s\"": "Дубликат названия поставщика \"%s\"",
   "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "Некорректное название поставщика \"%s\". Допустимые символы \"0-9a-z_.@-\"",
@@ -15,19 +11,11 @@
   "Available providers": "Доступные поставщики",
   "Social login connect is disabled": "Привязки социальных логинов отключены",
   "Email already registered": "Пользователь с таким email уже зарегистрирован",
-  "Prevent creating an account if the email address exists in another account": "Не позволять создавать аккаунт, если пользователь с таким email адресом уже существует",
-  "Allow login only from specified domain": "Позволять вход только с указаного домена",
   "Login from %s domain is not allowed for %s provider": "Вход с домена %s не разрешен для поставщика %s",
-  "Update user profile every login": "Обновлять профиль пользователя при каждом логине",
-  "Do not prune not available user groups on login": "Не вычищать недоступные пользователю группы при логине",
   "Disable password confirmation on settings change": "Отключить подтверждение паролем изменения настроек",
   "New user created": "Создан новый пользователь",
-  "Automatically create groups if they do not exists": "Автоматически создавать несуществующие группы",
-  "Restrict login for users without mapped groups": "Запрещать вход пользователям без ассоциированных групп",
   "Your user group is not allowed to login, please contact support": "Вход для вашей группы пользователей запрещен, пожалуйста свяжитесь с техподдержкой",
   "User %s (%s) just created via social login": "Пользователь %s (%s) создан через social login",
-  "Log in with %s": "Войти через %s",
-  "Disable notify admins about new users": "Отключить оповещение администраторов о новых пользователях",
-  "Create users with disabled account": "Создавать пользователей с отключенным аккаунтом"
+  "Log in with %s": "Войти через %s"
 },"pluralForm" :"nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);"
 }
