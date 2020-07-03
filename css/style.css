@@ -151,7 +151,9 @@
 .disconnect-logins li a {
   font-size: 14px;
 }
-
+.sociallogin-connect #alternative-logins {
+  margin-bottom: 5px;
+}
 .sociallogin-connect #alternative-logins li {
   height: unset;
   display: inline-flex;

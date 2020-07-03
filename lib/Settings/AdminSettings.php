@@ -49,8 +49,9 @@ class AdminSettings implements ISettings
             'twitter',
             'GitHub',
             'discord',
-            'slack',
             'QQ',
+            'slack',
+            'telegram'
         ];
         $groupNames = [];
         $groups = $this->groupManager->search('');
@@ -75,9 +76,6 @@ class AdminSettings implements ISettings
             'app_name' => $this->appName,
             'action_url' => $this->urlGenerator->linkToRoute($this->appName.'.settings.saveAdmin'),
             'groups' => $groupNames,
-            'tg_bot' => $this->config->getAppValue($this->appName, 'tg_bot'),
-            'tg_token' => $this->config->getAppValue($this->appName, 'tg_token'),
-            'tg_group' => $this->config->getAppValue($this->appName, 'tg_group'),
             'custom_providers' => $customProviders,
             'providers' => $providers,
         ];

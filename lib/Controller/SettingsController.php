@@ -44,22 +44,12 @@ class SettingsController extends Controller
         $this->socialConnect = $socialConnect;
     }
 
-    public function saveAdmin(
-        $options,
-        $providers,
-        $custom_providers,
-        $tg_bot,
-        $tg_token,
-        $tg_group
-    ) {
+    public function saveAdmin($options, $providers, $custom_providers) {
         foreach ($options as $k => $v) {
             $this->config->setAppValue($this->appName, $k, $v ? true : false);
         }
 
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
-        $this->config->setAppValue($this->appName, 'tg_bot', $tg_bot);
-        $this->config->setAppValue($this->appName, 'tg_token', $tg_token);
-        $this->config->setAppValue($this->appName, 'tg_group', $tg_group);
 
         try {
             $names = array_keys($providers);

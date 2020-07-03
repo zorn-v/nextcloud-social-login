@@ -225,43 +225,6 @@ class LoginController extends Controller
         return $this->auth(CustomOAuth2::class, $config, $provider, 'Custom OAuth2');
     }
 
-    /**
-     * @PublicPage
-     * @NoCSRFRequired
-     * @UseSession
-     */
-    public function telegram()
-    {
-        if ($redirectUrl = $this->request->getParam('login_redirect_url')) {
-            $this->session->set('login_redirect_url', $redirectUrl);
-        }
-        $botToken = $this->config->getAppValue($this->appName, 'tg_token');
-        $checkHash = $this->request->getParam('hash');
-        $authData = $_GET;
-        unset($authData['hash'], $authData['login_redirect_url']);
-        ksort($authData);
-        array_walk($authData, function (&$value, $key) {$value = $key.'='.$value;});
-        $dataCheckStr = implode("\n", $authData);
-        $secretKey = hash('sha256', $botToken, true);
-        $hash = hash_hmac('sha256', $dataCheckStr, $secretKey);
-        if ($hash !== $checkHash) {
-            throw new LoginException($this->l->t('Telegram auth data check failed'));
-        }
-        if ((time() - $this->request->getParam('auth_date')) > 300) {
-            throw new LoginException($this->l->t('Telegram auth data expired'));
-        }
-        if (null === $tgId = $this->request->getParam('id')) {
-            throw new LoginException($this->l->t('Missing mandatory "id" param'));
-        }
-        $uid = 'tg-' . $tgId;
-        $profile = new Profile();
-        $profile->identifier = $tgId;
-        $profile->displayName = $this->request->getParam('first_name').' '.$this->request->getParam('last_name');
-        $profile->photoURL = $this->request->getParam('photo_url');
-        $profile->data['default_group'] = $this->config->getAppValue($this->appName, 'tg_group');
-        return $this->login($uid, $profile);
-    }
-
     private function auth($class, array $config, $provider, $providerType)
     {
         if (empty($config)) {
@@ -302,6 +265,9 @@ class LoginController extends Controller
 
         $profile->data['default_group'] = $config['default_group'];
 
+        if ($provider === 'telegram') {
+            $provider = 'tg'; //For backward compatibility
+        }
         $uid = $provider.'-'.$profileId;
         if (strlen($uid) > 64 || !preg_match('#^[a-z0-9_.@-]+$#i', $profileId)) {
             $uid = $provider.'-'.md5($profileId);

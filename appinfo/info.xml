@@ -5,7 +5,7 @@
     <name>Social Login</name>
     <summary>Social login via OAuth or OpenID</summary>
     <description> </description>
-    <version>3.1.1</version>
+    <version>3.1.2</version>
     <licence>agpl</licence>
     <author>zorn-v</author>
     <namespace>SocialLogin</namespace>
@@ -29,6 +29,7 @@
             <step>OCA\SocialLogin\Migration\SeparateProvidersNameAndTitle</step>
             <step>OCA\SocialLogin\Migration\ProvidersDefaultGroup</step>
             <step>OCA\SocialLogin\Migration\OneKeyCustomProviders</step>
+            <step>OCA\SocialLogin\Migration\TelegramToProviders</step>
         </post-migration>
     </repair-steps>
 </info>

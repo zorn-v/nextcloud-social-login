@@ -49,22 +49,29 @@ class PersonalSettings implements ISettings
             'disable_password_confirmation' => $this->config->getUserValue($uid, $this->appName, 'disable_password_confirmation', false),
         ];
         if ($params['allow_login_connect']) {
-            if ($params['tg_bot'] = $this->config->getAppValue($this->appName, 'tg_bot')) {
-                $params['tg_redirect_url'] = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.telegram');
-                $csp = new \OCP\AppFramework\Http\ContentSecurityPolicy();
-                $csp->addAllowedScriptDomain('telegram.org')
-                    ->addAllowedFrameDomain('oauth.telegram.org')
-                ;
-                $manager = \OC::$server->getContentSecurityPolicyManager();
-                $manager->addDefaultPolicy($csp);
-            }
-
             $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
             if (is_array($providers)) {
                 foreach ($providers as $name => $provider) {
                     if ($provider['appid']) {
+                        $providerUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.oauth', ['provider' => $name]);
+                        if ($name === 'telegram') {
+                            $csp = new \OCP\AppFramework\Http\ContentSecurityPolicy();
+                            $csp->addAllowedScriptDomain('telegram.org')
+                                ->addAllowedFrameDomain('oauth.telegram.org')
+                            ;
+                            $manager = \OC::$server->getContentSecurityPolicyManager();
+                            $manager->addDefaultPolicy($csp);
+
+                            Util::addHeader('meta', [
+                                'id' => 'tg-data',
+                                'data-login' => $provider['appid'],
+                                'data-redirect-url' => $providerUrl,
+                            ]);
+                            Util::addScript($this->appName, 'telegram');
+                            continue;
+                        }
                         $params['providers'][ucfirst($name)] = [
-                            'url' => $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', ['provider' => $name])
+                            'url' => $providerUrl,
                         ];
                     }
                 }

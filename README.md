@@ -45,53 +45,6 @@ If you want sync groups on every login do not forget to check "Update user profi
 
 You can find example how to configure WSO2IS for return roles claim with OIDC at https://medium.com/@dewni.matheesha/claim-mapping-and-retrieving-end-user-information-in-wso2is-cffd5f3937ff
 
-## Telegram
-
-Add [BotFather](https://telegram.me/BotFather)
-```
-/newbot
-nameof_bot
-```
-
->Save the API key somewhere you will need to put it in nextcloud along with your bot username in the social login section.
-
-[Go here](https://core.telegram.org/widgets/login)
-
-Add your bot username and change the authoriazation type to "Redirect to URL"
-Enter your nextcloud domain followed by:
-
-`/apps/sociallogin/oauth/telegram`
-
-```
-https://cloud.nextcloud.com/apps/sociallogin/oauth/telegram
-```
-Login with Telegram
-
-Go back to BotFather
-
-```
-/mybots
-```
-Select your bot
-```
-/setdomain
-cloud.nextcloud.com
-```
-Go to your nextcloud settings social login admin page.
-Enter your Telegram bot name
-```
-nameof_bot
-```
-and your API key that you copied when you created your bot
-
-And thats it
-
-For using telegram login you need create bot and connect it to domain as described here https://core.telegram.org/widgets/login
-
-Then specify bot login and token in "Social login" section of admin settings page
-
-**Telegram auth will not work everywhere another than browser.***
-
 ## Built-in OAuth providers
 
 You can copy link of certain login button to get proper "redirect url" for OAuth app setting.

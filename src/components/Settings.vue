@@ -95,32 +95,6 @@
         </label>
       </template>
     </div>
-
-    <br/>
-    <div class="provider-settings">
-      <h2 class="provider-title">
-        <img :src="imagePath('telegram')" /> Telegram
-      </h2>
-      <label>
-        {{ t('Bot login') }}<br/>
-        <input type="text" name="tg_bot" :value="tg_bot"/>
-      </label>
-      <br/>
-      <label>
-        {{ t('Token') }}<br/>
-        <input type="password" name="tg_token" :value="tg_token"/>
-      </label>
-      <br/>
-      <label>
-        {{ t('Default group') }}<br/>
-        <select name="tg_group">
-          <option value="">{{ t('None') }}</option>
-          <option v-for="group in groups" :key="group" :value="group" :selected="tg_group === group">
-            {{ group }}
-          </option>
-        </select>
-      </label>
-    </div>
     <br/>
 
     <button>{{ t('Save') }}</button>

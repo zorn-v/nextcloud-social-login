@@ -13,11 +13,11 @@ $routes = [
     ['name' => 'settings#disconnectSocialLogin', 'url' => '/disconnect-social/{login}', 'verb' => 'GET'],
     ['name' => 'settings#savePersonal', 'url' => '/settings/save-personal', 'verb' => 'POST'],
     ['name' => 'login#oauth', 'url' => '/oauth/{provider}', 'verb' => 'GET'],
-    ['name' => 'login#telegram', 'url' => '/telegram', 'verb' => 'GET'],
+    //['name' => 'login#telegram', 'url' => '/telegram', 'verb' => 'GET'],
 ];
-foreach ($customProviders as $provider) {
-    $routes[] = ['name' => 'login#'.$provider, 'url' => '/'.$provider.'/{provider}', 'verb' => 'GET'];
-    $routes[] = ['name' => 'login#'.$provider, 'url' => '/'.$provider.'/{provider}', 'postfix' => '.post', 'verb' => 'POST'];
+foreach ($customProviders as $providerType) {
+    $routes[] = ['name' => 'login#'.$providerType, 'url' => '/'.$providerType.'/{provider}', 'verb' => 'GET'];
+    $routes[] = ['name' => 'login#'.$providerType, 'url' => '/'.$providerType.'/{provider}', 'postfix' => '.post', 'verb' => 'POST'];
 }
 return [
     'routes' => $routes
