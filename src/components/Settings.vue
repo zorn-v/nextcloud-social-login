@@ -1,7 +1,8 @@
 <template>
   <form @submit.prevent="saveSettings">
     <div v-for="(enabled, name) in options" :key="name">
-      <input :id="name" :ref="'opt_' + name" type="checkbox" class="checkbox" :name="'options['+name+']'" value="1" :checked="enabled" >
+      <input type="hidden" :name="'options['+name+']'" :value="enabled ? 1 : 0" />
+      <input :id="name" :ref="'opt_' + name" type="checkbox" class="checkbox" v-model="options[name]" />
       <label :for="name">{{ optionsTitles[name] ? t(optionsTitles[name]) : name }}</label>
     </div>
     <button>{{ t('Save') }}</button>
@@ -20,7 +21,7 @@
           <input
             v-model="provider[fieldName]"
             :type="fieldData.type"
-            :name="provType+'_providers['+k+']['+fieldName+']'"
+            :name="'custom_providers['+provType+']['+k+']['+fieldName+']'"
             :readonly="fieldName === 'name' && !provider.isNew"
             :required="fieldData.required"
           />
@@ -28,7 +29,7 @@
         </label>
         <label>
           {{ t('Button style') }}<br/>
-          <select :name="provType+'_providers['+k+'][style]'">
+          <select :name="'custom_providers['+provType+']['+k+'][style]'">
             <option value="">{{ t('None') }}</option>
             <option v-for="(styleTitle, style) in styleClass" :key="style" :value="style" :selected="provider.style === style">
               {{ styleTitle }}
@@ -38,7 +39,7 @@
         <br/>
         <label>
           {{ t('Default group') }}<br/>
-          <select :name="provType+'_providers['+k+'][defaultGroup]'">
+          <select :name="'custom_providers['+provType+']['+k+'][defaultGroup]'">
             <option value="">{{ t('None') }}</option>
             <option v-for="group in groups" :key="group" :value="group" :selected="provider.defaultGroup === group">
               {{ group }}
@@ -52,7 +53,7 @@
           </button>
           <div v-for="(mapping, mappingIdx) in provider.groupMapping" :key="mapping">
             <input type="text" class="foreign-group" v-model="mapping.foreign" />
-            <select class="local-group" :name="mapping.foreign ? provType+'_providers['+k+'][groupMapping]['+mapping.foreign+']' : ''">
+            <select class="local-group" :name="mapping.foreign ? 'custom_providers['+provType+']['+k+'][groupMapping]['+mapping.foreign+']' : ''">
               <option v-for="group in groups" :key="group" :value="group" :selected="mapping.local === group">
                 {{ group }}
               </option>
@@ -143,8 +144,11 @@ export default {
     data.providerTypes = providerTypes
     data.styleClass = styleClass
 
-    for (var provType in data.custom_providers) {
-      if (providerTypes[provType] && providerTypes[provType].hasGroupMapping) {
+    for (var provType in providerTypes) {
+      if (!data.custom_providers[provType]) {
+        data.custom_providers[provType] = []
+      }
+      if (providerTypes[provType].hasGroupMapping) {
         for (var k = 0; k < data.custom_providers[provType].length; ++k) {
           var groupMappingArr = []
           var groupMapping = data.custom_providers[provType][k].groupMapping

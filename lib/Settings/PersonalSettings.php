@@ -69,9 +69,7 @@ class PersonalSettings implements ISettings
                     }
                 }
             }
-            $params['providers'] = array_merge($params['providers'], $this->getProviders('openid'));
-            $params['providers'] = array_merge($params['providers'], $this->getProviders('custom_oidc'));
-            $params['providers'] = array_merge($params['providers'], $this->getProviders('custom_oauth2'));
+            $params['providers'] = array_merge($params['providers'], $this->getCustomProviders());
 
             $connectedLogins = $this->socialConnect->getConnectedLogins($uid);
             foreach ($connectedLogins as $login) {
@@ -84,12 +82,12 @@ class PersonalSettings implements ISettings
         return new TemplateResponse($this->appName, 'personal', $params);
     }
 
-    private function getProviders($providersType)
+    private function getCustomProviders()
     {
         $result = [];
-        $providers = json_decode($this->config->getAppValue($this->appName, $providersType.'_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $provider) {
+        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
+        foreach ($providers as $providersType => $providerList) {
+            foreach ($providerList as $provider) {
                 $name = $provider['name'];
                 $title = $provider['title'];
                 $result[$title] = [
@@ -98,6 +96,7 @@ class PersonalSettings implements ISettings
                 ];
             }
         }
+
         return $result;
     }
 

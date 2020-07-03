@@ -3,7 +3,6 @@ namespace OCA\SocialLogin\Migration;
 
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
-use OCP\IDBConnection;
 use OCP\IConfig;
 
 class ProvidersDefaultGroup implements IRepairStep
@@ -11,15 +10,11 @@ class ProvidersDefaultGroup implements IRepairStep
     /** @var IConfig */
     private $config;
 
-    /** @var IDBConnection */
-    private $db;
-
     private $appName = 'sociallogin';
 
-    public function __construct(IConfig $config, IDBConnection $db)
+    public function __construct(IConfig $config)
     {
         $this->config = $config;
-        $this->db = $db;
     }
 
     public function getName()

@@ -85,9 +85,7 @@ class LoginController extends Controller
      */
     public function oauth($provider)
     {
-        $scopes = [
-            'facebook' => 'email, public_profile',
-        ];
+        $scopes = [];
         $config = [];
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
         if (is_array($providers) && in_array($provider, array_keys($providers))) {
@@ -127,11 +125,12 @@ class LoginController extends Controller
     public function openid($provider)
     {
         $config = [];
-        $providers = json_decode($this->config->getAppValue($this->appName, 'openid_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $prov) {
+        $providersType = 'openid';
+        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_providers', '[]'), true);
+        if (isset($providers[$providersType])) {
+            foreach ($providers[$providersType] as $prov) {
                 if ($prov['name'] === $provider) {
-                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.openid', ['provider' => $provider]);
+                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.'.$providersType, ['provider' => $provider]);
                     $config = [
                         'callback'          => $callbackUrl,
                         'openid_identifier' => $prov['url'],
@@ -152,11 +151,12 @@ class LoginController extends Controller
     public function customOidc($provider)
     {
         $config = [];
-        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oidc_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $prov) {
+        $providersType = 'custom_oidc';
+        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_providers', '[]'), true);
+        if (isset($providers[$providersType])) {
+            foreach ($providers[$providersType] as $prov) {
                 if ($prov['name'] === $provider) {
-                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom_oidc', ['provider' => $provider]);
+                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.'.$providersType, ['provider' => $provider]);
                     list($authUrl, $authQuery) = explode('?', $prov['authorizeUrl']) + [1 => null];
                     $config = [
                         'callback' => $callbackUrl,
@@ -193,11 +193,12 @@ class LoginController extends Controller
     public function customOauth2($provider)
     {
         $config = [];
-        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_oauth2_providers', '[]'), true);
-        if (is_array($providers)) {
-            foreach ($providers as $prov) {
+        $providersType = 'custom_oauth2';
+        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_providers', '[]'), true);
+        if (isset($providers[$providersType])) {
+            foreach ($providers[$providersType] as $prov) {
                 if ($prov['name'] === $provider) {
-                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom_oauth2', ['provider' => $provider]);
+                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.'.$providersType, ['provider' => $provider]);
                     $config = [
                         'callback' => $callbackUrl,
                         'scope' => $prov['scope'],
@@ -275,10 +276,12 @@ class LoginController extends Controller
             $adapter->authenticate();
             $profile = $adapter->getUserProfile();
         }  catch (\Exception $e) {
+            $this->storage->clear();
             throw new LoginException($e->getMessage());
         }
         $profileId = preg_replace('#.*/#', '', rtrim($profile->identifier, '/'));
         if (empty($profileId)) {
+            $this->storage->clear();
             throw new LoginException($this->l->t('Can not get identifier from provider'));
         }
 

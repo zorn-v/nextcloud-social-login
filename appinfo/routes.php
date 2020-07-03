@@ -7,18 +7,18 @@
  * The controller class has to be registered in the application.php file since
  * it's instantiated in there
  */
+$customProviders = ['openid', 'custom_oidc', 'custom_oauth2'];
+$routes = [
+    ['name' => 'settings#saveAdmin', 'url' => '/settings/save-admin', 'verb' => 'POST'],
+    ['name' => 'settings#disconnectSocialLogin', 'url' => '/disconnect-social/{login}', 'verb' => 'GET'],
+    ['name' => 'settings#savePersonal', 'url' => '/settings/save-personal', 'verb' => 'POST'],
+    ['name' => 'login#oauth', 'url' => '/oauth/{provider}', 'verb' => 'GET'],
+    ['name' => 'login#telegram', 'url' => '/telegram', 'verb' => 'GET'],
+];
+foreach ($customProviders as $provider) {
+    $routes[] = ['name' => 'login#'.$provider, 'url' => '/'.$provider.'/{provider}', 'verb' => 'GET'];
+    $routes[] = ['name' => 'login#'.$provider, 'url' => '/'.$provider.'/{provider}', 'postfix' => '.post', 'verb' => 'POST'];
+}
 return [
-    'routes' => [
-        ['name' => 'settings#saveAdmin', 'url' => '/settings/save-admin', 'verb' => 'POST'],
-        ['name' => 'login#oauth', 'url' => '/oauth/{provider}', 'verb' => 'GET'],
-        ['name' => 'login#openid', 'url' => '/openid/{provider}', 'verb' => 'GET'],
-        ['name' => 'login#openid', 'url' => '/openid/{provider}', 'postfix' => '.post', 'verb' => 'POST'],
-        ['name' => 'login#custom_oidc', 'url' => '/custom_oidc/{provider}', 'verb' => 'GET'],
-        ['name' => 'login#custom_oidc', 'url' => '/custom_oidc/{provider}', 'postfix' => '.post', 'verb' => 'POST'],
-        ['name' => 'login#custom_oauth2', 'url' => '/custom_oauth2/{provider}', 'verb' => 'GET'],
-        ['name' => 'login#custom_oauth2', 'url' => '/custom_oauth2/{provider}', 'postfix' => '.post', 'verb' => 'POST'],
-        ['name' => 'login#telegram', 'url' => '/telegram', 'verb' => 'GET'],
-        ['name' => 'settings#disconnectSocialLogin', 'url' => '/disconnect-social/{login}', 'verb' => 'GET'],
-        ['name' => 'settings#savePersonal', 'url' => '/settings/save-personal', 'verb' => 'POST'],
-    ]
+    'routes' => $routes
 ];

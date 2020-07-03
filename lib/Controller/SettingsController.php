@@ -47,42 +47,32 @@ class SettingsController extends Controller
     public function saveAdmin(
         $options,
         $providers,
+        $custom_providers,
         $tg_bot,
         $tg_token,
-        $tg_group,
-        $openid_providers,
-        $custom_oidc_providers,
-        $custom_oauth2_providers
+        $tg_group
     ) {
         foreach ($options as $k => $v) {
             $this->config->setAppValue($this->appName, $k, $v ? true : false);
         }
 
+        $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
         $this->config->setAppValue($this->appName, 'tg_bot', $tg_bot);
         $this->config->setAppValue($this->appName, 'tg_token', $tg_token);
         $this->config->setAppValue($this->appName, 'tg_group', $tg_group);
 
-        $openid_providers = $openid_providers ?: [];
-        $custom_oidc_providers = $custom_oidc_providers ?: [];
-        $custom_oauth2_providers = $custom_oauth2_providers ?: [];
         try {
             $names = array_keys($providers);
-            $this->checkProviders($openid_providers, $names);
-            $this->checkProviders($custom_oidc_providers, $names);
-            $this->checkProviders($custom_oauth2_providers, $names);
+            foreach ($custom_providers as $provType => $provs) {
+                $this->checkProviders($provs, $names);
+                $custom_providers[$provType] = array_values($provs);
+            }
         } catch (\Exception $e) {
             return new JSONResponse(['message' => $e->getMessage()]);
         }
 
-        if (is_array($openid_providers)) {
-            $this->config->setAppValue($this->appName, 'openid_providers', json_encode(array_values($openid_providers)));
-        }
-        if (is_array($custom_oidc_providers)) {
-            $this->config->setAppValue($this->appName, 'custom_oidc_providers', json_encode(array_values($custom_oidc_providers)));
-        }
-        if (is_array($custom_oauth2_providers)) {
-            $this->config->setAppValue($this->appName, 'custom_oauth2_providers', json_encode(array_values($custom_oauth2_providers)));
-        }
+        $this->config->setAppValue($this->appName, 'custom_providers', json_encode($custom_providers));
+
         return new JSONResponse(['success' => true]);
     }
 
