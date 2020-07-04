@@ -5,4 +5,5 @@ export default {
   salesforce: 'SalesForce',
   stackoverflow: 'Stackoverflow',
   yahoo: 'Yahoo',
+  keycloak: 'Keycloak',
 }
