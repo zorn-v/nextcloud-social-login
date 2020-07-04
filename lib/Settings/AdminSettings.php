@@ -2,6 +2,7 @@
 
 namespace OCA\SocialLogin\Settings;
 
+use OCA\SocialLogin\Service\ProviderService;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\Settings\ISettings;
 use OCP\IGroupManager;
@@ -31,28 +32,7 @@ class AdminSettings implements ISettings
     public function getForm()
     {
         Util::addScript($this->appName, 'settings');
-        $paramsNames = [
-            'disable_registration',
-            'create_disabled_users',
-            'allow_login_connect',
-            'prevent_create_email_exists',
-            'update_profile_on_login',
-            'no_prune_user_groups',
-            'auto_create_groups',
-            'restrict_users_wo_mapped_groups',
-            'disable_notify_admins',
-        ];
-        $oauthProviders = [
-            'google',
-            'amazon',
-            'facebook',
-            'twitter',
-            'GitHub',
-            'discord',
-            'QQ',
-            'slack',
-            'telegram'
-        ];
+
         $groupNames = [];
         $groups = $this->groupManager->search('');
         foreach ($groups as $group) {
@@ -60,7 +40,7 @@ class AdminSettings implements ISettings
         }
         $providers = [];
         $savedProviders = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
-        foreach ($oauthProviders as $provider) {
+        foreach (ProviderService::DEFAULT_PROVIDERS as $provider) {
             if (array_key_exists($provider, $savedProviders)) {
                 $providers[$provider] = $savedProviders[$provider];
             } else {
@@ -79,7 +59,7 @@ class AdminSettings implements ISettings
             'custom_providers' => $customProviders,
             'providers' => $providers,
         ];
-        foreach ($paramsNames as $paramName) {
+        foreach (ProviderService::OPTIONS as $paramName) {
             $params['options'][$paramName] = $this->config->getAppValue($this->appName, $paramName);
         }
         return new TemplateResponse($this->appName, 'admin', $params);

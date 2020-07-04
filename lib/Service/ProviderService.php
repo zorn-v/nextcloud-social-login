@@ -23,12 +23,37 @@ use OCP\Mail\IMailer;
 
 class ProviderService
 {
+    const OPTIONS = [
+        'disable_registration',
+        'create_disabled_users',
+        'allow_login_connect',
+        'prevent_create_email_exists',
+        'update_profile_on_login',
+        'no_prune_user_groups',
+        'auto_create_groups',
+        'restrict_users_wo_mapped_groups',
+        'disable_notify_admins',
+    ];
+    const DEFAULT_PROVIDERS = [
+        'google',
+        'amazon',
+        'facebook',
+        'twitter',
+        'GitHub',
+        'discord',
+        'QQ',
+        'slack',
+        'telegram',
+    ];
+
     const TYPE_OPENID = 'openid';
+    const TYPE_OAUTH1 = 'custom_oauth1';
     const TYPE_OAUTH2 = 'custom_oauth2';
     const TYPE_OIDC = 'custom_oidc';
 
     const TYPE_CLASSES = [
         self::TYPE_OPENID => Provider\OpenID::class,
+        self::TYPE_OAUTH1 => CustomOAuth1::class,
         self::TYPE_OAUTH2 => CustomOAuth2::class,
         self::TYPE_OIDC => CustomOpenIDConnect::class,
     ];
@@ -43,20 +68,18 @@ class ProviderService
         self::TYPE_OPENID => [
             'openid_identifier' => 'url',
         ],
-        self::TYPE_OIDC => [
-            'scope' => 'scope',
+        self::TYPE_OAUTH1 => [
             'keys' => [
                 'id'     => 'clientId',
                 'secret' => 'clientSecret',
             ],
             'endpoints' => [
+                'api_base_url'     => 'apiBaseUrl',
                 'authorize_url'    => 'authorizeUrl',
                 'access_token_url' => 'tokenUrl',
-                'user_info_url'    => 'userInfoUrl',
+                'profile_url'    => 'profileUrl',
             ],
-            'groups_claim'  => 'groupsClaim',
-            'group_mapping' => 'groupMapping',
-            'logout_url'    => 'logoutUrl',
+            'logout_url' => 'logoutUrl',
         ],
         self::TYPE_OAUTH2 => [
             'scope' => 'scope',
@@ -71,6 +94,21 @@ class ProviderService
                 'profile_url'    => 'profileUrl',
             ],
             'profile_fields' => 'profileFields',
+            'groups_claim'  => 'groupsClaim',
+            'group_mapping' => 'groupMapping',
+            'logout_url'    => 'logoutUrl',
+        ],
+        self::TYPE_OIDC => [
+            'scope' => 'scope',
+            'keys' => [
+                'id'     => 'clientId',
+                'secret' => 'clientSecret',
+            ],
+            'endpoints' => [
+                'authorize_url'    => 'authorizeUrl',
+                'access_token_url' => 'tokenUrl',
+                'user_info_url'    => 'userInfoUrl',
+            ],
             'groups_claim'  => 'groupsClaim',
             'group_mapping' => 'groupMapping',
             'logout_url'    => 'logoutUrl',
