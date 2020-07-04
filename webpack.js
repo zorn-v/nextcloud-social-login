@@ -26,16 +26,8 @@ module.exports = {
       },
       {
         test: /src[\\\/].+\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              url: false,
-            }
-          },
-          'sass-loader'
-        ]
+        exclude: /node_modules/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader?url=false', 'sass-loader']
       },
       {
         test: /\.vue$/,
