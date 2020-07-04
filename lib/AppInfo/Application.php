@@ -2,26 +2,22 @@
 
 namespace OCA\SocialLogin\AppInfo;
 
+use OCA\SocialLogin\Db\SocialConnectDAO;
+use OCA\SocialLogin\Service\ProviderService;
 use OCP\AppFramework\App;
-use OCP\IURLGenerator;
 use OCP\IConfig;
-use OCP\IUserManager;
-use OCP\IUserSession;
+use OCP\IL10N;
 use OCP\IRequest;
 use OCP\ISession;
+use OCP\IURLGenerator;
 use OCP\IUser;
-use OCP\IL10N;
-use OCA\SocialLogin\Db\SocialConnectDAO;
+use OCP\IUserManager;
+use OCP\IUserSession;
 use OCP\Util;
 
 class Application extends App
 {
     private $appName = 'sociallogin';
-
-    /** @var IConfig */
-    private $config;
-    /** @var IURLGenerator */
-    private $urlGenerator;
 
     public function __construct()
     {
@@ -33,7 +29,7 @@ class Application extends App
         Util::addStyle($this->appName, 'style');
         $l = $this->query(IL10N::class);
 
-        $this->config = $this->query(IConfig::class);
+        $config = $this->query(IConfig::class);
 
         $this->query(IUserManager::class)->listen('\OC\User', 'preDelete', [$this, 'preDeleteUser']);
 
@@ -41,7 +37,7 @@ class Application extends App
         if ($userSession->isLoggedIn()) {
             $uid = $userSession->getUser()->getUID();
             $session = $this->query(ISession::class);
-            if ($this->config->getUserValue($uid, $this->appName, 'disable_password_confirmation')) {
+            if ($config->getUserValue($uid, $this->appName, 'disable_password_confirmation')) {
                 $session->set('last-password-confirm', time());
             }
             if ($logoutUrl = $session->get('sociallogin_logout_url')) {
@@ -53,55 +49,36 @@ class Application extends App
             return;
         }
 
-        $this->urlGenerator = $this->query(IURLGenerator::class);
+        $providerService = $this->query(ProviderService::class);
+        $urlGenerator = $this->query(IURLGenerator::class);
         $request = $this->query(IRequest::class);
         $redirectUrl = $request->getParam('redirect_url');
 
         $providersCount = 0;
-        $providerUrl = '';
-        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
+        $authUrl = '';
+        $providers = json_decode($config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
         foreach ($providers as $name => $provider) {
-            if ($provider['appid']) {
-                $providerUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.oauth', [
-                    'provider' => $name,
-                    'login_redirect_url' => $redirectUrl
-                ]);
-                if ($name === 'telegram') {
-                    $csp = new \OCP\AppFramework\Http\ContentSecurityPolicy();
-                    $csp->addAllowedScriptDomain('telegram.org')
-                        ->addAllowedFrameDomain('oauth.telegram.org')
-                    ;
-                    $manager = \OC::$server->getContentSecurityPolicyManager();
-                    $manager->addDefaultPolicy($csp);
-
-                    Util::addHeader('meta', [
-                        'id' => 'tg-data',
-                        'data-login' => $provider['appid'],
-                        'data-redirect-url' => $providerUrl,
-                    ]);
-                    Util::addScript($this->appName, 'telegram');
-                    continue;
-                }
+            if ($provider['appid'] && $authUrl = $providerService->getAuthUrl($name, $provider['appid'])) {
                 ++$providersCount;
                 \OC_App::registerLogIn([
+                    'href' => $authUrl,
                     'name' => $l->t('Log in with %s', ucfirst($name)),
-                    'href' => $providerUrl,
                 ]);
             }
         }
 
-        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
+        $providers = json_decode($config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
         foreach ($providers as $providersType => $providerList) {
             foreach ($providerList as $provider) {
                 ++$providersCount;
-                $providerUrl = $this->urlGenerator->linkToRoute($this->appName.'.login.custom', [
+                $authUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom', [
                     'type' => $providersType,
                     'provider' => $provider['name'],
                     'login_redirect_url' => $redirectUrl
                 ]);
                 \OC_App::registerLogIn([
+                    'href' => $authUrl,
                     'name' => $l->t('Log in with %s', $provider['title']),
-                    'href' => $providerUrl,
                     'style' => isset($provider['style']) ? $provider['style'] : '',
                 ]);
             }
@@ -111,9 +88,9 @@ class Application extends App
             && PHP_SAPI !== 'cli'
             && $request->getMethod() === 'GET'
             && !$request->getParam('noredir')
-            && $this->config->getSystemValue('social_login_auto_redirect', false);
+            && $config->getSystemValue('social_login_auto_redirect', false);
         if ($useLoginRedirect && $request->getPathInfo() === '/login') {
-            header('Location: ' . $providerUrl);
+            header('Location: ' . $authUrl);
             exit();
         }
     }

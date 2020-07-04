@@ -2,13 +2,14 @@
 
 namespace OCA\SocialLogin\Settings;
 
+use OCA\SocialLogin\Db\SocialConnectDAO;
+use OCA\SocialLogin\Service\ProviderService;
 use OCP\AppFramework\Http\TemplateResponse;
-use OCP\Settings\ISettings;
+use OCP\IConfig;
 use OCP\IURLGenerator;
 use OCP\IUserSession;
-use OCP\IConfig;
+use OCP\Settings\ISettings;
 use OCP\Util;
-use OCA\SocialLogin\Db\SocialConnectDAO;
 
 class PersonalSettings implements ISettings
 {
@@ -22,19 +23,23 @@ class PersonalSettings implements ISettings
     private $userSession;
     /** @var SocialConnectDAO */
     private $socialConnect;
+    /** @var ProviderService */
+    private $providerService;
 
     public function __construct(
         $appName,
         IConfig $config,
         IURLGenerator $urlGenerator,
         IUserSession $userSession,
-        SocialConnectDAO $socialConnect
+        SocialConnectDAO $socialConnect,
+        ProviderService $providerService
     ) {
         $this->appName = $appName;
         $this->config = $config;
         $this->urlGenerator = $urlGenerator;
         $this->userSession = $userSession;
         $this->socialConnect = $socialConnect;
+        $this->providerService = $providerService;
     }
 
     public function getForm()
@@ -52,26 +57,9 @@ class PersonalSettings implements ISettings
             $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
             if (is_array($providers)) {
                 foreach ($providers as $name => $provider) {
-                    if ($provider['appid']) {
-                        $providerUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.oauth', ['provider' => $name]);
-                        if ($name === 'telegram') {
-                            $csp = new \OCP\AppFramework\Http\ContentSecurityPolicy();
-                            $csp->addAllowedScriptDomain('telegram.org')
-                                ->addAllowedFrameDomain('oauth.telegram.org')
-                            ;
-                            $manager = \OC::$server->getContentSecurityPolicyManager();
-                            $manager->addDefaultPolicy($csp);
-
-                            Util::addHeader('meta', [
-                                'id' => 'tg-data',
-                                'data-login' => $provider['appid'],
-                                'data-redirect-url' => $providerUrl,
-                            ]);
-                            Util::addScript($this->appName, 'telegram');
-                            continue;
-                        }
+                    if ($provider['appid'] && $authUrl = $this->providerService->getAuthUrl($name, $provider['appid'])) {
                         $params['providers'][ucfirst($name)] = [
-                            'url' => $providerUrl,
+                            'url' => $authUrl,
                         ];
                     }
                 }

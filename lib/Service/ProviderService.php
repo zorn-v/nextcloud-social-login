@@ -20,6 +20,7 @@ use OCP\IURLGenerator;
 use OCP\IUserSession;
 use OCP\IUserManager;
 use OCP\Mail\IMailer;
+use OCP\Util;
 
 class ProviderService
 {
@@ -171,6 +172,33 @@ class ProviderService
         $this->l = $l;
         $this->mailer = $mailer;
         $this->socialConnect = $socialConnect;
+    }
+
+    public function getAuthUrl($name, $appId)
+    {
+        $redirectUrl = $this->request->getParam('redirect_url');
+        $authUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.oauth', [
+            'provider' => $name,
+            'login_redirect_url' => $redirectUrl
+        ]);
+        switch ($name) {
+            case 'telegram':
+                $csp = new \OCP\AppFramework\Http\ContentSecurityPolicy();
+                $csp->addAllowedScriptDomain('telegram.org')
+                    ->addAllowedFrameDomain('oauth.telegram.org')
+                ;
+                $manager = \OC::$server->getContentSecurityPolicyManager();
+                $manager->addDefaultPolicy($csp);
+                Util::addHeader('meta', [
+                    'id' => 'tg-data',
+                    'data-login' => $appId,
+                    'data-redirect-url' => $authUrl,
+                ]);
+                Util::addScript($this->appName, 'telegram');
+                return false;
+        }
+
+        return $authUrl;
     }
 
     public function handleDefault($provider)
