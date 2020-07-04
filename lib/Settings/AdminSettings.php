@@ -59,7 +59,7 @@ class AdminSettings implements ISettings
             $groupNames[] = $group->getGid();
         }
         $providers = [];
-        $savedProviders = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
+        $savedProviders = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
         foreach ($oauthProviders as $provider) {
             if (array_key_exists($provider, $savedProviders)) {
                 $providers[$provider] = $savedProviders[$provider];
@@ -70,7 +70,7 @@ class AdminSettings implements ISettings
                 ];
             }
         }
-        $customProviders = json_decode($this->config->getAppValue($this->appName, 'custom_providers', '[]'), true);
+        $customProviders = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
 
         $params = [
             'app_name' => $this->appName,

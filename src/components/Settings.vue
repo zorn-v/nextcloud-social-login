@@ -2,8 +2,8 @@
   <form @submit.prevent="saveSettings">
     <div v-for="(enabled, name) in options" :key="name">
       <input type="hidden" :name="'options['+name+']'" :value="enabled ? 1 : 0" />
-      <input :id="name" :ref="'opt_' + name" type="checkbox" class="checkbox" v-model="options[name]" />
-      <label :for="name">{{ optionsTitles[name] ? t(optionsTitles[name]) : name }}</label>
+      <input :id="'opt_'+name" type="checkbox" class="checkbox" v-model="options[name]" />
+      <label :for="'opt_'+name">{{ optionsTitles[name] ? t(optionsTitles[name]) : name }}</label>
     </div>
     <button>{{ t('Save') }}</button>
     <hr/>
@@ -139,10 +139,12 @@ export default {
     return data
   },
   mounted: function () {
-    var vm = this
-    var disableReg = vm.$refs.opt_disable_registration[0]
+    var disableReg = document.getElementById('opt_disable_registration')
+    if (!disableReg) {
+      return
+    }
     disableReg.onchange = function () {
-      vm.$refs.opt_prevent_create_email_exists[0].disabled = this.checked
+      document.getElementById('opt_prevent_create_email_exists').disabled = this.checked
     }
     disableReg.onchange()
   },
