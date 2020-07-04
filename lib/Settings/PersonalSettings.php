@@ -98,7 +98,7 @@ class PersonalSettings implements ISettings
                 $name = $provider['name'];
                 $title = $provider['title'];
                 $result[$title] = [
-                    'url' => $this->urlGenerator->linkToRoute($this->appName.'.login.'.$providersType, ['provider' => $name]),
+                    'url' => $this->urlGenerator->linkToRoute($this->appName.'.login.custom', ['type' => $providersType, 'provider' => $name]),
                     'style' => isset($provider['style']) ? $provider['style'] : '',
                 ];
             }

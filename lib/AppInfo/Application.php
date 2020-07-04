@@ -94,7 +94,8 @@ class Application extends App
         foreach ($providers as $providersType => $providerList) {
             foreach ($providerList as $provider) {
                 ++$providersCount;
-                $providerUrl = $this->urlGenerator->linkToRoute($this->appName.'.login.'.$providersType, [
+                $providerUrl = $this->urlGenerator->linkToRoute($this->appName.'.login.custom', [
+                    'type' => $providersType,
                     'provider' => $provider['name'],
                     'login_redirect_url' => $redirectUrl
                 ]);

@@ -2,6 +2,7 @@
 
 namespace OCA\SocialLogin\Controller;
 
+use OC\User\LoginException;
 use OCA\SocialLogin\Service\ProviderService;
 use OCP\AppFramework\Controller;
 use OCP\IRequest;
@@ -32,28 +33,11 @@ class LoginController extends Controller
      * @NoCSRFRequired
      * @UseSession
      */
-    public function openid($provider)
+    public function custom($type, $provider)
     {
-        return $this->providerService->handleCustom(ProviderService::TYPE_OPENID, $provider);
-    }
-
-    /**
-     * @PublicPage
-     * @NoCSRFRequired
-     * @UseSession
-     */
-    public function customOidc($provider)
-    {
-        return $this->providerService->handleCustom(ProviderService::TYPE_OIDC, $provider);
-    }
-
-    /**
-     * @PublicPage
-     * @NoCSRFRequired
-     * @UseSession
-     */
-    public function customOauth2($provider)
-    {
-        return $this->providerService->handleCustom(ProviderService::TYPE_OAUTH2, $provider);
+        if (!isset(ProviderService::TYPE_CLASSES[$type])) {
+            throw new LoginException(sprintf('Unknown provider type: %s', $type));
+        }
+        return $this->providerService->handleCustom($type, $provider);
     }
 }

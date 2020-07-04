@@ -169,7 +169,10 @@ class ProviderService
         if (isset($providers[$type])) {
             foreach ($providers[$type] as $prov) {
                 if ($prov['name'] === $provider) {
-                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.'.$type, ['provider' => $provider]);
+                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom', [
+                        'type'=> $type,
+                        'provider' => $provider
+                    ]);
                     $config = array_merge([
                         'callback'          => $callbackUrl,
                         'default_group'     => $prov['defaultGroup'],
