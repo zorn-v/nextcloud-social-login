@@ -7,7 +7,7 @@
  * The controller class has to be registered in the application.php file since
  * it's instantiated in there
  */
-$customProviders = ['openid', 'custom_oidc', 'custom_oauth2'];
+$customProviders = array_keys(OCA\SocialLogin\Service\ProviderService::TYPE_CLASSES);
 $routes = [
     ['name' => 'settings#saveAdmin', 'url' => '/settings/save-admin', 'verb' => 'POST'],
     ['name' => 'settings#disconnectSocialLogin', 'url' => '/disconnect-social/{login}', 'verb' => 'GET'],

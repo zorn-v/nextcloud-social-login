@@ -24,7 +24,7 @@ class LoginController extends Controller
      */
     public function oauth($provider)
     {
-        return $this->providerService->oauth($provider);
+        return $this->providerService->handleDefault($provider);
     }
 
     /**
@@ -34,7 +34,7 @@ class LoginController extends Controller
      */
     public function openid($provider)
     {
-        return $this->providerService->openid($provider);
+        return $this->providerService->handleCustom(ProviderService::TYPE_OPENID, $provider);
     }
 
     /**
@@ -44,7 +44,7 @@ class LoginController extends Controller
      */
     public function customOidc($provider)
     {
-        return $this->providerService->customOidc($provider);
+        return $this->providerService->handleCustom(ProviderService::TYPE_OIDC, $provider);
     }
 
     /**
@@ -54,6 +54,6 @@ class LoginController extends Controller
      */
     public function customOauth2($provider)
     {
-        return $this->providerService->customOauth2($provider);
+        return $this->providerService->handleCustom(ProviderService::TYPE_OAUTH2, $provider);
     }
 }

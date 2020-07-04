@@ -23,6 +23,60 @@ use OCP\Mail\IMailer;
 
 class ProviderService
 {
+    const TYPE_OPENID = 'openid';
+    const TYPE_OAUTH2 = 'custom_oauth2';
+    const TYPE_OIDC = 'custom_oidc';
+
+    const TYPE_CLASSES = [
+        self::TYPE_OPENID => Provider\OpenID::class,
+        self::TYPE_OAUTH2 => CustomOAuth2::class,
+        self::TYPE_OIDC => CustomOpenIDConnect::class,
+    ];
+
+    private $configMapping = [
+        'default' => [
+            'keys' => [
+                'id' => 'appid',
+                'secret' => 'secret',
+            ],
+        ],
+        self::TYPE_OPENID => [
+            'openid_identifier' => 'url',
+        ],
+        self::TYPE_OIDC => [
+            'scope' => 'scope',
+            'keys' => [
+                'id'     => 'clientId',
+                'secret' => 'clientSecret',
+            ],
+            'endpoints' => [
+                'authorize_url'    => 'authorizeUrl',
+                'access_token_url' => 'tokenUrl',
+                'user_info_url'    => 'userInfoUrl',
+            ],
+            'groups_claim'  => 'groupsClaim',
+            'group_mapping' => 'groupMapping',
+            'logout_url'    => 'logoutUrl',
+        ],
+        self::TYPE_OAUTH2 => [
+            'scope' => 'scope',
+            'keys' => [
+                'id'     => 'clientId',
+                'secret' => 'clientSecret',
+            ],
+            'endpoints' => [
+                'api_base_url'     => 'apiBaseUrl',
+                'authorize_url'    => 'authorizeUrl',
+                'access_token_url' => 'tokenUrl',
+                'profile_url'    => 'profileUrl',
+            ],
+            'profile_fields' => 'profileFields',
+            'groups_claim'  => 'groupsClaim',
+            'group_mapping' => 'groupMapping',
+            'logout_url'    => 'logoutUrl',
+        ],
+    ];
+
     /** @var string */
     private $appName;
     /** @var IRequest */
@@ -81,26 +135,19 @@ class ProviderService
         $this->socialConnect = $socialConnect;
     }
 
-    public function oauth($provider)
+    public function handleDefault($provider)
     {
-        $scopes = [];
         $config = [];
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
         if (is_array($providers) && in_array($provider, array_keys($providers))) {
             foreach ($providers as $name => $prov) {
                 if ($name === $provider) {
                     $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.oauth', ['provider' => $provider]);
-                    $config = [
+                    $config = array_merge([
                         'callback' => $callbackUrl,
-                        'keys'     => [
-                            'id'     => $prov['appid'],
-                            'secret' => $prov['secret'],
-                        ],
                         'default_group' => $prov['defaultGroup'],
-                    ];
-                    if (isset($scopes[$provider])) {
-                        $config['scope'] = $scopes[$provider];
-                    }
+                    ], $this->applyConfigMapping('default', $prov));
+
                     if (isset($prov['auth_params']) && is_array($prov['auth_params'])) {
                         foreach ($prov['auth_params'] as $k => $v) {
                             if (!empty($v)) {
@@ -115,102 +162,57 @@ class ProviderService
         return $this->auth(Provider::class.'\\'.ucfirst($provider), $config, $provider, 'OAuth');
     }
 
-    public function openid($provider)
+    public function handleCustom($type, $provider)
     {
         $config = [];
-        $providersType = 'openid';
         $providers = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
-        if (isset($providers[$providersType])) {
-            foreach ($providers[$providersType] as $prov) {
+        if (isset($providers[$type])) {
+            foreach ($providers[$type] as $prov) {
                 if ($prov['name'] === $provider) {
-                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.'.$providersType, ['provider' => $provider]);
-                    $config = [
+                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.'.$type, ['provider' => $provider]);
+                    $config = array_merge([
                         'callback'          => $callbackUrl,
-                        'openid_identifier' => $prov['url'],
                         'default_group'     => $prov['defaultGroup'],
-                    ];
-                    break;
-                }
-            }
-        }
-        return $this->auth(Provider\OpenID::class, $config, $provider, 'OpenID');
-    }
+                    ], $this->applyConfigMapping($type, $prov));
 
-    public function customOidc($provider)
-    {
-        $config = [];
-        $providersType = 'custom_oidc';
-        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
-        if (isset($providers[$providersType])) {
-            foreach ($providers[$providersType] as $prov) {
-                if ($prov['name'] === $provider) {
-                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.'.$providersType, ['provider' => $provider]);
-                    list($authUrl, $authQuery) = explode('?', $prov['authorizeUrl']) + [1 => null];
-                    $config = [
-                        'callback' => $callbackUrl,
-                        'scope' => $prov['scope'],
-                        'keys' => [
-                            'id'     => $prov['clientId'],
-                            'secret' => $prov['clientSecret'],
-                        ],
-                        'endpoints' => [
-                            'authorize_url'    => $authUrl,
-                            'access_token_url' => $prov['tokenUrl'],
-                            'user_info_url'    => $prov['userInfoUrl'],
-                        ],
-                        'default_group' => $prov['defaultGroup'],
-                        'groups_claim'  => isset($prov['groupsClaim']) ? $prov['groupsClaim'] : null,
-                        'group_mapping' => isset($prov['groupMapping']) ? $prov['groupMapping'] : null,
-                        'logout_url'    => isset($prov['logoutUrl']) ? $prov['logoutUrl'] : null,
-                    ];
-                    if ($authQuery) {
+                    if (isset($config['endpoints']['authorize_url']) && strpos($config['endpoints']['authorize_url'], '?') !== false) {
+                        list($authUrl, $authQuery) = explode('?', $config['endpoints']['authorize_url'], 2);
+                        $config['endpoints']['authorize_url'] = $authUrl;
                         parse_str($authQuery, $config['authorize_url_parameters']);
                     }
                     break;
                 }
             }
         }
-        return $this->auth(CustomOpenIDConnect::class, $config, $provider, 'OpenID Connect');
+        return $this->auth(self::TYPE_CLASSES[$type], $config, $provider);
     }
 
-    public function customOauth2($provider)
+    private function applyConfigMapping($mapping, $data)
     {
-        $config = [];
-        $providersType = 'custom_oauth2';
-        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
-        if (isset($providers[$providersType])) {
-            foreach ($providers[$providersType] as $prov) {
-                if ($prov['name'] === $provider) {
-                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.'.$providersType, ['provider' => $provider]);
-                    $config = [
-                        'callback' => $callbackUrl,
-                        'scope' => $prov['scope'],
-                        'keys' => [
-                            'id'     => $prov['clientId'],
-                            'secret' => $prov['clientSecret'],
-                        ],
-                        'endpoints' => [
-                            'api_base_url'     => $prov['apiBaseUrl'],
-                            'authorize_url'    => $prov['authorizeUrl'],
-                            'access_token_url' => $prov['tokenUrl'],
-                            'profile_url'      => $prov['profileUrl'],
-                        ],
-                        'profile_fields' => $prov['profileFields'],
-                        'default_group'  => $prov['defaultGroup'],
-                        'groups_claim'  => isset($prov['groupsClaim']) ? $prov['groupsClaim'] : null,
-                        'group_mapping' => isset($prov['groupMapping']) ? $prov['groupMapping'] : null,
-                        'logout_url'    => isset($prov['logoutUrl']) ? $prov['logoutUrl'] : null,
-                    ];
-                    break;
-                }
+        if (!is_array($mapping)) {
+            if (!isset($this->configMapping[$mapping])) {
+                throw new LoginException(sprintf('Unknown provider type: %s', $mapping));
+            }
+            $mapping = $this->configMapping[$mapping];
+        }
+        $result = [];
+        foreach ($mapping as $k => $v) {
+            if (is_array($v)) {
+                $result[$k] = $this->applyConfigMapping($v, $data);
+            } else {
+                $result[$k] = isset($data[$v]) ? $data[$v] : null;
             }
         }
-        return $this->auth(CustomOAuth2::class, $config, $provider, 'Custom OAuth2');
+        return $result;
     }
 
-    private function auth($class, array $config, $provider, $providerType)
+    private function auth($class, array $config, $provider, $providerType = null)
     {
         if (empty($config)) {
+            if (!$providerType) {
+                $providerType = explode('\\', $class);
+                $providerType = end($providerType);
+            }
             throw new LoginException($this->l->t('Unknown %s provider: "%s"', [$providerType, $provider]));
         }
         if ($redirectUrl = $this->request->getParam('login_redirect_url')) {
