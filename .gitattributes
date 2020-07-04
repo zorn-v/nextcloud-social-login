@@ -3,4 +3,4 @@
 /docs export-ignore
 /src export-ignore
 /package* export-ignore
-/node_modules
+/*.js export-ignore
