@@ -75,7 +75,6 @@ class ProviderService
                 'secret' => 'clientSecret',
             ],
             'endpoints' => [
-                'api_base_url'     => 'apiBaseUrl',
                 'authorize_url'    => 'authorizeUrl',
                 'access_token_url' => 'tokenUrl',
                 'profile_url'    => 'profileUrl',
