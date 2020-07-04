@@ -1,0 +1,87 @@
+$buttons: (
+  (facebook, #3c5a99, 14px, true),
+  (google, #DB4437, 23px, true),
+  (amazon, #ff9900, 26px, true),
+  (twitter, #1da1f2, 25px, true),
+  (GitHub, #333333, 23px, true),
+  (discord, #7289DA, 21px, true),
+  (QQ, #0052d9, 21px, true),
+  (slack, #611f69, 21px, true),
+
+  (gitlab, #3f3177, 24px, false),
+  (openid, #b3b3b3, 24px, false),
+  (paypal, #253B80, 21px, false),
+  (yahoo, #4d00ae, 31px, false),
+  (stackoverflow, #BCBBBB, 21px, false),
+  (salesforce, #009EDB, 29px, false),
+);
+
+#alternative-logins a.button {
+  &::before {
+    content: "";
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 18px;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+
+  @each $name, $color, $icon-width, $default in $buttons {
+    $selector: '';
+    @if $default {
+      $selector: '&[href*="/sociallogin/oauth/#{$name}"]';
+    } @else {
+      $selector: '&.#{$name}';
+    }
+    #{$selector} {
+      border: 0;
+      color: #ffffff;
+      background-color: $color;
+      &::before {
+        background-image: url("../img/button/#{to-lower-case($name)}.svg");
+        width: $icon-width;
+      }
+    }
+  }
+}
+
+
+/* Personal settings styles */
+.disconnect-logins {
+  a::before {
+    content: "";
+    width: 25px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    vertical-align: middle;
+    background-image: url(../img/close.svg);
+  }
+  a:hover {
+    color: var(--color-primary-element);
+  }
+  li {
+    margin-bottom: 5px;
+    &:last-child {
+      margin-bottom: 20px;
+    }
+    a {
+      font-size: 14px;
+    }
+  }
+}
+
+.sociallogin-connect #alternative-logins {
+  margin-bottom: 5px;
+  li {
+    height: unset;
+    display: inline-flex;
+    a {
+      padding: 12px 24px;
+      &:hover {
+        box-shadow: 2px 2px 3px #999;
+      }
+    }
+  }
+}

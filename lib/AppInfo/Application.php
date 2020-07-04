@@ -26,7 +26,7 @@ class Application extends App
 
     public function register()
     {
-        Util::addStyle($this->appName, 'style');
+        Util::addStyle($this->appName, 'styles');
         $l = $this->query(IL10N::class);
 
         $config = $this->query(IConfig::class);
