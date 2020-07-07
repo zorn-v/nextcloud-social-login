@@ -50,7 +50,7 @@ class AdminSettings implements ISettings
                 ];
             }
         }
-        $customProviders = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
+        $customProviders = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true);
 
         $params = [
             'app_name' => $this->appName,

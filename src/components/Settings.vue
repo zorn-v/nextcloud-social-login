@@ -118,6 +118,10 @@ export default {
     data.providerTypes = providerTypes
     data.styleClass = styleClass
 
+    if (!data.custom_providers) {
+      data.custom_providers = {}
+    }
+
     for (var provType in providerTypes) {
       if (!data.custom_providers[provType]) {
         data.custom_providers[provType] = []
