@@ -6,6 +6,7 @@ use Hybridauth\Provider;
 use Hybridauth\User\Profile;
 use Hybridauth\HttpClient\Curl;
 use OC\User\LoginException;
+use OCA\SocialLogin\Provider\CustomOAuth1;
 use OCA\SocialLogin\Provider\CustomOAuth2;
 use OCA\SocialLogin\Provider\CustomOpenIDConnect;
 use OCA\SocialLogin\Db\SocialConnectDAO;
