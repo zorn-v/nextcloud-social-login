@@ -434,8 +434,7 @@ class ProviderService
             }
         }
 
-
-        $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => '']);
+        $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => $user->getUID()]);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
 
         if ($redirectUrl = $this->session->get('login_redirect_url')) {
