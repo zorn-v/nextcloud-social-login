@@ -97,6 +97,7 @@ class ProviderService
             'profile_fields' => 'profileFields',
             'groups_claim'  => 'groupsClaim',
             'group_mapping' => 'groupMapping',
+            'matchByEmail' => 'matchByEmail',
             'logout_url'    => 'logoutUrl',
         ],
         self::TYPE_OIDC => [
@@ -325,6 +326,12 @@ class ProviderService
         $uid = $provider.'-'.$profileId;
         if (strlen($uid) > 64 || !preg_match('#^[a-z0-9_.@-]+$#i', $profileId)) {
             $uid = $provider.'-'.md5($profileId);
+        }
+		if ($config['matchByEmail'] == "on") {
+			$users = $this->userManager->getByEmail($profile->email);
+			if (null !== $users && count($users) == 1) {
+				$uid = $users[0]->getUID();
+			}
         }
         return $this->login($uid, $profile, $provider.'-');
     }
