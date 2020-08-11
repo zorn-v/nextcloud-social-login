@@ -118,6 +118,11 @@ export default {
         type: 'text',
         required: false,
       },
+      matchByEmail: {
+        title: 'Identify users by email',
+        type: 'checkbox',
+        required: false,
+      },
       profileFields: {
         title: 'Profile Fields (optional, comma-separated)',
         type: 'text',
