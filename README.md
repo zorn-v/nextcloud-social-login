@@ -71,3 +71,13 @@ If you want to temporary disable this function (e.g. for login as local admin), 
 You can copy link from specific login button on login page and paste it on provider's website as callback url!
 Some users may get strange reply(Callback) url error from provider even if you pasted the right url, that's because your nextcloud server may generate http urls when you are actually using https.
 Please set 'overwriteprotocol' => 'https', in your config.php file.
+
+### Url Redirects Used:
+* https://example.com/apps/sociallogin/oauth/facebook
+* https://example.com/apps/sociallogin/oauth/google
+* https://example.com/apps/sociallogin/oauth/amazon
+* https://example.com/apps/sociallogin/oauth/twitter
+* https://example.com/apps/sociallogin/oauth/GitHub
+* https://example.com/apps/sociallogin/oauth/discord
+* https://example.com/apps/sociallogin/oauth/QQ
+* https://example.com/apps/sociallogin/oauth/slack
