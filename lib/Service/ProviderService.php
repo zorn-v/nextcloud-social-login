@@ -22,6 +22,7 @@ use OCP\IUserSession;
 use OCP\IUserManager;
 use OCP\Mail\IMailer;
 use OCP\Util;
+use OC\Accounts\AccountManager;
 
 class ProviderService
 {
@@ -142,6 +143,8 @@ class ProviderService
     private $mailer;
     /** @var SocialConnectDAO */
     private $socialConnect;
+    /** @var AccountManager */
+    private $accountManager;
 
 
     public function __construct(
@@ -157,7 +160,8 @@ class ProviderService
         ISession $session,
         IL10N $l,
         IMailer $mailer,
-        SocialConnectDAO $socialConnect
+        SocialConnectDAO $socialConnect,
+        AccountManager $accountManager
     ) {
         $this->appName = $appName;
         $this->request = $request;
@@ -172,6 +176,7 @@ class ProviderService
         $this->l = $l;
         $this->mailer = $mailer;
         $this->socialConnect = $socialConnect;
+        $this->accountManager = $accountManager;
     }
 
     public function getAuthUrl($name, $appId)
@@ -433,7 +438,13 @@ class ProviderService
                 $group->addUser($user);
             }
         }
-
+        
+        if(isset($profile->address)){
+            $account = $this->accountManager->getUser($user);
+            $account['address']['value'] = $profile->address;
+            $this->accountManager->updateUser($user,$account);
+        }
+        
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => '']);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
 
