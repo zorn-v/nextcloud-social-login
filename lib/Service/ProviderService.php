@@ -10,6 +10,7 @@ use OCA\SocialLogin\Provider\CustomOAuth1;
 use OCA\SocialLogin\Provider\CustomOAuth2;
 use OCA\SocialLogin\Provider\CustomOpenIDConnect;
 use OCA\SocialLogin\Db\SocialConnectDAO;
+use OCP\Accounts\IAccountManager;
 use OCP\AppFramework\Http\RedirectResponse;
 use OCP\IAvatarManager;
 use OCP\IConfig;
@@ -22,7 +23,6 @@ use OCP\IUserSession;
 use OCP\IUserManager;
 use OCP\Mail\IMailer;
 use OCP\Util;
-use OC\Accounts\AccountManager;
 
 class ProviderService
 {
@@ -143,7 +143,7 @@ class ProviderService
     private $mailer;
     /** @var SocialConnectDAO */
     private $socialConnect;
-    /** @var AccountManager */
+    /** @var IAccountManager */
     private $accountManager;
 
 
@@ -161,7 +161,7 @@ class ProviderService
         IL10N $l,
         IMailer $mailer,
         SocialConnectDAO $socialConnect,
-        AccountManager $accountManager
+        IAccountManager $accountManager
     ) {
         $this->appName = $appName;
         $this->request = $request;
@@ -433,18 +433,18 @@ class ProviderService
 
             }
 
+            if (isset($profile->address)) {
+                $account = $this->accountManager->getUser($user);
+                $account['address']['value'] = $profile->address;
+                $this->accountManager->updateUser($user, $account);
+            }
+
             $defaultGroup = $profile->data['default_group'];
             if ($defaultGroup && $group = $this->groupManager->get($defaultGroup)) {
                 $group->addUser($user);
             }
         }
-        
-        if(isset($profile->address)){
-            $account = $this->accountManager->getUser($user);
-            $account['address']['value'] = $profile->address;
-            $this->accountManager->updateUser($user,$account);
-        }
-        
+
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => '']);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
 
