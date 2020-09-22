@@ -68,6 +68,7 @@ If you want to temporary disable this function (e.g. for login as local admin), 
 ## Hint
 
 ### About Callback(Reply) Url
-You can copy link from specific login button on login page and paste it on provider's website as callback url!
+You can copy link from specific login button on login page and paste it on provider's website as callback url. To make proper button visible, just fill certain provider settings with random data and change it later.
+
 Some users may get strange reply(Callback) url error from provider even if you pasted the right url, that's because your nextcloud server may generate http urls when you are actually using https.
 Please set 'overwriteprotocol' => 'https', in your config.php file.
