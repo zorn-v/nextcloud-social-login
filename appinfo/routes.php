@@ -28,5 +28,7 @@ return [
         ['name' => 'login#oauth', 'url' => '/oauth/{provider}', 'verb' => 'GET'],
         ['name' => 'login#custom', 'url' => '/{type}/{provider}', 'verb' => 'GET'],
         ['name' => 'login#custom', 'url' => '/{type}/{provider}', 'postfix' => '.post', 'verb' => 'GET'],
+    ], 'ocs' => [
+        ['name' => 'link#connectSocialLogin', 'url' => '/api/connect/{uid}', 'verb' => 'POST'],
     ]
 ];
