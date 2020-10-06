@@ -30,5 +30,6 @@ return [
         ['name' => 'login#custom', 'url' => '/{type}/{provider}', 'postfix' => '.post', 'verb' => 'GET'],
     ], 'ocs' => [
         ['name' => 'link#connectSocialLogin', 'url' => '/api/connect/{uid}', 'verb' => 'POST'],
+        ['name' => 'link#disconnectSocialLogin', 'url' => '/api/connect/{uid}', 'verb' => 'DELETE'],
     ]
 ];
