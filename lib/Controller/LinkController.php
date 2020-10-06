@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OCA\Provisioning_API\Controller;
+namespace OCA\SocialLogin\Controller;
 
 use OCA\SocialLogin\Db\SocialConnectDAO;
 use OCP\AppFramework\Http;
