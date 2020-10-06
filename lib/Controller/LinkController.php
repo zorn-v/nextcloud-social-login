@@ -12,8 +12,8 @@ use OCP\IAppConfig;
 use OCP\IConfig;
 use OCP\IRequest;
 
-class LinkController extends OCSController {
-
+class LinkController extends OCSController
+{
     /** @var SocialConnectDAO */
     private $socialConnect;
 
@@ -29,21 +29,23 @@ class LinkController extends OCSController {
     /**
      * @PasswordConfirmationRequired
      * @param string $uid
-     * @param string $login
+     * @param string $identifier
      * @return DataResponse
      */
-    public function connectSocialLogin($uid, $login): DataResponse {
-        $this->socialConnect->connectLogin($uid, $login);
+    public function connectSocialLogin($uid, $identifier): DataResponse
+    {
+        $this->socialConnect->connectLogin($uid, $identifier);
         return new DataResponse();
     }
 
     /**
      * @PasswordConfirmationRequired
-     * @param string $uid
+     * @param string $identifier
      * @return DataResponse
      */
-    public function connectSocialLogin($uid): DataResponse {
-        $this->socialConnect->disconnectLogin($uid);
+    public function disconnectSocialLogin($identifier): DataResponse
+    {
+        $this->socialConnect->disconnectLogin($identifier);
         return new DataResponse();
     }
 }

@@ -15,8 +15,9 @@ return [
         ['name' => 'login#oauth', 'url' => '/oauth/{provider}', 'verb' => 'GET'],
         ['name' => 'login#custom', 'url' => '/{type}/{provider}', 'verb' => 'GET'],
         ['name' => 'login#custom', 'url' => '/{type}/{provider}', 'postfix' => '.post', 'verb' => 'POST'],
-    ], 'ocs' => [
+    ],
+    'ocs' => [
         ['name' => 'link#connectSocialLogin', 'url' => '/api/connect/{uid}', 'verb' => 'POST'],
-        ['name' => 'link#disconnectSocialLogin', 'url' => '/api/connect/{uid}', 'verb' => 'DELETE'],
+        ['name' => 'link#disconnectSocialLogin', 'url' => '/api/connect/{identifier}', 'verb' => 'DELETE'],
     ]
 ];
