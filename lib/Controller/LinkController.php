@@ -36,4 +36,14 @@ class LinkController extends OCSController {
         $this->socialConnect->connectLogin($uid, $login);
         return new DataResponse();
     }
+
+    /**
+     * @PasswordConfirmationRequired
+     * @param string $uid
+     * @return DataResponse
+     */
+    public function connectSocialLogin($uid): DataResponse {
+        $this->socialConnect->disconnectLogin($uid);
+        return new DataResponse();
+    }
 }
