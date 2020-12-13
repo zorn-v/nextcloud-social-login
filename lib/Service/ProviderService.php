@@ -293,6 +293,16 @@ class ProviderService
             $this->session->set('login_redirect_url', $redirectUrl);
         }
 
+        $curlOptions = [];
+        $httpClientConfig = $this->config->getSystemValue('social_login_http_client', []);
+        if (isset($httpClientConfig['timeout'])) {
+            $curlOptions[CURLOPT_TIMEOUT] = $httpClientConfig['timeout'];
+            $curlOptions[CURLOPT_CONNECTTIMEOUT] = $httpClientConfig['timeout'];
+        }
+        if ($curlOptions) {
+            $config['curl_options'] = $curlOptions;
+        }
+
         try {
             $adapter = new $class($config, null, $this->storage);
             $adapter->authenticate();
