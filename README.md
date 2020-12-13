@@ -65,6 +65,14 @@ You can use comma separated list for multiple domains
 You can use `'social_login_auto_redirect' => true` setting in `config.php` for auto redirect unauthorized users to social login if only one provider is configured.
 If you want to temporary disable this function (e.g. for login as local admin), you can add `noredir=1` query parameter in url for login page. Something like `https://cloud.domain.com/login?noredir=1`
 
+To set timeout for http client, you can use
+```php
+  'social_login_http_client' => [
+    'timeout' => 45,
+  ],
+```
+in `config.php`
+
 ## Hint
 
 ### About Callback(Reply) Url
