@@ -422,8 +422,9 @@ class ProviderService
                     if ($groupMapping && isset($groupMapping[$v])) {
                         $syncGroupNames[] = $groupMapping[$v];
                     }
-                    if ($autoCreateGroups) {
-                        $syncGroupNames[] = $newGroupPrefix.$v;
+                    $autoGroup = $newGroupPrefix.$v;
+                    if ($autoCreateGroups || $this->groupManager->groupExists($autoGroup)) {
+                        $syncGroupNames[] = $autoGroup;
                     }
                 }
 
