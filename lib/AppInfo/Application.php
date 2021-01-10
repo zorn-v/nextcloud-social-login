@@ -8,6 +8,7 @@ use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IConfig;
 use OCP\IL10N;
 use OCP\IRequest;
@@ -16,6 +17,8 @@ use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\IUserManager;
 use OCP\IUserSession;
+use OCP\User\Events\BeforeUserDeletedEvent;
+use OCP\User\Events\UserLoggedOutEvent;
 use OCP\Util;
 
 class Application extends App implements IBootstrap
@@ -38,7 +41,10 @@ class Application extends App implements IBootstrap
 
         $l = $this->query(IL10N::class);
         $config = $this->query(IConfig::class);
-        $this->query(IUserManager::class)->listen('\OC\User', 'preDelete', [$this, 'preDeleteUser']);
+
+        $dispatcher = $this->query(IEventDispatcher::class);
+        $dispatcher->addListener(BeforeUserDeletedEvent::class, [$this, 'preDeleteUser']);
+
         $userSession = $this->query(IUserSession::class);
         if ($userSession->isLoggedIn()) {
             $uid = $userSession->getUser()->getUID();
@@ -47,7 +53,7 @@ class Application extends App implements IBootstrap
                 $session->set('last-password-confirm', time());
             }
             if ($logoutUrl = $session->get('sociallogin_logout_url')) {
-                $userSession->listen('\OC\User', 'postLogout', function () use ($logoutUrl) {
+                $dispatcher->addListener(UserLoggedOutEvent::class, function () use ($logoutUrl) {
                     header('Location: ' . $logoutUrl);
                     exit();
                 });
@@ -101,8 +107,9 @@ class Application extends App implements IBootstrap
         }
     }
 
-    public function preDeleteUser(IUser $user)
+    public function preDeleteUser(BeforeUserDeletedEvent $event)
     {
+        $user = $event->getUser();
         $this->query(SocialConnectDAO::class)->disconnectAll($user->getUID());
     }
 
