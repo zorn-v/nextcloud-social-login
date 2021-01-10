@@ -63,7 +63,7 @@
         </template>
       </div>
     </div>
-
+    <hr/><br/>
     <div class="provider-settings" v-for="(provider, name) in providers" :key="name">
       <h2 class="provider-title">
         <img :src="imagePath(name.toLowerCase())" /> {{ name[0].toUpperCase() + name.substring(1) }}

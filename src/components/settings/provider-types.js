@@ -1,4 +1,60 @@
 export default {
+  custom_oidc: {
+    title: 'Custom OpenID Connect',
+    hasGroupMapping: true,
+    fields: {
+      name: {
+        title: 'Internal name',
+        type: 'text',
+        required: true,
+      },
+      title: {
+        title: 'Title',
+        type: 'text',
+        required: true,
+      },
+      authorizeUrl: {
+        title: 'Authorize url',
+        type: 'url',
+        required: true,
+      },
+      tokenUrl: {
+        title: 'Token url',
+        type: 'url',
+        required: true,
+      },
+      userInfoUrl: {
+        title: 'User info URL (optional)',
+        type: 'url',
+        required: false,
+      },
+      logoutUrl: {
+        title: 'Logout URL (optional)',
+        type: 'url',
+        required: false,
+      },
+      clientId: {
+        title: 'Client Id',
+        type: 'text',
+        required: true,
+      },
+      clientSecret: {
+        title: 'Client Secret',
+        type: 'password',
+        required: true,
+      },
+      scope: {
+        title: 'Scope',
+        type: 'text',
+        required: true,
+      },
+      groupsClaim: {
+        title: 'Groups claim (optional)',
+        type: 'text',
+        required: false,
+      },
+    }
+  },
   openid: {
     title: 'OpenID',
     fields: {
@@ -15,51 +71,6 @@ export default {
       url: {
         title: 'Identifier url',
         type: 'url',
-        required: true,
-      },
-    }
-  },
-  custom_oauth1: {
-    title: 'Custom OAuth1',
-    fields: {
-      name: {
-        title: 'Internal name',
-        type: 'text',
-        required: true,
-      },
-      title: {
-        title: 'Title',
-        type: 'text',
-        required: true,
-      },
-      authorizeUrl: {
-        title: 'Authorize url',
-        type: 'text',
-        required: true,
-      },
-      tokenUrl: {
-        title: 'Token url',
-        type: 'text',
-        required: true,
-      },
-      profileUrl: {
-        title: 'Profile url',
-        type: 'text',
-        required: true,
-      },
-      logoutUrl: {
-        title: 'Logout URL (optional)',
-        type: 'url',
-        required: false,
-      },
-      clientId: {
-        title: 'Consumer key',
-        type: 'text',
-        required: true,
-      },
-      clientSecret: {
-        title: 'Consumer Secret',
-        type: 'password',
         required: true,
       },
     }
@@ -130,9 +141,8 @@ export default {
       },
     }
   },
-  custom_oidc: {
-    title: 'Custom OpenID Connect',
-    hasGroupMapping: true,
+  custom_oauth1: {
+    title: 'Custom OAuth1',
     fields: {
       name: {
         title: 'Internal name',
@@ -146,18 +156,18 @@ export default {
       },
       authorizeUrl: {
         title: 'Authorize url',
-        type: 'url',
+        type: 'text',
         required: true,
       },
       tokenUrl: {
         title: 'Token url',
-        type: 'url',
+        type: 'text',
         required: true,
       },
-      userInfoUrl: {
-        title: 'User info URL (optional)',
-        type: 'url',
-        required: false,
+      profileUrl: {
+        title: 'Profile url',
+        type: 'text',
+        required: true,
       },
       logoutUrl: {
         title: 'Logout URL (optional)',
@@ -165,24 +175,14 @@ export default {
         required: false,
       },
       clientId: {
-        title: 'Client Id',
+        title: 'Consumer key',
         type: 'text',
         required: true,
       },
       clientSecret: {
-        title: 'Client Secret',
+        title: 'Consumer Secret',
         type: 'password',
         required: true,
-      },
-      scope: {
-        title: 'Scope',
-        type: 'text',
-        required: true,
-      },
-      groupsClaim: {
-        title: 'Groups claim (optional)',
-        type: 'text',
-        required: false,
       },
     }
   },
