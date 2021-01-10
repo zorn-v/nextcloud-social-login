@@ -458,6 +458,7 @@ class ProviderService
 
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => '']);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
+        $this->userSession->createRememberMeToken($user);
 
         if ($redirectUrl = $this->session->get('login_redirect_url')) {
             return new RedirectResponse($redirectUrl);
