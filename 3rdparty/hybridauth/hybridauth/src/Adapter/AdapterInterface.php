@@ -19,14 +19,14 @@ interface AdapterInterface
     /**
      * Initiate the appropriate protocol and process/automate the authentication or authorization flow.
      *
-     * @return bool|null
+     * @return boolean|null
      */
     public function authenticate();
 
     /**
      * Returns TRUE if the user is connected
      *
-     * @return bool
+     * @return boolean
      */
     public function isConnected();
 

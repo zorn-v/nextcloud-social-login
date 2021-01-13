@@ -17,10 +17,11 @@ use Hybridauth\Data\Collection;
  */
 class Patreon extends OAuth2
 {
+
     /**
      * {@inheritdoc}
      */
-    protected $scope = 'identity identity[email]';
+    public $scope = 'identity identity[email]';
 
     /**
      * {@inheritdoc}
@@ -40,21 +41,14 @@ class Patreon extends OAuth2
     /**
      * {@inheritdoc}
      */
-    protected $apiDocumentation = 'https://docs.patreon.com/#oauth';
-
-    /**
-     * {@inheritdoc}
-     */
     protected function initialize()
     {
         parent::initialize();
 
-        if ($this->isRefreshTokenAvailable()) {
-            $this->tokenRefreshParameters += [
-                'client_id' => $this->clientId,
-                'client_secret' => $this->clientSecret,
-            ];
-        }
+        $this->tokenRefreshParameters += [
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+        ];
     }
 
     /**

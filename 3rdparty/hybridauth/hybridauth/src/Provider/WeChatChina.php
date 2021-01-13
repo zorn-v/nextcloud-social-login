@@ -12,6 +12,7 @@ namespace Hybridauth\Provider;
  */
 class WeChatChina extends WeChat
 {
+
     /**
      * {@inheritdoc}
      */

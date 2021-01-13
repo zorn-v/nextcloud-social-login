@@ -10,14 +10,14 @@ namespace Hybridauth\Provider;
 use Hybridauth\Adapter\OpenID;
 
 /**
- * StackExchange OpenID provider adapter.
+ * Yahoo OpenID provider adapter.
  */
-class StackExchangeOpenID extends OpenID
+class YahooOpenID extends OpenID
 {
     /**
     * {@inheritdoc}
     */
-    protected $openidIdentifier = 'https://openid.stackexchange.com/';
+    protected $openidIdentifier = 'https://open.login.yahooapis.com/openid20/www.yahoo.com/xrds';
 
     /**
     * {@inheritdoc}
@@ -28,7 +28,7 @@ class StackExchangeOpenID extends OpenID
 
         $userProfile = $this->storage->get($this->providerId . '.user');
 
-        $userProfile->identifier    = !empty($userProfile->identifier) ? $userProfile->identifier : $userProfile->email;
+        $userProfile->identifier    = $userProfile->email;
         $userProfile->emailVerified = $userProfile->email;
 
         // re store the user profile

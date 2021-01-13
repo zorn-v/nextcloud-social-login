@@ -13,19 +13,17 @@ use Hybridauth\Data;
 use Hybridauth\User;
 
 /**
- * Twitter OAuth1 provider adapter.
- * Uses OAuth1 not OAuth2 because many Twitter endpoints are built around OAuth1.
+ * Twitter provider adapter.
  *
  * Example:
  *
  *   $config = [
- *       'callback' => Hybridauth\HttpClient\Util::getCurrentUrl(),
- *       'keys' => ['key' => '', 'secret' => ''], // OAuth1 uses 'key' not 'id'
- *       'authorize' => true // Needed to perform actions on behalf of users (see below link)
- *         // https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
+ *       'callback'  => Hybridauth\HttpClient\Util::getCurrentUrl(),
+ *       'keys'      => [ 'key' => '', 'secret' => '' ], // OAuth1 uses 'key' not 'id'
+ *       'authorize' => true
  *   ];
  *
- *   $adapter = new Hybridauth\Provider\Twitter($config);
+ *   $adapter = new Hybridauth\Provider\Twitter( $config );
  *
  *   try {
  *       $adapter->authenticate();
@@ -34,7 +32,8 @@ use Hybridauth\User;
  *       $tokens = $adapter->getAccessToken();
  *       $contacts = $adapter->getUserContacts(['screen_name' =>'andypiper']); // get those of @andypiper
  *       $activity = $adapter->getUserActivity('me');
- *   } catch (\Exception $e) {
+ *   }
+ *   catch( Exception $e ){
  *       echo $e->getMessage() ;
  *   }
  */
@@ -82,9 +81,7 @@ class Twitter extends OAuth1
      */
     public function getUserProfile()
     {
-        $response = $this->apiRequest('account/verify_credentials.json', 'GET', [
-            'include_email' => $this->config->get('include_email') === false ? 'false' : 'true',
-        ]);
+        $response = $this->apiRequest('account/verify_credentials.json?include_email=true');
 
         $data = new Data\Collection($response);
 
@@ -94,28 +91,28 @@ class Twitter extends OAuth1
 
         $userProfile = new User\Profile();
 
-        $userProfile->identifier = $data->get('id_str');
-        $userProfile->displayName = $data->get('screen_name');
-        $userProfile->description = $data->get('description');
-        $userProfile->firstName = $data->get('name');
-        $userProfile->email = $data->get('email');
+        $userProfile->identifier    = $data->get('id_str');
+        $userProfile->displayName   = $data->get('screen_name');
+        $userProfile->description   = $data->get('description');
+        $userProfile->firstName     = $data->get('name');
+        $userProfile->email         = $data->get('email');
         $userProfile->emailVerified = $data->get('email');
-        $userProfile->webSiteURL = $data->get('url');
-        $userProfile->region = $data->get('location');
+        $userProfile->webSiteURL    = $data->get('url');
+        $userProfile->region        = $data->get('location');
 
-        $userProfile->profileURL = $data->exists('screen_name')
-            ? ('http://twitter.com/' . $data->get('screen_name'))
-            : '';
+        $userProfile->profileURL    = $data->exists('screen_name')
+                                        ? ('http://twitter.com/' . $data->get('screen_name'))
+                                        : '';
 
         $photoSize = $this->config->get('photo_size') ?: 'original';
         $photoSize = $photoSize === 'original' ? '' : "_{$photoSize}";
-        $userProfile->photoURL = $data->exists('profile_image_url_https')
-            ? str_replace('_normal', $photoSize, $data->get('profile_image_url_https'))
-            : '';
+        $userProfile->photoURL      = $data->exists('profile_image_url_https')
+                                        ? str_replace('_normal', $photoSize, $data->get('profile_image_url_https'))
+                                        : '';
 
         $userProfile->data = [
-            'followed_by' => $data->get('followers_count'),
-            'follows' => $data->get('friends_count'),
+          'followed_by' => $data->get('followers_count'),
+          'follows' => $data->get('friends_count'),
         ];
 
         return $userProfile;
@@ -126,13 +123,13 @@ class Twitter extends OAuth1
      */
     public function getUserContacts($parameters = [])
     {
-        $parameters = ['cursor' => '-1'] + $parameters;
+        $parameters = [ 'cursor' => '-1'] + $parameters;
 
         $response = $this->apiRequest('friends/ids.json', 'GET', $parameters);
 
         $data = new Data\Collection($response);
 
-        if (!$data->exists('ids')) {
+        if (! $data->exists('ids')) {
             throw new UnexpectedApiResponseException('Provider API returned an unexpected response.');
         }
 
@@ -143,10 +140,10 @@ class Twitter extends OAuth1
         $contacts = [];
 
         // 75 id per time should be okey
-        $contactsIds = array_chunk((array)$data->get('ids'), 75);
+        $contactsIds = array_chunk((array) $data->get('ids'), 75);
 
         foreach ($contactsIds as $chunk) {
-            $parameters = ['user_id' => implode(',', $chunk)];
+            $parameters = [ 'user_id' => implode(',', $chunk) ];
 
             try {
                 $response = $this->apiRequest('users/lookup.json', 'GET', $parameters);
@@ -175,14 +172,14 @@ class Twitter extends OAuth1
 
         $userContact = new User\Contact();
 
-        $userContact->identifier = $item->get('id_str');
+        $userContact->identifier  = $item->get('id_str');
         $userContact->displayName = $item->get('name');
-        $userContact->photoURL = $item->get('profile_image_url');
+        $userContact->photoURL    = $item->get('profile_image_url');
         $userContact->description = $item->get('description');
 
-        $userContact->profileURL = $item->exists('screen_name')
-            ? ('http://twitter.com/' . $item->get('screen_name'))
-            : '';
+        $userContact->profileURL  = $item->exists('screen_name')
+                                        ? ('http://twitter.com/' . $item->get('screen_name'))
+                                        : '';
 
         return $userContact;
     }
@@ -219,8 +216,8 @@ class Twitter extends OAuth1
     public function getUserActivity($stream = 'me')
     {
         $apiUrl = ($stream == 'me')
-            ? 'statuses/user_timeline.json'
-            : 'statuses/home_timeline.json';
+                    ? 'statuses/user_timeline.json'
+                    : 'statuses/home_timeline.json';
 
         $response = $this->apiRequest($apiUrl);
 
@@ -247,17 +244,17 @@ class Twitter extends OAuth1
 
         $userActivity = new User\Activity();
 
-        $userActivity->id = $item->get('id_str');
+        $userActivity->id   = $item->get('id_str');
         $userActivity->date = $item->get('created_at');
         $userActivity->text = $item->get('text');
 
-        $userActivity->user->identifier = $item->filter('user')->get('id_str');
-        $userActivity->user->displayName = $item->filter('user')->get('name');
-        $userActivity->user->photoURL = $item->filter('user')->get('profile_image_url');
+        $userActivity->user->identifier   = $item->filter('user')->get('id_str');
+        $userActivity->user->displayName  = $item->filter('user')->get('name');
+        $userActivity->user->photoURL     = $item->filter('user')->get('profile_image_url');
 
-        $userActivity->user->profileURL = $item->filter('user')->get('screen_name')
-            ? ('http://twitter.com/' . $item->filter('user')->get('screen_name'))
-            : '';
+        $userActivity->user->profileURL   = $item->filter('user')->get('screen_name')
+                                                ? ('http://twitter.com/' . $item->filter('user')->get('screen_name'))
+                                                : '';
 
         return $userActivity;
     }
