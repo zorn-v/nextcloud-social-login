@@ -35,6 +35,11 @@ Also nested claims is supported. For example `resource_access.client-id.roles` f
 }
 ```
 
+There is also support for setting the displayName:
+```
+{"roles": [{gid: 1, displayName: "admin"}, {gid: 2, displayName: "user"}]}
+```
+
 
 You can use provider groups in two ways:
 
