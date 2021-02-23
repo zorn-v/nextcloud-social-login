@@ -422,16 +422,13 @@ class ProviderService
                     if(is_object($v)) {
                         $group = $v;
                     } else {
-                        $group = (object) array('gid' => $v, 'displayName' => $v);
+                        $group = (object) array('gid' => $v);
                     }
 
                     if ($groupMapping && isset($groupMapping[$group->gid])) {
-                        $syncGroups[] = $groupMapping[$group->gid];
+                        $syncGroups[] = (object) array('gid' => $groupMapping[$group->gid]);
                     }
                     $autoGroup = $newGroupPrefix.$group->gid;
-                    if($group->gid == $group->displayName) {
-                        $group->displayName = $autoGroup;
-                    }
                     $group->gid = $autoGroup;
                     if ($autoCreateGroups || $this->groupManager->groupExists($group->gid)) {
                         $syncGroups[] = $group;
@@ -449,7 +446,10 @@ class ProviderService
                 foreach ($syncGroups as $group) {
                     if ($newGroup = $this->groupManager->createGroup($group->gid)) {
                         $newGroup->addUser($user);
-                        $newGroup->setDisplayName($group->displayName);
+
+                        if(isset($group->displayName)) {
+                            $newGroup->setDisplayName($group->displayName);
+                        }
                     }
                 }
 
