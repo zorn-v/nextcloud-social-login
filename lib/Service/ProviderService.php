@@ -412,33 +412,44 @@ class ProviderService
             }
 
             if (isset($profile->data['groups']) && is_array($profile->data['groups'])) {
-                $groupNames = $profile->data['groups'];
+                $groups = $profile->data['groups'];
                 $groupMapping = isset($profile->data['group_mapping']) ? $profile->data['group_mapping'] : null;
                 $userGroups = $this->groupManager->getUserGroups($user);
                 $autoCreateGroups = $this->config->getAppValue($this->appName, 'auto_create_groups');
-                $syncGroupNames = [];
+                $syncGroups = [];
 
-                foreach ($groupNames as $k => $v) {
-                    if ($groupMapping && isset($groupMapping[$v])) {
-                        $syncGroupNames[] = $groupMapping[$v];
+                foreach ($groups as $k => $v) {
+                    if(is_object($v)) {
+                        $group = $v;
+                    } else {
+                        $group = (object) array('gid' => $v, 'displayName' => $v);
                     }
-                    $autoGroup = $newGroupPrefix.$v;
-                    if ($autoCreateGroups || $this->groupManager->groupExists($autoGroup)) {
-                        $syncGroupNames[] = $autoGroup;
+
+                    if ($groupMapping && isset($groupMapping[$group->gid])) {
+                        $syncGroups[] = $groupMapping[$group->gid];
+                    }
+                    $autoGroup = $newGroupPrefix.$group->gid;
+                    if($group->gid == $group->displayName) {
+                        $group->displayName = $autoGroup;
+                    }
+                    $group->gid = $autoGroup;
+                    if ($autoCreateGroups || $this->groupManager->groupExists($group->gid)) {
+                        $syncGroups[] = $group;
                     }
                 }
 
                 if (!$this->config->getAppValue($this->appName, 'no_prune_user_groups')) {
                     foreach ($userGroups as $group) {
-                        if (!in_array($group->getGID(), $syncGroupNames)) {
+                        if (!in_array($group->getGID(), array_column($syncGroups, 'gid'))) {
                             $group->removeUser($user);
                         }
                     }
                 }
 
-                foreach ($syncGroupNames as $groupName) {
-                    if ($group = $this->groupManager->createGroup($groupName)) {
-                        $group->addUser($user);
+                foreach ($syncGroups as $group) {
+                    if ($newGroup = $this->groupManager->createGroup($group->gid)) {
+                        $newGroup->addUser($user);
+                        $newGroup->setDisplayName($group->displayName);
                     }
                 }
 
