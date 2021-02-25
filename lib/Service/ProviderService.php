@@ -420,6 +420,9 @@ class ProviderService
 
                 foreach ($groups as $k => $v) {
                     if(is_object($v)) {
+                        if(!isset($v->gid)) {
+                            continue;
+                        }
                         $group = $v;
                     } else {
                         $group = (object) array('gid' => $v);
