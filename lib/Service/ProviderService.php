@@ -423,6 +423,9 @@ class ProviderService
                         if(!isset($v->gid)) {
                             continue;
                         }
+                        if (empty($v->gid)) {
+                            continue;
+                        }
                         $group = $v;
                     } else {
                         $group = (object) array('gid' => $v);
