@@ -94,6 +94,13 @@
           <input type="text" :name="'providers['+name+'][auth_params][hd]'" :value="provider.auth_params ? provider.auth_params.hd : ''"/>
         </label>
       </template>
+      <template v-if="name === 'GitHub'">
+        <br/>
+        <label>
+          {{ t('Allow login only for specified organizations') }}<br/>
+          <input type="text" :name="'providers['+name+'][orgs]'" :value="provider.orgs"/>
+        </label>
+      </template>
     </div>
     <br/>
 
