@@ -437,10 +437,7 @@ class ProviderService
 
                 foreach ($groups as $k => $v) {
                     if(is_object($v)) {
-                        if(!isset($v->gid)) {
-                            continue;
-                        }
-                        if (empty($v->gid)) {
+                        if(empty($v->gid) && $v->gid !== '0' && $v->gid !== 0) {
                             continue;
                         }
                         $group = $v;
