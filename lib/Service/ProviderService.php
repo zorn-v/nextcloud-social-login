@@ -217,7 +217,7 @@ class ProviderService
                     $config = array_merge([
                         'callback' => $callbackUrl,
                         'default_group' => $prov['defaultGroup'],
-                        'orgs' => $prov['orgs'],
+                        'orgs' => $prov['orgs'] ?? null,
                     ], $this->applyConfigMapping('default', $prov));
 
                     if (isset($prov['auth_params']) && is_array($prov['auth_params'])) {
@@ -327,19 +327,20 @@ class ProviderService
             }
         }
 
-        if (!empty($config['orgs'])) {
+        if ($provider === 'GitHub' && !empty($config['orgs'])) {
             $allowedOrgs = array_map('trim', explode(',', $config['orgs']));
             $username = $adapter->apiRequest('user')->login;
-            foreach ($allowedOrgs as $org) {
-                try {
-                    $adapter->apiRequest('orgs/'.$org.'/members/'.$username);
-                    goto pass;
-                } catch (\Exception $e) {}
-            }
-
-            $this->storage->clear();
-            throw new LoginException($this->l->t('Login is available only to members of the following GitHub organizations: %s', $config['orgs']));
-            pass: ;
+            $checkOrgs = function () use ($adapter, $allowedOrgs, $username, $config) {
+                foreach ($allowedOrgs as $org) {
+                    try {
+                        $adapter->apiRequest('orgs/'.$org.'/members/'.$username);
+                        return;
+                    } catch (\Exception $e) {}
+                }
+                $this->storage->clear();
+                throw new LoginException($this->l->t('Login is available only to members of the following GitHub organizations: %s', $config['orgs']));
+            };
+            $checkOrgs();
         }
 
         if (!empty($config['logout_url'])) {

@@ -14,6 +14,7 @@ OC.L10N.register(
     "None": "Отсутствует",
     "Save": "Сохранить",
     "Allow login only from specified domain": "Позволять вход только с указаного домена",
+    "Allow login only for specified organizations": "Позволять вход только для организаций",
 
     "Settings for social login successfully saved": "Настройки social login успешно сохранены",
     "Do you realy want to remove {providerTitle} provider ?": "Вы действительно хотите удалить поставщика {providerTitle} ?",

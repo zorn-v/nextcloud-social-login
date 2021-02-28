@@ -12,6 +12,7 @@
   "Social login connect is disabled": "Привязки социальных логинов отключены",
   "Email already registered": "Пользователь с таким email уже зарегистрирован",
   "Login from %s domain is not allowed for %s provider": "Вход с домена %s не разрешен для поставщика %s",
+  "Login is available only to members of the following GitHub organizations: %s": "Вход разрешен только для членов следующих GitHub организаций: %s",
   "Disable password confirmation on settings change": "Отключить подтверждение паролем изменения настроек",
   "New user created": "Создан новый пользователь",
   "Your user group is not allowed to login, please contact support": "Вход для вашей группы пользователей запрещен, пожалуйста свяжитесь с техподдержкой",
