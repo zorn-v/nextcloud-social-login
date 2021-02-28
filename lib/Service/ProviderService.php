@@ -436,8 +436,8 @@ class ProviderService
                 $syncGroups = [];
 
                 foreach ($groups as $k => $v) {
-                    if(is_object($v)) {
-                        if(empty($v->gid) && $v->gid !== '0' && $v->gid !== 0) {
+                    if (is_object($v)) {
+                        if (empty($v->gid) && $v->gid !== '0' && $v->gid !== 0) {
                             continue;
                         }
                         $group = $v;
