@@ -36,6 +36,7 @@ class ProviderService
         'auto_create_groups',
         'restrict_users_wo_mapped_groups',
         'disable_notify_admins',
+        'hide_default_login',
     ];
     const DEFAULT_PROVIDERS = [
         'google',

@@ -8,4 +8,5 @@ export default {
   auto_create_groups: 'Automatically create groups if they do not exists',
   restrict_users_wo_mapped_groups: 'Restrict login for users without mapped groups',
   disable_notify_admins: 'Disable notify admins about new users',
+  hide_default_login: 'Hide default login (can be made visible with /login?showDefault=true)',
 }
