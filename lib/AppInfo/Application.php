@@ -111,6 +111,10 @@ class Application extends App implements IBootstrap
             && $config->getAppValue($this->appName, 'hide_default_login');
         if ($hideDefaultLogin && $request->getPathInfo() === '/login') {
             Util::addStyle($this->appName, 'hide_default_login');
+            \OC_App::registerLogin([
+                'href' => '#body-login',
+                'name' => $l->t('Log in with username or email'),
+            ]);
         }
     }
 
