@@ -17,6 +17,7 @@
   "New user created": "Neuer Benutzer angelegt",
   "Your user group is not allowed to login, please contact support": "Ihre Benutzergruppe darf sich nicht anmelden, bitte kontaktieren Sie den technischen Support",
   "User %s (%s) just created via social login": "Benutzer %s (%s) wurde gerade via Social Login angelegt",
-  "Log in with %s": "Anmelden mit %s"
+  "Log in with %s": "Anmelden mit %s",
+  "Log in with username or email": "Mit Benutzernamen oder Passwort anmelden"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }

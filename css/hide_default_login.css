@@ -1,1 +1,4 @@
 #body-login main div:first-child {display:none}
+#body-login a[href*='#body-login'] {background-color:inherit;color:#fff;font-size:inherit;font-weight:inherit}
+#body-login:target main div:first-child {display:inherit}
+#body-login:target a[href*='#body-login'] {display:none}
