@@ -36,7 +36,7 @@ $buttons: (
     }
     #{$selector} {
       border: 0;
-      color: #ffffff;
+      color: #ffffff !important;
       background-color: $color;
       &::before {
         background-image: url("../img/button/#{to-lower-case($name)}.svg");
