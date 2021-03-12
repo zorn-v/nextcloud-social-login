@@ -10,7 +10,9 @@ Login to your NextCloud installation as an administrator and under "Apps" click 
 
 See below for setup and configuration instructions.
 
+## Custom OAuth2
 
+User identifier (optional) - Identifier that will be used to create an account for the authenticated user. Retrieved from the resource server specified via the Profile url field
 
 ## Custom OAuth2/OIDC groups
 

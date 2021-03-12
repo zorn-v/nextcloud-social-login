@@ -26,6 +26,10 @@ class CustomOAuth2 extends OAuth2
         }
 
         $response = $this->apiRequest($profileUrl);
+        $userIdentifier = $this->config->get('user_identifier');
+        if(!isset($response->identifier) && isset($userIdentifier)) {
+            $response->identifier = $response->$userIdentifier;
+        }
         if (!isset($response->identifier) && isset($response->id)) {
             $response->identifier = $response->id;
         }

@@ -139,6 +139,11 @@ export default {
         type: 'text',
         required: false,
       },
+      userIdentifier: {
+        title: 'User identifier (optional)',
+        type: 'text',
+        required: false,
+      },
     }
   },
   custom_oauth1: {
