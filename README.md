@@ -93,7 +93,8 @@ To find out how to configure other providers, just configure them in the GUI and
 ```
 mysql -u nextcloud -p nextcloud
 Password: <yourpassword>
-select * FROM oc_appconfig WHERE appid='sociallogin';
+
+> SELECT * FROM oc_appconfig WHERE appid='sociallogin';
 ```
 
 ## Hint
