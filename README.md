@@ -87,7 +87,7 @@ You can configure everything from commandline by using the occ utility. To setup
 ```bash
 php occ config:app:set sociallogin custom_providers --value='{"custom_oidc": [{"name": "gitlab_oidc", "title": "Gitlab", "authorizeUrl": "https://gitlab.my-domain.org/oauth/authorize", "tokenUrl": "https://gitlab.my-domain.org/oauth/token", "userInfoUrl": "https://gitlab.my-domain.org/oauth/userinfo", "logoutUrl": "", "clientId": "$my_application_id", "clientSecret": "$my_super_secret_secret", "scope": "openid", "groupsClaim": "groups", "style": "gitlab", "defaultGroup": ""}]}'
 ```
-to do this with docker you just need to add `docker exec -t -u33 $containername` in front of the command, or run it interactively from `docker exec -it -u33 $containername /bin/bash`
+to do this with docker you just need to add `docker exec -t -uwww-data CONTAINER_NAME` in front of the command, or run it interactively from `docker exec -it -uwww-data CONTAINER_NAME sh`
 
 To find out how to configure other providers, just configure them in the GUI and take a look at the database afterwards:
 ```
@@ -95,6 +95,7 @@ mysql -u nextcloud -p nextcloud
 Password: <yourpassword>
 select * FROM oc_appconfig WHERE appid='sociallogin';
 ```
+
 ## Hint
 
 ### About Callback(Reply) Url
