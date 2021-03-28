@@ -48,6 +48,7 @@ class ProviderService
         'QQ',
         'slack',
         'telegram',
+        'mailru',
     ];
 
     const TYPE_OPENID = 'openid';
