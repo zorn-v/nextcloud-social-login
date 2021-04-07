@@ -107,6 +107,7 @@ class Application extends App implements IBootstrap
         }
 
         $hideDefaultLogin = $providersCount > 0
+            && PHP_SAPI !== 'cli'
             && !$request->getParam('showDefault')
             && $config->getAppValue($this->appName, 'hide_default_login');
         if ($hideDefaultLogin && $request->getPathInfo() === '/login') {
