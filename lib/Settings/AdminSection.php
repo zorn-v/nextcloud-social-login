@@ -51,9 +51,9 @@ class AdminSection implements IIconSection
     }
 
     /**
-	 * {@inheritdoc}
-	 */
-	public function getIcon() {
-		return $this->urlGenerator->imagePath('core', 'categories/social.svg');
-	}
+     * {@inheritdoc}
+     */
+    public function getIcon() {
+        return $this->urlGenerator->imagePath('core', 'categories/social.svg');
+    }
 }

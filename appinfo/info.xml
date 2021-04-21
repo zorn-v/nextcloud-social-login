@@ -19,11 +19,11 @@
         <nextcloud min-version="20" max-version="99" />
     </dependencies>
     <settings>
-    	<admin>OCA\SocialLogin\Settings\AdminSettings</admin>
+        <admin>OCA\SocialLogin\Settings\AdminSettings</admin>
         <admin-section>OCA\SocialLogin\Settings\AdminSection</admin-section>
         <personal>OCA\SocialLogin\Settings\PersonalSettings</personal>
         <personal-section>OCA\SocialLogin\Settings\AdminSection</personal-section>
-  	</settings>
+    </settings>
     <repair-steps>
         <post-migration>
             <step>OCA\SocialLogin\Migration\SeparateProvidersNameAndTitle</step>

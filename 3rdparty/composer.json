@@ -1,12 +1,12 @@
 {
-	"name": "sociallogin/3rdparty",
-	"description": "3rdparty components for sociallogin",
-	"config": {
-		"vendor-dir": ".",
-		"optimize-autoloader": true,
-		"classmap-authoritative": true
-	},
-	"require": {
-		"hybridauth/hybridauth": "3.3.0"
-	}
+    "name": "sociallogin/3rdparty",
+    "description": "3rdparty components for sociallogin",
+    "config": {
+        "vendor-dir": ".",
+        "optimize-autoloader": true,
+        "classmap-authoritative": true
+    },
+    "require": {
+        "hybridauth/hybridauth": "3.3.0"
+    }
 }

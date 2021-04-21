@@ -12,9 +12,9 @@ class ConnectedLoginMapper extends QBMapper {
     }
 
     /**
-	 * @param string $identifier social login identifier
-	 * @return ConnectedLogin|null
-	 */
+     * @param string $identifier social login identifier
+     * @return ConnectedLogin|null
+     */
     public function find(string $identifier) {
         $qb = $this->db->getQueryBuilder();
 
@@ -26,12 +26,12 @@ class ConnectedLoginMapper extends QBMapper {
 
         try {
             return $this->findEntity($qb);
-		} catch(Db\DoesNotExistException $e) {
-			return null;
-		} catch(Db\MultipleObjectsReturnedException $e) {
-			\OC::$server->getLogger()->warn("Got multiple objects when querying for connected login. This should not happen! " . $e, ['app' => 'sociallogin']);
-			return null;
-		}
+        } catch(Db\DoesNotExistException $e) {
+            return null;
+        } catch(Db\MultipleObjectsReturnedException $e) {
+            \OC::$server->getLogger()->warn("Got multiple objects when querying for connected login. This should not happen! " . $e, ['app' => 'sociallogin']);
+            return null;
+        }
     }
 
     /**
@@ -62,11 +62,11 @@ class ConnectedLoginMapper extends QBMapper {
     public function disconnectLogin($identifier)
     {
         $qb = $this->db->getQueryBuilder();
-		$qb->delete($this->tableName)
-			->where(
-				$qb->expr()->eq('identifier', $qb->createNamedParameter($identifier))
-			);
-		$qb->execute();
+        $qb->delete($this->tableName)
+            ->where(
+                $qb->expr()->eq('identifier', $qb->createNamedParameter($identifier))
+            );
+        $qb->execute();
     }
 
     /**
@@ -76,11 +76,11 @@ class ConnectedLoginMapper extends QBMapper {
     {
         $qb = $this->db->getQueryBuilder();
 
-		$qb->delete($this->tableName)
-			->where(
-				$qb->expr()->eq('uid', $qb->createNamedParameter($uid))
-			);
-		$qb->execute();
+        $qb->delete($this->tableName)
+            ->where(
+                $qb->expr()->eq('uid', $qb->createNamedParameter($uid))
+            );
+        $qb->execute();
     }
 
     /**
