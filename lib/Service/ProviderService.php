@@ -9,7 +9,7 @@ use OC\User\LoginException;
 use OCA\SocialLogin\Provider\CustomOAuth1;
 use OCA\SocialLogin\Provider\CustomOAuth2;
 use OCA\SocialLogin\Provider\CustomOpenIDConnect;
-use OCA\SocialLogin\Db\SocialConnectDAO;
+use OCA\SocialLogin\Db\ConnectedLoginMapper;
 use OCP\Accounts\IAccountManager;
 use OCP\AppFramework\Http\RedirectResponse;
 use OCP\IAvatarManager;
@@ -143,7 +143,7 @@ class ProviderService
     private $l;
     /** @var IMailer */
     private $mailer;
-    /** @var SocialConnectDAO */
+    /** @var ConnectedLoginMapper */
     private $socialConnect;
     /** @var IAccountManager */
     private $accountManager;
@@ -162,7 +162,7 @@ class ProviderService
         ISession $session,
         IL10N $l,
         IMailer $mailer,
-        SocialConnectDAO $socialConnect,
+        ConnectedLoginMapper $socialConnect,
         IAccountManager $accountManager
     ) {
         $this->appName = $appName;

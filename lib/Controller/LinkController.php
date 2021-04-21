@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OCA\SocialLogin\Controller;
 
-use OCA\SocialLogin\Db\SocialConnectDAO;
+use OCA\SocialLogin\Db\ConnectedLoginMapper;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\OCSController;
@@ -14,13 +14,13 @@ use OCP\IRequest;
 
 class LinkController extends OCSController
 {
-    /** @var SocialConnectDAO */
+    /** @var ConnectedLoginMapper */
     private $socialConnect;
 
     public function __construct(
         $appName,
         IRequest $request,
-        SocialConnectDAO $socialConnect
+        ConnectedLoginMapper $socialConnect
     ) {
         parent::__construct($appName, $request);
         $this->socialConnect = $socialConnect;

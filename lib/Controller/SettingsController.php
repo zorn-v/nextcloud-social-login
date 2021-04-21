@@ -12,7 +12,7 @@ use OCP\IConfig;
 use OCP\IURLGenerator;
 use OCP\IUserSession;
 use OCP\Util;
-use OCA\SocialLogin\Db\SocialConnectDAO;
+use OCA\SocialLogin\Db\ConnectedLoginMapper;
 
 class SettingsController extends Controller
 {
@@ -24,7 +24,7 @@ class SettingsController extends Controller
     private $userSession;
     /** @var IL10N */
     private $l;
-    /** @var SocialConnectDAO */
+    /** @var ConnectedLoginMapper */
     private $socialConnect;
 
     public function __construct(
@@ -34,7 +34,7 @@ class SettingsController extends Controller
         IURLGenerator $urlGenerator,
         IUserSession $userSession,
         IL10N $l,
-        SocialConnectDAO $socialConnect
+        ConnectedLoginMapper $socialConnect
     ) {
         parent::__construct($appName, $request);
         $this->config = $config;

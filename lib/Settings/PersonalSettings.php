@@ -2,7 +2,7 @@
 
 namespace OCA\SocialLogin\Settings;
 
-use OCA\SocialLogin\Db\SocialConnectDAO;
+use OCA\SocialLogin\Db\ConnectedLoginMapper;
 use OCA\SocialLogin\Service\ProviderService;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IConfig;
@@ -21,7 +21,7 @@ class PersonalSettings implements ISettings
     private $urlGenerator;
     /** @var IUserSession */
     private $userSession;
-    /** @var SocialConnectDAO */
+    /** @var ConnectedLoginMapper */
     private $socialConnect;
     /** @var ProviderService */
     private $providerService;
@@ -31,7 +31,7 @@ class PersonalSettings implements ISettings
         IConfig $config,
         IURLGenerator $urlGenerator,
         IUserSession $userSession,
-        SocialConnectDAO $socialConnect,
+        ConnectedLoginMapper $socialConnect,
         ProviderService $providerService
     ) {
         $this->appName = $appName;

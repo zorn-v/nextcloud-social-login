@@ -2,7 +2,7 @@
 
 namespace OCA\SocialLogin\AppInfo;
 
-use OCA\SocialLogin\Db\SocialConnectDAO;
+use OCA\SocialLogin\Db\ConnectedLoginMapper;
 use OCA\SocialLogin\Service\ProviderService;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
@@ -122,7 +122,7 @@ class Application extends App implements IBootstrap
     public function preDeleteUser(BeforeUserDeletedEvent $event)
     {
         $user = $event->getUser();
-        $this->query(SocialConnectDAO::class)->disconnectAll($user->getUID());
+        $this->query(ConnectedLoginMapper::class)->disconnectAll($user->getUID());
     }
 
     private function query($className)
