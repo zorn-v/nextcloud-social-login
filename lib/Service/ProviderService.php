@@ -120,15 +120,15 @@ class ProviderService
     ];
 
     /** @var string */
-    private $appName;
+    protected $appName;
     /** @var IRequest */
     private $request;
     /** @var IConfig */
-    private $config;
+    protected $config;
     /** @var IURLGenerator */
     private $urlGenerator;
     /** @var SessionStorage */
-    private $storage;
+    protected $storage;
     /** @var IUserManager */
     private $userManager;
     /** @var IUserSession */
@@ -208,10 +208,14 @@ class ProviderService
         return $authUrl;
     }
 
+    private function getDefaultProviders() {
+        return json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
+    }
+
     public function handleDefault($provider)
     {
         $config = [];
-        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
+        $providers = $this->getDefaultProviders();
         if (is_array($providers) && in_array($provider, array_keys($providers))) {
             foreach ($providers as $name => $prov) {
                 if ($name === $provider) {
@@ -236,27 +240,37 @@ class ProviderService
         return $this->auth(Provider::class.'\\'.ucfirst($provider), $config, $provider, 'OAuth');
     }
 
+    protected function getCustomProviders() {
+        return json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
+    }
+
+    protected function generateCustomProviderConfig($type, $providerConfig) {
+        $config = [];
+        $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom', [
+            'type'=> $type,
+            'provider' => $providerConfig['name']
+        ]);
+        $config = array_merge([
+            'callback'          => $callbackUrl,
+            'default_group'     => $providerConfig['defaultGroup'],
+        ], $this->applyConfigMapping($type, $providerConfig));
+
+        if (isset($config['endpoints']['authorize_url']) && strpos($config['endpoints']['authorize_url'], '?') !== false) {
+            list($authUrl, $authQuery) = explode('?', $config['endpoints']['authorize_url'], 2);
+            $config['endpoints']['authorize_url'] = $authUrl;
+            parse_str($authQuery, $config['authorize_url_parameters']);
+        }
+        return $config;
+    }
+
     public function handleCustom($type, $provider)
     {
         $config = [];
-        $providers = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
+        $providers = $this->getCustomProviders();
         if (isset($providers[$type])) {
             foreach ($providers[$type] as $prov) {
                 if ($prov['name'] === $provider) {
-                    $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.custom', [
-                        'type'=> $type,
-                        'provider' => $provider
-                    ]);
-                    $config = array_merge([
-                        'callback'          => $callbackUrl,
-                        'default_group'     => $prov['defaultGroup'],
-                    ], $this->applyConfigMapping($type, $prov));
-
-                    if (isset($config['endpoints']['authorize_url']) && strpos($config['endpoints']['authorize_url'], '?') !== false) {
-                        list($authUrl, $authQuery) = explode('?', $config['endpoints']['authorize_url'], 2);
-                        $config['endpoints']['authorize_url'] = $authUrl;
-                        parse_str($authQuery, $config['authorize_url_parameters']);
-                    }
+                    $config = $this->generateCustomProviderConfig($type, $prov);
                     break;
                 }
             }
@@ -283,7 +297,7 @@ class ProviderService
         return $result;
     }
 
-    private function auth($class, array $config, $provider, $providerType = null)
+    protected function auth($class, array $config, $provider, $providerType = null)
     {
         if (empty($config)) {
             if (!$providerType) {

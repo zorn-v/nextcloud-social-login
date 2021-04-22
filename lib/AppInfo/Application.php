@@ -33,6 +33,11 @@ class Application extends App implements IBootstrap
     public function register(IRegistrationContext $context): void
     {
         require __DIR__ . '/../../3rdparty/autoload.php';
+
+        $context->registerEventListener(
+            'OCA\DAV\Connector\Sabre::authInit',
+            '\OCA\SocialLogin\WebDav\DAVBearerAuthBackend'
+        );
     }
 
     public function boot(IBootContext $context): void

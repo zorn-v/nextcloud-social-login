@@ -7,6 +7,9 @@
         "classmap-authoritative": true
     },
     "require": {
-        "hybridauth/hybridauth": "3.3.0"
+        "hybridauth/hybridauth": "3.3.0",
+        "firebase/php-jwt": "^5.2",
+        "lcobucci/jwt": "^4.1",
+        "lcobucci/clock": "^2.0"
     }
 }

@@ -53,6 +53,21 @@ export default {
         type: 'text',
         required: false,
       },
+      webdavEnabled: {
+        title: 'Allow WebDav login? (optional)',
+        type: 'checkbox',
+        required: false,
+      },
+      issuer: {
+        title: 'Issuer (required by WebDav login)',
+        type: 'text',
+        required: false,
+      },
+      jwks_uri: {
+        title: 'JWKS URI (required by WebDav login)',
+        type: 'text',
+        required: false,
+      },
     }
   },
   openid: {
