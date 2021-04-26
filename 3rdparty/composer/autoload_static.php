@@ -25,6 +25,7 @@ class ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f
         'Hybridauth\\Adapter\\AbstractAdapter' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Adapter/AbstractAdapter.php',
         'Hybridauth\\Adapter\\AdapterInterface' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Adapter/AdapterInterface.php',
         'Hybridauth\\Adapter\\DataStoreTrait' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Adapter/DataStoreTrait.php',
+        'Hybridauth\\Adapter\\Discourse' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Adapter/Discourse.php',
         'Hybridauth\\Adapter\\OAuth1' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Adapter/OAuth1.php',
         'Hybridauth\\Adapter\\OAuth2' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Adapter/OAuth2.php',
         'Hybridauth\\Adapter\\OpenID' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Adapter/OpenID.php',
