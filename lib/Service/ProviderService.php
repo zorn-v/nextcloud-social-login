@@ -5,6 +5,7 @@ namespace OCA\SocialLogin\Service;
 use Hybridauth\Provider;
 use Hybridauth\User\Profile;
 use Hybridauth\HttpClient\Curl;
+use OC\Authentication\Token\DefaultTokenProvider;
 use OC\User\LoginException;
 use OCA\SocialLogin\Provider\CustomOAuth1;
 use OCA\SocialLogin\Provider\CustomOAuth2;
@@ -147,6 +148,8 @@ class ProviderService
     private $socialConnect;
     /** @var IAccountManager */
     private $accountManager;
+    /** @var DefaultTokenProvider */
+    private $tokenProvider;
 
 
     public function __construct(
@@ -163,7 +166,8 @@ class ProviderService
         IL10N $l,
         IMailer $mailer,
         ConnectedLoginMapper $socialConnect,
-        IAccountManager $accountManager
+        IAccountManager $accountManager,
+        DefaultTokenProvider $tokenProvider
     ) {
         $this->appName = $appName;
         $this->request = $request;
@@ -179,6 +183,7 @@ class ProviderService
         $this->mailer = $mailer;
         $this->socialConnect = $socialConnect;
         $this->accountManager = $accountManager;
+        $this->tokenProvider = $tokenProvider;
     }
 
     public function getAuthUrl($name, $appId)
@@ -489,6 +494,7 @@ class ProviderService
             }
         }
 
+		$this->userSession->setTokenProvider($this->tokenProvider);
         $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => '']);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
         $this->userSession->createRememberMeToken($user);
