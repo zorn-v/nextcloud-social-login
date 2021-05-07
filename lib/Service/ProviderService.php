@@ -494,10 +494,16 @@ class ProviderService
             }
         }
 
+        $this->userSession->getSession()->regenerateId();
 		$this->userSession->setTokenProvider($this->tokenProvider);
-        $this->userSession->completeLogin($user, ['loginName' => $user->getUID(), 'password' => '']);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
-        $this->userSession->createRememberMeToken($user);
+
+        $token = $tokenProvider->getToken($this->userSession->getSession()->getId());
+        $this->userSession->completeLogin($user, [
+            'loginName' => $user->getUID(),
+            'password' => '',
+            'token' => $token,
+        ], false);
 
         if ($redirectUrl = $this->session->get('login_redirect_url')) {
             return new RedirectResponse($redirectUrl);
