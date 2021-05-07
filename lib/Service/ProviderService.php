@@ -498,7 +498,7 @@ class ProviderService
 		$this->userSession->setTokenProvider($this->tokenProvider);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
 
-        $token = $tokenProvider->getToken($this->userSession->getSession()->getId());
+        $token = $this->tokenProvider->getToken($this->userSession->getSession()->getId());
         $this->userSession->completeLogin($user, [
             'loginName' => $user->getUID(),
             'password' => '',
