@@ -396,6 +396,7 @@ class ProviderService
         }
 
         $updateUserProfile = $this->config->getAppValue($this->appName, 'update_profile_on_login');
+        $userPassword = '';
 
         if (null === $user) {
             if ($this->config->getAppValue($this->appName, 'disable_registration')) {
@@ -407,8 +408,8 @@ class ProviderService
             ) {
                 throw new LoginException($this->l->t('Email already registered'));
             }
-            $password = substr(base64_encode(random_bytes(64)), 0, 30);
-            $user = $this->userManager->createUser($uid, $password);
+            $userPassword = substr(base64_encode(random_bytes(64)), 0, 30);
+            $user = $this->userManager->createUser($uid, $userPassword);
 
             if ($this->config->getAppValue($this->appName, 'create_disabled_users')) {
                 $user->setEnabled(false);
@@ -501,9 +502,12 @@ class ProviderService
         $token = $this->tokenProvider->getToken($this->userSession->getSession()->getId());
         $this->userSession->completeLogin($user, [
             'loginName' => $user->getUID(),
-            'password' => '',
-            'token' => $token,
+            'password' => $userPassword,
+            'token' => $userPassword ? null : $token,
         ], false);
+
+        //Workaround to create user files folder. Remove it later.
+        \OC::$server->query(\OCP\Files\IRootFolder::class)->getUserFolder($user->getUID());
 
         if ($redirectUrl = $this->session->get('login_redirect_url')) {
             return new RedirectResponse($redirectUrl);
