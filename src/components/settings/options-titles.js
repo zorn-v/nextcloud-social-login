@@ -7,6 +7,7 @@ export default {
   no_prune_user_groups: 'Do not prune not available user groups on login',
   auto_create_groups: 'Automatically create groups if they do not exists',
   restrict_users_wo_mapped_groups: 'Restrict login for users without mapped groups',
+  restrict_users_wo_assigned_groups: 'Restrict login for users without assigned groups',
   disable_notify_admins: 'Disable notify admins about new users',
   hide_default_login: 'Hide default login (can be made visible with /login?showDefault=true)',
 }

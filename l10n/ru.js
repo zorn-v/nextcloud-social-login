@@ -9,6 +9,7 @@ OC.L10N.register(
     "Do not prune not available user groups on login": "Не вычищать недоступные пользователю группы при логине",
     "Automatically create groups if they do not exists": "Автоматически создавать несуществующие группы",
     "Restrict login for users without mapped groups": "Запрещать вход пользователям без ассоциированных групп",
+    "Restrict login for users without assigned groups": "Запрещать вход пользователям без установленных групп",
     "Disable notify admins about new users": "Отключить оповещение администраторов о новых пользователях",
 
     "None": "Отсутствует",

@@ -36,6 +36,7 @@ class ProviderService
         'no_prune_user_groups',
         'auto_create_groups',
         'restrict_users_wo_mapped_groups',
+        'restrict_users_wo_assigned_groups',
         'disable_notify_admins',
         'hide_default_login',
     ];
@@ -385,6 +386,10 @@ class ProviderService
             $currentUid = $this->userSession->getUser()->getUID();
             $this->socialConnect->connectLogin($currentUid, $uid);
             return new RedirectResponse($this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section'=>'sociallogin']));
+        }
+
+        if ($this->config->getAppValue($this->appName, 'restrict_users_wo_assigned_groups') && empty($profile->data['groups'])) {
+            throw new LoginException($this->l->t('Users without assigned groups is not allowed to login, please contact support'));
         }
 
         if ($this->config->getAppValue($this->appName, 'restrict_users_wo_mapped_groups') && isset($profile->data['group_mapping'])) {
