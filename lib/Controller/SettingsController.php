@@ -51,16 +51,17 @@ class SettingsController extends Controller
 
         $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
 
-        try {
-            $names = array_keys($providers);
-            foreach ($custom_providers as $provType => $provs) {
-                $this->checkProviders($provs, $names);
-                $custom_providers[$provType] = array_values($provs);
+        if (is_array($custom_providers)) {
+            try {
+                $names = array_keys($providers);
+                foreach ($custom_providers as $provType => $provs) {
+                    $this->checkProviders($provs, $names);
+                    $custom_providers[$provType] = array_values($provs);
+                }
+            } catch (\Exception $e) {
+                return new JSONResponse(['message' => $e->getMessage()]);
             }
-        } catch (\Exception $e) {
-            return new JSONResponse(['message' => $e->getMessage()]);
         }
-
         $this->config->setAppValue($this->appName, 'custom_providers', json_encode($custom_providers));
 
         return new JSONResponse(['success' => true]);
