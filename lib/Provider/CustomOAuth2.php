@@ -26,14 +26,16 @@ class CustomOAuth2 extends OAuth2
         }
 
         $response = $this->apiRequest($profileUrl);
-        if (!isset($response->identifier) && isset($response->id)) {
-            $response->identifier = $response->id;
+        if (!isset($response->identifier)) {
+            $response->identifier = $response->id
+                ?? $response->ID
+                ?? $response->data->id
+                ?? $response->user_id
+                ?? null
+            ;
         }
-        if (!isset($response->identifier) && isset($response->data->id)) {
-            $response->identifier = $response->data->id;
-        }
-        if (!isset($response->identifier) && isset($response->user_id)) {
-            $response->identifier = $response->user_id;
+        if (!isset($response->displayName)) {
+            $response->displayName = $response->username ?? null;
         }
 
         $data = new Data\Collection($response);
