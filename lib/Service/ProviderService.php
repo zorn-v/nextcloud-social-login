@@ -373,8 +373,14 @@ class ProviderService
     {
         $user = $this->userManager->get($uid);
         if (null === $user) {
-            $connectedUid = $this->socialConnect->findUID($uid);
-            $user = $this->userManager->get($connectedUid);
+            // search user by email
+            if (count($this->userManager->getByEmail($profile->email)) === 1) {
+                $user = $this->userManager->getByEmail($profile->email)[0];
+            }
+            else {
+                $connectedUid = $this->socialConnect->findUID($uid);
+                $user = $this->userManager->get($connectedUid);
+            }
         }
         if ($this->userSession->isLoggedIn()) {
             if (!$this->config->getAppValue($this->appName, 'allow_login_connect')) {
