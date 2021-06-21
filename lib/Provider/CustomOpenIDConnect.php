@@ -54,6 +54,9 @@ class CustomOpenIDConnect extends CustomOAuth2
             $userProfile->data['groups']
         )) {
             $profile = new Data\Collection( $this->apiRequest($userInfoUrl) );
+            if (empty($userProfile->identifier)) {
+                $userProfile->identifier = $profile->get('sub');
+            }
             if (empty($userProfile->displayName)) {
                 $userProfile->displayName = $profile->get('preferred_username') ?: $profile->get('nickname') ?: $profile->get('name');
             }
