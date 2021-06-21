@@ -54,6 +54,18 @@ class CustomOpenIDConnect extends CustomOAuth2
             $userProfile->data['groups']
         )) {
             $profile = new Data\Collection( $this->apiRequest($userInfoUrl) );
+            if (empty($userProfile->identifier)) {
+                $userProfile->identifier = $profile->get('sub');
+                $userProfile->displayName = $profile->get('preferred_username') ?: $profile->get('nickname') ?: $profile->get('name');
+                $userProfile->photoURL = $profile->get('picture') ?: $profile->get('avatar');
+                if (preg_match('#<img.+src=["\'](.+?)["\']#', $userProfile->photoURL, $m)) {
+                    $userProfile->photoURL = $m[1];
+                }
+                $userProfile->email = $profile->get('email');
+                if (null !== $groups = $this->getGroups($profile)) {
+                    $userProfile->data['groups'] = $groups;
+                }
+            }
             if (empty($userProfile->displayName)) {
                 $userProfile->displayName = $profile->get('preferred_username') ?: $profile->get('nickname') ?: $profile->get('name');
             }
