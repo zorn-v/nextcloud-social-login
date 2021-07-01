@@ -58,7 +58,7 @@ class CustomOpenIDConnect extends CustomOAuth2
                 $userProfile->photoURL = $m[1];
             }
             $userProfile->email = $profile->get('email');
-            if (null !== $groups = $this->getGroups($profile)) {
+            if (empty($userProfile->data['groups']) && null !== $groups = $this->getGroups($profile)) {
                 $userProfile->data['groups'] = $groups;
             }
         }
