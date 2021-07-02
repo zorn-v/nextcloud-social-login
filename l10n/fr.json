@@ -17,7 +17,7 @@
   "User %s (%s) just created via social login": "L'utilisateur %s (%s) vient d'être créé avec Social Login",
   "Login from %s domain is not allowed for %s provider": "La connexion depuis le domaine %s n'est pas autorisée pour le fournisseur %s",
   "Login is available only to members of the following GitHub organizations: %s": "La connexion est disponible uniquement pour les membres des organisations GitHub suivantes : %s",
-  "Log in with %s": "Connexion avec %s"
+  "Log in with %s": "Connexion avec %s",
   "Log in with username or email": "Connexion avec nom d'utilisateur ou e-mail"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }
