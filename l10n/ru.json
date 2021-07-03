@@ -18,6 +18,7 @@
   "Your user group is not allowed to login, please contact support": "Вход для вашей группы пользователей запрещен, пожалуйста свяжитесь с техподдержкой",
   "Users without assigned groups is not allowed to login, please contact support'": "Вход пользователей без группы запрещен, пожалуйста свяжитесь с техподдержкой",
   "User %s (%s) just created via social login": "Пользователь %s (%s) создан через social login",
+  "Log in with username or email": "Войти через имя пользователя или email",
   "Log in with %s": "Войти через %s"
 },"pluralForm" :"nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);"
 }
