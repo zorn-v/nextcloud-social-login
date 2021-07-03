@@ -70,12 +70,14 @@ class Application extends App implements IBootstrap
         $authUrl = '';
         $providers = json_decode($config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
         foreach ($providers as $name => $provider) {
-            if ($provider['appid'] && $authUrl = $providerService->getAuthUrl($name, $provider['appid'])) {
+            if ($provider['appid']) {
                 ++$providersCount;
-                \OC_App::registerLogIn([
-                    'href' => $authUrl,
-                    'name' => $l->t('Log in with %s', ucfirst($name)),
-                ]);
+                if ($authUrl = $providerService->getAuthUrl($name, $provider['appid'])) {
+                    \OC_App::registerLogIn([
+                        'href' => $authUrl,
+                        'name' => $l->t('Log in with %s', ucfirst($name)),
+                    ]);
+                }
             }
         }
 
