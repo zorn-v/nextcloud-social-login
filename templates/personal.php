@@ -16,14 +16,16 @@
         <?php endforeach ?>
     </ul>
     <h3><?php p($l->t('Available providers')) ?></h3>
-    <ul id="alternative-logins">
-        <?php foreach ($_['providers'] as $title => $data): ?>
-        <li>
-            <a class="button primary <?php p(isset($data['style']) ? $data['style'] : '') ?>" href="<?php print_unescaped($data['url']) ?>">
-                <?php p($title) ?>
-            </a>
-        </li>
-        <?php endforeach ?>
-    </ul>
+    <main>
+        <ul id="alternative-logins">
+            <?php foreach ($_['providers'] as $title => $data): ?>
+            <li>
+                <a class="button primary <?php p(isset($data['style']) ? $data['style'] : '') ?>" href="<?php print_unescaped($data['url']) ?>">
+                    <?php p($title) ?>
+                </a>
+            </li>
+            <?php endforeach ?>
+        </ul>
+    </main>
     <?php endif ?>
 </div>

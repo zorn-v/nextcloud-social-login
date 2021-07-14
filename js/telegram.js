@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var redirectUrl = tgData.dataset.redirectUrl
 
   var mainEl = document.getElementsByTagName('main')[0]
-  if (mainEl && document.querySelector('form[name="login"]')) {
+  if (mainEl && (document.querySelector('form[name="login"]') || document.querySelector('.section.sociallogin-connect'))) {
     var script = document.createElement('script')
     script.src = 'https://telegram.org/js/telegram-widget.js?9'
     script.dataset.size = 'large'
