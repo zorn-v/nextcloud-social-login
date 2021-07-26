@@ -436,7 +436,7 @@ class ProviderService
                 $curl = new Curl();
                 try {
                     $photo = $curl->request($profile->photoURL);
-                    $avatar = $this->avatarManager->getAvatar($uid);
+                    $avatar = $this->avatarManager->getAvatar($user->getUid());
                     $avatar->set($photo);
                 } catch (\Exception $e) {}
             }
