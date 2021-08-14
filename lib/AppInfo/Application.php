@@ -96,7 +96,8 @@ class Application extends App implements IBootstrap
                 ]);
                 SocialLogin::addLogin(
                     $l->t('Log in with %s', $provider['title']),
-                    $authUrl, $provider['style'] ?? ''
+                    $authUrl,
+                    $provider['style'] ?? ''
                 );
                 $this->regContext->registerAlternativeLogin(SocialLogin::class);
             }
@@ -112,7 +113,8 @@ class Application extends App implements IBootstrap
             exit();
         }
 
-        $hideDefaultLogin = $providersCount > 0 && $config->getAppValue($this->appName, 'hide_default_login');
+        $hideDefaultLogin = $providersCount > 0
+            && $config->getAppValue($this->appName, 'hide_default_login');
         if ($hideDefaultLogin && $request->getPathInfo() === '/login') {
             $this->regContext->registerAlternativeLogin(DefaultLoginShow::class);
         }
