@@ -519,7 +519,7 @@ class ProviderService
         ], false);
 
         //Workaround to create user files folder. Remove it later.
-        \OC::$server->query(\OCP\Files\IRootFolder::class)->getUserFolder($user->getUID());
+        \OC::$server->get(\OCP\Files\IRootFolder::class)->getUserFolder($user->getUID());
 
         if ($redirectUrl = $this->session->get('login_redirect_url')) {
             return new RedirectResponse($redirectUrl);
