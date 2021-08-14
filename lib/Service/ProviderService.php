@@ -13,6 +13,7 @@ use OCA\SocialLogin\Provider\CustomOpenIDConnect;
 use OCA\SocialLogin\Db\ConnectedLoginMapper;
 use OCP\Accounts\IAccountManager;
 use OCP\AppFramework\Http\RedirectResponse;
+use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IAvatarManager;
 use OCP\IConfig;
 use OCP\IGroupManager;
@@ -23,6 +24,7 @@ use OCP\IURLGenerator;
 use OCP\IUserSession;
 use OCP\IUserManager;
 use OCP\Mail\IMailer;
+use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 use OCP\Util;
 
 class ProviderService
@@ -149,6 +151,8 @@ class ProviderService
     private $socialConnect;
     /** @var IAccountManager */
     private $accountManager;
+    /** @var IEventDispatcher */
+    private $dispatcher;
     /** @var DefaultTokenProvider */
     private $tokenProvider;
 
@@ -168,6 +172,7 @@ class ProviderService
         IMailer $mailer,
         ConnectedLoginMapper $socialConnect,
         IAccountManager $accountManager,
+        IEventDispatcher $dispatcher,
         DefaultTokenProvider $tokenProvider
     ) {
         $this->appName = $appName;
@@ -184,6 +189,7 @@ class ProviderService
         $this->mailer = $mailer;
         $this->socialConnect = $socialConnect;
         $this->accountManager = $accountManager;
+        $this->dispatcher = $dispatcher;
         $this->tokenProvider = $tokenProvider;
     }
 
@@ -196,12 +202,13 @@ class ProviderService
         ]);
         switch ($name) {
             case 'telegram':
-                $csp = new \OCP\AppFramework\Http\ContentSecurityPolicy();
-                $csp->addAllowedScriptDomain('telegram.org')
-                    ->addAllowedFrameDomain('oauth.telegram.org')
-                ;
-                $manager = \OC::$server->getContentSecurityPolicyManager();
-                $manager->addDefaultPolicy($csp);
+                $this->dispatcher->addListener(AddContentSecurityPolicyEvent::class, function ($event) {
+                    $csp = new \OCP\AppFramework\Http\ContentSecurityPolicy();
+                    $csp->addAllowedScriptDomain('telegram.org')
+                        ->addAllowedFrameDomain('oauth.telegram.org')
+                    ;
+                    $event->addPolicy($csp);
+                });
                 Util::addHeader('meta', [
                     'id' => 'tg-data',
                     'data-login' => $appId,

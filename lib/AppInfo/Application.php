@@ -14,8 +14,6 @@ use OCP\IL10N;
 use OCP\IRequest;
 use OCP\ISession;
 use OCP\IURLGenerator;
-use OCP\IUser;
-use OCP\IUserManager;
 use OCP\IUserSession;
 use OCP\User\Events\BeforeUserDeletedEvent;
 use OCP\User\Events\UserLoggedOutEvent;
@@ -129,6 +127,6 @@ class Application extends App implements IBootstrap
 
     private function query($className)
     {
-        return $this->getContainer()->query($className);
+        return $this->getContainer()->get($className);
     }
 }
