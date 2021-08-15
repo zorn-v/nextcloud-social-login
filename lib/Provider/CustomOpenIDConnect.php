@@ -59,7 +59,9 @@ class CustomOpenIDConnect extends CustomOAuth2
             if (preg_match('#<img.+src=["\'](.+?)["\']#', $userProfile->photoURL, $m)) {
                 $userProfile->photoURL = $m[1];
             }
-            $userProfile->email = $profile->get('email');
+            if (!$userProfile->email) {
+                $userProfile->email = $profile->get('email');
+            }
             if (empty($userProfile->data['groups']) && null !== $groups = $this->getGroups($profile)) {
                 $userProfile->data['groups'] = $groups;
             }
