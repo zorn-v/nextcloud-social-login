@@ -508,7 +508,7 @@ class ProviderService
         }
 
         $this->userSession->getSession()->regenerateId();
-		$this->userSession->setTokenProvider($this->tokenProvider);
+        $this->userSession->setTokenProvider($this->tokenProvider);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
 
         $token = $this->tokenProvider->getToken($this->userSession->getSession()->getId());

@@ -23,17 +23,17 @@ class DefaultLoginShow implements IAlternativeLogin
         return $this->l->t('Log in with username or email');
     }
 
-	public function getLink(): string
+    public function getLink(): string
     {
         return '#body-login';
     }
 
-	public function getClass(): string
+    public function getClass(): string
     {
         return '';
     }
 
-	public function load(): void
+    public function load(): void
     {
         Util::addStyle($this->appName, 'hide_default_login');
     }

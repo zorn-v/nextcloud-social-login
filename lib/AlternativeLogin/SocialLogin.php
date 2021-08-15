@@ -16,17 +16,17 @@ class SocialLogin implements IAlternativeLogin
         return $this->label;
     }
 
-	public function getLink(): string
+    public function getLink(): string
     {
         return $this->link;
     }
 
-	public function getClass(): string
+    public function getClass(): string
     {
         return $this->cssClass;
     }
 
-	public function load(): void
+    public function load(): void
     {
         list($this->label, $this->link, $this->cssClass) = array_shift(self::$logins);
     }
