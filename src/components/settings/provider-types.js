@@ -23,6 +23,10 @@ export default {
         type: 'url',
         required: true,
       },
+      displayNameClaim: {
+        title: 'Display name claim (optional)',
+        type: 'text',
+      },
       userInfoUrl: {
         title: 'User info URL (optional)',
         type: 'url',

@@ -117,6 +117,7 @@ class ProviderService
                 'access_token_url' => 'tokenUrl',
                 'user_info_url'    => 'userInfoUrl',
             ],
+            'displayname_claim' => 'displayNameClaim',
             'groups_claim'  => 'groupsClaim',
             'group_mapping' => 'groupMapping',
             'logout_url'    => 'logoutUrl',
