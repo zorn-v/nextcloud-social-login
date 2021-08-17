@@ -32,4 +32,7 @@
             <step>OCA\SocialLogin\Migration\TelegramToProviders</step>
         </post-migration>
     </repair-steps>
+    <background-jobs>
+        <job>OCA\SocialLogin\Task\RefreshTokensTask</job>
+    </background-jobs>
 </info>

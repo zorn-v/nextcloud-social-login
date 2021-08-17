@@ -3,6 +3,7 @@
 namespace OCA\SocialLogin\Controller;
 
 use OC\User\LoginException;
+use OCA\SocialLogin\Service\ConfigService;
 use OCA\SocialLogin\Service\ProviderService;
 use OCP\AppFramework\Controller;
 use OCP\IRequest;
@@ -35,7 +36,7 @@ class LoginController extends Controller
      */
     public function custom($type, $provider)
     {
-        if (!isset(ProviderService::TYPE_CLASSES[$type])) {
+        if (!isset(ConfigService::TYPE_CLASSES[$type])) {
             throw new LoginException(sprintf('Unknown provider type: %s', $type));
         }
         return $this->providerService->handleCustom($type, $provider);
