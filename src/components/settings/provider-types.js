@@ -57,6 +57,11 @@ export default {
         type: 'text',
         required: false,
       },
+      saveTokens: {
+        title: 'Save and refresh tokens in local database',
+        type: 'checkbox',
+        required: false,
+      }
     }
   },
   openid: {

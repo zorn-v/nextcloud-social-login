@@ -216,7 +216,11 @@ class ProviderService
 
         try {
             $adapter = $this->adapterService->new($class, $config, $this->storage);
-            $this->tokenService->authenticate($adapter, $providerType, $provider);
+            if (array_key_exists('saveTokens', $config) && $config['saveTokens'] == true ) {
+                $this->tokenService->authenticate($adapter, $providerType, $provider);
+            } else{
+                $adapter->authenticate();
+            }
             $profile = $adapter->getUserProfile();
         }  catch (\Exception $e) {
             $this->storage->clear();

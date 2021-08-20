@@ -78,6 +78,7 @@ class ConfigService
             'groups_claim'  => 'groupsClaim',
             'group_mapping' => 'groupMapping',
             'logout_url'    => 'logoutUrl',
+            'saveTokens' => 'saveTokens',
         ],
     ];
 

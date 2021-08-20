@@ -82,4 +82,17 @@ class TokensMapper extends QBMapper
         return $tokens;
     }
 
+    public function delete(Db\Entity $tokens): Db\Entity{
+        $qb = $this->db->getQueryBuilder();
+
+        $qb->delete($this->getTableName());
+        $qb->where(
+            $qb->expr()->eq('uid', $qb->createNamedParameter($tokens->getUid(), 'string'))
+        );
+
+        $qb->executeStatement();
+
+        return $tokens;
+    }
+
 }

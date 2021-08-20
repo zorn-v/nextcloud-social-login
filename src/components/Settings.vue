@@ -225,6 +225,9 @@ export default {
   input, select {
     width: 285px;
   }
+  input[type="checkbox"] {
+    width: 16px;
+  }
   .provider-settings {
     display: inline-block;
     vertical-align: top;
