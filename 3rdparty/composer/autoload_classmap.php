@@ -10,6 +10,7 @@ return array(
     'Hybridauth\\Adapter\\AbstractAdapter' => $vendorDir . '/hybridauth/hybridauth/src/Adapter/AbstractAdapter.php',
     'Hybridauth\\Adapter\\AdapterInterface' => $vendorDir . '/hybridauth/hybridauth/src/Adapter/AdapterInterface.php',
     'Hybridauth\\Adapter\\DataStoreTrait' => $vendorDir . '/hybridauth/hybridauth/src/Adapter/DataStoreTrait.php',
+    'Hybridauth\\Adapter\\Discourse' => $vendorDir . '/hybridauth/hybridauth/src/Adapter/Discourse.php',
     'Hybridauth\\Adapter\\OAuth1' => $vendorDir . '/hybridauth/hybridauth/src/Adapter/OAuth1.php',
     'Hybridauth\\Adapter\\OAuth2' => $vendorDir . '/hybridauth/hybridauth/src/Adapter/OAuth2.php',
     'Hybridauth\\Adapter\\OpenID' => $vendorDir . '/hybridauth/hybridauth/src/Adapter/OpenID.php',
