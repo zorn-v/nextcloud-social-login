@@ -10,7 +10,7 @@ OC.L10N.register(
     "Automatically create groups if they do not exists": "Nicht existierende Gruppen automatisch erstellen",
     "Restrict login for users without mapped groups": "Verhindern, dass sich Benutzer ohne zugeordnete Gruppe anmelden können",
     "Disable notify admins about new users": "Benachrichtigung von Admins über neue Benutzer deaktivieren",
-    "Hide default login (can be made visible with /login?showDefault=true)": "Standard-Login ausblenden (kann durch /login?showDefault=true wieder sichtbar gemacht werden)",
+    "Hide default login": "Standard-Login ausblenden",
 
     "None": "Keine",
     "Save": "Speichern",

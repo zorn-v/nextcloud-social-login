@@ -9,5 +9,5 @@ export default {
   restrict_users_wo_mapped_groups: 'Restrict login for users without mapped groups',
   restrict_users_wo_assigned_groups: 'Restrict login for users without assigned groups',
   disable_notify_admins: 'Disable notify admins about new users',
-  hide_default_login: 'Hide default login (can be made visible with /login?showDefault=true)',
+  hide_default_login: 'Hide default login',
 }
