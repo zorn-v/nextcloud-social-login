@@ -103,20 +103,20 @@ class Application extends App implements IBootstrap
             }
         }
 
-        $useLoginRedirect = $providersCount === 1
-            && PHP_SAPI !== 'cli'
-            && $request->getMethod() === 'GET'
-            && !$request->getParam('noredir')
-            && $config->getSystemValue('social_login_auto_redirect', false);
-        if ($useLoginRedirect && $request->getPathInfo() === '/login') {
-            header('Location: ' . $authUrl);
-            exit();
-        }
+        if (PHP_SAPI !== 'cli') {
+            $useLoginRedirect = $providersCount === 1
+                && $request->getMethod() === 'GET'
+                && !$request->getParam('noredir')
+                && $config->getSystemValue('social_login_auto_redirect', false);
+            if ($useLoginRedirect && $request->getPathInfo() === '/login') {
+                header('Location: ' . $authUrl);
+                exit();
+            }
 
-        $hideDefaultLogin = $providersCount > 0
-            && $config->getAppValue($this->appName, 'hide_default_login');
-        if ($hideDefaultLogin && $request->getPathInfo() === '/login') {
-            $this->regContext->registerAlternativeLogin(DefaultLoginShow::class);
+            $hideDefaultLogin = $providersCount > 0 && $config->getAppValue($this->appName, 'hide_default_login');
+            if ($hideDefaultLogin && $request->getPathInfo() === '/login') {
+                $this->regContext->registerAlternativeLogin(DefaultLoginShow::class);
+            }
         }
     }
 
