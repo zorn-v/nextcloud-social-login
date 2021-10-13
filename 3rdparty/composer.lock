@@ -4,28 +4,32 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6985048efcbefd76b212ef082db038ba",
+    "content-hash": "3e89c8e7766d1d985901f997b1ee6ce8",
     "packages": [
         {
             "name": "hybridauth/hybridauth",
-            "version": "3.3.0",
+            "version": "3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hybridauth/hybridauth.git",
-                "reference": "51cb2ad2f04d175d298b51e919868dec1d4d8b04"
+                "reference": "0ec1b8cb8b230aae739422c5e42bc5733b3a7316"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/51cb2ad2f04d175d298b51e919868dec1d4d8b04",
-                "reference": "51cb2ad2f04d175d298b51e919868dec1d4d8b04",
+                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/0ec1b8cb8b230aae739422c5e42bc5733b3a7316",
+                "reference": "0ec1b8cb8b230aae739422c5e42bc5733b3a7316",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": "^5.4 || ^7.0 || ^8.0"
             },
             "require-dev": {
                 "ext-curl": "*",
-                "phpunit/phpunit": "^4.8.35 || ^6.5 || ^8"
+                "phpunit/phpunit": "^4.8.35 || ^6.5 || ^8.0"
+            },
+            "suggest": {
+                "firebase/php-jwt": "Needed to support Apple provider",
+                "phpseclib/phpseclib": "Needed to support Apple provider"
             },
             "type": "library",
             "autoload": {
@@ -49,6 +53,7 @@
                 "Authentication",
                 "OpenId",
                 "api",
+                "apple",
                 "authorization",
                 "facebook",
                 "google",
@@ -59,9 +64,9 @@
             "support": {
                 "gitter": "https://gitter.im/hybridauth/hybridauth",
                 "issues": "https://github.com/hybridauth/hybridauth/issues",
-                "source": "https://github.com/hybridauth/hybridauth/tree/master"
+                "source": "https://github.com/hybridauth/hybridauth/tree/3.7.1"
             },
-            "time": "2020-04-16T08:04:26+00:00"
+            "time": "2021-03-13T17:35:33+00:00"
         }
     ],
     "packages-dev": [],
@@ -72,5 +77,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
