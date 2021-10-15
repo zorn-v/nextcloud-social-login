@@ -53,6 +53,7 @@ class ProviderService
         'slack',
         'telegram',
         'mailru',
+        'yandex',
     ];
 
     const TYPE_OPENID = 'openid';
