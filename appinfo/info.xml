@@ -5,7 +5,7 @@
     <name>Social Login</name>
     <summary>Social login via OAuth or OpenID</summary>
     <description> </description>
-    <version>4.8.7</version>
+    <version>4.8.8</version>
     <licence>agpl</licence>
     <author>zorn-v</author>
     <namespace>SocialLogin</namespace>
