@@ -253,7 +253,7 @@ class LightOpenID
     protected function get_realm_protocol()
     {
         if (!empty($_SERVER['HTTPS'])) {
-            $use_secure_protocol = ($_SERVER['HTTPS'] != 'off');
+            $use_secure_protocol = ($_SERVER['HTTPS'] !== 'off');
         } elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
             $use_secure_protocol = ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https');
         } elseif (isset($_SERVER['HTTP__WSSC'])) {
@@ -274,7 +274,7 @@ class LightOpenID
      * @return array|bool|string
      * @throws ErrorException
      */
-    protected function request_curl($url, $method='GET', $params=array(), $update_claimed_id)
+    protected function request_curl($url, $method='GET', $params=array(), $update_claimed_id=false)
     {
         $params = http_build_query($params, '', '&');
         $curl = curl_init($url . ($method == 'GET' && $params ? '?' . $params : ''));
@@ -419,7 +419,7 @@ class LightOpenID
      * @return array|false|string
      * @throws ErrorException
      */
-    protected function request_streams($url, $method='GET', $params=array(), $update_claimed_id)
+    protected function request_streams($url, $method='GET', $params=array(), $update_claimed_id=false)
     {
         if (!$this->hostExists($url)) {
             throw new ErrorException("Could not connect to $url.", 404);
@@ -1090,14 +1090,8 @@ class LightOpenID
         $server = $this->discover($this->claimed_id);
 
         foreach (explode(',', $this->data['openid_signed']) as $item) {
-            # Checking whether magic_quotes_gpc is turned on, because
-            # the function may fail if it is. For example, when fetching
-            # AX namePerson, it might contain an apostrophe, which will be escaped.
-            # In such case, validation would fail, since we'd send different data than OP
-            # wants to verify. stripslashes() should solve that problem, but we can't
-            # use it when magic_quotes is off.
             $value = $this->data['openid_' . str_replace('.', '_', $item)];
-            $params['openid.' . $item] = function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc() ? stripslashes($value) : $value;
+            $params['openid.' . $item] = $value;
         }
 
         $params['openid.mode'] = 'check_authentication';
