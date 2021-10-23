@@ -29,13 +29,14 @@ use Hybridauth\Adapter;
  *       // etc.
  *   ];
  *
- *   $adapter = new Hybridauth\Provider\OpenID($config);
+ *   $adapter = new Hybridauth\Provider\OpenID( $config );
  *
  *   try {
  *       $adapter->authenticate();
  *
  *       $userProfile = $adapter->getUserProfile();
- *   } catch (\Exception $e) {
+ *   }
+ *   catch( \Exception $e ){
  *       echo $e->getMessage() ;
  *   }
  */

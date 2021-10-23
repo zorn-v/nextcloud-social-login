@@ -17,10 +17,11 @@ use Hybridauth\User;
  */
 class Discord extends OAuth2
 {
+
     /**
      * {@inheritdoc}
      */
-    protected $scope = 'identify email';
+    public $scope = 'identify email';
 
     /**
      * {@inheritdoc}
@@ -49,12 +50,10 @@ class Discord extends OAuth2
     {
         parent::initialize();
 
-        if ($this->isRefreshTokenAvailable()) {
-            $this->tokenRefreshParameters += [
-                'client_id' => $this->clientId,
-                'client_secret' => $this->clientSecret,
-            ];
-        }
+        $this->tokenRefreshParameters += [
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+        ];
     }
 
     /**

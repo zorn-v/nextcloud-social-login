@@ -165,22 +165,15 @@ class OAuthRequest
      */
     public function get_signable_parameters()
     {
-        $params = [];
-
-        // Grab all parameters.
-        foreach ($this->parameters as $key_param => $value_param) {
-            // Process only scalar values.
-            if (is_scalar($value_param)) {
-                $params[$key_param] = $value_param;
-            }
-        }
-
+        // Grab all parameters
+        $params = $this->parameters;
+        
         // Remove oauth_signature if present
         // Ref: Spec: 9.1.1 ("The oauth_signature parameter MUST be excluded.")
         if (isset($params['oauth_signature'])) {
             unset($params['oauth_signature']);
         }
-
+        
         return OAuthUtil::build_http_query($params);
     }
     

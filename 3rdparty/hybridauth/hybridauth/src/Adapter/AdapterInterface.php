@@ -19,14 +19,14 @@ interface AdapterInterface
     /**
      * Initiate the appropriate protocol and process/automate the authentication or authorization flow.
      *
-     * @return bool|null
+     * @return boolean|null
      */
     public function authenticate();
 
     /**
      * Returns TRUE if the user is connected
      *
-     * @return bool
+     * @return boolean
      */
     public function isConnected();
 
@@ -96,12 +96,6 @@ interface AdapterInterface
      * @return mixed
      */
     public function apiRequest($url, $method = 'GET', $parameters = [], $headers = [], $multipart = false);
-
-    /**
-     * Do whatever may be necessary to make sure tokens do not expire.
-     * Intended to be be called frequently, e.g. via Cron.
-     */
-    public function maintainToken();
 
     /**
      * Return oauth access tokens.

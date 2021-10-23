@@ -17,10 +17,11 @@ use Hybridauth\User;
  */
 class GitHub extends OAuth2
 {
+
     /**
      * {@inheritdoc}
      */
-    protected $scope = 'user:email';
+    public $scope = 'user:email';
 
     /**
      * {@inheritdoc}
