@@ -41,6 +41,7 @@ class ProviderService
         'restrict_users_wo_assigned_groups',
         'disable_notify_admins',
         'hide_default_login',
+        'auto_map_groups',
     ];
     const DEFAULT_PROVIDERS = [
         'google',
@@ -469,14 +470,18 @@ class ProviderService
 
                     if ($groupMapping && isset($groupMapping[$group->gid])) {
                         $syncGroups[] = (object) array('gid' => $groupMapping[$group->gid]);
-                    }
+		    }
+
+		    if ($this->config->getAppValue($this->appName, 'auto_map_groups')) {
+                        $syncGroups[] = (object) array('gid' => $group->gid);
+	            }
                     $autoGroup = $newGroupPrefix.$group->gid;
                     $group->gid = $autoGroup;
                     if ($autoCreateGroups || $this->groupManager->groupExists($group->gid)) {
                         $syncGroups[] = $group;
                     }
                 }
-
+		
                 if (!$this->config->getAppValue($this->appName, 'no_prune_user_groups')) {
                     foreach ($userGroups as $group) {
                         if (!in_array($group->getGID(), array_column($syncGroups, 'gid'))) {
