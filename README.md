@@ -97,6 +97,9 @@ Password: <yourpassword>
 > SELECT * FROM oc_appconfig WHERE appid='sociallogin';
 ```
 
+Or just run
+`docker exec -t -uwww-data CONTAINER_NAME php occ config:app:get sociallogin custom_providers`
+
 ## Hint
 
 ### About Callback(Reply) Url
