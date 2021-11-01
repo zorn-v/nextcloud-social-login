@@ -317,6 +317,9 @@ class ProviderService
             $curlOptions[CURLOPT_TIMEOUT] = $httpClientConfig['timeout'];
             $curlOptions[CURLOPT_CONNECTTIMEOUT] = $httpClientConfig['timeout'];
         }
+        if (isset($httpClientConfig['proxy'])) {
+            $curlOptions[CURLOPT_PROXY] = $httpClientConfig['proxy'];
+        }
         if ($curlOptions) {
             $config['curl_options'] = $curlOptions;
         }
