@@ -442,7 +442,11 @@ class ProviderService
 
         if ($updateUserProfile) {
             $user->setDisplayName($profile->displayName ?: $profile->identifier);
-            $user->setEMailAddress((string)$profile->email);
+            if (method_exists($user, 'setSystemEMailAddress')) {
+                $user->setSystemEMailAddress((string)$profile->email);
+            } else {
+                $user->setEMailAddress((string)$profile->email);
+            }
 
             if ($profile->photoURL) {
                 $curl = new Curl();
