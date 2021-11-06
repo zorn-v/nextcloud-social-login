@@ -29,7 +29,6 @@ class ConnectedLoginMapper extends QBMapper {
         } catch(Db\DoesNotExistException $e) {
             return null;
         } catch(Db\MultipleObjectsReturnedException $e) {
-            \OC::$server->getLogger()->warn("Got multiple objects when querying for connected login. This should not happen! " . $e, ['app' => 'sociallogin']);
             return null;
         }
     }
@@ -65,8 +64,13 @@ class ConnectedLoginMapper extends QBMapper {
         $qb->delete($this->tableName)
             ->where(
                 $qb->expr()->eq('identifier', $qb->createNamedParameter($identifier))
-            );
-        $qb->execute();
+            )
+        ;
+        if (method_exists($qb, 'executeStatement')) {
+            $qb->executeStatement();
+        } else {
+            $qb->execute();
+        }
     }
 
     /**
@@ -79,8 +83,13 @@ class ConnectedLoginMapper extends QBMapper {
         $qb->delete($this->tableName)
             ->where(
                 $qb->expr()->eq('uid', $qb->createNamedParameter($uid))
-            );
-        $qb->execute();
+            )
+        ;
+        if (method_exists($qb, 'executeStatement')) {
+            $qb->executeStatement();
+        } else {
+            $qb->execute();
+        }
     }
 
     /**
