@@ -36,7 +36,7 @@ class CustomOpenIDConnect extends CustomOAuth2
         $userProfile = new User\Profile();
         $userProfile->identifier  = $data->get('sub');
         $userProfile->displayName = $data->get($displayNameClaim) ?: $data->get('name') ?: $data->get('preferred_username');
-        $userProfile->photoURL    = $data->get('picture');
+        $userProfile->photoURL    = (string)$data->get('picture');
         $userProfile->email       = $data->get('email');
         if ($data->exists('street_address')) {
             $userProfile->address = $data->get('street_address');
@@ -56,7 +56,7 @@ class CustomOpenIDConnect extends CustomOAuth2
             }
             $userProfile->displayName = $profile->get($displayNameClaim) ?: $profile->get('name') ?: $profile->get('preferred_username') ?: $profile->get('nickname');
             if (!$userProfile->photoURL) {
-                $userProfile->photoURL = $profile->get('picture') ?: $profile->get('avatar');
+                $userProfile->photoURL = (string)($profile->get('picture') ?: $profile->get('avatar'));
             }
             if (preg_match('#<img.+src=["\'](.+?)["\']#', $userProfile->photoURL, $m)) {
                 $userProfile->photoURL = $m[1];
