@@ -143,6 +143,11 @@ export default {
         type: 'text',
         required: false,
       },
+      nameField: {
+        title: 'Name Field (optional)',
+        type: 'text',
+        required: false,
+      },
     }
   },
   custom_oauth1: {

@@ -104,6 +104,7 @@ class ProviderService
             ],
             'profile_fields' => 'profileFields',
             'groups_claim'  => 'groupsClaim',
+            'name_field' => 'nameField',
             'group_mapping' => 'groupMapping',
             'logout_url'    => 'logoutUrl',
         ],

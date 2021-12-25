@@ -35,6 +35,10 @@ class CustomOAuth2 extends OAuth2
                 ?? null
             ;
         }
+        $nameField = $this->config->get('name_field');
+        if (!empty($nameField)) {
+            $response->displayName = $response->$nameField;
+        }
         if (!isset($response->displayName)) {
             $response->displayName = $response->username ?? null;
         }
