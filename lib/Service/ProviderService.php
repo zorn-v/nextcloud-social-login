@@ -103,6 +103,7 @@ class ProviderService
                 'profile_url'    => 'profileUrl',
             ],
             'profile_fields' => 'profileFields',
+            'displayname_claim' => 'displayNameClaim',
             'groups_claim'  => 'groupsClaim',
             'group_mapping' => 'groupMapping',
             'logout_url'    => 'logoutUrl',

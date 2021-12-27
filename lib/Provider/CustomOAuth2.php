@@ -36,7 +36,8 @@ class CustomOAuth2 extends OAuth2
             ;
         }
         if (!isset($response->displayName)) {
-            $response->displayName = $response->username ?? null;
+            $displayNameClaim = $this->config->get('displayname_claim');
+            $response->displayName = $response->$displayNameClaim ?? $response->username ?? null;
         }
 
         $data = new Data\Collection($response);
