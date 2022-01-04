@@ -5,6 +5,7 @@ OC.L10N.register(
     "Create users with disabled account": "Benutzer mit einem deaktivierten Konto erstellen",
     "Allow users to connect social logins with their account": "Benutzern erlauben, externe Konten mit Ihrem Konto zu verknüpfen",
     "Prevent creating an account if the email address exists in another account": "Anlegen eines Kontos verhindern, wenn die Email-Adresse bereits von einem anderen Konto verwendet wird",
+    "Update an account, if the email address exists in that account": "Aktualisiere ein Konto, wenn die Email-Adresse in diesem Konto existiert",
     "Update user profile every login": "Benutzerprofil nach jeder Anmeldung aktualisieren",
     "Do not prune not available user groups on login": "Nicht vorhandene Benutzergruppen bei der Anmeldung nicht wieder löschen",
     "Automatically create groups if they do not exists": "Nicht existierende Gruppen automatisch erstellen",
