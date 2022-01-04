@@ -34,6 +34,7 @@ class ProviderService
         'create_disabled_users',
         'allow_login_connect',
         'prevent_create_email_exists',
+        'update_account_email_exists',
         'update_profile_on_login',
         'no_prune_user_groups',
         'auto_create_groups',
@@ -414,6 +415,17 @@ class ProviderService
         }
 
         $updateUserProfile = $this->config->getAppValue($this->appName, 'update_profile_on_login');
+
+        if (
+            $profile->email && $this->config->getAppValue($this->appName, 'update_account_email_exists')
+            && count($this->userManager->getByEmail($profile->email)) === 1
+        ) {
+            $user = $this->userManager->getByEmail($profile->email)[0];
+            $uid = $user->getUid();
+            $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 0);
+            $updateUserProfile = true;
+        }
+
         $userPassword = '';
 
         if (null === $user) {
