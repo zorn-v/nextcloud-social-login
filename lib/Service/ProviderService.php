@@ -7,6 +7,7 @@ use Hybridauth\User\Profile;
 use Hybridauth\HttpClient\Curl;
 use OC\Authentication\Token\DefaultTokenProvider;
 use OC\User\LoginException;
+use OCA\SocialLogin\Provider\CustomDiscourse;
 use OCA\SocialLogin\Provider\CustomOAuth1;
 use OCA\SocialLogin\Provider\CustomOAuth2;
 use OCA\SocialLogin\Provider\CustomOpenIDConnect;
@@ -60,12 +61,14 @@ class ProviderService
     const TYPE_OAUTH1 = 'custom_oauth1';
     const TYPE_OAUTH2 = 'custom_oauth2';
     const TYPE_OIDC = 'custom_oidc';
+    const TYPE_DISCOURSE = 'custom_discourse';
 
     const TYPE_CLASSES = [
         self::TYPE_OPENID => Provider\OpenID::class,
         self::TYPE_OAUTH1 => CustomOAuth1::class,
         self::TYPE_OAUTH2 => CustomOAuth2::class,
         self::TYPE_OIDC => CustomOpenIDConnect::class,
+        self::TYPE_DISCOURSE => CustomDiscourse::class,
     ];
 
     private $configMapping = [
@@ -121,6 +124,16 @@ class ProviderService
             ],
             'displayname_claim' => 'displayNameClaim',
             'groups_claim'  => 'groupsClaim',
+            'group_mapping' => 'groupMapping',
+            'logout_url'    => 'logoutUrl',
+        ],
+        self::TYPE_DISCOURSE => [
+            'keys' => [
+                'secret' => 'ssoSecret',
+            ],
+            'endpoints' => [
+                'base_url'    => 'baseUrl',
+            ],
             'group_mapping' => 'groupMapping',
             'logout_url'    => 'logoutUrl',
         ],
