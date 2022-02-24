@@ -16,6 +16,7 @@ OC.L10N.register(
     "Save": "Сохранить",
     "Allow login only from specified domain": "Позволять вход только с указаного домена",
     "Allow login only for specified organizations": "Позволять вход только для организаций",
+    "Allow login only for specified guilds": "Позволять вход только для гильдий",
 
     "Settings for social login successfully saved": "Настройки social login успешно сохранены",
     "Do you realy want to remove {providerTitle} provider ?": "Вы действительно хотите удалить поставщика {providerTitle} ?",

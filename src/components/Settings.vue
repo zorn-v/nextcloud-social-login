@@ -101,6 +101,13 @@
           <input type="text" :name="'providers['+name+'][orgs]'" :value="provider.orgs"/>
         </label>
       </template>
+      <template v-if="name === 'discord'">
+        <br/>
+        <label>
+          {{ t('Allow login only for specified guilds') }}<br/>
+          <input type="text" :name="'providers['+name+'][guilds]'" :value="provider.guilds"/>
+        </label>
+      </template>
     </div>
     <br/>
 

@@ -240,6 +240,9 @@ class ProviderService
     public function handleDefault($provider)
     {
         $config = [];
+        $scopes = [
+            'discord' => 'identify email guilds',
+        ];
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
         if (is_array($providers) && in_array($provider, array_keys($providers))) {
             foreach ($providers as $name => $prov) {
@@ -249,7 +252,12 @@ class ProviderService
                         'callback' => $callbackUrl,
                         'default_group' => $prov['defaultGroup'],
                         'orgs' => $prov['orgs'] ?? null,
+                        'guilds' => $prov['guilds'] ?? null,
                     ], $this->applyConfigMapping('default', $prov));
+
+                    if (isset($scopes[$name])) {
+                        $config['scope'] = $scopes[$name];
+                    }
 
                     if (isset($prov['auth_params']) && is_array($prov['auth_params'])) {
                         foreach ($prov['auth_params'] as $k => $v) {
@@ -375,6 +383,21 @@ class ProviderService
                 throw new LoginException($this->l->t('Login is available only to members of the following GitHub organizations: %s', $config['orgs']));
             };
             $checkOrgs();
+        }
+
+        if ($provider === 'discord' && !empty($config['guilds'])) {
+            $allowedGuilds = array_map('trim', explode(',', $config['guilds']));
+            $userGuilds = $adapter->apiRequest('users/@me/guilds');
+            $checkGuilds = function () use ($allowedGuilds, $userGuilds, $config) {
+                foreach ($userGuilds as $guild) {
+                    if (in_array($guild->id ?? null, $allowedGuilds)) {
+                        return;
+                    }
+                }
+                $this->storage->clear();
+                throw new LoginException($this->l->t('Login is available only to members of the following Discord guilds: %s', $config['guilds']));
+            };
+            $checkGuilds();
         }
 
         if (!empty($config['logout_url'])) {
