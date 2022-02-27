@@ -541,13 +541,10 @@ class ProviderService
 
             }
 
-            if (isset($profile->address)) {
-                list($major, , $patch) = Util::getVersion();
-                if ($major >= 21 && $patch >= 1) {
-                    $account = $this->accountManager->getAccount($user);
-                    $account->setProperty(IAccountManager::PROPERTY_ADDRESS, $profile->address, IAccountManager::SCOPE_PRIVATE, IAccountManager::NOT_VERIFIED);
-                    $this->accountManager->updateAccount($account);
-                }
+            if (isset($profile->address) && method_exists($this->accountManager, 'updateAccount')) {
+                $account = $this->accountManager->getAccount($user);
+                $account->setProperty(IAccountManager::PROPERTY_ADDRESS, $profile->address, IAccountManager::SCOPE_PRIVATE, IAccountManager::NOT_VERIFIED);
+                $this->accountManager->updateAccount($account);
             }
 
             $defaultGroup = $profile->data['default_group'];
