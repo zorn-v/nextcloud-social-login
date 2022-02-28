@@ -87,7 +87,7 @@
           </option>
         </select>
       </label>
-      <template v-if="name === 'google'">
+      <template v-if="['google', 'yandex'].includes(name)">
         <br/>
         <label>
           {{ t('Allow login only from specified domain') }}<br/>
