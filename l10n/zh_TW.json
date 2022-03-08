@@ -1,7 +1,7 @@
 { "translations": {
   "Social login": "社交登入",
   "Enabled": "啟用",
-  "Unknown %s provider: \"%s\"": "未知的提供者 \"%s\"",
+  "Unknown %s provider: \"%s\"": "未知的提供者 %s - \"%s\"",
   "Auto creating new users is disabled": "自動新增使用者已關閉",
   "This account already connected": "您已經連結此項目的社交登入",
   "Provider name cannot be empty": "提供者名稱不能沒有內容",
