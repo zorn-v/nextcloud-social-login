@@ -5,7 +5,7 @@ namespace OCA\SocialLogin\Service;
 use Hybridauth\Provider;
 use Hybridauth\User\Profile;
 use Hybridauth\HttpClient\Curl;
-use OC\Authentication\Token\DefaultTokenProvider;
+use OC\Authentication\Token\IProvider;
 use OC\User\LoginException;
 use OCA\SocialLogin\Provider\CustomDiscourse;
 use OCA\SocialLogin\Provider\CustomOAuth1;
@@ -169,7 +169,7 @@ class ProviderService
     private $accountManager;
     /** @var IEventDispatcher */
     private $dispatcher;
-    /** @var DefaultTokenProvider */
+    /** @var IProvider */
     private $tokenProvider;
 
 
@@ -189,7 +189,7 @@ class ProviderService
         ConnectedLoginMapper $socialConnect,
         IAccountManager $accountManager,
         IEventDispatcher $dispatcher,
-        DefaultTokenProvider $tokenProvider
+        IProvider $tokenProvider
     ) {
         $this->appName = $appName;
         $this->request = $request;
@@ -479,11 +479,7 @@ class ProviderService
 
         if ($updateUserProfile) {
             $user->setDisplayName($profile->displayName ?: $profile->identifier);
-            if (method_exists($user, 'setSystemEMailAddress')) {
-                $user->setSystemEMailAddress((string)$profile->email);
-            } else {
-                $user->setEMailAddress((string)$profile->email);
-            }
+            $user->setSystemEMailAddress((string)$profile->email);
 
             if ($profile->photoURL) {
                 $curl = new Curl();
@@ -541,7 +537,7 @@ class ProviderService
 
             }
 
-            if (isset($profile->address) && method_exists($this->accountManager, 'updateAccount')) {
+            if (isset($profile->address)) {
                 $account = $this->accountManager->getAccount($user);
                 $account->setProperty(IAccountManager::PROPERTY_ADDRESS, $profile->address, IAccountManager::SCOPE_PRIVATE, IAccountManager::NOT_VERIFIED);
                 $this->accountManager->updateAccount($account);

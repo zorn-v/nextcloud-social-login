@@ -5,7 +5,7 @@
     <name>Social Login</name>
     <summary>Social login via OAuth or OpenID</summary>
     <description> </description>
-    <version>4.13.1</version>
+    <version>4.14.0</version>
     <licence>agpl</licence>
     <author>zorn-v</author>
     <namespace>SocialLogin</namespace>
@@ -16,7 +16,7 @@
     <repository>https://github.com/zorn-v/nextcloud-social-login</repository>
     <screenshot>https://raw.githubusercontent.com/zorn-v/nextcloud-social-login/master/appinfo/screenshot.png</screenshot>
     <dependencies>
-        <nextcloud min-version="20" max-version="99" />
+        <nextcloud min-version="23" max-version="99" />
     </dependencies>
     <settings>
         <admin>OCA\SocialLogin\Settings\AdminSettings</admin>
