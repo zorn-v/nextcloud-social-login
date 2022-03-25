@@ -34,6 +34,7 @@ class ProviderService
         'disable_registration',
         'create_disabled_users',
         'allow_login_connect',
+        'allow_login_autoconnect',
         'prevent_create_email_exists',
         'update_profile_on_login',
         'no_prune_user_groups',
@@ -463,7 +464,7 @@ class ProviderService
                 throw new LoginException($this->l->t('Email already registered'));
             }
 
-            if ($profile->email && $this->config->getAppValue($this->appName, 'allow_login_connect')
+            if ($profile->email && $this->config->getAppValue($this->appName, 'allow_login_autoconnect')
                 && count($this->userManager->getByEmail($profile->email)) !== 0
             ) {
                 $existing_user = $this->userManager->getByEmail($profile->email);

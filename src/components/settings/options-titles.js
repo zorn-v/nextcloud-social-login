@@ -2,6 +2,7 @@ export default {
   disable_registration: 'Disable auto create new users',
   create_disabled_users: 'Create users with disabled account',
   allow_login_connect: 'Allow users to connect social logins with their account',
+  allow_login_autoconnect: 'Connect social logins to existing users automatically',
   prevent_create_email_exists: 'Prevent creating an account if the email address exists in another account',
   update_profile_on_login: 'Update user profile every login',
   no_prune_user_groups: 'Do not prune not available user groups on login',
