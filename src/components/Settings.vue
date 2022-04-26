@@ -101,6 +101,13 @@
           <input type="text" :name="'providers['+name+'][orgs]'" :value="provider.orgs"/>
         </label>
       </template>
+      <template v-if="name === 'BitBucket'">
+        <br/>
+        <label>
+          {{ t('Allow login only for specified workspace') }}<br/>
+          <input type="text" :name="'providers['+name+'][workspace]'" :value="provider.workspace"/>
+        </label>
+      </template>
       <template v-if="name === 'discord'">
         <br/>
         <label>
