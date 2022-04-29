@@ -393,14 +393,16 @@ class ProviderService
             }
             $allowedWorks = array_map('trim', explode(',', $config['workspace']));
             $username = $adapter->apiRequest('user')->login;
-            $checkWorks = function () use ($adapter, $allowedWorks, $username, $config) {
+            $checkWorks = function () use ($adapter, $allowedWorks, $config) {
                 try {
-                   $workspaceData = $adapter->apiRequest('workspaces');
-                   $get_slug = fn($w): string => $w->slug;
-                   $workspaces = array_map($get_slug, $workspaceData->values);
-                   $workspaces = array_intersect($workspaces, $allowedWorks);
-                   if (count($workspaces) > 0)
-                     return;
+                    $workspaceData = $adapter->apiRequest('workspaces');
+                    $workspaces = array_map(function ($w) {
+                        return $w->slug;
+                    }, $workspaceData->values);
+                    $workspaces = array_intersect($workspaces, $allowedWorks);
+                    if (count($workspaces) > 0) {
+                        return;
+                    }
                 } catch (\Exception $e) {}
                 $this->storage->clear();
                 throw new LoginException($this->l->t('Login is available only to members of the following Bitbucket workspaces: %s', $config['workspace']));
