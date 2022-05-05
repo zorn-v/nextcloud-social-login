@@ -589,6 +589,11 @@ class ProviderService
         \OC::$server->get(\OCP\Files\IRootFolder::class)->getUserFolder($user->getUID());
 
         if ($redirectUrl = $this->session->get('login_redirect_url')) {
+            if (strpos($redirectUrl, '/') === 0) {
+                // URL relative to the Nextcloud webroot, generate an absolute one
+                $redirectUrl = $this->urlGenerator->getAbsoluteURL($redirectUrl);
+            } // else, this is an absolute URL, leave it as-is
+
             return new RedirectResponse($redirectUrl);
         }
 
