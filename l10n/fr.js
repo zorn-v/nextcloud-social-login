@@ -9,7 +9,7 @@ OC.L10N.register(
     "Save": "Sauvegarder",
 
     "Settings for social login successfully saved": "Paramètres sauvegardés avec succès",
-    "Do you realy want to remove {providerTitle} provider ?": "Voulez-vous vraiment supprimer fournisseur {providerTitle} ?",
+    "Do you really want to remove {providerTitle} provider ?": "Voulez-vous vraiment supprimer fournisseur {providerTitle} ?",
     "Some error occurred while saving settings": "Erreur lors de la sauvegarde des paramètres",
     "Confirm remove": "Confirmer la suppression"
   },

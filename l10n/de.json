@@ -10,7 +10,7 @@
   "Social login connect": "Externe Konten verknüpfen",
   "Available providers": "Verfügbare Autorisierungsdienste",
   "Social login connect is disabled": "Social Login ist deaktiviert",
-  "Email already registered": "Diese Email-Adresse ist bereits registiert",
+  "Email already registered": "Diese Email-Adresse ist bereits registriert",
   "Login from %s domain is not allowed for %s provider": "Die Anmeldung von der Domäne %s ist für den Autorisierungsdienst %s nicht erlaubt",
   "Login is available only to members of the following GitHub organizations: %s": "Die Anmeldung ist nur für Mitglieder der folgenden GitHub-Organisationen verfügbar: %s",
   "Disable password confirmation on settings change": "Passwortbestätigung bei der Änderung von Einstellungen deaktivieren",

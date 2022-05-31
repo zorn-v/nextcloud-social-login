@@ -22,7 +22,7 @@ OC.L10N.register(
     "Custom OAuth2": "カスタムOAuth2",
 
     "Settings for social login successfully saved": "ソーシャルログインの設定が保存されました",
-    "Do you realy want to remove {providerTitle} provider ?": "{providerTitle}プロバイダーを削除してもよろしいですか？",
+    "Do you really want to remove {providerTitle} provider ?": "{providerTitle}プロバイダーを削除してもよろしいですか？",
     "Some error occurred while saving settings": "保存時にエラーが発生しました",
     "Confirm remove": "削除しますか"
   },

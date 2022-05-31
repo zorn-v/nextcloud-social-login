@@ -19,7 +19,7 @@ OC.L10N.register(
     "Allow login only for specified guilds": "Позволять вход только для гильдий",
 
     "Settings for social login successfully saved": "Настройки social login успешно сохранены",
-    "Do you realy want to remove {providerTitle} provider ?": "Вы действительно хотите удалить поставщика {providerTitle} ?",
+    "Do you really want to remove {providerTitle} provider ?": "Вы действительно хотите удалить поставщика {providerTitle} ?",
     "Some error occurred while saving settings": "Во время сохранения настроек произошла ошибка",
     "Confirm remove": "Подтверждение удаления"
   },
