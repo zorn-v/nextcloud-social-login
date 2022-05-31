@@ -1,16 +1,18 @@
-{ "translations": {
-  "Social login": "Social login",
-  "Enabled": "Ativar",
-  "Unknown %s provider: \"%s\"": "Provedor Desconhecido %s : \"%s\"",
-  "Auto creating new users is disabled": "A criação automática de novos utilizadores está desativada",
-  "This account already connected": "Esta conta já está conectada",
-  "Provider name cannot be empty": "O nome do provedor deve ser preenchido",
-  "Duplicate provider name \"%s\"": "O nome do provedor \"%s\"já existe",
-  "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "Nome do provedor \"% s\" inválido.Somente os seguintes caracteres são permitidos \"0-9a-z_.@-\"",
-  "Social login connect": "Vincular contas externas",
-  "Available providers": "Provedores disponíveis",
-  "Social login connect is disabled": "Login social está desativado",
-  "Email already registered": "O endereço de e-mail já está registrado",
-  "Disable password confirmation on settings change": "Desativar a confirmação da senha ao alterar as configurações"
-},"pluralForm" :"nplurals=2; plural=(n > 1);"
+{
+  "translations": {
+    "Social login": "Social login",
+    "Enabled": "Ativar",
+    "Unknown %s provider: \"%s\"": "Provedor Desconhecido %s : \"%s\"",
+    "Auto creating new users is disabled": "A criação automática de novos utilizadores está desativada",
+    "This account already connected": "Esta conta já está conectada",
+    "Provider name cannot be empty": "O nome do provedor deve ser preenchido",
+    "Duplicate provider name \"%s\"": "O nome do provedor \"%s\"já existe",
+    "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "Nome do provedor \"% s\" inválido.Somente os seguintes caracteres são permitidos \"0-9a-z_.@-\"",
+    "Social login connect": "Vincular contas externas",
+    "Available providers": "Provedores disponíveis",
+    "Social login connect is disabled": "Login social está desativado",
+    "Email already registered": "O endereço de e-mail já está registrado",
+    "Disable password confirmation on settings change": "Desativar a confirmação da senha ao alterar as configurações"
+  },
+  "pluralForm": "nplurals=2; plural=(n > 1);"
 }
