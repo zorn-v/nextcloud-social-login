@@ -577,6 +577,7 @@ class ProviderService
         $this->userSession->getSession()->regenerateId();
         $this->userSession->setTokenProvider($this->tokenProvider);
         $this->userSession->createSessionToken($this->request, $user->getUID(), $user->getUID());
+        $this->userSession->createRememberMeToken($user);
 
         $token = $this->tokenProvider->getToken($this->userSession->getSession()->getId());
         $this->userSession->completeLogin($user, [
