@@ -1,23 +1,25 @@
-{ "translations": {
-  "Social login": "Social login",
-  "Enabled": "Activé",
-  "Unknown %s provider: \"%s\"": "Fournisseur %s inconnu : \"%s\"",
-  "Auto creating new users is disabled": "La création automatique de nouveaux utilisateurs est désactivée",
-  "This account already connected": "Ce compte est déjà connecté",
-  "Provider name cannot be empty": "Le nom du fournisseur ne peut pas être vide",
-  "Duplicate provider name \"%s\"": "Nom du fournisseur en double : \"%s\"",
-  "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "Nom du fournisseur invalide : \"%s\". Caractères autorisés : \"0-9a-z_.@-\"",
-  "Social login connect": "Se connecter avec d'autres comptes",
-  "Available providers": "Fournisseurs disponibles",
-  "Social login connect is disabled": "La connexion via Social login est désactivée",
-  "Email already registered": "E-mail déjà enregistré",
-  "Disable password confirmation on settings change": "Désactiver la confirmation par mot de passe lors de la modification des paramètres",
-  "New user created": "Nouvel utilisateur créé",
-  "Your user group is not allowed to login, please contact support": "Votre groupe d'utilisateurs n'est pas autorisé à se connecter, veuillez contacter le support",
-  "User %s (%s) just created via social login": "L'utilisateur %s (%s) vient d'être créé avec Social Login",
-  "Login from %s domain is not allowed for %s provider": "La connexion depuis le domaine %s n'est pas autorisée pour le fournisseur %s",
-  "Login is available only to members of the following GitHub organizations: %s": "La connexion est disponible uniquement pour les membres des organisations GitHub suivantes : %s",
-  "Log in with %s": "Connexion avec %s",
-  "Log in with username or email": "Connexion avec nom d'utilisateur ou e-mail"
-},"pluralForm" :"nplurals=2; plural=(n > 1);"
+{
+  "translations": {
+    "Social login": "Social login",
+    "Enabled": "Activé",
+    "Unknown %s provider: \"%s\"": "Fournisseur %s inconnu : \"%s\"",
+    "Auto creating new users is disabled": "La création automatique de nouveaux utilisateurs est désactivée",
+    "This account already connected": "Ce compte est déjà connecté",
+    "Provider name cannot be empty": "Le nom du fournisseur ne peut pas être vide",
+    "Duplicate provider name \"%s\"": "Nom du fournisseur en double : \"%s\"",
+    "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "Nom du fournisseur invalide : \"%s\". Caractères autorisés : \"0-9a-z_.@-\"",
+    "Social login connect": "Se connecter avec d'autres comptes",
+    "Available providers": "Fournisseurs disponibles",
+    "Social login connect is disabled": "La connexion via Social login est désactivée",
+    "Email already registered": "E-mail déjà enregistré",
+    "Disable password confirmation on settings change": "Désactiver la confirmation par mot de passe lors de la modification des paramètres",
+    "New user created": "Nouvel utilisateur créé",
+    "Your user group is not allowed to login, please contact support": "Votre groupe d'utilisateurs n'est pas autorisé à se connecter, veuillez contacter le support",
+    "User %s (%s) just created via social login": "L'utilisateur %s (%s) vient d'être créé avec Social Login",
+    "Login from %s domain is not allowed for %s provider": "La connexion depuis le domaine %s n'est pas autorisée pour le fournisseur %s",
+    "Login is available only to members of the following GitHub organizations: %s": "La connexion est disponible uniquement pour les membres des organisations GitHub suivantes : %s",
+    "Log in with %s": "Connexion avec %s",
+    "Log in with username or email": "Connexion avec nom d'utilisateur ou e-mail"
+  },
+  "pluralForm": "nplurals=2; plural=(n > 1);"
 }

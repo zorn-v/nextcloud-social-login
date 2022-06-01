@@ -1,13 +1,15 @@
-{ "translations": {
-  "Social login": "社交登入",
-  "Enabled": "啟用",
-  "Unknown %s provider: \"%s\"": "未知的提供者 %s - \"%s\"",
-  "Auto creating new users is disabled": "自動新增使用者已關閉",
-  "This account already connected": "您已經連結此項目的社交登入",
-  "Provider name cannot be empty": "提供者名稱不能沒有內容",
-  "Duplicate provider name \"%s\"": "重複的提供者名稱 \"%s\"",
-  "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "無效的提供者名稱 \"%s\". 提供者名稱只允許 \"0-9a-z_.@-\"這些字符",
-  "Social login connect": "社交登入連線",
-  "Available providers": "請點選下方的項目來進行連結"
-},"pluralForm" :"nplurals=1; plural=0;"
+{
+  "translations": {
+    "Social login": "社交登入",
+    "Enabled": "啟用",
+    "Unknown %s provider: \"%s\"": "未知的提供者 %s - \"%s\"",
+    "Auto creating new users is disabled": "自動新增使用者已關閉",
+    "This account already connected": "您已經連結此項目的社交登入",
+    "Provider name cannot be empty": "提供者名稱不能沒有內容",
+    "Duplicate provider name \"%s\"": "重複的提供者名稱 \"%s\"",
+    "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "無效的提供者名稱 \"%s\". 提供者名稱只允許 \"0-9a-z_.@-\"這些字符",
+    "Social login connect": "社交登入連線",
+    "Available providers": "請點選下方的項目來進行連結"
+  },
+  "pluralForm": "nplurals=1; plural=0;"
 }

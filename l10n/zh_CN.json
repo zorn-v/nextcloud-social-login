@@ -1,17 +1,19 @@
-{ "translations": {
-  "Social login": "社交账号登录",
-  "Enabled": "启用",
-  "Unknown %s provider: \"%s\"": "未知的提供者 %s - \"%s\"",
-  "Auto creating new users is disabled": "自动创建使用者功能已被关闭",
-  "This account already connected": "使用者账号已经与该社交账号建立过连接",
-  "Provider name cannot be empty": "提供者名称不可为空",
-  "Duplicate provider name \"%s\"": "提供者名称重复 \"%s\"",
-  "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "提供者名称 \"%s\" 无效。 只允许包含 \"0-9a-z_.@-\"",
-  "Social login connect": "连接社交账号登录",
-  "Available providers": "请点击下方项目进行登录",
-  "Social login connect is disabled": "社交账号登陆禁用",
-  "Email already registered": "这个邮箱已经注册过了",
-  "Disable password confirmation on settings change": "改变设置不需要验证密码",
-  "Log in with %s": "使用 %s 账号登陆"
-},"pluralForm" :"nplurals=1; plural=0;"
+{
+  "translations": {
+    "Social login": "社交账号登录",
+    "Enabled": "启用",
+    "Unknown %s provider: \"%s\"": "未知的提供者 %s - \"%s\"",
+    "Auto creating new users is disabled": "自动创建使用者功能已被关闭",
+    "This account already connected": "使用者账号已经与该社交账号建立过连接",
+    "Provider name cannot be empty": "提供者名称不可为空",
+    "Duplicate provider name \"%s\"": "提供者名称重复 \"%s\"",
+    "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "提供者名称 \"%s\" 无效。 只允许包含 \"0-9a-z_.@-\"",
+    "Social login connect": "连接社交账号登录",
+    "Available providers": "请点击下方项目进行登录",
+    "Social login connect is disabled": "社交账号登陆禁用",
+    "Email already registered": "这个邮箱已经注册过了",
+    "Disable password confirmation on settings change": "改变设置不需要验证密码",
+    "Log in with %s": "使用 %s 账号登陆"
+  },
+  "pluralForm": "nplurals=1; plural=0;"
 }

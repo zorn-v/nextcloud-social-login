@@ -1,23 +1,25 @@
-{ "translations": {
-  "Social login": "Social Login",
-  "Enabled": "Aktiviert",
-  "Unknown %s provider: \"%s\"": "Unbekannter %s Autorisierungsdienst: \"%s\"",
-  "Auto creating new users is disabled": "Das automatische Anlegen neuer Benutzer ist deaktiviert",
-  "This account already connected": "Dieses Konto ist bereits verbunden",
-  "Provider name cannot be empty": "Der Name des Autorisierungsdienstes muss ausgefüllt werden",
-  "Duplicate provider name \"%s\"": "Der Name des Autorisierungsdienstes \"%s\" existiert bereits",
-  "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "Ungültiger Name für den Autorisierungsdienst \"%s\". Es sind nur die folgenden Zeichen erlaubt \"0-9a-z_.@-\"",
-  "Social login connect": "Externe Konten verknüpfen",
-  "Available providers": "Verfügbare Autorisierungsdienste",
-  "Social login connect is disabled": "Social Login ist deaktiviert",
-  "Email already registered": "Diese Email-Adresse ist bereits registiert",
-  "Login from %s domain is not allowed for %s provider": "Die Anmeldung von der Domäne %s ist für den Autorisierungsdienst %s nicht erlaubt",
-  "Login is available only to members of the following GitHub organizations: %s": "Die Anmeldung ist nur für Mitglieder der folgenden GitHub-Organisationen verfügbar: %s",
-  "Disable password confirmation on settings change": "Passwortbestätigung bei der Änderung von Einstellungen deaktivieren",
-  "New user created": "Neuer Benutzer angelegt",
-  "Your user group is not allowed to login, please contact support": "Ihre Benutzergruppe darf sich nicht anmelden, bitte kontaktieren Sie den technischen Support",
-  "User %s (%s) just created via social login": "Benutzer %s (%s) wurde gerade via Social Login angelegt",
-  "Log in with %s": "Anmelden mit %s",
-  "Log in with username or email": "Mit Benutzernamen oder Passwort anmelden"
-},"pluralForm" :"nplurals=2; plural=(n > 1);"
+{
+  "translations": {
+    "Social login": "Social Login",
+    "Enabled": "Aktiviert",
+    "Unknown %s provider: \"%s\"": "Unbekannter %s Autorisierungsdienst: \"%s\"",
+    "Auto creating new users is disabled": "Das automatische Anlegen neuer Benutzer ist deaktiviert",
+    "This account already connected": "Dieses Konto ist bereits verbunden",
+    "Provider name cannot be empty": "Der Name des Autorisierungsdienstes muss ausgefüllt werden",
+    "Duplicate provider name \"%s\"": "Der Name des Autorisierungsdienstes \"%s\" existiert bereits",
+    "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"": "Ungültiger Name für den Autorisierungsdienst \"%s\". Es sind nur die folgenden Zeichen erlaubt \"0-9a-z_.@-\"",
+    "Social login connect": "Externe Konten verknüpfen",
+    "Available providers": "Verfügbare Autorisierungsdienste",
+    "Social login connect is disabled": "Social Login ist deaktiviert",
+    "Email already registered": "Diese Email-Adresse ist bereits registriert",
+    "Login from %s domain is not allowed for %s provider": "Die Anmeldung von der Domäne %s ist für den Autorisierungsdienst %s nicht erlaubt",
+    "Login is available only to members of the following GitHub organizations: %s": "Die Anmeldung ist nur für Mitglieder der folgenden GitHub-Organisationen verfügbar: %s",
+    "Disable password confirmation on settings change": "Passwortbestätigung bei der Änderung von Einstellungen deaktivieren",
+    "New user created": "Neuer Benutzer angelegt",
+    "Your user group is not allowed to login, please contact support": "Ihre Benutzergruppe darf sich nicht anmelden, bitte kontaktieren Sie den technischen Support",
+    "User %s (%s) just created via social login": "Benutzer %s (%s) wurde gerade via Social Login angelegt",
+    "Log in with %s": "Anmelden mit %s",
+    "Log in with username or email": "Mit Benutzernamen oder Passwort anmelden"
+  },
+  "pluralForm": "nplurals=2; plural=(n > 1);"
 }
