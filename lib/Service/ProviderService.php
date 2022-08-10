@@ -512,7 +512,7 @@ class ProviderService
                     $photo = $curl->request($profile->photoURL);
                     $avatar = $this->avatarManager->getAvatar($user->getUid());
                     $avatar->set($photo);
-                } catch (\Exception $e) {}
+                } catch (\Throwable $e) {}
             }
 
             if (isset($profile->data['groups']) && is_array($profile->data['groups'])) {
