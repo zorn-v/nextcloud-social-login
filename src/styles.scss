@@ -20,7 +20,7 @@ $buttons: (
   (keycloak, #030303, 25px, false),
 );
 
-#alternative-logins a.button {
+#alternative-logins a {
   &::before {
     content: "";
     background-repeat: no-repeat;

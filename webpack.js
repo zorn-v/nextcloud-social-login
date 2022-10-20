@@ -14,8 +14,16 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'js'),
   },
+  performance: {
+    maxAssetSize: 256000,
+    maxEntrypointSize: 256000,
+  },
   module: {
     rules: [
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
+      },
       {
         test: /\.css$/,
         use: ['vue-style-loader', 'css-loader']

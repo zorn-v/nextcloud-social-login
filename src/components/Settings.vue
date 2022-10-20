@@ -135,6 +135,7 @@ export default {
   data: function () {
     var settingsEl = document.getElementById('sociallogin')
     var data = JSON.parse(settingsEl.dataset.settings)
+    console.log(data)
     data.optionsTitles = optionsTitles
     data.providerTypes = providerTypes
     data.styleClass = styleClass
