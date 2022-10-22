@@ -10,4 +10,5 @@ export default {
   restrict_users_wo_assigned_groups: 'Restrict login for users without assigned groups',
   disable_notify_admins: 'Disable notify admins about new users',
   hide_default_login: 'Hide default login',
+  button_text_wo_prefix: 'Button text without prefix',
 }

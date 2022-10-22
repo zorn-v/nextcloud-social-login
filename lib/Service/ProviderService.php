@@ -42,6 +42,7 @@ class ProviderService
         'restrict_users_wo_assigned_groups',
         'disable_notify_admins',
         'hide_default_login',
+        'button_text_wo_prefix',
     ];
     const DEFAULT_PROVIDERS = [
         'google',

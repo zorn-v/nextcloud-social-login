@@ -77,7 +77,7 @@ class Application extends App implements IBootstrap
                 ++$providersCount;
                 if ($authUrl = $providerService->getAuthUrl($name, $provider['appid'])) {
                     SocialLogin::addLogin(
-                        $l->t('Log in with %s', ucfirst($name)),
+                        $config->getAppValue($this->appName, 'button_text_wo_prefix') ? ucfirst($name) : $l->t('Log in with %s', ucfirst($name)),
                         $authUrl
                     );
                     $this->regContext->registerAlternativeLogin(SocialLogin::class);
@@ -95,7 +95,7 @@ class Application extends App implements IBootstrap
                     'login_redirect_url' => $redirectUrl
                 ]);
                 SocialLogin::addLogin(
-                    $l->t('Log in with %s', $provider['title']),
+                    $config->getAppValue($this->appName, 'button_text_wo_prefix') ? $provider['title'] : $l->t('Log in with %s', $provider['title']),
                     $authUrl,
                     $provider['style'] ?? ''
                 );
