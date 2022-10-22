@@ -1,59 +1,61 @@
+import { appName } from '../../common'
+
 export default {
   custom_oidc: {
-    title: 'Custom OpenID Connect',
+    title: t(appName, 'Custom OpenID Connect'),
     hasGroupMapping: true,
     fields: {
       name: {
-        title: 'Internal name',
+        title: t(appName, 'Internal name'),
         type: 'text',
         required: true,
       },
       title: {
-        title: 'Title',
+        title: t(appName, 'Title'),
         type: 'text',
         required: true,
       },
       authorizeUrl: {
-        title: 'Authorize url',
+        title: t(appName, 'Authorize url'),
         type: 'url',
         required: true,
       },
       tokenUrl: {
-        title: 'Token url',
+        title: t(appName, 'Token url'),
         type: 'url',
         required: true,
       },
       displayNameClaim: {
-        title: 'Display name claim (optional)',
+        title: t(appName, 'Display name claim (optional)'),
         type: 'text',
       },
       userInfoUrl: {
-        title: 'User info URL (optional)',
+        title: t(appName, 'User info URL (optional)'),
         type: 'url',
         required: false,
       },
       logoutUrl: {
-        title: 'Logout URL (optional)',
+        title: t(appName, 'Logout URL (optional)'),
         type: 'url',
         required: false,
       },
       clientId: {
-        title: 'Client Id',
+        title: t(appName, 'Client Id'),
         type: 'text',
         required: true,
       },
       clientSecret: {
-        title: 'Client Secret',
+        title: t(appName, 'Client Secret'),
         type: 'password',
         required: true,
       },
       scope: {
-        title: 'Scope',
+        title: t(appName, 'Scope'),
         type: 'text',
         required: true,
       },
       groupsClaim: {
-        title: 'Groups claim (optional)',
+        title: t(appName, 'Groups claim (optional)'),
         type: 'text',
         required: false,
       },
@@ -63,163 +65,163 @@ export default {
     title: 'OpenID',
     fields: {
       name: {
-        title: 'Internal name',
+        title: t(appName, 'Internal name'),
         type: 'text',
         required: true,
       },
       title: {
-        title: 'Title',
+        title: t(appName, 'Title'),
         type: 'text',
         required: true,
       },
       url: {
-        title: 'Identifier url',
+        title: t(appName, 'Identifier url'),
         type: 'url',
         required: true,
       },
     }
   },
   custom_oauth2: {
-    title: 'Custom OAuth2',
+    title: t(appName, 'Custom OAuth2'),
     hasGroupMapping: true,
     fields: {
       name: {
-        title: 'Internal name',
+        title: t(appName, 'Internal name'),
         type: 'text',
         required: true,
       },
       title: {
-        title: 'Title',
+        title: t(appName, 'Title'),
         type: 'text',
         required: true,
       },
       apiBaseUrl: {
-        title: 'API Base URL',
+        title: t(appName, 'API Base URL'),
         type: 'url',
         required: true,
       },
       authorizeUrl: {
-        title: 'Authorize url (can be relative to base URL)',
+        title: t(appName, 'Authorize url (can be relative to base URL)'),
         type: 'text',
         required: true,
       },
       tokenUrl: {
-        title: 'Token url (can be relative to base URL)',
+        title: t(appName, 'Token url (can be relative to base URL)'),
         type: 'text',
         required: true,
       },
       profileUrl: {
-        title: 'Profile url (can be relative to base URL)',
+        title: t(appName, 'Profile url (can be relative to base URL)'),
         type: 'text',
         required: true,
       },
       logoutUrl: {
-        title: 'Logout URL (optional)',
+        title: t(appName, 'Logout URL (optional)'),
         type: 'url',
         required: false,
       },
       clientId: {
-        title: 'Client Id',
+        title: t(appName, 'Client Id'),
         type: 'text',
         required: true,
       },
       clientSecret: {
-        title: 'Client Secret',
+        title: t(appName, 'Client Secret'),
         type: 'password',
         required: true,
       },
       scope: {
-        title: 'Scope (optional)',
+        title: t(appName, 'Scope (optional)'),
         type: 'text',
         required: false,
       },
       profileFields: {
-        title: 'Profile Fields (optional, comma-separated)',
+        title: t(appName, 'Profile Fields (optional, comma-separated)'),
         type: 'text',
         required: false,
       },
       displayNameClaim: {
-        title: 'Display name claim (optional)',
+        title: t(appName, 'Display name claim (optional)'),
         type: 'text',
       },
       groupsClaim: {
-        title: 'Groups claim (optional)',
+        title: t(appName, 'Groups claim (optional)'),
         type: 'text',
         required: false,
       },
     }
   },
   custom_oauth1: {
-    title: 'Custom OAuth1',
+    title: t(appName, 'Custom OAuth1'),
     fields: {
       name: {
-        title: 'Internal name',
+        title: t(appName, 'Internal name'),
         type: 'text',
         required: true,
       },
       title: {
-        title: 'Title',
+        title: t(appName, 'Title'),
         type: 'text',
         required: true,
       },
       authorizeUrl: {
-        title: 'Authorize url',
+        title: t(appName, 'Authorize url'),
         type: 'text',
         required: true,
       },
       tokenUrl: {
-        title: 'Token url',
+        title: t(appName, 'Token url'),
         type: 'text',
         required: true,
       },
       profileUrl: {
-        title: 'Profile url',
+        title: t(appName, 'Profile url'),
         type: 'text',
         required: true,
       },
       logoutUrl: {
-        title: 'Logout URL (optional)',
+        title: t(appName, 'Logout URL (optional)'),
         type: 'url',
         required: false,
       },
       clientId: {
-        title: 'Consumer key',
+        title: t(appName, 'Consumer key'),
         type: 'text',
         required: true,
       },
       clientSecret: {
-        title: 'Consumer Secret',
+        title: t(appName, 'Consumer Secret'),
         type: 'password',
         required: true,
       },
     }
   },
   custom_discourse: {
-    title: 'Custom Discourse',
+    title: t(appName, 'Custom Discourse'),
     hasGroupMapping: true,
     fields: {
       name: {
-        title: 'Internal name',
+        title: t(appName, 'Internal name'),
         type: 'text',
         required: true,
       },
       title: {
-        title: 'Title',
+        title: t(appName, 'Title'),
         type: 'text',
         required: true,
       },
       baseUrl: {
-        title: 'Base url',
+        title: t(appName, 'Base url'),
         type: 'text',
         required: true,
       },
       logoutUrl: {
-        title: 'Logout URL (optional)',
+        title: t(appName, 'Logout URL (optional)'),
         type: 'url',
         required: false,
       },
       ssoSecret: {
-        title: 'SSO Secret',
+        title: t(appName, 'SSO Secret'),
         type: 'password',
         required: true,
       },

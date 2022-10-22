@@ -2,9 +2,9 @@ import '@nextcloud/dialogs/styles/toast.scss'
 import { showError } from '@nextcloud/dialogs'
 import confirmPassword from '@nextcloud/password-confirmation'
 import axios from '@nextcloud/axios'
+import { appName } from './common'
 
 document.addEventListener('DOMContentLoaded', function () {
-  var appName = 'sociallogin';
   var form = document.getElementById('sociallogin_personal_settings')
   function saveSettings() {
     confirmPassword().then(function () {
@@ -15,8 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         })
         .catch(function () {
-          var msg = 'Some error occurred while saving settings'
-          showError(t(appName, msg));
+          showError(t(appName, 'Some error occurred while saving settings'))
         })
     })
   }

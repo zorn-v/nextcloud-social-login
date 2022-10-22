@@ -3,13 +3,13 @@
     <div v-for="(enabled, name) in options" :key="name">
       <input type="hidden" :name="'options['+name+']'" :value="enabled ? 1 : 0" />
       <input :id="'opt_'+name" type="checkbox" class="checkbox" v-model="options[name]" />
-      <label :for="'opt_'+name">{{ optionsTitles[name] ? t(optionsTitles[name]) : name }}</label>
+      <label :for="'opt_'+name">{{ optionsTitles[name] || name }}</label>
     </div>
     <button>{{ t('Save') }}</button>
     <hr/>
     <div v-for="(provData, provType) in providerTypes" :key="provType">
       <h2>
-        {{ t(provData.title) }}
+        {{ provData.title }}
         <button type="button">
           <div class="icon-add" @click="providerAdd(provType)"></div>
         </button>
@@ -17,7 +17,7 @@
       <div v-for="(provider, k) in custom_providers[provType]" :key="provider" :ref="'prov_'+provType+'_'+k" class="provider-settings">
         <div class="provider-remove" @click="providerRemove(provType, k)">x</div>
         <label v-for="(fieldData, fieldName) in provData.fields" :key="fieldName">
-          {{ t(fieldData.title) }}<br/>
+          {{ fieldData.title }}<br/>
           <input
             v-model="provider[fieldName]"
             :type="fieldData.type"
