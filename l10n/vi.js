@@ -1,7 +1,6 @@
 OC.L10N.register(
     "sociallogin",
     {
-    "Title" : "標題",
-    "Client Secret" : "客戶端密碼"
+    "Title" : "Tiêu đề"
 },
 "nplurals=1; plural=0;");
