@@ -5,7 +5,7 @@
       <input :id="'opt_'+name" type="checkbox" class="checkbox" v-model="options[name]" />
       <label :for="'opt_'+name">{{ optionsTitles[name] || name }}</label>
     </div>
-    <button>{{ t('Save') }}</button>
+    <button>{{ t(appName, 'Save') }}</button>
     <hr/>
     <div v-for="(provData, provType) in providerTypes" :key="provType">
       <h2>
@@ -28,7 +28,7 @@
           <br/>
         </label>
         <label>
-          {{ t('Button style') }}<br/>
+          {{ t(appName, 'Button style') }}<br/>
           <select :name="'custom_providers['+provType+']['+k+'][style]'">
             <option value="">{{ t('None') }}</option>
             <option v-for="(styleTitle, style) in styleClass" :key="style" :value="style" :selected="provider.style === style">
@@ -38,7 +38,7 @@
         </label>
         <br/>
         <label>
-          {{ t('Default group') }}<br/>
+          {{ t(appName, 'Default group') }}<br/>
           <select :name="'custom_providers['+provType+']['+k+'][defaultGroup]'">
             <option value="">{{ t('None') }}</option>
             <option v-for="group in groups" :key="group" :value="group" :selected="provider.defaultGroup === group">
@@ -49,7 +49,7 @@
         <br/>
         <template v-if="provData.hasGroupMapping">
           <button class="group-mapping-add" type="button" @click="provider.groupMapping.push({foreign: '', local: ''})">
-            {{ t('Add group mapping') }}
+            {{ t(appName, 'Add group mapping') }}
           </button>
           <div v-for="(mapping, mappingIdx) in provider.groupMapping" :key="mapping">
             <input type="text" class="foreign-group" v-model="mapping.foreign" />
@@ -69,17 +69,17 @@
         <img :src="imagePath(name.toLowerCase())" /> {{ name[0].toUpperCase() + name.substring(1) }}
       </h2>
       <label>
-        {{ t('App id') }}<br/>
+        {{ t(appName, 'App id') }}<br/>
         <input type="text" :name="'providers['+name+'][appid]'" :value="provider.appid"/>
       </label>
       <br/>
       <label>
-        {{ t('Secret') }}<br/>
+        {{ t(appName, 'Secret') }}<br/>
         <input type="password" :name="'providers['+name+'][secret]'" :value="provider.secret"/>
       </label>
       <br/>
       <label>
-        {{ t('Default group') }}<br/>
+        {{ t(appName, 'Default group') }}<br/>
         <select :name="'providers['+name+'][defaultGroup]'">
           <option value="">{{ t('None') }}</option>
           <option v-for="group in groups" :key="group" :value="group" :selected="provider.defaultGroup === group">
@@ -90,35 +90,35 @@
       <template v-if="['google', 'yandex', 'mailru'].includes(name)">
         <br/>
         <label>
-          {{ t('Allow login only from specified domain') }}<br/>
+          {{ t(appName, 'Allow login only from specified domain') }}<br/>
           <input type="text" :name="'providers['+name+'][auth_params][hd]'" :value="provider.auth_params ? provider.auth_params.hd : ''"/>
         </label>
       </template>
       <template v-if="name === 'GitHub'">
         <br/>
         <label>
-          {{ t('Allow login only for specified organizations') }}<br/>
+          {{ t(appName, 'Allow login only for specified organizations') }}<br/>
           <input type="text" :name="'providers['+name+'][orgs]'" :value="provider.orgs"/>
         </label>
       </template>
       <template v-if="name === 'BitBucket'">
         <br/>
         <label>
-          {{ t('Allow login only for specified workspace') }}<br/>
+          {{ t(appName, 'Allow login only for specified workspace') }}<br/>
           <input type="text" :name="'providers['+name+'][workspace]'" :value="provider.workspace"/>
         </label>
       </template>
       <template v-if="name === 'discord'">
         <br/>
         <label>
-          {{ t('Allow login only for specified guilds') }}<br/>
+          {{ t(appName, 'Allow login only for specified guilds') }}<br/>
           <input type="text" :name="'providers['+name+'][guilds]'" :value="provider.guilds"/>
         </label>
       </template>
     </div>
     <br/>
 
-    <button>{{ t('Save') }}</button>
+    <button>{{ t(appName, 'Save') }}</button>
   </form>
 </template>
 
@@ -164,6 +164,11 @@ export default {
 
     return data
   },
+  computed: {
+    appName: function () {
+      return this.app_name
+    },
+  },
   mounted: function () {
     var disableReg = document.getElementById('opt_disable_registration')
     if (!disableReg) {
@@ -175,7 +180,7 @@ export default {
     disableReg.onchange()
   },
   methods: {
-    t: function (text, vars) {
+    t: function (appName, text, vars) {
       return t(this.app_name, text, vars)
     },
     imagePath: function (file) {
@@ -191,13 +196,13 @@ export default {
                 vm.custom_providers[provType][i].isNew = false
               }
             }
-            showInfo(vm.t('Settings for social login successfully saved'))
+            showInfo(vm.t(vm.appName, 'Settings for social login successfully saved'))
           } else {
             showError(res.data.message)
           }
         })
         .catch(function () {
-          showError(vm.t('Some error occurred while saving settings'))
+          showError(vm.t(vm.appName, 'Some error occurred while saving settings'))
         })
     },
     providerAdd: function (provType) {
@@ -218,8 +223,8 @@ export default {
       if (needConfirm()) {
         const vm = this
         OC.dialogs.confirm(
-          this.t('Do you really want to remove {providerTitle} provider ?', {'providerTitle': providerTitle}),
-          this.t('Confirm remove'),
+          this.t(this.appName, 'Do you really want to remove {providerTitle} provider ?', {'providerTitle': providerTitle}),
+          this.t(this.appName, 'Confirm remove'),
           function (confirmed) {
             if (!confirmed) {
               return;
