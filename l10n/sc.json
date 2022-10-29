@@ -1,4 +1,7 @@
 { "translations": {
-    "Title" : "Tìtulu"
+    "Title" : "Tìtulu",
+    "Client Secret" : "Segretu de su cliente",
+    "Scope" : "Àmbitu",
+    "Consumer key" : "Crae cliente"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

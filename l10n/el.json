@@ -1,0 +1,7 @@
+{ "translations": {
+    "Title" : "Τίτλος",
+    "Client Secret" : "Μυστικό πελάτη",
+    "Scope" : "Εύρος",
+    "Consumer key" : "Κλειδί καταναλωτή"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

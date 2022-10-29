@@ -1,0 +1,7 @@
+{ "translations": {
+    "Title" : "Titel",
+    "Client Secret" : "Client Geheim",
+    "Scope" : "Scope",
+    "Consumer key" : "Consumer key"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
