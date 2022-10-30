@@ -130,6 +130,7 @@ import axios from '@nextcloud/axios'
 import optionsTitles from './settings/options-titles'
 import providerTypes from './settings/provider-types'
 import styleClass from './settings/style-class'
+import { appName } from '../common'
 
 export default {
   data: function () {
@@ -161,13 +162,8 @@ export default {
         }
       }
     }
-
+    data.appName = appName
     return data
-  },
-  computed: {
-    appName: function () {
-      return this.app_name
-    },
   },
   mounted: function () {
     var disableReg = document.getElementById('opt_disable_registration')
@@ -180,11 +176,8 @@ export default {
     disableReg.onchange()
   },
   methods: {
-    t: function (appName, text, vars) {
-      return t(this.app_name, text, vars)
-    },
     imagePath: function (file) {
-      return imagePath(this.app_name, file)
+      return imagePath(appName, file)
     },
     saveSettings: function (e) {
       var vm = this
@@ -196,13 +189,13 @@ export default {
                 vm.custom_providers[provType][i].isNew = false
               }
             }
-            showInfo(vm.t(vm.appName, 'Settings for social login successfully saved'))
+            showInfo(vm.t(appName, 'Settings for social login successfully saved'))
           } else {
             showError(res.data.message)
           }
         })
         .catch(function () {
-          showError(vm.t(vm.appName, 'Some error occurred while saving settings'))
+          showError(vm.t(appName, 'Some error occurred while saving settings'))
         })
     },
     providerAdd: function (provType) {
@@ -223,8 +216,8 @@ export default {
       if (needConfirm()) {
         const vm = this
         OC.dialogs.confirm(
-          this.t(this.appName, 'Do you really want to remove {providerTitle} provider ?', {'providerTitle': providerTitle}),
-          this.t(this.appName, 'Confirm remove'),
+          this.t(appName, 'Do you really want to remove {providerTitle} provider ?', {'providerTitle': providerTitle}),
+          this.t(appName, 'Confirm remove'),
           function (confirmed) {
             if (!confirmed) {
               return;
