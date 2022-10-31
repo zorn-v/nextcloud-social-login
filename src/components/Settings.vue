@@ -30,7 +30,7 @@
         <label>
           {{ t(appName, 'Button style') }}<br/>
           <select :name="'custom_providers['+provType+']['+k+'][style]'">
-            <option value="">{{ t('None') }}</option>
+            <option value="">{{ t(appName, 'None') }}</option>
             <option v-for="(styleTitle, style) in styleClass" :key="style" :value="style" :selected="provider.style === style">
               {{ styleTitle }}
             </option>
@@ -40,7 +40,7 @@
         <label>
           {{ t(appName, 'Default group') }}<br/>
           <select :name="'custom_providers['+provType+']['+k+'][defaultGroup]'">
-            <option value="">{{ t('None') }}</option>
+            <option value="">{{ t(appName, 'None') }}</option>
             <option v-for="group in groups" :key="group" :value="group" :selected="provider.defaultGroup === group">
               {{ group }}
             </option>
@@ -81,7 +81,7 @@
       <label>
         {{ t(appName, 'Default group') }}<br/>
         <select :name="'providers['+name+'][defaultGroup]'">
-          <option value="">{{ t('None') }}</option>
+          <option value="">{{ t(appName, 'None') }}</option>
           <option v-for="group in groups" :key="group" :value="group" :selected="provider.defaultGroup === group">
             {{ group }}
           </option>
