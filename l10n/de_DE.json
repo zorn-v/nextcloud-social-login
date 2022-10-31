@@ -22,6 +22,7 @@
     "Social login" : "Social-Login",
     "Social Login" : "Social-Login",
     "Social login via OAuth or OpenID" : "Social Login über OAuth oder OpenID",
+    "Some error occurred while saving settings" : "Beim Speichern der Einstellungen ist ein Fehler aufgetreten",
     "Disable auto create new users" : "Automatische Erstellung neuer Benutzer deaktivieren",
     "Create users with disabled account" : "Benutzer mit deaktiviertem Konto erstellen",
     "Allow users to connect social logins with their account" : "Ermöglichen Sie Benutzern, soziale Logins mit ihrem Konto zu verbinden",
@@ -61,7 +62,6 @@
     "Custom Discourse" : "Benutzerdefinierter Discourse",
     "Base url" : "Basis-URL",
     "SSO Secret" : "SSO-Geheimnis",
-    "Some error occurred while saving settings" : "Beim Speichern der Einstellungen ist ein Fehler aufgetreten",
     "Disable password confirmation on settings change" : "Passwortbestätigung bei Einstellungsänderung deaktivieren",
     "Social login connect" : "Soziale Anmeldung verbinden",
     "Available providers" : "Verfügbare Anbieter"

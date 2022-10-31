@@ -15,6 +15,7 @@
     "Email already registered" : "Пользователь с таким email уже зарегистрирован",
     "New user created" : "Создан новый пользователь",
     "User %s (%s) just created via social login" : "Пользователь %s (%s) создан через social login",
+    "Some error occurred while saving settings" : "Во время сохранения настроек произошла ошибка",
     "Disable auto create new users" : "Отключить автоматическое создание новых пользователей",
     "Create users with disabled account" : "Создавать пользователей с отключенным аккаунтом",
     "Allow users to connect social logins with their account" : "Позволять пользователям подключать социальные логины к своим аккаунтам",
@@ -29,7 +30,6 @@
     "Button text without prefix" : "Текст на кнопках без префикса",
     "Internal name" : "Внутреннее имя",
     "Title" : "Название",
-    "Some error occurred while saving settings" : "Во время сохранения настроек произошла ошибка",
     "Disable password confirmation on settings change" : "Отключить подтверждение паролем изменения настроек",
     "Social login connect" : "Привязки социальных логинов",
     "Available providers" : "Доступные поставщики"

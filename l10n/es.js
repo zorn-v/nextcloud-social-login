@@ -24,6 +24,7 @@ OC.L10N.register(
     "Social login" : "Social Login",
     "Social Login" : "Social Login",
     "Social login via OAuth or OpenID" : "Social login a través de OAuth u OpenID",
+    "Some error occurred while saving settings" : "Ocurrió algún error mientras se guardaban las configuraciones",
     "Disable auto create new users" : "Deshabilitar la creación automática de nuevos usuarios",
     "Create users with disabled account" : "Crear usuarios con cuenta deshabilitada",
     "Allow users to connect social logins with their account" : "Permitir a los usuarios conectar social logins con su cuenta",
@@ -63,7 +64,6 @@ OC.L10N.register(
     "Custom Discourse" : "Discourse personalizado",
     "Base url" : "URL base",
     "SSO Secret" : "Secreto SSO",
-    "Some error occurred while saving settings" : "Ocurrió algún error mientras se guardaban las configuraciones",
     "Disable password confirmation on settings change" : "Deshabilitar la confirmación de contraseña al cambiar las configuraciones",
     "Social login connect" : "Conexión Social login",
     "Available providers" : "Proveedores disponibles"

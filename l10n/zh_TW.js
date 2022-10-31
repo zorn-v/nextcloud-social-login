@@ -24,6 +24,9 @@ OC.L10N.register(
     "Social login" : "社交登入",
     "Social Login" : "社交登入",
     "Social login via OAuth or OpenID" : "透過 OAuth 或 OpenID 進行社交登入",
+    "Save" : "儲存",
+    "Secret" : "密碼",
+    "Some error occurred while saving settings" : "儲存設定時發生一些錯誤",
     "Disable auto create new users" : "停用自動建立新使用者",
     "Create users with disabled account" : "建立已停用帳號的使用者",
     "Allow users to connect social logins with their account" : "允許使用者將他們的帳號與社交登入連結",
@@ -63,7 +66,6 @@ OC.L10N.register(
     "Custom Discourse" : "自訂 Discourse",
     "Base url" : "基礎 URL",
     "SSO Secret" : "SSO 密碼",
-    "Some error occurred while saving settings" : "儲存設定時發生一些錯誤",
     "Disable password confirmation on settings change" : "停用設定變更時的密碼確認",
     "Social login connect" : "社交登入連結",
     "Available providers" : "可用的提供者"
