@@ -123,7 +123,6 @@
 </template>
 
 <script>
-import '@nextcloud/dialogs/styles/toast.scss'
 import { showError, showInfo } from '@nextcloud/dialogs'
 import { imagePath } from '@nextcloud/router'
 import axios from '@nextcloud/axios'

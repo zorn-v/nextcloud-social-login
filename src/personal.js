@@ -1,4 +1,3 @@
-import '@nextcloud/dialogs/styles/toast.scss'
 import { showError } from '@nextcloud/dialogs'
 import confirmPassword from '@nextcloud/password-confirmation'
 import axios from '@nextcloud/axios'
