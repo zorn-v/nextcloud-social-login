@@ -1,6 +1,9 @@
 OC.L10N.register(
     "sociallogin",
     {
+    "Save" : "Zapisz",
+    "None" : "Brak",
+    "Secret" : "Tajny klucz",
     "Title" : "Tytuł",
     "Client Secret" : "Tajny klucz klienta",
     "Scope" : "Zakres",

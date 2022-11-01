@@ -1,0 +1,9 @@
+{ "translations": {
+    "Save" : "ذخیره",
+    "None" : "هیچ‌کدام",
+    "Secret" : "راز",
+    "Title" : "عنوان",
+    "Client Secret" : "راز مشتری",
+    "Scope" : "حوزه"
+},"pluralForm" :"nplurals=2; plural=(n > 1);"
+}

@@ -1,0 +1,8 @@
+{ "translations": {
+    "Save" : "Enregistrar",
+    "None" : "Cap",
+    "Secret" : "Secret",
+    "Title" : "Títol",
+    "Client Secret" : "Secret del client"
+},"pluralForm" :"nplurals=2; plural=(n > 1);"
+}

@@ -1,4 +1,7 @@
 { "translations": {
+    "Save" : "Opslaan",
+    "None" : "Geen",
+    "Secret" : "Vertrouwelijk",
     "Title" : "Titel",
     "Client Secret" : "Client Geheim",
     "Scope" : "Scope",

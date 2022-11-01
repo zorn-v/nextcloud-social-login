@@ -24,6 +24,8 @@ OC.L10N.register(
     "Social login" : "Вписване през социална мрежа",
     "Social Login" : "Вписване през социална мрежа",
     "Social login via OAuth or OpenID" : "Вписване през социална мрежа чрез OAuth или OpenID",
+    "Save" : "Запиши",
+    "Secret" : "Тайна",
     "Some error occurred while saving settings" : "Възникна грешка при запазване на настройките",
     "Disable auto create new users" : "Деактивиране на автоматичното създаване на нови потребители",
     "Create users with disabled account" : "Създаване на потребители с деактивиран профил",

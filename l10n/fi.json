@@ -1,0 +1,9 @@
+{ "translations": {
+    "Save" : "Tallenna",
+    "None" : "Ei mitään",
+    "Secret" : "Salainen",
+    "Title" : "Nimeke",
+    "Scope" : "Näkyvyysalue",
+    "Consumer key" : "Kuluttaja-avain"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

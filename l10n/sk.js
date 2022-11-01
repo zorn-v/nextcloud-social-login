@@ -1,6 +1,9 @@
 OC.L10N.register(
     "sociallogin",
     {
+    "Save" : "Uložiť",
+    "None" : "Žiadne",
+    "Secret" : "Tajný kľúč",
     "Title" : "Názov",
     "Client Secret" : "Súkromné heslo klienta",
     "Scope" : "Rozsah",

@@ -1,4 +1,6 @@
 { "translations": {
+    "Save" : "Desa",
+    "Secret" : "Secret",
     "Title" : "Títol",
     "Client Secret" : "Secret del client",
     "Scope" : "Abast",

@@ -1,4 +1,7 @@
 { "translations": {
+    "Save" : "Spremi",
+    "None" : "Nema",
+    "Secret" : "Tajno",
     "Title" : "Naslov",
     "Client Secret" : "Tajni ključ klijenta",
     "Scope" : "Opseg",

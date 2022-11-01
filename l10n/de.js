@@ -24,6 +24,8 @@ OC.L10N.register(
     "Social login" : "Social-Login",
     "Social Login" : "Social-Login",
     "Social login via OAuth or OpenID" : "Social Login über OAuth oder OpenID",
+    "Save" : "Speichern",
+    "Secret" : "Geheimer Schlüssel",
     "Some error occurred while saving settings" : "Es ist ein Fehler beim Speichern der Einstellungen aufgetreten.",
     "Disable auto create new users" : "Automatische Erstellung neuer Benutzer deaktivieren",
     "Create users with disabled account" : "Benutzer mit deaktiviertem Konto erstellen",

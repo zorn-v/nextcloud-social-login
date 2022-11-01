@@ -1,4 +1,7 @@
 { "translations": {
+    "Save" : "Salva",
+    "None" : "Nessuno",
+    "Secret" : "Segreta",
     "Title" : "Titolo",
     "Client Secret" : "Segreto del client",
     "Scope" : "Ambito",
