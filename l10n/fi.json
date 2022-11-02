@@ -1,9 +1,24 @@
 { "translations": {
+    "Log in with username or email" : "Kirjaudu käyttäjätunnuksella tai sähköpostiosoitteella",
+    "Log in with %s" : "Kirjaudu käyttäen %s",
+    "This account already connected" : "Tämä tili yhdisti jo",
+    "Auto creating new users is disabled" : "Uusien käyttäjien automaattinen luominen on pois käytöstä",
+    "Email already registered" : "Sähköpostiosoite on jo käytössä",
+    "New user created" : "Uusi käyttäjä luotu",
     "Save" : "Tallenna",
+    "Button style" : "Painikkeen tyyli",
     "None" : "Ei mitään",
+    "Default group" : "Oletusryhmä",
     "Secret" : "Salainen",
+    "Confirm remove" : "Vahvista poistaminen",
+    "Custom OpenID Connect" : "Mukautettu OpenID Connect",
+    "Internal name" : "Sisäinen nimi",
     "Title" : "Nimeke",
+    "Authorize url" : "Valtuutuksen URL",
+    "Token url" : "Poletin URL",
     "Scope" : "Näkyvyysalue",
-    "Consumer key" : "Kuluttaja-avain"
+    "Profile url" : "Profiilin URL",
+    "Consumer key" : "Kuluttaja-avain",
+    "SSO Secret" : "SSO-salaisuus"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

@@ -26,6 +26,7 @@ OC.L10N.register(
     "Social login via OAuth or OpenID" : "Social login a través de OAuth u OpenID",
     "Save" : "Guardar",
     "Button style" : "Estilo de botones",
+    "None" : "Ninguno",
     "Default group" : "Grupo por defecto",
     "Add group mapping" : "Añadir asignación de grupo",
     "App id" : "Id de App",

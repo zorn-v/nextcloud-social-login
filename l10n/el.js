@@ -2,6 +2,7 @@ OC.L10N.register(
     "sociallogin",
     {
     "Save" : "Αποθήκευση",
+    "None" : "Καμμία",
     "Secret" : "Μυστικός",
     "Title" : "Τίτλος",
     "Client Secret" : "Μυστικό πελάτη",

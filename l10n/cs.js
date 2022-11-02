@@ -26,6 +26,7 @@ OC.L10N.register(
     "Social login via OAuth or OpenID" : "Přihlášení přes sociální sítě prostřednictvím OAuth nebo OpenID",
     "Save" : "Uložit",
     "Button style" : "Styl tlačítek",
+    "None" : "Žádná",
     "Default group" : "Výchozí skupina",
     "Add group mapping" : "Přidat mapování skupiny",
     "App id" : "Identif. aplikace",
