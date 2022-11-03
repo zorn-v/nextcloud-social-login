@@ -4,6 +4,7 @@ OC.L10N.register(
     "Save" : "Lagre",
     "None" : "Ingen",
     "Secret" : "Hemmelig",
+    "Do you really want to remove {providerTitle} provider ?" : "Vil du virkelig fjerne {providerTitle}-leverandøren?",
     "Title" : "Tittel",
     "Client Secret" : "Klient-hemmelighet",
     "Scope" : "Omfang"
