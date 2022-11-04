@@ -27,6 +27,7 @@ OC.L10N.register(
     "Save" : "Speichern",
     "Secret" : "Geheimer Schlüssel",
     "Some error occurred while saving settings" : "Es ist ein Fehler beim Speichern der Einstellungen aufgetreten.",
+    "Confirm remove" : "Entfernen bestätigen",
     "Disable auto create new users" : "Automatische Erstellung neuer Benutzer deaktivieren",
     "Create users with disabled account" : "Benutzer mit deaktiviertem Konto erstellen",
     "Allow users to connect social logins with their account" : "Erlaube Benutzern, soziale Logins mit ihrem Konto zu verbinden",
