@@ -7,6 +7,7 @@ OC.L10N.register(
     "Duplicate provider name \"%s\"" : "\"%s\" hizmet sağlayıcısı adı çift",
     "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "\"%s\" hizmet sağlayıcısı adı geçersiz. Kullanılabilecek karakterler: \"0-9a-z_.@-\"",
     "Unknown %s provider: \"%s\"" : "%s hizmet sağlayıcısı bilinmiyor: \"%s\"",
+    "Can not get identifier from provider" : "Hizmet sağlayıcıdan kod alınamadı",
     "Save" : "Kaydet",
     "None" : "Yok",
     "Secret" : "Parola",
