@@ -2,10 +2,10 @@ OC.L10N.register(
     "sociallogin",
     {
     "Log in with username or email" : "Přihlásit se uživatelským jménem nebo e-mailem",
-    "Log in with %s" : "Přihlásit se %s",
     "Provider name cannot be empty" : "Název poskytovatele je třeba vyplnit",
     "Duplicate provider name \"%s\"" : "Duplicitní název poskytovatele „%s“",
     "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "Neplatný název poskytovatele „%s“. Povolené znaky jsou „0-9a-z_.@-“",
+    "Log in with %s" : "Přihlásit se %s",
     "Unknown %s provider: \"%s\"" : "Neznámý poskytovatel%s: „%s“",
     "Can not get identifier from provider" : "Nedaří se získat identifikátor od poskytovatele",
     "Login from %s domain is not allowed for %s provider" : "Přihlášení z domény %s není pro poskytovatele %s dovoleno",

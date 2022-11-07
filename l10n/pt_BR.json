@@ -1,9 +1,9 @@
 { "translations": {
     "Log in with username or email" : "Entre com nome de usuário ou e-mail",
-    "Log in with %s" : "Entre com %s",
     "Provider name cannot be empty" : "Nome do provedor não pode ser vazio",
     "Duplicate provider name \"%s\"" : "Nome de provedor \"1%s\" duplicado",
     "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "Nome de provedor \"%s\" inválido.\nCaracteres permitidos \"0-9a-z_.@-\"",
+    "Log in with %s" : "Entre com %s",
     "Can not get identifier from provider" : "Não foi possível obter identificador do provedor",
     "Login from %s domain is not allowed for %s provider" : "Login a partir do domínio %snão é permitido pelo provedor %s",
     "Login is available only to members of the following GitHub organizations: %s" : "Login está disponível apenas para membros das organizações no GitHub: %s",

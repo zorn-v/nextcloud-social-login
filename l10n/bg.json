@@ -1,9 +1,9 @@
 { "translations": {
     "Log in with username or email" : "Вписване с име на потребител или имейл.",
-    "Log in with %s" : "Вписване с %s",
     "Provider name cannot be empty" : "Името на доставчика не може да бъде празно.",
     "Duplicate provider name \"%s\"" : "Дублирано име на доставчик  \"%s\"",
     "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "Невалидно име на доставчик \"%s\". Позволени са следните символи: \"0-9a-z_.@-\"",
+    "Log in with %s" : "Вписване с %s",
     "Unknown %s provider: \"%s\"" : "Неизвестен  %s доставчик: \"%s\"",
     "Can not get identifier from provider" : "Не може да се получи идентификатор от доставчика",
     "Login from %s domain is not allowed for %s provider" : "За доставчик %s, не е разрешено влизането от домейн %s",

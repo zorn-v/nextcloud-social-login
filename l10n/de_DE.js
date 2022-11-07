@@ -2,10 +2,10 @@ OC.L10N.register(
     "sociallogin",
     {
     "Log in with username or email" : "Mit Benutzername oder E-Mail anmelden",
-    "Log in with %s" : "Anmelden mit %s",
     "Provider name cannot be empty" : "Der Anbietername darf nicht leer sein",
     "Duplicate provider name \"%s\"" : "Doppelter Anbietername \"%s\"",
     "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "Ungültiger Anbietername \"%s\". Erlaubte Zeichen \"0-9a-z_.@-\"",
+    "Log in with %s" : "Anmelden mit %s",
     "Unknown %s provider: \"%s\"" : "Unbekannter %s-Anbieter: \"%s\"",
     "Can not get identifier from provider" : "Kennung vom Anbieter kann nicht abgerufen werden",
     "Login from %s domain is not allowed for %s provider" : "Die Anmeldung von der %s-Domäne ist für den %s-Anbieter nicht zulässig",

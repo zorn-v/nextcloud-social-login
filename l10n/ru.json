@@ -1,9 +1,9 @@
 { "translations": {
     "Log in with username or email" : "Войти через имя пользователя или email",
-    "Log in with %s" : "Войти через %s",
     "Provider name cannot be empty" : "Название поставщика не может быть пустым",
     "Duplicate provider name \"%s\"" : "Дубликат названия поставщика \"%s\"",
     "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "Некорректное название поставщика \"%s\". Допустимые символы \"0-9a-z_.@-\"",
+    "Log in with %s" : "Войти через %s",
     "Unknown %s provider: \"%s\"" : "Неизвестный поставщик %s: \"%s\"",
     "Login from %s domain is not allowed for %s provider" : "Вход с домена %s не разрешен для поставщика %s",
     "Login is available only to members of the following GitHub organizations: %s" : "Вход разрешен только для членов следующих GitHub организаций: %s",

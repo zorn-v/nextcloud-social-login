@@ -1,9 +1,9 @@
 { "translations": {
     "Log in with username or email" : "Bejelentkezés felhasználónévvel vagy e-mail-címmel",
-    "Log in with %s" : "Bejelentkezés ezzel: %s",
     "Provider name cannot be empty" : "A szolgáltató neve nem lehet üres",
     "Duplicate provider name \"%s\"" : "Ismételt szolgáltatónév: „%s”",
     "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "Érvénytelen szolgáltatónév: „%s”. Megengedett karakterek: „0-9a-z_.@-”",
+    "Log in with %s" : "Bejelentkezés ezzel: %s",
     "Unknown %s provider: \"%s\"" : "Ismeretlen %s szolgáltató: „%s”",
     "Can not get identifier from provider" : "Nem kérhető le azonosító a szolgáltatótól",
     "Save" : "Mentés",

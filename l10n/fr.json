@@ -1,9 +1,9 @@
 { "translations": {
     "Log in with username or email" : "Se connecter avec un nom d'utilisateur ou une adresse e-mail",
-    "Log in with %s" : "Se connecter avec %s",
     "Provider name cannot be empty" : "Le nom du fournisseur ne peut pas être vide",
     "Duplicate provider name \"%s\"" : "Duplicata du fournisseur \"%s\"",
     "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "Nom du fournisseur \"%s\" invalide. Les caractères autorisés sont \"0-9a-z_.@-\".",
+    "Log in with %s" : "Se connecter avec %s",
     "Unknown %s provider: \"%s\"" : "Fournisseur de %s inconnu : \"%s\"",
     "Can not get identifier from provider" : "Impossible d'obtenir un identifiant depuis le fournisseur",
     "Login from %s domain is not allowed for %s provider" : "La connexion depuis le domaine %s n'est pas autorisée pour le fournisseur %s",

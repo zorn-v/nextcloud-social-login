@@ -2,10 +2,10 @@ OC.L10N.register(
     "sociallogin",
     {
     "Log in with username or email" : "以使用戶名稱或電郵地址登入",
-    "Log in with %s" : "以 %s 登入",
     "Provider name cannot be empty" : "提供者名稱不能為空",
     "Duplicate provider name \"%s\"" : "重複的提供者名稱「%s」",
     "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "無效的提供者名稱「%s」。允許字元為「0-9a-z_.@-」",
+    "Log in with %s" : "以 %s 登入",
     "Unknown %s provider: \"%s\"" : "未知的 %s 提供者：「%s」",
     "Can not get identifier from provider" : "無法取得來自提供者的識別字串",
     "Login from %s domain is not allowed for %s provider" : "來自 %s 網域的登入不允許 %s 提供者",
