@@ -92,6 +92,7 @@ class Application extends App implements IBootstrap
                 && $config->getSystemValue('social_login_auto_redirect', false);
             if ($useLoginRedirect && $request->getPathInfo() === '/login') {
                 $login = $this->query($loginClass);
+                $login->load();
                 header('Location: ' . $login->getLink());
                 exit();
             }
