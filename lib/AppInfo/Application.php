@@ -64,6 +64,8 @@ class Application extends App implements IBootstrap
 
         $providerService = $this->query(ProviderService::class);
         $request = $this->query(IRequest::class);
+        $urlGenerator = $this->query(IURLGenerator::class);
+        $redirectUrl = $request->getParam('redirect_url');
 
         $providersCount = 0;
         $authUrl = '';
