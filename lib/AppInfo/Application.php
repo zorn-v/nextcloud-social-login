@@ -83,7 +83,7 @@ class Application extends App implements IBootstrap
         foreach ($providers as $providersType => $providerList) {
             foreach ($providerList as $provider) {
                 ++$providersCount;
-                $class = $providerService->getLoginClass($name, $provider, $providersType);
+                $class = $providerService->getLoginClass($provider['name'], $provider, $providersType);
                 $this->regContext->registerAlternativeLogin($class);
             }
         }
