@@ -1,8 +1,6 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import SettingsView from './components/Settings.vue'
 
-Vue.prototype.t = t
-new Vue({
-  el: '#sociallogin_settings_app',
-  render: h => h(SettingsView),
-})
+createApp(SettingsView)
+  .use((app) => app.config.globalProperties.t = t)
+  .mount('#sociallogin_settings_app')
