@@ -66,13 +66,13 @@ class Application extends App implements IBootstrap
         $request = $this->query(IRequest::class);
 
         $providersCount = 0;
-        $authUrl = '';
+        $loginClass = '';
         $providers = json_decode($config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
         foreach ($providers as $name => $provider) {
             if ($provider['appid']) {
                 ++$providersCount;
-                $class = $providerService->getLoginClass($name);
-                $this->regContext->registerAlternativeLogin($class);
+                $loginClass = $providerService->getLoginClass($name);
+                $this->regContext->registerAlternativeLogin($loginClass);
             }
         }
 
@@ -80,8 +80,8 @@ class Application extends App implements IBootstrap
         foreach ($providers as $providersType => $providerList) {
             foreach ($providerList as $provider) {
                 ++$providersCount;
-                $class = $providerService->getLoginClass($provider['name'], $provider, $providersType);
-                $this->regContext->registerAlternativeLogin($class);
+                $loginClass = $providerService->getLoginClass($provider['name'], $provider, $providersType);
+                $this->regContext->registerAlternativeLogin($loginClass);
             }
         }
 
@@ -91,7 +91,8 @@ class Application extends App implements IBootstrap
                 && !$request->getParam('noredir')
                 && $config->getSystemValue('social_login_auto_redirect', false);
             if ($useLoginRedirect && $request->getPathInfo() === '/login') {
-                header('Location: ' . $authUrl);
+                $login = $this->query($loginClass);
+                header('Location: ' . $login->getLink());
                 exit();
             }
 
