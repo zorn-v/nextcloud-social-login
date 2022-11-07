@@ -72,6 +72,7 @@ class Application extends App implements IBootstrap
             if ($provider['appid']) {
                 ++$providersCount;
                 $class = $providerService->getLoginClass($name);
+                $authUrl = $providerService->getAuthUrl($name, $provider['appid']);
                 $this->regContext->registerAlternativeLogin($class);
             }
         }
@@ -81,6 +82,11 @@ class Application extends App implements IBootstrap
             foreach ($providerList as $provider) {
                 ++$providersCount;
                 $class = $providerService->getLoginClass($provider['name'], $provider, $providersType);
+                $authUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom', [
+                    'type' => $providersType,
+                    'provider' => $provider['name'],
+                    'login_redirect_url' => $redirectUrl
+                ]);
                 $this->regContext->registerAlternativeLogin($class);
             }
         }
