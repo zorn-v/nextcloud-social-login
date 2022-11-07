@@ -14,7 +14,6 @@ use OCP\IConfig;
 use OCP\IL10N;
 use OCP\IRequest;
 use OCP\ISession;
-use OCP\IURLGenerator;
 use OCP\IUserSession;
 use OCP\User\Events\BeforeUserDeletedEvent;
 use OCP\User\Events\UserLoggedOutEvent;
@@ -64,9 +63,7 @@ class Application extends App implements IBootstrap
         }
 
         $providerService = $this->query(ProviderService::class);
-        $urlGenerator = $this->query(IURLGenerator::class);
         $request = $this->query(IRequest::class);
-        $redirectUrl = $request->getParam('redirect_url');
 
         $providersCount = 0;
         $authUrl = '';
