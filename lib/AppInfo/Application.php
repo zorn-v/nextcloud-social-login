@@ -13,6 +13,7 @@ use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IConfig;
 use OCP\IL10N;
 use OCP\IRequest;
+use OCP\IURLGenerator;
 use OCP\ISession;
 use OCP\IUserSession;
 use OCP\User\Events\BeforeUserDeletedEvent;
@@ -63,8 +64,8 @@ class Application extends App implements IBootstrap
         }
 
         $providerService = $this->query(ProviderService::class);
-        $request = $this->query(IRequest::class);
         $urlGenerator = $this->query(IURLGenerator::class);
+        $request = $this->query(IRequest::class);
         $redirectUrl = $request->getParam('redirect_url');
 
         $providersCount = 0;
