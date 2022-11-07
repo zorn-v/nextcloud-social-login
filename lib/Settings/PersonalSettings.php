@@ -10,6 +10,7 @@ use OCP\IURLGenerator;
 use OCP\IUserSession;
 use OCP\Settings\ISettings;
 use OCP\Util;
+use Psr\Container\ContainerInterface;
 
 class PersonalSettings implements ISettings
 {
@@ -25,6 +26,8 @@ class PersonalSettings implements ISettings
     private $socialConnect;
     /** @var ProviderService */
     private $providerService;
+    /** @var ContainerInterface */
+    private $container;
 
     public function __construct(
         $appName,
@@ -32,7 +35,8 @@ class PersonalSettings implements ISettings
         IURLGenerator $urlGenerator,
         IUserSession $userSession,
         ConnectedLoginMapper $socialConnect,
-        ProviderService $providerService
+        ProviderService $providerService,
+        ContainerInterface $container
     ) {
         $this->appName = $appName;
         $this->config = $config;
@@ -40,6 +44,7 @@ class PersonalSettings implements ISettings
         $this->userSession = $userSession;
         $this->socialConnect = $socialConnect;
         $this->providerService = $providerService;
+        $this->container = $container;
     }
 
     public function getForm()
@@ -57,10 +62,11 @@ class PersonalSettings implements ISettings
             $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
             if (is_array($providers)) {
                 foreach ($providers as $name => $provider) {
-                    if ($provider['appid'] && $authUrl = $this->providerService->getAuthUrl($name, $provider['appid'])) {
-                        $params['providers'][ucfirst($name)] = [
-                            'url' => $authUrl,
-                        ];
+                    if ($provider['appid']) {
+                        $class = $this->providerService->getLoginClass($name);
+                        $login = $this->container->get($class);
+                        $login->load();
+                        $params['providers'][ucfirst($name)] = ['url' => $login->getLink(), 'style' => $login->getClass()];
                     }
                 }
             }
@@ -83,12 +89,11 @@ class PersonalSettings implements ISettings
         $providers = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
         foreach ($providers as $providersType => $providerList) {
             foreach ($providerList as $provider) {
-                $name = $provider['name'];
+                $class = $this->providerService->getLoginClass($provider['name'], $provider, $providersType);
+                $login = $this->container->get($class);
+                $login->load();
                 $title = $provider['title'];
-                $result[$title] = [
-                    'url' => $this->urlGenerator->linkToRoute($this->appName.'.login.custom', ['type' => $providersType, 'provider' => $name]),
-                    'style' => isset($provider['style']) ? $provider['style'] : '',
-                ];
+                $result[$title] = ['url' => $login->getLink(), 'style' => $login->getClass()];
             }
         }
 

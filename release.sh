@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 GITHUB_REPO=zorn-v/nextcloud-social-login
 APP_NAME=sociallogin
@@ -24,7 +24,8 @@ UPLOAD_URL=`curl -sH "Authorization: token $GITHUB_TOKEN" -d "{\"tag_name\":\"$V
 git push
 git checkout -b release
 git tag $VERSION
-git log --format='%D- %s' | sed -e 's/HEAD -> release, //' -e 's/, origin\/master, origin\/HEAD, master//' -e 's/tag: v\([^-]*\)/\n## \1\n/' > CHANGELOG.md
+git log --format='%D- %s' | sed -e 's/HEAD -> release, //' -e 's/, origin\/master, origin\/HEAD, master//' \
+  -e 's/tag: v\([^-]*\)/\n## \1\n/' | sed 's/^.*\?- /- /' | uniq -u > CHANGELOG.md
 git add CHANGELOG.md
 sed -i '/<description> <\/description>/ {
   a <description><![CDATA[

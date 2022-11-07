@@ -3,7 +3,6 @@
 namespace OCA\SocialLogin\AppInfo;
 
 use OCA\SocialLogin\AlternativeLogin\DefaultLoginShow;
-use OCA\SocialLogin\AlternativeLogin\SocialLogin;
 use OCA\SocialLogin\Db\ConnectedLoginMapper;
 use OCA\SocialLogin\Service\ProviderService;
 use OCP\AppFramework\App;
@@ -75,13 +74,8 @@ class Application extends App implements IBootstrap
         foreach ($providers as $name => $provider) {
             if ($provider['appid']) {
                 ++$providersCount;
-                if ($authUrl = $providerService->getAuthUrl($name, $provider['appid'])) {
-                    SocialLogin::addLogin(
-                        $config->getAppValue($this->appName, 'button_text_wo_prefix') ? ucfirst($name) : $l->t('Log in with %s', ucfirst($name)),
-                        $authUrl
-                    );
-                    $this->regContext->registerAlternativeLogin(SocialLogin::class);
-                }
+                $class = $providerService->getLoginClass($name);
+                $this->regContext->registerAlternativeLogin($class);
             }
         }
 
@@ -89,17 +83,8 @@ class Application extends App implements IBootstrap
         foreach ($providers as $providersType => $providerList) {
             foreach ($providerList as $provider) {
                 ++$providersCount;
-                $authUrl = $urlGenerator->linkToRoute($this->appName.'.login.custom', [
-                    'type' => $providersType,
-                    'provider' => $provider['name'],
-                    'login_redirect_url' => $redirectUrl
-                ]);
-                SocialLogin::addLogin(
-                    $config->getAppValue($this->appName, 'button_text_wo_prefix') ? $provider['title'] : $l->t('Log in with %s', $provider['title']),
-                    $authUrl,
-                    $provider['style'] ?? ''
-                );
-                $this->regContext->registerAlternativeLogin(SocialLogin::class);
+                $class = $providerService->getLoginClass($name, $provider, $providersType);
+                $this->regContext->registerAlternativeLogin($class);
             }
         }
 

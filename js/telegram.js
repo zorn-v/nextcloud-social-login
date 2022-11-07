@@ -3,19 +3,20 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!tgData) {
     return
   }
-  var login = tgData.dataset.login
+  var botId = tgData.dataset.botId
   var redirectUrl = tgData.dataset.redirectUrl
-
-  var mainEl = document.querySelector('.section.sociallogin-connect main')
-  if (!mainEl) {
-    mainEl = document.getElementById('alternative-logins')
-  }
-  if (mainEl && (document.querySelector('form[name="login"]') || document.querySelector('.section.sociallogin-connect'))) {
-    var script = document.createElement('script')
-    script.src = 'https://telegram.org/js/telegram-widget.js?9'
-    script.dataset.size = 'large'
-    script.dataset.telegramLogin = login
-    script.dataset.authUrl = redirectUrl
-    mainEl.appendChild(script)
+  var tgBtn = document.querySelector('#alternative-logins .telegram')
+  if (tgBtn) {
+    var tgWidget = document.createElement('script')
+    tgWidget.src = 'https://telegram.org/js/telegram-widget.js?21'
+    document.head.appendChild(tgWidget)
+    tgBtn.onclick = function (e) {
+      e.preventDefault()
+      Telegram.Login.auth({bot_id: botId}, function (data) {
+        if (data) {
+          location = redirectUrl + '?' + new URLSearchParams(data)
+        }
+      })
+    }
   }
 })
