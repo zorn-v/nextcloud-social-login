@@ -60,7 +60,7 @@ class AdminSettings implements ISettings
             'providers' => $providers,
         ];
         foreach (ProviderService::OPTIONS as $paramName) {
-            $params['options'][$paramName] = $this->config->getAppValue($this->appName, $paramName);
+            $params['options'][$paramName] = !!$this->config->getAppValue($this->appName, $paramName);
         }
         return new TemplateResponse($this->appName, 'admin', $params);
     }
