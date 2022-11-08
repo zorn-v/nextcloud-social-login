@@ -123,13 +123,12 @@
 </template>
 
 <script>
-import { showError, showInfo } from '@nextcloud/dialogs'
 import { imagePath } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import optionsTitles from './settings/options-titles'
 import providerTypes from './settings/provider-types'
 import styleClass from './settings/style-class'
-import { appName } from '../common'
+import { appName, showError, showInfo } from '../common'
 
 export default {
   data: function () {

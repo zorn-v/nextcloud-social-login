@@ -1,7 +1,6 @@
-import { showError } from '@nextcloud/dialogs'
 import confirmPassword from '@nextcloud/password-confirmation'
 import axios from '@nextcloud/axios'
-import { appName } from './common'
+import { appName, showError } from './common'
 
 document.addEventListener('DOMContentLoaded', function () {
   var form = document.getElementById('sociallogin_personal_settings')
