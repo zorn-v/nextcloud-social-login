@@ -1,6 +1,10 @@
 OC.L10N.register(
     "sociallogin",
     {
+    "Log in with username or email" : "Piesakieties ar lietotājvārdu vai e-pastu",
+    "Log in with %s" : "Piesakieties ar %s",
+    "Social login" : "Sociālā pieteikšanās",
+    "Social Login" : "Sociālā pieteikšanās",
     "Save" : "Saglabāt",
     "None" : "Nav",
     "Secret" : "Noslēpums",
