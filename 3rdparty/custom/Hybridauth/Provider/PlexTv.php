@@ -41,7 +41,6 @@ class PlexTv extends OAuth2
             'strong' => 'true',
             'X-Plex-Client-Identifier' => $clientId,
         ]);
-        $this->storeData('pin_id', $pin->id);
 
         return 'https://app.plex.tv/auth#?'.http_build_query([
             'clientID' => $clientId,
