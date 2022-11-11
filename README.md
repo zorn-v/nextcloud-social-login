@@ -18,7 +18,9 @@ You can use groups from your custom provider. For that you should specify "Group
 
 ```json
 {"roles": ["admin", "user"]}
+```
 or
+```json
 {"roles": "admin,user"}
 ```
 
