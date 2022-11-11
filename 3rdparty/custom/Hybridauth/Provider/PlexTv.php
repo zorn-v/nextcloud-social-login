@@ -24,13 +24,10 @@ class PlexTv extends OAuth2
 
     protected function initialize()
     {
-        $this->apiRequestParameters = [
-            'X-Plex-Client-Identifier' => $this->getStoredData('client_id') ?: '',
-        ];
-
         $this->apiRequestHeaders = [
             'Accept' => 'application/json',
             'X-Plex-Product' => $this->product,
+            'X-Plex-Client-Identifier' => $this->getStoredData('client_id') ?: '',
             'X-Plex-Token' =>  $this->getStoredData('access_token') ?: '',
         ];
     }
@@ -49,15 +46,14 @@ class PlexTv extends OAuth2
         return 'https://app.plex.tv/auth#?'.http_build_query([
             'clientID' => $clientId,
             'code' => $pin->code,
-            'forwardUrl' => $this->callback.'?'.http_build_query(['code' => $pin->code, 'state' => $clientId]),
+            'forwardUrl' => $this->callback.'?'.http_build_query(['code' => $pin->id, 'state' => $clientId]),
             'context' => ['device' => ['product' => $this->product]],
         ]);
     }
 
     protected function exchangeCodeForAccessToken($code)
     {
-        $pin = $this->apiRequest('pins/'.$this->getStoredData('pin_id'));
-        $this->deleteStoredData('pin_id');
+        $pin = $this->apiRequest('pins/'.$code);
         $pin->access_token = $pin->authToken;
 
         return json_encode($pin);
