@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e89c8e7766d1d985901f997b1ee6ce8",
+    "content-hash": "094a675f8f77877b45cedde95316b328",
     "packages": [
         {
             "name": "hybridauth/hybridauth",
-            "version": "3.7.1",
+            "version": "v3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hybridauth/hybridauth.git",
-                "reference": "0ec1b8cb8b230aae739422c5e42bc5733b3a7316"
+                "reference": "cda2ddac102c29872164677fe92900bfef2eb15c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/0ec1b8cb8b230aae739422c5e42bc5733b3a7316",
-                "reference": "0ec1b8cb8b230aae739422c5e42bc5733b3a7316",
+                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/cda2ddac102c29872164677fe92900bfef2eb15c",
+                "reference": "cda2ddac102c29872164677fe92900bfef2eb15c",
                 "shasum": ""
             },
             "require": {
@@ -64,9 +64,9 @@
             "support": {
                 "gitter": "https://gitter.im/hybridauth/hybridauth",
                 "issues": "https://github.com/hybridauth/hybridauth/issues",
-                "source": "https://github.com/hybridauth/hybridauth/tree/3.7.1"
+                "source": "https://github.com/hybridauth/hybridauth/tree/v3.8.1"
             },
-            "time": "2021-03-13T17:35:33+00:00"
+            "time": "2022-07-12T07:29:28+00:00"
         }
     ],
     "packages-dev": [],
@@ -77,5 +77,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }

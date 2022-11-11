@@ -73,11 +73,13 @@
         <input type="text" :name="'providers['+name+'][appid]'" :value="provider.appid"/>
       </label>
       <br/>
-      <label>
-        {{ t(appName, 'Secret') }}<br/>
-        <input type="password" :name="'providers['+name+'][secret]'" :value="provider.secret"/>
-      </label>
-      <br/>
+      <template v-if="name !== 'PlexTv'">
+        <label>
+          {{ t(appName, 'Secret') }}<br/>
+          <input type="password" :name="'providers['+name+'][secret]'" :value="provider.secret"/>
+        </label>
+        <br/>
+      </template>
       <label>
         {{ t(appName, 'Default group') }}<br/>
         <select :name="'providers['+name+'][defaultGroup]'">

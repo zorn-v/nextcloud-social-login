@@ -20,6 +20,10 @@ class ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f
         ),
     );
 
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/..' . '/custom',
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Hybridauth\\Adapter\\AbstractAdapter' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Adapter/AbstractAdapter.php',
@@ -75,6 +79,7 @@ class ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f
         'Hybridauth\\Provider\\GitLab' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/GitLab.php',
         'Hybridauth\\Provider\\Google' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Google.php',
         'Hybridauth\\Provider\\Instagram' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Instagram.php',
+        'Hybridauth\\Provider\\Keycloak' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Keycloak.php',
         'Hybridauth\\Provider\\LinkedIn' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/LinkedIn.php',
         'Hybridauth\\Provider\\Mailru' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Mailru.php',
         'Hybridauth\\Provider\\Medium' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Medium.php',
@@ -86,6 +91,7 @@ class ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f
         'Hybridauth\\Provider\\Paypal' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Paypal.php',
         'Hybridauth\\Provider\\PaypalOpenID' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/PaypalOpenID.php',
         'Hybridauth\\Provider\\Pinterest' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Pinterest.php',
+        'Hybridauth\\Provider\\PlexTv' => __DIR__ . '/..' . '/custom/Hybridauth/Provider/PlexTv.php',
         'Hybridauth\\Provider\\QQ' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/QQ.php',
         'Hybridauth\\Provider\\Reddit' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Reddit.php',
         'Hybridauth\\Provider\\Slack' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Slack.php',
@@ -124,6 +130,7 @@ class ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f::$fallbackDirsPsr4;
             $loader->classMap = ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f::$classMap;
 
         }, null, ClassLoader::class);

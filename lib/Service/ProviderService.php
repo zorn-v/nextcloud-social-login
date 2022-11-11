@@ -56,6 +56,7 @@ class ProviderService
         'mailru',
         'yandex',
         'BitBucket',
+        'PlexTv',
     ];
 
     const TYPE_OPENID = 'openid';
