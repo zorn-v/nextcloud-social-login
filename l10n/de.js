@@ -25,6 +25,7 @@ OC.L10N.register(
     "Social Login" : "Social-Login",
     "Social login via OAuth or OpenID" : "Social Login über OAuth oder OpenID",
     "Save" : "Speichern",
+    "None" : "Nicht kategorisierte Rezepte",
     "Secret" : "Geheimer Schlüssel",
     "Some error occurred while saving settings" : "Es ist ein Fehler beim Speichern der Einstellungen aufgetreten.",
     "Confirm remove" : "Entfernen bestätigen",
