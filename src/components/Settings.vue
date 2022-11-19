@@ -220,7 +220,7 @@ export default {
       if (needConfirm()) {
         const vm = this
         OC.dialogs.confirm(
-          this.t(appName, 'Do you really want to remove {providerTitle} provider?', {'providerTitle': providerTitle}),
+          this.t(appName, 'Do you really want to remove {providerTitle} provider ?', {'providerTitle': providerTitle}),
           this.t(appName, 'Confirm remove'),
           function (confirmed) {
             if (!confirmed) {
