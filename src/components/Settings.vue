@@ -70,21 +70,21 @@
       </h2>
       <label>
         {{ t(appName, 'App id') }}<br/>
-        <input type="text" :name="'providers['+name+'][appid]'" :value="provider.appid"/>
+        <input type="text" :name="'providers['+name+'][appid]'" v-model="provider.appid"/>
       </label>
       <br/>
       <template v-if="name !== 'PlexTv'">
         <label>
           {{ t(appName, 'Secret') }}<br/>
-          <input type="password" :name="'providers['+name+'][secret]'" :value="provider.secret"/>
+          <input type="password" :name="'providers['+name+'][secret]'" v-model="provider.secret"/>
         </label>
         <br/>
       </template>
       <label>
         {{ t(appName, 'Default group') }}<br/>
-        <select :name="'providers['+name+'][defaultGroup]'">
+        <select :name="'providers['+name+'][defaultGroup]'" v-model="provider.defaultGroup">
           <option value="">{{ t(appName, 'None') }}</option>
-          <option v-for="group in groups" :key="group" :value="group" :selected="provider.defaultGroup === group">
+          <option v-for="group in groups" :key="group" :value="group">
             {{ group }}
           </option>
         </select>
@@ -93,28 +93,31 @@
         <br/>
         <label>
           {{ t(appName, 'Allow login only from specified domain') }}<br/>
-          <input type="text" :name="'providers['+name+'][auth_params][hd]'" :value="provider.auth_params ? provider.auth_params.hd : ''"/>
+          <input type="text" :name="'providers['+name+'][auth_params][hd]'"
+            :value="provider.auth_params ? provider.auth_params.hd : ''"
+            @input="provider.auth_params = provider.auth_params || {}; provider.auth_params.hd = $event.target.value"
+          />
         </label>
       </template>
       <template v-if="name === 'GitHub'">
         <br/>
         <label>
           {{ t(appName, 'Allow login only for specified organizations') }}<br/>
-          <input type="text" :name="'providers['+name+'][orgs]'" :value="provider.orgs"/>
+          <input type="text" :name="'providers['+name+'][orgs]'" v-model="provider.orgs"/>
         </label>
       </template>
       <template v-if="name === 'BitBucket'">
         <br/>
         <label>
           {{ t(appName, 'Allow login only for specified workspace') }}<br/>
-          <input type="text" :name="'providers['+name+'][workspace]'" :value="provider.workspace"/>
+          <input type="text" :name="'providers['+name+'][workspace]'" v-model="provider.workspace"/>
         </label>
       </template>
       <template v-if="name === 'discord'">
         <br/>
         <label>
           {{ t(appName, 'Allow login only for specified guilds') }}<br/>
-          <input type="text" :name="'providers['+name+'][guilds]'" :value="provider.guilds"/>
+          <input type="text" :name="'providers['+name+'][guilds]'" v-model="provider.guilds"/>
         </label>
       </template>
     </div>
@@ -176,6 +179,7 @@ export default {
     disableReg.onchange()
   },
   methods: {
+    test(e) {console.log(e)},
     imagePath: function (file) {
       return imagePath(appName, file)
     },
