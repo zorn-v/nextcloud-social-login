@@ -1,6 +1,7 @@
 OC.L10N.register(
     "sociallogin",
     {
+    "This account already connected" : "이 계정은 이미 연결됨",
     "Save" : "저장",
     "None" : "없음",
     "Secret" : "비밀",
