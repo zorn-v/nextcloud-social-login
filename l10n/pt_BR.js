@@ -35,7 +35,7 @@ OC.L10N.register(
     "Restrict login for users without mapped groups" : "Restringir login apenas para usuários sem grupo definido",
     "Restrict login for users without assigned groups" : "Restringir login para logins sem grupo designado",
     "Disable notify admins about new users" : "Desativar notificação para administração sobre novos usuários",
-    "Hide default login" : "Ocultar login padrão",
+    "Hide default login" : "Ocultar o login padrão",
     "Button text without prefix" : "Texto no botão sem prefixo",
     "Custom OpenID Connect" : "Conexão OpenID customizada",
     "Internal name" : "Nome interno",
