@@ -576,6 +576,8 @@ class ProviderService
             'token' => $userPassword ? null : $token,
         ], false);
 
+        $user->updateLastLoginTimestamp();
+
         //Workaround to create user files folder. Remove it later.
         \OC::$server->get(\OCP\Files\IRootFolder::class)->getUserFolder($user->getUID());
 
