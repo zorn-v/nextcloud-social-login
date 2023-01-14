@@ -1,9 +1,18 @@
 OC.L10N.register(
     "sociallogin",
     {
+    "Log in with username or email" : "Zaloguj się za pomocą nazwy użytkownika lub adresu e-mail",
+    "Provider name cannot be empty" : "Nazwa dostawcy nie może być pusta",
+    "Duplicate provider name \"%s\"" : "Powiel nazwę dostawcy \"%s\"",
+    "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "Nieprawidłowa nazwa dostawcy \"%s\". Dozwolone znaki 0-9a-z_.@-\"",
+    "Log in with %s" : "Zaloguj się za pomocą %s",
+    "This account already connected" : "To konto jest już połączone",
+    "Email already registered" : "Adres e-mail już zarejestrowany",
+    "New user created" : "Utworzono nowego użytkownika",
     "Save" : "Zapisz",
     "None" : "Brak",
     "Secret" : "Tajny klucz",
+    "Confirm remove" : "Potwierdź usunięcie",
     "Title" : "Tytuł",
     "Client Secret" : "Tajny klucz klienta",
     "Scope" : "Zakres",

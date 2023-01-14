@@ -1,12 +1,28 @@
 OC.L10N.register(
     "sociallogin",
     {
+    "Log in with username or email" : "Hasi saioa erabiltzaile-izen edo e-postarekin",
+    "Provider name cannot be empty" : "Hornitzailearen izena ezin da hutsik egon",
+    "Log in with %s" : "Hasi saioa %s-(r)ekin",
+    "Email already registered" : "E-posta dagoeneko erregistratuta dago",
+    "New user created" : "Erabiltzaile berria sortuta",
+    "Social login" : "Saio-hasiera soziala",
+    "Social Login" : "Saio-hasiera soziala",
+    "Social login via OAuth or OpenID" : "Saio-hasiera soziala OAuth edo OpenID bidez",
     "Save" : "Gorde",
+    "Button style" : "Botoien estiloa",
     "None" : "Bat ere ez",
+    "Default group" : "Lehenetsitako taldea",
     "Secret" : "Sekretua",
+    "Confirm remove" : "Berretsi kentzea",
+    "Create users with disabled account" : "Sortu erabiltzaileak desgaitutako kontuekin",
     "Title" : "Izenburua",
+    "Token url" : "Tokenaren esteka",
+    "Client Id" : "Bezeroaren Id",
     "Client Secret" : "Bezeroaren Sekretua",
     "Scope" : "Esparrua",
+    "API Base URL" : "APIaren oinarrizko URLa",
+    "Scope (optional)" : "Irismena (hautazkoa)",
     "Consumer key" : "Kontsumitzailearen gakoa"
 },
 "nplurals=2; plural=(n != 1);");
