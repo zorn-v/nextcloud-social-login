@@ -25,6 +25,7 @@ OC.L10N.register(
     "Social Login" : "Social-Login",
     "Social login via OAuth or OpenID" : "Social Login über OAuth oder OpenID",
     "Save" : "Speichern",
+    "Button style" : "Knopf-Stil",
     "None" : "Nicht kategorisierte Rezepte",
     "Default group" : "Standardgruppe",
     "Add group mapping" : "Gruppenzuordnung hinzufügen",

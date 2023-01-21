@@ -13,6 +13,7 @@ OC.L10N.register(
     "Button style" : "Botoien estiloa",
     "None" : "Bat ere ez",
     "Default group" : "Lehenetsitako taldea",
+    "App id" : "Aplikazioaren id",
     "Secret" : "Sekretua",
     "Confirm remove" : "Berretsi kentzea",
     "Create users with disabled account" : "Sortu erabiltzaileak desgaitutako kontuekin",
@@ -23,6 +24,11 @@ OC.L10N.register(
     "Scope" : "Esparrua",
     "API Base URL" : "APIaren oinarrizko URLa",
     "Scope (optional)" : "Irismena (hautazkoa)",
-    "Consumer key" : "Kontsumitzailearen gakoa"
+    "Profile url" : "Profilaren url-a",
+    "Consumer key" : "Kontsumitzailearen gakoa",
+    "Consumer Secret" : "Kontsumitzailearen sekretua",
+    "Custom Discourse" : "Discourse pertsonalizatua",
+    "Base url" : "Oinarrizko url-a",
+    "SSO Secret" : "SSO sekretua"
 },
 "nplurals=2; plural=(n != 1);");
