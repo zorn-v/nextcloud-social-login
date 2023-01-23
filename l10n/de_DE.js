@@ -62,7 +62,7 @@ OC.L10N.register(
     "Client Id" : "Client-ID",
     "Client Secret" : "Geheime Zeichenkette des Clients",
     "Scope" : "Anwendungsbereich",
-    "Groups claim (optional)" : "Anspruch auf Gruppen (optional)",
+    "Groups claim (optional)" : "Gruppen beanspruchen (optional)",
     "Identifier url" : "Identifikator-URL",
     "Custom OAuth2" : "Benutzerdefiniertes OAuth2",
     "API Base URL" : "API-Basis-URL",
