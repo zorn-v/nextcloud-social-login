@@ -64,7 +64,7 @@ You can copy link of certain login button to get proper "redirect url" for OAuth
 * [Facebook](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/facebook.md)
 * [Twitter](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/twitter.md)
 * [GitHub](https://github.com/settings/developers)
-* [Discord](https://discordapp.com/developers/applications/me#top)
+* [Discord](#configure-discord)
 * [Telegram](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/telegram.md)
 * PlexTv - you can use any title as app id
 
@@ -104,6 +104,16 @@ Password: <yourpassword>
 Or just run
 
 `docker exec -t -uwww-data CONTAINER_NAME php occ config:app:get sociallogin custom_providers`
+
+### Configure Discord
+
+To properly configure discord you have to:
+
+1. Create new discord application on [DiscordApp developers](https://discordapp.com/developers/applications/me#top)
+2. Open tab `Settings -> OAuth2 -> General`. In `Redirects` add new redirection link looking like this: `https://nextcloud.mydomain.com/apps/sociallogin/oauth/discord`.
+3. Copy `CLIENT ID` and generate and copy `CLIENT SECRET`
+4. Open in Nextcloud `Settings -> Social Login` and paste `CLIENT ID` into field `App id` and `CLIENT SECRET` into `Secret`.
+5. Select default group for users created this way.
 
 ## Hint
 
