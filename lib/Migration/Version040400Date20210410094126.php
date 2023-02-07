@@ -32,11 +32,11 @@ class Version040400Date20210410094126 extends SimpleMigrationStep {
         if (!$schema->hasTable('sociallogin_connect')) {
             $table = $schema->createTable('sociallogin_connect');
             $table->addColumn('uid', 'string', [
-                    'notnull' => true,
+                'notnull' => true,
             ]);
             $table->addColumn('identifier', 'string', [
-                    'notnull' => true,
-                    'length' => 190,
+                'notnull' => true,
+                'length' => 190,
             ]);
             $table->addUniqueIndex(['identifier'], 'sociallogin_connect_id');
         }
