@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OCA\SocialLogin\Migration;
 
 use Closure;
+use Doctrine\DBAL\Types\Types;
 use OCP\DB\ISchemaWrapper;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
@@ -31,13 +32,18 @@ class Version040400Date20210410094126 extends SimpleMigrationStep {
 
         if (!$schema->hasTable('sociallogin_connect')) {
             $table = $schema->createTable('sociallogin_connect');
-            $table->addColumn('uid', 'string', [
+            $table->addColumn('id', Types::BIGINT, [
+				'autoincrement' => true,
+				'unsigned' => true,
+			]);
+            $table->addColumn('uid', Types::STRING, [
                 'notnull' => true,
             ]);
-            $table->addColumn('identifier', 'string', [
+            $table->addColumn('identifier', Types::STRING, [
                 'notnull' => true,
                 'length' => 190,
             ]);
+            $table->setPrimaryKey(['id']);
             $table->addUniqueIndex(['identifier'], 'sociallogin_connect_id');
         }
         return $schema;
