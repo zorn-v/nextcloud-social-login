@@ -11,6 +11,7 @@ OC.L10N.register(
     "Save" : "Mentés",
     "None" : "Egyik sem",
     "Secret" : "Titok",
+    "Do you really want to remove {providerTitle} provider ?" : "Biztos, hogy eltávolítja a következő szolgáltatót: {providerTitle}?",
     "Title" : "Cím",
     "Client Secret" : "Klienstitok",
     "Scope" : "Hatókör",
