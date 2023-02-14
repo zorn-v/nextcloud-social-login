@@ -79,6 +79,7 @@ class ProviderService
                 'id' => 'appid',
                 'secret' => 'secret',
             ],
+            'group_mapping' => 'groupMapping',
         ],
         self::TYPE_OPENID => [
             'openid_identifier' => 'url',
@@ -232,7 +233,7 @@ class ProviderService
     {
         $config = [];
         $scopes = [
-            'discord' => 'identify email guilds',
+            'discord' => 'identify email guilds guilds.members.read',
         ];
         $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
         if (is_array($providers) && in_array($provider, array_keys($providers))) {
@@ -413,6 +414,24 @@ class ProviderService
                 throw new LoginException($this->l->t('Login is available only to members of the following Discord guilds: %s', $config['guilds']));
             };
             $checkGuilds();
+
+            // read Discord roles into NextCloud groups
+            $profile->data['groups'] = [];
+            if(!empty($allowedGuilds)) {
+                foreach($userGuilds as $guild) {
+                    if (!in_array($guild->id ?? null, $allowedGuilds)) {
+                        // Only read groups from the explicitly declared guilds.
+                        // It doesn't make sense to try to map in random, unknown groups from arbitrary guilds.
+                        // and without this, a user in many guilds will trip a HTTP 429 rate limit from the Discord API.
+                        continue;
+                    }
+                    # https://discord.com/developers/docs/resources/guild#get-guild-member
+                    $guild_data = $adapter->apiRequest('users/@me/guilds/' . $guild->id . '/member' );
+                    $profile->data['groups'] = array_merge($profile->data['groups'], $guild_data->roles ?? []);
+                    // TODO: /member returns roles as their ID; to get their name requires an extra API call
+                    //       (and perhaps extra permissions?)
+                }
+            }
         }
 
         if (!empty($config['logout_url'])) {
@@ -422,6 +441,7 @@ class ProviderService
         }
 
         $profile->data['default_group'] = $config['default_group'];
+        $profile->data['group_mapping'] = $config['group_mapping'];
 
         if ($provider === 'telegram') {
             $provider = 'tg'; //For backward compatibility

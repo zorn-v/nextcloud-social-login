@@ -50,6 +50,9 @@ class AdminSettings implements ISettings
                 ];
             }
         }
+        // make sure these render the 'Add Group Mapping' button
+        $providers['discord']['hasGroupMapping'] = true;
+
         $customProviders = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true);
 
         $params = [

@@ -120,6 +120,20 @@
           <input type="text" :name="'providers['+name+'][guilds]'" v-model="provider.guilds"/>
         </label>
       </template>
+      <template v-if="provider.hasGroupMapping">
+        <button class="group-mapping-add" type="button" @click="provider.groupMapping.push({foreign: '', local: ''})">
+          {{ t(appName, 'Add group mapping') }}
+        </button>
+        <div v-for="(mapping, mappingIdx) in provider.groupMapping" :key="mapping">
+          <input type="text" class="foreign-group" v-model="mapping.foreign" />
+          <select class="local-group" :name="mapping.foreign ? 'providers['+name+'][groupMapping]['+mapping.foreign+']' : ''">
+            <option v-for="group in groups" :key="group" :value="group" :selected="mapping.local === group">
+              {{ group }}
+            </option>
+          </select>
+          <span class="group-mapping-remove" @click="provider.groupMapping.splice(mappingIdx, 1)">x</span>
+        </div>
+      </template>
     </div>
     <br/>
 
@@ -148,6 +162,10 @@ export default {
       data.custom_providers = {}
     }
 
+    // In the 'custom' providers, those that can have multiple instances of the same protocol, rewrite groupMapping
+    // from { foreign0: local0, foreign1, local1, ... }
+    // to [ { 'foreign': foreign0, 'local': local0 }, { 'foreign': foreign1, 'local': local1 }, ... ]
+    // This is necessary for Vue to use groupMapping as a read-write data model.
     for (var provType in providerTypes) {
       if (!data.custom_providers[provType]) {
         data.custom_providers[provType] = []
@@ -165,6 +183,24 @@ export default {
         }
       }
     }
+
+    // For the fixed providers, with only a singleton instance of the login server, rewrite groupMapping
+    // from { foreign0: local0, foreign1, local1, ... }
+    // to [ { 'foreign': foreign0, 'local': local0 }, { 'foreign': foreign1, 'local': local1 }, ... ]
+    // This is necessary for Vue to use groupMapping as a read-write data model.
+    for (var provType in data.providers)  {
+      if (data.providers[provType].hasGroupMapping) {
+        var groupMappingArr = []
+        var groupMapping = data.providers[provType].groupMapping
+        if (groupMapping) {
+          for (var foreignGroup in groupMapping) {
+            groupMappingArr.push({foreign: foreignGroup, local: groupMapping[foreignGroup]})
+          }
+        }
+        data.providers[provType].groupMapping = groupMappingArr
+      }
+    }
+
     data.appName = appName
     return data
   },
