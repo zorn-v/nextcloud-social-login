@@ -79,7 +79,7 @@ OC.L10N.register(
     "Base url" : "Basis-URL",
     "SSO Secret" : "SSO-Geheimnis",
     "Disable password confirmation on settings change" : "Passwortbestätigung bei Einstellungsänderung deaktivieren",
-    "Social login connect" : "Soziale Anmeldung verbinden",
+    "Social login connect" : "Mittels Social-Anmeldung verbinden",
     "Available providers" : "Verfügbare Anbieter"
 },
 "nplurals=2; plural=(n != 1);");
