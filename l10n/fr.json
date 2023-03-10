@@ -34,7 +34,7 @@
     "Allow login only for specified workspace" : "Autoriser la connexion uniquement pour l'espace de travail spécifié",
     "Allow login only for specified guilds" : "Autoriser la connexion uniquement pour la guilde spécifiée",
     "Settings for social login successfully saved" : "Paramètres de connexion via Social enregistrés avec succès",
-    "Some error occurred while saving settings" : "Des erreurs se sont produites lors de la sauvegarde des paramètres",
+    "Some error occurred while saving settings" : "Des erreurs se sont produites lors de l'enregistrement des paramètres",
     "Do you really want to remove {providerTitle} provider ?" : "Voulez-vous vraiment supprimer le fournisseur {providerTitle} ?",
     "Confirm remove" : "Confirmer la suppression",
     "Disable auto create new users" : "Désactivation de la création automatique d'utilisateurs",
