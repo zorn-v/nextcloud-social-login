@@ -13,6 +13,6 @@ OC.L10N.register(
     "Title" : "Título",
     "Client Secret" : "Segredo do cliente",
     "Scope" : "Ámbito",
-    "Consumer key" : "Clave do consumidor"
+    "Consumer key" : "Chave do consumidor"
 },
 "nplurals=2; plural=(n != 1);");

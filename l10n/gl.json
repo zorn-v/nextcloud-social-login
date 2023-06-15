@@ -11,6 +11,6 @@
     "Title" : "Título",
     "Client Secret" : "Segredo do cliente",
     "Scope" : "Ámbito",
-    "Consumer key" : "Clave do consumidor"
+    "Consumer key" : "Chave do consumidor"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
