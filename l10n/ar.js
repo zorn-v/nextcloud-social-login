@@ -6,6 +6,8 @@ OC.L10N.register(
     "Secret" : "السر",
     "Title" : "العنوان",
     "Client Secret" : "سر العميل",
-    "Scope" : "النطاق"
+    "Scope" : "النطاق",
+    "Consumer key" : "مفتاح المستهلك",
+    "Custom Discourse" : "منصة المحادثات ديسكورس المخصصة"
 },
 "nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;");
