@@ -1,6 +1,7 @@
 OC.L10N.register(
     "sociallogin",
     {
+    "Login is available only to members of the following GitHub organizations: %s" : "تسجيل الدخول متاح فقط لأعضاء مؤسسات جيت هب التالية: %s",
     "Save" : "Save",
     "None" : "غير محدد",
     "Secret" : "السر",
