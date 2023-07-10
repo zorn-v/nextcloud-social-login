@@ -27,7 +27,7 @@
     "None" : "Ningún",
     "Default group" : "Grupo predeterminado",
     "Add group mapping" : "Engadir asignación de grupos",
-    "App id" : "ID da apli",
+    "App id" : "ID da aplicación",
     "Secret" : "Segredo",
     "Allow login only from specified domain" : "Permitir o acceso só dende o dominio especificado",
     "Allow login only for specified organizations" : "Permitir o acceso só para as organizacións especificadas",
