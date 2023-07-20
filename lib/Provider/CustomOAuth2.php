@@ -47,7 +47,6 @@ class CustomOAuth2 extends OAuth2
             $response->identifier = $response->id
                 ?? $response->ID
                 ?? $response->data->id
-                ?? $response->data->userId
                 ?? $response->user_id
                 ?? $response->userid
                 ?? $response->userId
@@ -62,9 +61,6 @@ class CustomOAuth2 extends OAuth2
             ?? $response->username
             ?? null
         ;
-
-        $response->email = $response->data->email;
-        $response->phone = $response->data->mobile;
 
         $data = new Data\Collection($response);
 
