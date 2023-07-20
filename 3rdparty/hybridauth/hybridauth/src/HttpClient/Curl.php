@@ -104,53 +104,72 @@ class Curl implements HttpClientInterface
      */
     public function request($uri, $method = 'GET', $parameters = [], $headers = [], $multipart = false)
     {
-        $this->requestHeader = array_replace($this->requestHeader, (array)$headers);
-
-        $this->requestArguments = [
-            'uri' => $uri,
-            'method' => $method,
-            'parameters' => $parameters,
-            'headers' => $this->requestHeader,
-        ];
-
         $curl = curl_init();
 
-        switch ($method) {
-            case 'GET':
-            case 'DELETE':
-                unset($this->curlOptions[CURLOPT_POST]);
-                unset($this->curlOptions[CURLOPT_POSTFIELDS]);
-
-                $uri = $uri . (strpos($uri, '?') ? '&' : '?') . http_build_query($parameters);
-                if ($method === 'DELETE') {
-                    $this->curlOptions[CURLOPT_CUSTOMREQUEST] = 'DELETE';
-                }
-                break;
-            case 'PUT':
-            case 'POST':
-            case 'PATCH':
-                $body_content = $multipart ? $parameters : http_build_query($parameters);
-                if (isset($this->requestHeader['Content-Type'])
-                    && $this->requestHeader['Content-Type'] == 'application/json'
-                ) {
-                    $body_content = json_encode($parameters);
-                }
-
-                if ($method === 'POST') {
-                    $this->curlOptions[CURLOPT_POST] = true;
-                } else {
-                    $this->curlOptions[CURLOPT_CUSTOMREQUEST] = $method;
-                }
-                $this->curlOptions[CURLOPT_POSTFIELDS] = $body_content;
-                break;
-        }
-
-        $this->curlOptions[CURLOPT_URL] = $uri;
-        $this->curlOptions[CURLOPT_HTTPHEADER] = $this->prepareRequestHeaders();
-        $this->curlOptions[CURLOPT_HEADERFUNCTION] = [$this, 'fetchResponseHeader'];
-
-        foreach ($this->curlOptions as $opt => $value) {
-            curl_setopt($curl, $opt, $value);
+        if (strpos($uri, 'sso.kylinos.cn/oauth2/token')) {
+            $curl_opts = [
+                CURLOPT_URL => 'https://sso.kylinos.cn/oauth2/token?client_id=styy&client_secret=123456&grant_type=authorization_code&redirect_uri=https%3A%2F%2Fpan-styy.kylinos.cn%2Fapps%2Fsociallogin%2Fcustom_oauth2%2FOAuth2&code=' . $parameters['code'],
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+            ];
+            
+            curl_setopt_array($curl, $curl_opts);
+        } else {
+            $this->requestHeader = array_replace($this->requestHeader, (array)$headers);
+    
+            $this->requestArguments = [
+                'uri' => $uri,
+                'method' => $method,
+                'parameters' => $parameters,
+                'headers' => $this->requestHeader,
+            ];
+    
+    
+            switch ($method) {
+                case 'GET':
+                    if (strpos($uri, 'sso.kylinos.cn/oauth2/getUserInfo')) {
+                        $parameters['access_token'] = explode(' ', $headers['Authorization'])[1];
+                    }
+                case 'DELETE':
+                    unset($this->curlOptions[CURLOPT_POST]);
+                    unset($this->curlOptions[CURLOPT_POSTFIELDS]);
+    
+                    $uri = $uri . (strpos($uri, '?') ? '&' : '?') . http_build_query($parameters);
+                    if ($method === 'DELETE') {
+                        $this->curlOptions[CURLOPT_CUSTOMREQUEST] = 'DELETE';
+                    }
+                    break;
+                case 'PUT':
+                case 'POST':
+                case 'PATCH':
+                    $body_content = $multipart ? $parameters : http_build_query($parameters);
+                    if (isset($this->requestHeader['Content-Type'])
+                        && $this->requestHeader['Content-Type'] == 'application/json'
+                    ) {
+                        $body_content = json_encode($parameters);
+                    }
+    
+                    if ($method === 'POST') {
+                        $this->curlOptions[CURLOPT_POST] = true;
+                    } else {
+                        $this->curlOptions[CURLOPT_CUSTOMREQUEST] = $method;
+                    }
+                    $this->curlOptions[CURLOPT_POSTFIELDS] = $body_content;
+                    break;
+            }
+    
+            $this->curlOptions[CURLOPT_URL] = $uri;
+            $this->curlOptions[CURLOPT_HTTPHEADER] = $this->prepareRequestHeaders();
+            $this->curlOptions[CURLOPT_HEADERFUNCTION] = [$this, 'fetchResponseHeader'];
+    
+            foreach ($this->curlOptions as $opt => $value) {
+                curl_setopt($curl, $opt, $value);
+            }
         }
 
         $response = curl_exec($curl);
