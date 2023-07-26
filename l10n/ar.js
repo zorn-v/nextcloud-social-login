@@ -75,7 +75,7 @@ OC.L10N.register(
     "Profile url" : "عنوان URL الملف الشخصي",
     "Consumer key" : "مفتاح المستهلك",
     "Consumer Secret" : "سر المستهلك",
-    "Custom Discourse" : "منصة المحادثات ديسكورس المخصصة",
+    "Custom Discourse" : "منصة المحادثات Discourse المخصصة",
     "Base url" : "عنوان url الأساسي",
     "SSO Secret" : "سر الدخول SSO",
     "Disable password confirmation on settings change" : "تعطيل تأكيد كلمة المرور عند تغيير الإعدادات",
