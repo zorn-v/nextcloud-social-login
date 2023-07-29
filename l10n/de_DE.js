@@ -30,7 +30,7 @@ OC.L10N.register(
     "Default group" : "Standardgruppe",
     "Add group mapping" : "Gruppenzuordnung hinzufügen",
     "App id" : "App-ID",
-    "Secret" : "Passwort",
+    "Secret" : "Geheimnis",
     "Allow login only from specified domain" : "Anmeldung nur von der angegebenen Domain erlauben",
     "Allow login only for specified organizations" : "Anmeldung nur für angegebene Organisationen zulassen",
     "Allow login only for specified workspace" : "Anmeldung nur für den angegebenen Workspace zulassen",
