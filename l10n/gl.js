@@ -20,7 +20,7 @@ OC.L10N.register(
     "Auto creating new users is disabled" : "Está desactivada a creación automática de usuarios",
     "Email already registered" : "O correo xa está rexistrado",
     "New user created" : "Creouse o novo usuario",
-    "User %s (%s) just created via social login" : "Usuario %s (%s) que ven de ser creado a través do acceso social",
+    "User %s (%s) just created via social login" : "Usuario %s (%s) que vén de ser creado a través do acceso social",
     "Social login" : "Acceso social",
     "Social Login" : "Acceso social",
     "Social login via OAuth or OpenID" : "Acceso social mediante OAuth ou OpenID",
