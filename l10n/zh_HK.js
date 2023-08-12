@@ -20,7 +20,7 @@ OC.L10N.register(
     "Auto creating new users is disabled" : "自動建立新用戶功能已停用",
     "Email already registered" : "電子郵件已註冊",
     "New user created" : "新用戶已建立",
-    "User %s (%s) just created via social login" : "剛透過社交登入建立的使用者 %s (%s)",
+    "User %s (%s) just created via social login" : "剛透過社交登入建立的用戶 %s (%s)",
     "Social login" : "社交登入",
     "Social Login" : "社交登入",
     "Social login via OAuth or OpenID" : "透過 OAuth 或 OpenID 進行社交登入",
