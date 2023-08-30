@@ -171,7 +171,7 @@ export default {
       }
     }
     data.addVisibleName = null
-    data.defaultVisible = []
+    data.defaultVisible = Object.keys(data.providers).filter((name) => !!data.providers[name].appid)
     return data
   },
   computed: {
@@ -214,6 +214,7 @@ export default {
                 vm.custom_providers[provType][i].isNew = false
               }
             }
+            vm.defaultVisible = Object.keys(vm.providers).filter((name) => !!vm.providers[name].appid)
             showInfo(vm.t(appName, 'Settings for social login successfully saved'))
           } else {
             showError(res.data.message)
