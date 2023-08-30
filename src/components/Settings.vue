@@ -56,8 +56,18 @@
         />
       </div>
     </div>
-    <hr/><br/>
-    <div class="provider-settings" v-for="(provider, name) in providers" :key="name">
+    <hr/>
+    <div v-if="defaultProvidersList.length">
+      <br/>
+      <select v-model="addVisibleName" @change="defaultVisible.push(addVisibleName); addVisibleName = null;">
+        <option disabled hidden :value="null">{{ t(appName, 'Add default provider') }}</option>
+        <option v-for="p in defaultProvidersList" :key="p.name" :value="p.name" >
+          {{ p.title }}
+        </option>
+      </select>
+    </div>
+    <br/>
+    <div class="provider-settings" v-for="(provider, name) in defaultProviders" :key="name">
       <h2 class="provider-title">
         <img :src="imagePath(name.toLowerCase())" /> {{ name[0].toUpperCase() + name.substring(1) }}
       </h2>
@@ -160,7 +170,25 @@ export default {
         }
       }
     }
+    data.addVisibleName = null
+    data.defaultVisible = []
     return data
+  },
+  computed: {
+    defaultProviders: function () {
+      const providers = Object.assign({}, this.providers)
+      for (const k in providers) {
+        if (!providers[k].appid && !this.defaultVisible.includes(k)) {
+          delete providers[k]
+        }
+      }
+      return providers
+    },
+    defaultProvidersList: function () {
+      return Object.keys(this.providers)
+        .map((name) => ({ name, title: name[0].toUpperCase() + name.substring(1) }))
+        .filter((p) => !this.defaultProviders[p.name] && !this.defaultVisible.includes(p.name))
+    },
   },
   mounted: function () {
     var disableReg = document.getElementById('opt_disable_registration')
