@@ -123,6 +123,13 @@
           <input type="text" :name="'providers['+name+'][guilds]'" v-model="provider.guilds"/>
         </label>
       </template>
+      <GroupMapping v-if="provider.groupMapping"
+        :groups="groups"
+        :group-mapping="provider.groupMapping"
+        :input-name-prefix="'providers['+name+'][groupMapping]'"
+        @add="provider.groupMapping.push({foreign: '', local: ''})"
+        @remove="provider.groupMapping.splice($event, 1)"
+      />
     </div>
     <br/>
 
@@ -142,8 +149,9 @@ import { appName, showError, showInfo } from '../common'
 export default {
   components: { GroupMapping },
   data: function () {
-    var settingsEl = document.getElementById('sociallogin')
-    var data = JSON.parse(settingsEl.dataset.settings)
+    const settingsEl = document.getElementById('sociallogin')
+    const data = JSON.parse(settingsEl.dataset.settings)
+    const hasGroupMapping = ['discord']
 
     data.optionsTitles = optionsTitles
     data.providerTypes = providerTypes
@@ -153,23 +161,26 @@ export default {
       data.custom_providers = {}
     }
 
-    for (var provType in providerTypes) {
+    const convertGroupMapping = (provider) => {
+      const groupMappingArr = []
+      const groupMapping = provider.groupMapping
+      if (groupMapping) {
+        for (const foreignGroup in groupMapping) {
+          groupMappingArr.push({foreign: foreignGroup, local: groupMapping[foreignGroup]})
+        }
+      }
+      provider.groupMapping = groupMappingArr
+    }
+    for (const provType in providerTypes) {
       if (!data.custom_providers[provType]) {
         data.custom_providers[provType] = []
       }
       if (providerTypes[provType].hasGroupMapping) {
-        for (var k = 0; k < data.custom_providers[provType].length; ++k) {
-          var groupMappingArr = []
-          var groupMapping = data.custom_providers[provType][k].groupMapping
-          if (groupMapping) {
-            for (var foreignGroup in groupMapping) {
-              groupMappingArr.push({foreign: foreignGroup, local: groupMapping[foreignGroup]})
-            }
-          }
-          data.custom_providers[provType][k].groupMapping = groupMappingArr
-        }
+        data.custom_providers[provType].forEach((p) => convertGroupMapping(p))
       }
     }
+    hasGroupMapping.forEach((provName) => convertGroupMapping(data.providers[provName]))
+
     data.addVisibleName = null
     data.defaultVisible = Object.keys(data.providers).filter((name) => !!data.providers[name].appid)
     return data

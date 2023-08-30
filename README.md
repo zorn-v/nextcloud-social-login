@@ -114,6 +114,7 @@ To properly configure discord you have to:
 3. Copy `CLIENT ID` and generate and copy `CLIENT SECRET`
 4. Open in Nextcloud `Settings -> Social Login` and paste `CLIENT ID` into field `App id` and `CLIENT SECRET` into `Secret`.
 5. Select default group for users created this way.
+6. For group mapping check [#395](https://github.com/zorn-v/nextcloud-social-login/pull/395)
 
 ## Hint
 

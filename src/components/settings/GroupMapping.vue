@@ -22,6 +22,7 @@ export default {
 <style scoped>
   .group-mapping-add {
     width: 100%;
+    display: block;
   }
   .foreign-group, .local-group {
     width: 133px;
