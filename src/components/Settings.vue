@@ -47,20 +47,13 @@
           </select>
         </label>
         <br/>
-        <template v-if="provData.hasGroupMapping">
-          <button class="group-mapping-add" type="button" @click="provider.groupMapping.push({foreign: '', local: ''})">
-            {{ t(appName, 'Add group mapping') }}
-          </button>
-          <div v-for="(mapping, mappingIdx) in provider.groupMapping" :key="mapping">
-            <input type="text" class="foreign-group" v-model="mapping.foreign" />
-            <select class="local-group" :name="mapping.foreign ? 'custom_providers['+provType+']['+k+'][groupMapping]['+mapping.foreign+']' : ''">
-              <option v-for="group in groups" :key="group" :value="group" :selected="mapping.local === group">
-                {{ group }}
-              </option>
-            </select>
-            <span class="group-mapping-remove" @click="provider.groupMapping.splice(mappingIdx, 1)">x</span>
-          </div>
-        </template>
+        <GroupMapping v-if="provData.hasGroupMapping"
+          :groups="groups"
+          :group-mapping="provider.groupMapping"
+          :input-name-prefix="'custom_providers['+provType+']['+k+'][groupMapping]'"
+          @add="provider.groupMapping.push({foreign: '', local: ''})"
+          @remove="provider.groupMapping.splice($event, 1)"
+        />
       </div>
     </div>
     <hr/><br/>
@@ -130,12 +123,14 @@
 <script>
 import { imagePath } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
+import GroupMapping from './settings/GroupMapping.vue'
 import optionsTitles from './settings/options-titles'
 import providerTypes from './settings/provider-types'
 import styleClass from './settings/style-class'
 import { appName, showError, showInfo } from '../common'
 
 export default {
+  components: { GroupMapping },
   data: function () {
     var settingsEl = document.getElementById('sociallogin')
     var data = JSON.parse(settingsEl.dataset.settings)
@@ -165,7 +160,6 @@ export default {
         }
       }
     }
-    data.appName = appName
     return data
   },
   mounted: function () {
@@ -179,7 +173,6 @@ export default {
     disableReg.onchange()
   },
   methods: {
-    test(e) {console.log(e)},
     imagePath: function (file) {
       return imagePath(appName, file)
     },
@@ -256,10 +249,6 @@ export default {
     width: 20px;
     text-align: center;
   }
-  .provider-settings .group-mapping-remove {
-    cursor: pointer;
-    font-weight: bold;
-  }
   input[readonly] {
     background-color: #ebebeb;
     color: rgba(0, 0, 0, 0.4);
@@ -271,11 +260,5 @@ export default {
     width: 20px;
     height: 20px;
     margin-bottom: -2px;
-  }
-  .group-mapping-add {
-    width: 100%;
-  }
-  .foreign-group, .local-group {
-    width: 133px;
   }
 </style>
