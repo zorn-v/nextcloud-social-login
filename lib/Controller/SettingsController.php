@@ -4,15 +4,14 @@ namespace OCA\SocialLogin\Controller;
 
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
-use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\RedirectResponse;
 use OCP\IL10N;
 use OCP\IRequest;
 use OCP\IConfig;
 use OCP\IURLGenerator;
 use OCP\IUserSession;
-use OCP\Util;
 use OCA\SocialLogin\Db\ConnectedLoginMapper;
+use OCA\SocialLogin\Service\ProviderService;
 
 class SettingsController extends Controller
 {
@@ -53,7 +52,7 @@ class SettingsController extends Controller
 
         if (is_array($custom_providers)) {
             try {
-                $names = array_keys($providers);
+                $names = ProviderService::DEFAULT_PROVIDERS;
                 foreach ($custom_providers as $provType => $provs) {
                     $this->checkProviders($provs, $names);
                     $custom_providers[$provType] = array_values($provs);
