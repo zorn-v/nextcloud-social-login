@@ -574,9 +574,21 @@ class ProviderService
 
             }
 
+            $updateAccount = false;
+            $account = $this->accountManager->getAccount($user);
             if (isset($profile->address)) {
-                $account = $this->accountManager->getAccount($user);
+                $updateAccount = true;
                 $account->setProperty(IAccountManager::PROPERTY_ADDRESS, $profile->address, IAccountManager::SCOPE_PRIVATE, IAccountManager::NOT_VERIFIED);
+            }
+            if (isset($profile->phone)) {
+                $updateAccount = true;
+                $account->setProperty(IAccountManager::PROPERTY_PHONE, $profile->phone, IAccountManager::SCOPE_PRIVATE, IAccountManager::NOT_VERIFIED);
+            }
+            if (isset($profile->webSiteURL)) {
+                $updateAccount = true;
+                $account->setProperty(IAccountManager::PROPERTY_WEBSITE, $profile->webSiteURL, IAccountManager::SCOPE_PRIVATE, IAccountManager::NOT_VERIFIED);
+            }
+            if ($updateAccount) {
                 $this->accountManager->updateAccount($account);
             }
 
