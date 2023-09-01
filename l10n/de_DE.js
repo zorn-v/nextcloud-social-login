@@ -28,6 +28,7 @@ OC.L10N.register(
     "Button style" : "Knopf-Stil",
     "None" : "Keine",
     "Default group" : "Standardgruppe",
+    "Add default provider" : "Standardanbieter hinzufügen",
     "App id" : "App-ID",
     "Secret" : "Geheimnis",
     "Allow login only from specified domain" : "Anmeldung nur von der angegebenen Domain erlauben",

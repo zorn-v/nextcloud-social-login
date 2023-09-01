@@ -28,6 +28,7 @@ OC.L10N.register(
     "Button style" : "Düğme biçemi",
     "None" : "Yok",
     "Default group" : "Varsayılan grup",
+    "Add default provider" : "Varsayılan hizmet sağlayıcı ekle",
     "App id" : "Uygulama kodu",
     "Secret" : "Parola",
     "Allow login only from specified domain" : "Yalnızca belirtilen etki alanıyla oturum açılabilsin",

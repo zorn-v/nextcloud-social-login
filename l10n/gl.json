@@ -26,6 +26,7 @@
     "Button style" : "Estilo de botón",
     "None" : "Ningún",
     "Default group" : "Grupo predeterminado",
+    "Add default provider" : "Engadir o provedor predeterminado",
     "App id" : "ID da aplicación",
     "Secret" : "Segredo",
     "Allow login only from specified domain" : "Permitir o acceso só dende o dominio especificado",

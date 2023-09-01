@@ -26,6 +26,7 @@
     "Button style" : "Estilo do botão",
     "None" : "Nenhum",
     "Default group" : "Grupo padrão",
+    "Add default provider" : "Adicionar provedor padrão",
     "App id" : "ID do aplicativo",
     "Secret" : "Secreto",
     "Allow login only from specified domain" : "Permitir login apenas do domínio especificado",

@@ -28,6 +28,7 @@ OC.L10N.register(
     "Button style" : "Стил дугмета",
     "None" : "Ништа",
     "Default group" : "Подразумевана група",
+    "Add default provider" : "Додај подразумеваног понуђача услуге",
     "App id" : "id апликације",
     "Secret" : "Тајни",
     "Allow login only from specified domain" : "Дозоли пријаву само са одређеног домена",

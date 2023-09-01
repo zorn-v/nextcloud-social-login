@@ -28,6 +28,7 @@ OC.L10N.register(
     "Button style" : "زر النمط ",
     "None" : "غير محدد",
     "Default group" : "المجموعة الافتراضية",
+    "Add default provider" : "أضِف مزوِّداً افتراضيّاً",
     "App id" : "معرف التطبيق",
     "Secret" : "السر",
     "Allow login only from specified domain" : "السماح بتسجيل الدخول من النطاق المحدد فقط ",

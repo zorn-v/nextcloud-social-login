@@ -26,6 +26,7 @@
     "Button style" : "按鈕樣式",
     "None" : "無",
     "Default group" : "預設群組",
+    "Add default provider" : "新增預設提供者",
     "App id" : "應用程式 ID",
     "Secret" : "密碼",
     "Allow login only from specified domain" : "僅允許來自特定網域的登入",
