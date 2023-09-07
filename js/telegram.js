@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
               redirectObj.searchParams.set(k, v)
             })
             location = redirectObj.href
-          } catch (TypeError) {
+          } catch (err) {
             location = redirectUrl + '?' + new URLSearchParams(data)
           }
           document.body.style.display = 'none'
