@@ -28,6 +28,7 @@ OC.L10N.register(
     "Button style" : "Styl tlačítek",
     "None" : "Žádná",
     "Default group" : "Výchozí skupina",
+    "Add default provider" : "Přidat výchozího poskytovatele",
     "App id" : "Identif. aplikace",
     "Secret" : "Soukromý",
     "Allow login only from specified domain" : "Umožnit přihlašování pouze z dané domény",
