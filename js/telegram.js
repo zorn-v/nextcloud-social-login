@@ -14,7 +14,15 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault()
       Telegram.Login.auth({bot_id: botId}, function (data) {
         if (data) {
-          location = redirectUrl + '?' + new URLSearchParams(data)
+          try {
+            var redirectObj = new URL(redirectUrl)
+            new URLSearchParams(data).forEach((v, k) => {
+              redirectObj.searchParams.set(k, v)
+            })
+            location = redirectObj.href
+          } catch (err) {
+            location = redirectUrl + '?' + new URLSearchParams(data)
+          }
           document.body.style.display = 'none'
         }
       })
