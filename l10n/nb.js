@@ -28,6 +28,7 @@ OC.L10N.register(
     "Button style" : "Knappestil",
     "None" : "Ingen",
     "Default group" : "Standardgruppe",
+    "Add default provider" : "Legg til standard tilbyder",
     "App id" : "App-ID",
     "Secret" : "Hemmelig",
     "Allow login only from specified domain" : "Tillat kun pålogging fra spesifisert domene",
