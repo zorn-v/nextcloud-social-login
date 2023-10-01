@@ -4,6 +4,7 @@ OC.L10N.register(
     "Save" : "Uložiť",
     "None" : "Žiadne",
     "Secret" : "Tajný kľúč",
+    "Confirm remove" : "Potvrdiť odstránenie",
     "Title" : "Názov",
     "Client Secret" : "Súkromné heslo klienta",
     "Scope" : "Rozsah",
