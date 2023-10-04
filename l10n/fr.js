@@ -28,6 +28,7 @@ OC.L10N.register(
     "Button style" : "Style du bouton",
     "None" : "Aucune",
     "Default group" : "Groupe par défaut",
+    "Add default provider" : "Ajouter un fournisseur par défaut",
     "App id" : "ID d'application",
     "Secret" : "Caché",
     "Allow login only from specified domain" : "Autoriser la connexion uniquement depuis le domaine spécifié",
