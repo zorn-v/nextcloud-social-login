@@ -1,6 +1,7 @@
 OC.L10N.register(
     "sociallogin",
     {
+    "New user created" : "Bol vytvorený nový používateľ",
     "Save" : "Uložiť",
     "None" : "Žiadne",
     "Secret" : "Tajný kľúč",
