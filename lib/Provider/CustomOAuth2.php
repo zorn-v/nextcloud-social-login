@@ -52,6 +52,7 @@ class CustomOAuth2 extends OAuth2
                 ?? $response->userId
                 ?? $response->oauth_user_id
                 ?? $response->sub
+                ?? $response->client_id
                 ?? null
             ;
         }
@@ -59,6 +60,7 @@ class CustomOAuth2 extends OAuth2
         $response->displayName = $response->$displayNameClaim
             ?? $response->displayName
             ?? $response->username
+            ?? $response->name
             ?? null
         ;
 
