@@ -28,6 +28,7 @@ OC.L10N.register(
     "Button style" : "Gomb stílusa",
     "None" : "Egyik sem",
     "Default group" : "Alapértelmezett csoport",
+    "Add default provider" : "Alapértelemezett szolgáltató hozzáadása",
     "App id" : "Alkalmazásazonosító",
     "Secret" : "Titok",
     "Allow login only from specified domain" : "Bejelentkezés engedélyezése csak a megadott tartományokból",
