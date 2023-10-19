@@ -4,6 +4,7 @@ OC.L10N.register(
     "New user created" : "Bol vytvorený nový používateľ",
     "Save" : "Uložiť",
     "None" : "Žiadne",
+    "Add default provider" : "Pridať predvoleného poskytovateľa",
     "Secret" : "Tajný kľúč",
     "Confirm remove" : "Potvrdiť odstránenie",
     "Title" : "Názov",
