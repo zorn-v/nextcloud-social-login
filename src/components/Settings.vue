@@ -122,6 +122,10 @@
           {{ t(appName, 'Allow login only for specified guilds') }}<br/>
           <input type="text" :name="'providers['+name+'][guilds]'" v-model="provider.guilds"/>
         </label>
+        <label>
+          {{ t(appName, 'Use guild nick') }}
+          <input type="checkbox" v-model="provider.useGuildNames"/>
+        </label>
       </template>
       <GroupMapping v-if="provider.groupMapping"
         :groups="groups"
