@@ -35,6 +35,7 @@ OC.L10N.register(
     "Allow login only for specified organizations" : "Umožnit přihlašování pouze pro dané organizace",
     "Allow login only for specified workspace" : "Umožnit přihlášení pouze pro daný pracovní prostor",
     "Allow login only for specified guilds" : "Umožnit přihlášení pouze pro dané „cechy“ (guild)",
+    "Use guild nick" : "Použít přezdívku ve skupině",
     "Settings for social login successfully saved" : "Nastavení pro přihlašování se sociálními sítěmi byla úspěšně uložena.",
     "Some error occurred while saving settings" : "Při ukládání nastavení došlo k nějaké chybě",
     "Do you really want to remove {providerTitle} provider ?" : "Opravdu chcete poskytovatele {providerTitle} odebrat?",

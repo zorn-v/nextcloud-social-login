@@ -35,6 +35,7 @@ OC.L10N.register(
     "Allow login only for specified organizations" : "Permitir o acceso só para as organizacións especificadas",
     "Allow login only for specified workspace" : "Permitir o acceso só para o espazo de traballo especificado",
     "Allow login only for specified guilds" : "Permitir o acceso só para os gremios especificados",
+    "Use guild nick" : "Usar alcume do gremio",
     "Settings for social login successfully saved" : "Os axustes acceso social  gardáronse correctamente",
     "Some error occurred while saving settings" : "Produciuse algún erro ao gardar os axustes.",
     "Do you really want to remove {providerTitle} provider ?" : "Confirma que quere retirar o provedor {providerTitle}?",

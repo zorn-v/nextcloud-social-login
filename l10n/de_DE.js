@@ -35,6 +35,7 @@ OC.L10N.register(
     "Allow login only for specified organizations" : "Anmeldung nur für angegebene Organisationen zulassen",
     "Allow login only for specified workspace" : "Anmeldung nur für den angegebenen Workspace zulassen",
     "Allow login only for specified guilds" : "Anmeldung nur für bestimmte Gilden zulassen",
+    "Use guild nick" : "Gilden-Nick benutzen",
     "Settings for social login successfully saved" : "Einstellungen für Social Login gespeichert",
     "Some error occurred while saving settings" : "Beim Speichern der Einstellungen ist ein Fehler aufgetreten",
     "Do you really want to remove {providerTitle} provider ?" : "Möchten Sie wirklich Anbieter {providerTitle} entfernen?",
