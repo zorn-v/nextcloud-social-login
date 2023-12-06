@@ -72,11 +72,28 @@
         <img :src="imagePath(name.toLowerCase())" /> {{ name[0].toUpperCase() + name.substring(1) }}
       </h2>
       <label>
-        {{ t(appName, 'App id') }}<br/>
+        {{ name === 'apple' ? t(appName, 'Services ID') : t(appName, 'App id') }}<br/>
         <input type="text" :name="'providers['+name+'][appid]'" v-model="provider.appid"/>
       </label>
       <br/>
-      <template v-if="name !== 'PlexTv'">
+      <template v-if="name === 'apple'">
+        <label>
+          {{ t(appName, 'Team ID') }}<br/>
+          <input type="text" :name="'providers['+name+'][teamId]'" v-model="provider.teamId"/>
+        </label>
+        <br/>
+        <label>
+          {{ t(appName, 'Key ID') }}<br/>
+          <input type="password" :name="'providers['+name+'][keyId]'" v-model="provider.keyId"/>
+        </label>
+        <br/>
+        <label>
+          {{ t(appName, 'Key content') }}<br/>
+          <textarea :name="'providers['+name+'][keyContent]'" v-model="provider.keyContent" />
+        </label>
+        <br/>
+      </template>
+      <template v-else-if="name !== 'PlexTv'">
         <label>
           {{ t(appName, 'Secret') }}<br/>
           <input type="password" :name="'providers['+name+'][secret]'" v-model="provider.secret"/>
@@ -272,8 +289,12 @@ export default {
 </script>
 
 <style scoped>
-  input, select {
+  input, select, textarea {
     width: 285px;
+  }
+  textarea {
+    resize: none;
+    height: 70px;
   }
   .provider-settings {
     display: inline-block;

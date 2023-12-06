@@ -14,6 +14,7 @@ return [
         ['name' => 'settings#savePersonal', 'url' => '/settings/save-personal', 'verb' => 'POST'],
         ['name' => 'api#setConfig', 'url' => '/api/config', 'verb' => 'POST'],
         ['name' => 'login#oauth', 'url' => '/oauth/{provider}', 'verb' => 'GET'],
+        ['name' => 'login#oauth', 'url' => '/oauth/{provider}', 'postfix' => '.post', 'verb' => 'POST'],
         ['name' => 'login#custom', 'url' => '/{type}/{provider}', 'verb' => 'GET'],
         ['name' => 'login#custom', 'url' => '/{type}/{provider}', 'postfix' => '.post', 'verb' => 'POST'],
     ],

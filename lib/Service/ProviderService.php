@@ -44,6 +44,7 @@ class ProviderService
         'button_text_wo_prefix',
     ];
     const DEFAULT_PROVIDERS = [
+        'apple',
         'google',
         'amazon',
         'facebook',
@@ -78,6 +79,10 @@ class ProviderService
             'keys' => [
                 'id' => 'appid',
                 'secret' => 'secret',
+                // Apple below
+                'team_id' => 'teamId',
+                'key_id' => 'keyId',
+                'key_content' => 'keyContent',
             ],
         ],
         self::TYPE_OPENID => [

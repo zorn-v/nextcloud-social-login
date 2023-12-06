@@ -7,5 +7,6 @@ $baseDir = $vendorDir;
 
 return array(
     'Hybridauth\\' => array($vendorDir . '/hybridauth/hybridauth/src'),
+    'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     '' => array($vendorDir . '/custom'),
 );
