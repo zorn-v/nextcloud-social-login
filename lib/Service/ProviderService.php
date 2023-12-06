@@ -248,7 +248,7 @@ class ProviderService
                         'callback' => $callbackUrl,
                         'default_group' => $prov['defaultGroup'],
                     ], $this->applyConfigMapping('default', $prov));
-                    $opts = ['orgs', 'workspace', 'guilds', 'groupMapping'];
+                    $opts = ['orgs', 'workspace', 'guilds', 'groupMapping', 'useGuildNames'];
                     foreach ($opts as $opt) {
                         if (isset($prov[$opt])) {
                             $config[$opt] = $prov[$opt];
@@ -414,13 +414,19 @@ class ProviderService
             $checkGuilds = function () use ($allowedGuilds, $userGuilds, $config) {
                 foreach ($userGuilds as $guild) {
                     if (in_array($guild->id ?? null, $allowedGuilds)) {
-                        return;
+                        return $guild->id;
                     }
                 }
                 $this->storage->clear();
                 throw new LoginException($this->l->t('Login is available only to members of the following Discord guilds: %s', $config['guilds']));
             };
-            $checkGuilds();
+            $matchingGuildId = $checkGuilds();
+
+            // Use discord guild member nickname as display name
+            if ($config['useGuildNames'] && $matchingGuildId) {
+                $guildMember = $adapter->apiRequest('users/@me/guilds/' . $matchingGuildId . '/member' );
+                $profile->displayName = $guildMember->nick ?? $profile->displayName;
+            }
 
             if ($allowedGuilds && !empty($config['groupMapping'])) {
                 // read Discord roles into NextCloud groups

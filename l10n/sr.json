@@ -33,6 +33,7 @@
     "Allow login only for specified organizations" : "Дозоли пријаву само за одређене одганизације",
     "Allow login only for specified workspace" : "Дозоли пријаву само за одређени радни простор",
     "Allow login only for specified guilds" : "Дозоли пријаву само за одређене гилде",
+    "Use guild nick" : "Користи надимак гилде",
     "Settings for social login successfully saved" : "Подешавања за пријаву на друштвене мреже су успешно сачувана",
     "Some error occurred while saving settings" : "Дошло је до неке грешке током чувања подешавања",
     "Do you really want to remove {providerTitle} provider ?" : "Да ли заиста желите да уклоните пружаоца услуге {providerTitle}?",

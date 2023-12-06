@@ -33,6 +33,7 @@
     "Allow login only for specified organizations" : "السماح بتسجيل الدخول للمؤسسات المحددة فقط",
     "Allow login only for specified workspace" : "السماح بتسجيل الدخول لمساحة العمل المحددة فقط",
     "Allow login only for specified guilds" : "السماح بتسجيل الدخول للاتحادات المحددة فقط",
+    "Use guild nick" : "إستعمِل لقب النقابة أو الرابطة",
     "Settings for social login successfully saved" : "تم حفظ إعدادات تسجيل الدخول الاجتماعي بنجاح",
     "Some error occurred while saving settings" : "حدث خطأ ما أثناء حفظ الإعدادات",
     "Do you really want to remove {providerTitle} provider ?" : "هل تريد حقًا إزالة مزود {ProviderTitle}؟",
