@@ -30,6 +30,7 @@ OC.L10N.register(
     "Default group" : "Alapértelmezett csoport",
     "Add default provider" : "Alapértelemezett szolgáltató hozzáadása",
     "App id" : "Alkalmazásazonosító",
+    "Team ID" : "Csapatazonosító",
     "Secret" : "Titok",
     "Allow login only from specified domain" : "Bejelentkezés engedélyezése csak a megadott tartományokból",
     "Allow login only for specified organizations" : "Bejelentkezés engedélyezése csak a megadott szervezetek esetén",

@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "שמירה",
     "None" : "ללא",
+    "Team ID" : "מזהה הקבוצה",
     "Secret" : "סוד",
     "Title" : "תפקיד",
     "Client Secret" : "סוד לקוח",

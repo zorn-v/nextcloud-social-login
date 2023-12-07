@@ -29,6 +29,7 @@ OC.L10N.register(
     "None" : "Bat ere ez",
     "Default group" : "Lehenetsitako taldea",
     "App id" : "Aplikazioaren id",
+    "Team ID" : "Taldearen IDa",
     "Secret" : "Sekretua",
     "Allow login only from specified domain" : "Baimendu konektatzea zehazturiko domeinutik soilik",
     "Allow login only for specified organizations" : "Baimendu konektatzea zehazturiko erakundeei soilik",

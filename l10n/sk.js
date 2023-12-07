@@ -5,6 +5,7 @@ OC.L10N.register(
     "Save" : "Uložiť",
     "None" : "Žiadne",
     "Add default provider" : "Pridať predvoleného poskytovateľa",
+    "Team ID" : "Identifikátor tímu",
     "Secret" : "Tajný kľúč",
     "Confirm remove" : "Potvrdiť odstránenie",
     "Title" : "Názov",

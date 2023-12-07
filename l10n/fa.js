@@ -29,6 +29,7 @@ OC.L10N.register(
     "None" : "هیچ‌کدام",
     "Default group" : "Default group",
     "App id" : "App id",
+    "Team ID" : "Team ID",
     "Secret" : "راز",
     "Allow login only from specified domain" : "Allow login only from specified domain",
     "Allow login only for specified organizations" : "Allow login only for specified organizations",

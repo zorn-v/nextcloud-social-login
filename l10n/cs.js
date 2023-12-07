@@ -30,6 +30,7 @@ OC.L10N.register(
     "Default group" : "Výchozí skupina",
     "Add default provider" : "Přidat výchozího poskytovatele",
     "App id" : "Identif. aplikace",
+    "Team ID" : "Identifikátor týmu",
     "Secret" : "Soukromý",
     "Allow login only from specified domain" : "Umožnit přihlašování pouze z dané domény",
     "Allow login only for specified organizations" : "Umožnit přihlašování pouze pro dané organizace",

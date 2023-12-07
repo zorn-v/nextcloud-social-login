@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Opslaan",
     "None" : "Geen",
+    "Team ID" : "Team ID",
     "Secret" : "Vertrouwelijk",
     "Title" : "Titel",
     "Client Secret" : "Client Geheim",

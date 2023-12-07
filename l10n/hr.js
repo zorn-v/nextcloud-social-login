@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Spremi",
     "None" : "Nema",
+    "Team ID" : "ID tima",
     "Secret" : "Tajno",
     "Title" : "Naslov",
     "Client Secret" : "Tajni ključ klijenta",

@@ -29,6 +29,7 @@ OC.L10N.register(
     "None" : "Ninguno",
     "Default group" : "Grupo predeterminado",
     "App id" : "ID de la aplicación",
+    "Team ID" : "ID de equipo",
     "Secret" : "Secreto",
     "Allow login only from specified domain" : "Permitir inicio de sesión solo desde el dominio especificado",
     "Allow login only for specified organizations" : "Permitir inicio de sesión solo para organizaciones especificadas",

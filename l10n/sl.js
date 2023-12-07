@@ -8,6 +8,7 @@ OC.L10N.register(
     "Log in with %s" : "Prijava z %s",
     "Save" : "Shrani",
     "None" : "Brez",
+    "Team ID" : "ID Skupine",
     "Secret" : "Skrivna koda",
     "Title" : "Naziv",
     "Client Secret" : "Skrivni ključ odjemalca",

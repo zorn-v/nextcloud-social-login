@@ -19,6 +19,7 @@ OC.L10N.register(
     "User %s (%s) just created via social login" : "Пользователь %s (%s) создан через social login",
     "Save" : "Сохранить",
     "None" : "Отсутствует",
+    "Team ID" : "ID команды",
     "Allow login only from specified domain" : "Позволять вход только с указаного домена",
     "Allow login only for specified organizations" : "Позволять вход только для организаций",
     "Allow login only for specified guilds" : "Позволять вход только для гильдий",

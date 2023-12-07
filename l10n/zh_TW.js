@@ -30,6 +30,7 @@ OC.L10N.register(
     "Default group" : "預設群組",
     "Add default provider" : "新增預設提供者",
     "App id" : "應用程式 ID",
+    "Team ID" : "團隊 ID",
     "Secret" : "密碼",
     "Allow login only from specified domain" : "僅允許來自特定網域的登入",
     "Allow login only for specified organizations" : "僅允許特定組織登入",

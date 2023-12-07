@@ -5,6 +5,7 @@ OC.L10N.register(
     "Log in with %s" : "%sでログインする",
     "Save" : "保存",
     "None" : "なし",
+    "Team ID" : "チームID",
     "Secret" : "シークレットキー",
     "Title" : "タイトル",
     "Client Secret" : "クライアントシークレットキー",

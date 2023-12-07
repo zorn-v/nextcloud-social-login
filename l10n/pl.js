@@ -11,6 +11,7 @@ OC.L10N.register(
     "New user created" : "Utworzono nowego użytkownika",
     "Save" : "Zapisz",
     "None" : "Brak",
+    "Team ID" : "ID Team",
     "Secret" : "Tajny klucz",
     "Confirm remove" : "Potwierdź usunięcie",
     "Title" : "Tytuł",

@@ -5,6 +5,7 @@ OC.L10N.register(
     "Log in with %s" : "使用%s登录",
     "Save" : "保存",
     "None" : "无",
+    "Team ID" : "团队 ID",
     "Secret" : "Secret",
     "Title" : "标题",
     "Client Id" : "客户端ID",

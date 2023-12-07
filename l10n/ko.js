@@ -4,6 +4,7 @@ OC.L10N.register(
     "This account already connected" : "이 계정은 이미 연결됨",
     "Save" : "저장",
     "None" : "없음",
+    "Team ID" : "팀 아이디",
     "Secret" : "비밀",
     "Title" : "제목",
     "Client Secret" : "클라이언트 비밀 값",

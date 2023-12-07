@@ -28,6 +28,7 @@
     "Default group" : "Grupo predeterminado",
     "Add default provider" : "Engadir o provedor predeterminado",
     "App id" : "ID da aplicación",
+    "Team ID" : "ID do equipo",
     "Secret" : "Segredo",
     "Allow login only from specified domain" : "Permitir o acceso só dende o dominio especificado",
     "Allow login only for specified organizations" : "Permitir o acceso só para as organizacións especificadas",

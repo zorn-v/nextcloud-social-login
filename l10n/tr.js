@@ -30,6 +30,7 @@ OC.L10N.register(
     "Default group" : "Varsayılan grup",
     "Add default provider" : "Varsayılan hizmet sağlayıcı ekle",
     "App id" : "Uygulama kodu",
+    "Team ID" : "Takım kodu",
     "Secret" : "Parola",
     "Allow login only from specified domain" : "Yalnızca belirtilen etki alanıyla oturum açılabilsin",
     "Allow login only for specified organizations" : "Yalnızca belirtilen kuruluşlarla oturum açılabilsin",

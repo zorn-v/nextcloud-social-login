@@ -30,6 +30,7 @@ OC.L10N.register(
     "Default group" : "Подразумевана група",
     "Add default provider" : "Додај подразумеваног понуђача услуге",
     "App id" : "id апликације",
+    "Team ID" : "ID тима",
     "Secret" : "Тајни",
     "Allow login only from specified domain" : "Дозоли пријаву само са одређеног домена",
     "Allow login only for specified organizations" : "Дозоли пријаву само за одређене одганизације",

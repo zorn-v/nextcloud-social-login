@@ -27,6 +27,7 @@
     "None" : "Nicht kategorisierte Rezepte",
     "Default group" : "Standardgruppe",
     "App id" : "App-Id",
+    "Team ID" : "Team-ID",
     "Secret" : "Geheimer Schlüssel",
     "Allow login only from specified domain" : "Anmeldung nur von der angegebenen Domain erlauben",
     "Allow login only for specified organizations" : "Anmeldung nur für angegebene Organisationen zulassen",

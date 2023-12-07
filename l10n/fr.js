@@ -30,6 +30,7 @@ OC.L10N.register(
     "Default group" : "Groupe par défaut",
     "Add default provider" : "Ajouter un fournisseur par défaut",
     "App id" : "ID de l'application",
+    "Team ID" : "Identifiant Team",
     "Secret" : "Secret",
     "Allow login only from specified domain" : "Autoriser la connexion uniquement depuis le domaine spécifié",
     "Allow login only for specified organizations" : "Autoriser la connexion uniquement pour l'organisation spécifiée",

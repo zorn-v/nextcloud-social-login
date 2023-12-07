@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Sarva",
     "None" : "Perunu",
+    "Team ID" : "ID de grupu",
     "Secret" : "Segretu",
     "Title" : "Tìtulu",
     "Client Secret" : "Segretu de su cliente",

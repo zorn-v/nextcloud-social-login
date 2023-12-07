@@ -19,6 +19,7 @@
     "None" : "Καμμία",
     "Default group" : "Προεπιλεγμένη ομάδα",
     "App id" : "Αναγνωριστικό εφαρμογής",
+    "Team ID" : "Ταυτότητα ομάδας",
     "Secret" : "Μυστικός",
     "Allow login only for specified organizations" : "Επιτρέψτε τη σύνδεση μόνο για καθορισμένους οργανισμούς",
     "Allow login only for specified workspace" : "Επιτρέψτε τη σύνδεση μόνο για καθορισμένο χώρο εργασίας",
