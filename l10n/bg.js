@@ -29,6 +29,7 @@ OC.L10N.register(
     "None" : "Няма",
     "Default group" : "Група по подразбиране",
     "App id" : "Идентификатор за приложението",
+    "Team ID" : "Идентификатор на екип",
     "Secret" : "Тайна",
     "Allow login only from specified domain" : "Разрешаване на вписване само от определен домейн",
     "Allow login only for specified organizations" : "Разрешаване на вписване само за определени организации",

@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Desa",
     "None" : "Només una vegada",
+    "Team ID" : "ID de l'equip",
     "Secret" : "Secret",
     "Title" : "Títol",
     "Client Secret" : "Secret del client",
