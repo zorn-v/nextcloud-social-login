@@ -139,9 +139,10 @@
           {{ t(appName, 'Allow login only for specified guilds') }}<br/>
           <input type="text" :name="'providers['+name+'][guilds]'" v-model="provider.guilds"/>
         </label>
+        <br/>
         <label>
-          {{ t(appName, 'Use guild nick') }}
           <input type="checkbox" v-model="provider.useGuildNames"/>
+          {{ t(appName, 'Use guild nick') }}
         </label>
       </template>
       <GroupMapping v-if="provider.groupMapping"
@@ -295,6 +296,10 @@ export default {
 <style scoped>
   input, select, textarea {
     width: 285px;
+  }
+  input[type="checkbox"] {
+    width: 20px;
+    vertical-align: middle;
   }
   textarea {
     resize: none;
