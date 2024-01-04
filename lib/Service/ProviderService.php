@@ -423,7 +423,7 @@ class ProviderService
             $matchingGuildId = $checkGuilds();
 
             // Use discord guild member nickname as display name
-            if ($config['useGuildNames'] && $matchingGuildId) {
+            if (!empty($config['useGuildNames']) && $matchingGuildId) {
                 $guildMember = $adapter->apiRequest('users/@me/guilds/' . $matchingGuildId . '/member' );
                 $profile->displayName = $guildMember->nick ?? $profile->displayName;
             }
