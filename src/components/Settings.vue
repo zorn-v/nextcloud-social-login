@@ -141,7 +141,7 @@
         </label>
         <br/>
         <label>
-          <input type="checkbox" v-model="provider.useGuildNames"/>
+          <input type="checkbox" :name="'providers['+name+'][useGuildNames]'" v-model="provider.useGuildNames"/>
           {{ t(appName, 'Use guild nick') }}
         </label>
       </template>
