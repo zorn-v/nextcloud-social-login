@@ -67,6 +67,7 @@ You can copy link of certain login button to get proper "redirect url" for OAuth
 * [Discord](#configure-discord)
 * [Telegram](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/telegram.md)
 * PlexTv - you can use any title as app id
+* [Codeberg](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/codeberg.md)
 
 Details about "Allow login only from specified domain" google setting you can find here [#44](https://github.com/zorn-v/nextcloud-social-login/issues/44)
 You can use comma separated list for multiple domains
