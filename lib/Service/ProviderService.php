@@ -510,7 +510,7 @@ class ProviderService
             ) {
                 throw new LoginException($this->l->t('Email already registered'));
             }
-            $userPassword = substr(base64_encode(random_bytes(64)), 0, 30);
+            $userPassword = '1@aA'.substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $userPassword);
 
             if ($this->config->getAppValue($this->appName, 'create_disabled_users')) {
