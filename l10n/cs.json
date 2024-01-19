@@ -29,6 +29,8 @@
     "Add default provider" : "Přidat výchozího poskytovatele",
     "App id" : "Identif. aplikace",
     "Team ID" : "Identifikátor týmu",
+    "Key ID" : "Identifikátor klíče",
+    "Key content" : "Obsah klíče",
     "Secret" : "Soukromý",
     "Allow login only from specified domain" : "Umožnit přihlašování pouze z dané domény",
     "Allow login only for specified organizations" : "Umožnit přihlašování pouze pro dané organizace",
