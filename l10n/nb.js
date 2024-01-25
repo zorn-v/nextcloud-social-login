@@ -30,6 +30,7 @@ OC.L10N.register(
     "Default group" : "Standardgruppe",
     "Add default provider" : "Legg til standard tilbyder",
     "App id" : "App-ID",
+    "Team ID" : "Team-ID",
     "Secret" : "Hemmelig",
     "Allow login only from specified domain" : "Tillat kun pålogging fra spesifisert domene",
     "Allow login only for specified organizations" : "Tillat pålogging kun for spesifiserte organisasjoner",
