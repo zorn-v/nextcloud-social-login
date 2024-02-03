@@ -62,7 +62,7 @@ OC.L10N.register(
     "Title" : "Título",
     "Authorize url" : "URL de autorización",
     "Token url" : "URL do testemuño",
-    "Display name claim (optional)" : "Reclamación do nome para mostrar (opcional)",
+    "Display name claim (optional)" : "Reclamación do nome para amosar (opcional)",
     "User info URL (optional)" : "URL da información do usuario (opcional)",
     "Logout URL (optional)" : "URL de saída (opcional)",
     "Client Id" : "ID de cliente",
