@@ -90,7 +90,7 @@ class CustomOAuth2 extends OAuth2
     protected function getGroups(Data\Collection $data)
     {
         if ($groupsClaim = $this->config->get('groups_claim')) {
-            $nestedClaims = explode('.', $groupsClaim);
+            $nestedClaims = str_getcsv($groupsClaim, '.','"');
             $claim = array_shift($nestedClaims);
             $groups = $data->get($claim);
             while (count($nestedClaims) > 0) {
