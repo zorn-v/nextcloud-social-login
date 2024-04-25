@@ -6,6 +6,7 @@ OC.L10N.register(
     "This account already connected" : "Esta cuenta yá está conectada",
     "Save" : "Guardar",
     "None" : "Nada",
+    "Team ID" : "ID d'equipu",
     "Key content" : "Conteníu de la clave",
     "Secret" : "Secretu",
     "Internal name" : "Nome internu",
