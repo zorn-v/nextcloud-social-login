@@ -1,5 +1,5 @@
 { "translations": {
-    "Log in with username or email" : "Se connecter avec un nom d'utilisateur ou une adresse électronique",
+    "Log in with username or email" : "Se connecter avec un nom d'utilisateur ou un e-mail",
     "Provider name cannot be empty" : "Le nom du fournisseur ne peut pas être vide",
     "Duplicate provider name \"%s\"" : "Duplicata du fournisseur \"%s\"",
     "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "Nom du fournisseur \"%s\" invalide. Les caractères autorisés sont \"0-9a-z_.@-\".",
@@ -46,7 +46,7 @@
     "Disable auto create new users" : "Désactiver la création automatique d'utilisateurs",
     "Create users with disabled account" : "Créer les utilisateurs avec des comptes désactivés",
     "Allow users to connect social logins with their account" : "Autoriser les utilisateurs à se connecter à leur compte via Social",
-    "Prevent creating an account if the email address exists in another account" : "Empêcher la création d'un utilisateur si son adresse de courriel est déjà utilisée par un autre compte",
+    "Prevent creating an account if the email address exists in another account" : "Empêcher la création d'un utilisateur si son adresse e-mail est déjà utilisée par un autre compte",
     "Update user profile every login" : "Mettre à jour le profil utilisateur à chaque connexion",
     "Do not prune not available user groups on login" : "Ne pas élaguer les groupes d'utilisateurs non disponibles à la connexion",
     "Automatically create groups if they do not exists" : "Créer les groupes automatiquement s'ils n'existent pas",
