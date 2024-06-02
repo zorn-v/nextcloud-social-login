@@ -70,6 +70,9 @@
     <div class="provider-settings" v-for="(provider, name) in defaultProviders" :key="name">
       <h2 class="provider-title">
         <img :src="imagePath(name.toLowerCase())" /> {{ name[0].toUpperCase() + name.substring(1) }}
+        <button type="button" v-if="defaultVisible.includes(name)" @click="defaultVisible.splice(defaultVisible.indexOf(name), 1)">
+          x
+        </button>
       </h2>
       <label>
         {{ name === 'apple' ? t(appName, 'Services ID') : t(appName, 'App id') }}<br/>
@@ -325,6 +328,8 @@ export default {
   }
   .section h2.provider-title {
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
   }
   .provider-title img {
     width: 20px;
