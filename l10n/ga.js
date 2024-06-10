@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Sábháil",
     "None" : "aon cheann",
+    "Team ID" : "Aitheantas foirne",
     "Secret" : "Rúnda",
     "Title" : "Teideal",
     "Scope" : "Raon feidhme"
