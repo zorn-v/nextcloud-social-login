@@ -70,11 +70,9 @@
     <div class="provider-settings" v-for="(provider, name) in defaultProviders" :key="name">
       <h2 class="provider-title">
         <img :src="imagePath(name.toLowerCase())" /> {{ name[0].toUpperCase() + name.substring(1) }}
-        <!-- Does not work yet
-        <div class="provider-remove" @click="defaultVisible.splice(defaultVisible.indexOf(name), 1)">
+        <div class="provider-remove" @click="provider.appid = null; defaultVisible.splice(defaultVisible.indexOf(name), 1);">
           x
         </div>
-        -->
       </h2>
       <label>
         {{ name === 'apple' ? t(appName, 'Services ID') : t(appName, 'App id') }}<br/>
