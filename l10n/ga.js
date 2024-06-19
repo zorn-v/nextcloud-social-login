@@ -6,6 +6,7 @@ OC.L10N.register(
     "Team ID" : "Aitheantas foirne",
     "Secret" : "Rúnda",
     "Title" : "Teideal",
-    "Scope" : "Raon feidhme"
+    "Scope" : "Raon feidhme",
+    "Consumer key" : "Eochair tomhaltóra"
 },
 "nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);");
