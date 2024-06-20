@@ -4,6 +4,7 @@
     "Team ID" : "Aitheantas foirne",
     "Secret" : "Rúnda",
     "Title" : "Teideal",
+    "Client Secret" : "Rúnda Cliant",
     "Scope" : "Raon feidhme",
     "Consumer key" : "Eochair tomhaltóra"
 },"pluralForm" :"nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);"

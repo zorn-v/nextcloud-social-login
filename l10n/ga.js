@@ -6,6 +6,7 @@ OC.L10N.register(
     "Team ID" : "Aitheantas foirne",
     "Secret" : "Rúnda",
     "Title" : "Teideal",
+    "Client Secret" : "Rúnda Cliant",
     "Scope" : "Raon feidhme",
     "Consumer key" : "Eochair tomhaltóra"
 },
