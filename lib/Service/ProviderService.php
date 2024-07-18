@@ -604,7 +604,7 @@ class ProviderService
             }
 
             $defaultGroup = $profile->data['default_group'];
-            if ($defaultGroup && $group = $this->groupManager->get($defaultGroup)) {
+            if ($defaultGroup && ($group = $this->groupManager->get($defaultGroup)) && !$group->inGroup($user)) {
                 $group->addUser($user);
             }
         }
