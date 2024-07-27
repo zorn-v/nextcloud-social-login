@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Spara",
     "None" : "Ingen",
+    "Team ID" : "Team-ID",
     "Secret" : "Hemlig",
     "Title" : "Titel",
     "Client Secret" : "Klienthemlighet",
