@@ -39,6 +39,7 @@ OC.L10N.register(
     "Allow login only for specified organizations" : "Bejelentkezés engedélyezése csak a megadott szervezetek esetén",
     "Allow login only for specified workspace" : "Bejelentkezés engedélyezése csak a megadott munkaterületek esetén",
     "Allow login only for specified guilds" : "Bejelentkezés engedélyezése csak a megadott szerverek esetén",
+    "Use guild nick" : "Szerver becenév használata",
     "Settings for social login successfully saved" : "A közösségi bejelentkezés beállításai sikeresen mentve",
     "Some error occurred while saving settings" : "Hiba történt a beállítások mentése során.",
     "Do you really want to remove {providerTitle} provider ?" : "Biztos, hogy eltávolítja a következő szolgáltatót: {providerTitle}?",
