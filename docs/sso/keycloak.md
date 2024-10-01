@@ -91,8 +91,8 @@ Logout URL:    https://<your-keycloak-url.fr>/auth/realms/<your-realm>/protocol/
 Client Id:     <keycloak-client-id>
 Client Secret: <keycloak-client-secret>
 Scope:         openid groups-nextcloud profile
-Groups claim: groups
-Button style: Keycloak
+Groups claim:  groups
+Button style:  Keycloak
 Default group: None
 Group mapping: nextcloud-admins <--> admin
                nextcloud-users  <--> users
