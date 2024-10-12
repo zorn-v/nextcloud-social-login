@@ -29,6 +29,7 @@ OC.L10N.register(
     "None" : "Žádná",
     "Default group" : "Výchozí skupina",
     "Add default provider" : "Přidat výchozího poskytovatele",
+    "Services ID" : "Identifikátor služeb",
     "App id" : "Identif. aplikace",
     "Team ID" : "Identifikátor týmu",
     "Key ID" : "Identifikátor klíče",
