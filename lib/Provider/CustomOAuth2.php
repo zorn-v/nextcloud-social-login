@@ -39,7 +39,7 @@ class CustomOAuth2 extends OAuth2
             $profileUrl .= (strpos($profileUrl, '?') !== false ? '&' : '?') . 'fields=' . implode(',', $profileFields);
         }
 
-        $response = $this->apiRequest($profileUrl);
+        $response = $this->apiRequest($profileUrl, headers: ["X-Scope" => $this->config->get('scope')]);
         if (isset($response->ocs->data)) {
             $response = $response->ocs->data;
         }
