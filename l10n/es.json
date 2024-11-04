@@ -38,7 +38,7 @@
     "Allow login only for specified workspace" : "Permitir ingreso sólo para el espacio de trabajo especificado",
     "Allow login only for specified guilds" : "Permitir ingreso sólo para los gremios especificados",
     "Use guild nick" : "Usar apodo de gremio",
-    "Settings for social login successfully saved" : "Las configuraciones de social login se guardaron exitósamente",
+    "Settings for social login successfully saved" : "Las configuraciones de login social se han guardado correctamente",
     "Some error occurred while saving settings" : "Ocurrió algún error mientras se guardaban las configuraciones",
     "Do you really want to remove {providerTitle} provider ?" : "¿Realmente quiere quitar al proveedor {providerTitle}?",
     "Confirm remove" : "Confirmar supresión",
