@@ -466,7 +466,7 @@ class ProviderService
         return $this->login($uid, $profile, $provider.'-');
     }
 
-        private function login($uid, Profile $profile, $newGroupPrefix = '')
+    private function login($uid, Profile $profile, $newGroupPrefix = '')
     {
         $user = $this->userManager->get($uid);
         if (null === $user) {
