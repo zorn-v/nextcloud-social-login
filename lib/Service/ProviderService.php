@@ -466,46 +466,30 @@ class ProviderService
         return $this->login($uid, $profile, $provider.'-');
     }
 
-    private function login($uid, Profile $profile, $newGroupPrefix = '')
+        private function login($uid, Profile $profile, $newGroupPrefix = '')
     {
         $user = $this->userManager->get($uid);
         if (null === $user) {
             $connectedUid = $this->socialConnect->findUID($uid);
             $user = $this->userManager->get($connectedUid);
         }
+    
+        // Initialize and update as needed
+        $updateUserProfile = false;
+        $userPassword = '';
+    
         if ($this->userSession->isLoggedIn()) {
             if (!$this->config->getAppValue($this->appName, 'allow_login_connect')) {
                 throw new LoginException($this->l->t('Social login connect is disabled'));
             }
             if (null !== $user) {
-                throw new LoginException($this->l->t('This account already connected'));
+                throw new LoginException($this->l->t('This account is already connected'));
             }
             $currentUid = $this->userSession->getUser()->getUID();
             $this->socialConnect->connectLogin($currentUid, $uid);
             return new RedirectResponse($this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section'=>'sociallogin']));
         }
-
-        $jwtGroups = $profile->data['groups'] ?? [];
-        $nextcloudGroups = $this->groupManager->getUserGroups($user);
-        $isInGroup = !empty($nextcloudGroups) || !empty($jwtGroups);
     
-        if ($this->config->getAppValue($this->appName, 'restrict_users_wo_assigned_groups')) {
-            if (!$isInGroup) {
-                throw new LoginException($this->l->t('Users without assigned groups is not allowed to login, please contact support'));
-            } 
-        }
-
-        if ($this->config->getAppValue($this->appName, 'restrict_users_wo_mapped_groups') && isset($profile->data['group_mapping'])) {
-            $groups = isset($profile->data['groups']) ? $profile->data['groups'] : [];
-            $mappedGroups = array_intersect($groups, array_keys($profile->data['group_mapping']));
-            if (!$mappedGroups) {
-                throw new LoginException($this->l->t('Your user group is not allowed to login, please contact support'));
-            }
-        }
-
-        $updateUserProfile = $this->config->getAppValue($this->appName, 'update_profile_on_login');
-        $userPassword = '';
-
         if (null === $user) {
             if ($this->config->getAppValue($this->appName, 'disable_registration')) {
                 throw new LoginException($this->l->t('Auto creating new users is disabled'));
@@ -516,13 +500,19 @@ class ProviderService
             ) {
                 throw new LoginException($this->l->t('Email already registered'));
             }
+    
+            // Create new user since they do not exist
             $userPassword = '1@aA'.substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $userPassword);
 
             if ($this->config->getAppValue($this->appName, 'create_disabled_users')) {
                 $user->setEnabled(false);
             }
-
+    
+            // Set profile information for the new user
+            $user->setDisplayName($profile->displayName ?: $profile->identifier);
+            $user->setSystemEMailAddress((string)$profile->email);
+            
             $this->config->setUserValue($uid, $this->appName, 'disable_password_confirmation', 1);
             $updateUserProfile = true;
 
@@ -530,7 +520,26 @@ class ProviderService
                 $this->notifyAdmins($uid, $profile->displayName ?: $profile->identifier, $profile->data['default_group']);
             }
         }
-
+    
+        // Group checks after creating or retrieving the user
+        $jwtGroups = $profile->data['groups'] ?? [];
+        $nextcloudGroups = $this->groupManager->getUserGroups($user);
+        $isInGroup = !empty($nextcloudGroups) || !empty($jwtGroups);
+    
+        if ($this->config->getAppValue($this->appName, 'restrict_users_wo_assigned_groups')) {
+            if (!$isInGroup) {
+                throw new LoginException($this->l->t('Users without assigned groups are not allowed to login, please contact support'));
+            }
+        }
+    
+        if ($this->config->getAppValue($this->appName, 'restrict_users_wo_mapped_groups') && isset($profile->data['group_mapping'])) {
+            $mappedGroups = array_intersect($jwtGroups, array_keys($profile->data['group_mapping']));
+            if (!$mappedGroups) {
+                throw new LoginException($this->l->t('Your user group is not allowed to login, please contact support'));
+            }
+        }
+    
+        // Update the user's profile if necessary
         if ($updateUserProfile) {
             $user->setDisplayName($profile->displayName ?: $profile->identifier);
             $user->setSystemEMailAddress((string)$profile->email);
