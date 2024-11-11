@@ -485,8 +485,14 @@ class ProviderService
             return new RedirectResponse($this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section'=>'sociallogin']));
         }
 
-        if ($this->config->getAppValue($this->appName, 'restrict_users_wo_assigned_groups') && empty($profile->data['groups'])) {
-            throw new LoginException($this->l->t('Users without assigned groups is not allowed to login, please contact support'));
+        $jwtGroups = $profile->data['groups'] ?? [];
+        $nextcloudGroups = $this->groupManager->getUserGroups($user);
+        $isInGroup = !empty($nextcloudGroups) || !empty($jwtGroups);
+    
+        if ($this->config->getAppValue($this->appName, 'restrict_users_wo_assigned_groups')) {
+            if (!$isInGroup) {
+                throw new LoginException($this->l->t('Users without assigned groups is not allowed to login, please contact support'));
+            } 
         }
 
         if ($this->config->getAppValue($this->appName, 'restrict_users_wo_mapped_groups') && isset($profile->data['group_mapping'])) {
