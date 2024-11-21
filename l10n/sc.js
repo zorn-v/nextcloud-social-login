@@ -5,6 +5,7 @@ OC.L10N.register(
     "None" : "Perunu",
     "Team ID" : "ID de grupu",
     "Secret" : "Segretu",
+    "Allow login only for specified workspace" : "Permite s'identificatzione isceti pro s'ispàtziu de traballu ispetzificadu",
     "Title" : "Tìtulu",
     "Client Secret" : "Segretu de su cliente",
     "Scope" : "Àmbitu",
