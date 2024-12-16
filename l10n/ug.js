@@ -42,7 +42,7 @@ OC.L10N.register(
     "Use guild nick" : "Guild nick نى ئىشلىتىڭ",
     "Settings for social login successfully saved" : "ئىجتىمائىي كىرىش تەڭشەكلىرى مۇۋەپپەقىيەتلىك ساقلاندى",
     "Some error occurred while saving settings" : "تەڭشەكلەرنى ساقلاش جەريانىدا بەزى خاتالىقلار يۈز بەردى",
-    "Do you really want to remove {providerTitle} provider ?" : "سىز {تەمىنلىگۈچى Title} تەمىنلىگۈچىنى ئۆچۈرمەكچىمۇ؟",
+    "Do you really want to remove {providerTitle} provider ?" : "سىز {providerTitle} Title} تەمىنلىگۈچىنى ئۆچۈرمەكچىمۇ؟",
     "Confirm remove" : "چىقىرىۋېتىشنى جەزملەشتۈرۈڭ",
     "Add group mapping" : "گۇرۇپپا خەرىتىسىنى قوشۇڭ",
     "Disable auto create new users" : "ئاپتوماتىك يېڭى ئىشلەتكۈچى قۇرۇشنى چەكلەڭ",
