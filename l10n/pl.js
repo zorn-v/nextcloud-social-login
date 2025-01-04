@@ -13,6 +13,7 @@ OC.L10N.register(
     "None" : "Brak",
     "Team ID" : "ID Team",
     "Secret" : "Tajny klucz",
+    "Allow login only for specified workspace" : "Zezwalaj na logowanie tylko w określonym obszarze roboczym",
     "Confirm remove" : "Potwierdź usunięcie",
     "Title" : "Tytuł",
     "Client Secret" : "Tajny klucz klienta",
