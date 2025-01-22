@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace OCA\SocialLogin\Controller;
 
 use OCA\SocialLogin\Db\ConnectedLoginMapper;
-use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\PasswordConfirmationRequired;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\OCSController;
-use OCP\IAppConfig;
-use OCP\IConfig;
 use OCP\IRequest;
 
 class LinkController extends OCSController
@@ -32,6 +30,7 @@ class LinkController extends OCSController
      * @param string $identifier
      * @return DataResponse
      */
+    #[PasswordConfirmationRequired]
     public function connectSocialLogin($uid, $identifier): DataResponse
     {
         $this->socialConnect->connectLogin($uid, $identifier);
@@ -43,6 +42,7 @@ class LinkController extends OCSController
      * @param string $identifier
      * @return DataResponse
      */
+    #[PasswordConfirmationRequired]
     public function disconnectSocialLogin($identifier): DataResponse
     {
         $this->socialConnect->disconnectLogin($identifier);

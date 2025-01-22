@@ -615,6 +615,15 @@ class ProviderService
         $this->userSession->createRememberMeToken($user);
 
         $token = $this->tokenProvider->getToken($this->userSession->getSession()->getId());
+        // needed since NC 30.0.3
+        if (
+            $this->config->getUserValue($uid, $this->appName, 'disable_password_confirmation')
+            && method_exists($token, 'getScopeAsArray')
+        ) {
+            $scope = $token->getScopeAsArray();
+            $scope['password-unconfirmable'] = true;
+            $token->setScope($scope);
+        }
         $this->userSession->completeLogin($user, [
             'loginName' => $user->getUID(),
             'password' => $userPassword,

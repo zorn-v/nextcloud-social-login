@@ -3,6 +3,7 @@
 namespace OCA\SocialLogin\Controller;
 
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\Attribute\PasswordConfirmationRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\RedirectResponse;
 use OCP\IL10N;
@@ -90,6 +91,7 @@ class SettingsController extends Controller
      * @NoAdminRequired
      * @PasswordConfirmationRequired
      */
+    #[PasswordConfirmationRequired]
     public function savePersonal($disable_password_confirmation)
     {
         $uid = $this->userSession->getUser()->getUID();
