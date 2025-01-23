@@ -5,6 +5,9 @@ namespace OCA\SocialLogin\Controller;
 use OC\User\LoginException;
 use OCA\SocialLogin\Service\ProviderService;
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\Attribute\PublicPage;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
+use OCP\AppFramework\Http\Attribute\UseSession;
 use OCP\IRequest;
 
 class LoginController extends Controller
@@ -23,6 +26,9 @@ class LoginController extends Controller
      * @NoCSRFRequired
      * @UseSession
      */
+    #[PublicPage]
+    #[NoCSRFRequired]
+    #[UseSession]
     public function oauth($provider)
     {
         return $this->providerService->handleDefault($provider);
@@ -33,6 +39,9 @@ class LoginController extends Controller
      * @NoCSRFRequired
      * @UseSession
      */
+    #[PublicPage]
+    #[NoCSRFRequired]
+    #[UseSession]
     public function custom($type, $provider)
     {
         if (!isset(ProviderService::TYPE_CLASSES[$type])) {

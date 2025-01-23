@@ -3,6 +3,7 @@
 namespace OCA\SocialLogin\Controller;
 
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\Attribute\PasswordConfirmationRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\RedirectResponse;
@@ -91,6 +92,7 @@ class SettingsController extends Controller
      * @NoAdminRequired
      * @PasswordConfirmationRequired
      */
+    #[NoAdminRequired]
     #[PasswordConfirmationRequired]
     public function savePersonal($disable_password_confirmation)
     {
@@ -102,6 +104,7 @@ class SettingsController extends Controller
     /**
      * @NoAdminRequired
      */
+    #[NoAdminRequired]
     public function disconnectSocialLogin($login)
     {
         $this->socialConnect->disconnectLogin($login);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OCA\SocialLogin\Controller;
 
 use OCP\AppFramework\ApiController as BaseController;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\Response;
 use OCP\IConfig;
 use OCP\IRequest;
@@ -26,6 +27,7 @@ class ApiController extends BaseController
     /**
      * @NoCSRFRequired
      */
+    #[NoCSRFRequired]
     public function setConfig($key, $config)
     {
         $this->config->setAppValue($this->appName, $key, $config);
