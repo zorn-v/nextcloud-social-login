@@ -623,6 +623,7 @@ class ProviderService
             $scope = $token->getScopeAsArray();
             $scope['password-unconfirmable'] = true;
             $token->setScope($scope);
+            $this->tokenProvider->updateToken($token);
         }
         $this->userSession->completeLogin($user, [
             'loginName' => $user->getUID(),
