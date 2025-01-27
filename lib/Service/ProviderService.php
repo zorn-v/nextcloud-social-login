@@ -617,7 +617,7 @@ class ProviderService
         $token = $this->tokenProvider->getToken($this->userSession->getSession()->getId());
         // needed since NC 30.0.3
         if (
-            $this->config->getUserValue($uid, $this->appName, 'disable_password_confirmation')
+            $this->config->getUserValue($user->getUid(), $this->appName, 'disable_password_confirmation')
             && method_exists($token, 'getScopeAsArray')
         ) {
             $scope = $token->getScopeAsArray();
