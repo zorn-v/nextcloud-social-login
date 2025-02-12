@@ -5,6 +5,7 @@ OC.L10N.register(
     "None" : "Ingen",
     "Secret" : "Hemmelighed",
     "Title" : "Titel",
+    "Token url" : "Token url",
     "Client Secret" : "Klient-Secret",
     "Scope" : "Anvendelsesområde"
 },
