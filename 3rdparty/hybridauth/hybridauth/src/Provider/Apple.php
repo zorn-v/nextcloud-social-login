@@ -94,6 +94,8 @@ class Apple extends OAuth2
      */
     protected $AuthorizeUrlParametersEncType = PHP_QUERY_RFC3986;
 
+    protected $supportRequestState = false;
+
     /**
      * {@inheritdoc}
      */
