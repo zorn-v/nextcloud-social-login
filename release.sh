@@ -1,8 +1,9 @@
-#!/bin/bash -e
+#!/bin/bash
 
 GITHUB_REPO=zorn-v/nextcloud-social-login
 APP_NAME=sociallogin
 NC_KEY_FILE=~/.nextcloud/certificates/$APP_NAME.key
+NC_CERT_FILE=~/.nextcloud/certificates/$APP_NAME.crt
 
 cd `dirname $0`
 
@@ -13,7 +14,7 @@ git diff --quiet --exit-code
 [ $? != 0 ] && echo There is unstaged changes && exit 1
 [ ! -f .credentials ] && echo No credentials file found && exit 1
 . .credentials
-
+set -e
 [ -z "$GITHUB_TOKEN" ] && echo GITHUB_TOKEN var is missing. Go to https://github.com/settings/tokens get one and put it in .credentials && exit 1
 [ -z "$NC_TOKEN" ] && echo NC_TOKEN var is missing. Go to https://apps.nextcloud.com/account/token get one and put it in .credentials && exit 1
 
@@ -37,6 +38,18 @@ git commit -am 'Release'
 git archive release --prefix=$APP_NAME/ -o release.tar.gz
 git checkout master
 git branch -D release
+
+if [ -n "$OCC_CMD_PATH"]
+then
+  TMP_DIR=`mktemp -d`
+  mv release.tar.gz $TMP_DIR/
+  cd $TMP_DIR
+  tar xzf release.tar.gz
+  rm -f release.tar.gz
+  php $OCC_CMD_PATH integrity:sign-app --path=$APP_NAME --privateKey="$NC_KEY_FILE" --certificate="$NC_CERT_FILE"
+  tar czf $APP_NAME release.tar.gz
+  rm -rf $APP_NAME
+fi
 
 curl -sH "Authorization: token $GITHUB_TOKEN" -H 'Content-Type: application/octet-stream' --data-binary '@release.tar.gz' ${UPLOAD_URL}?name=release.tar.gz > /dev/null
 DOWNLOAD_URL=https://github.com/$GITHUB_REPO/releases/download/$VERSION/release.tar.gz
