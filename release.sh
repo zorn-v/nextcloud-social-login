@@ -46,8 +46,8 @@ then
   cd $TMP_DIR
   tar xzf release.tar.gz
   rm -f release.tar.gz
-  php $OCC_CMD_PATH integrity:sign-app --path=$APP_NAME --privateKey="$NC_KEY_FILE" --certificate="$NC_CERT_FILE"
-  tar czf $APP_NAME release.tar.gz
+  php $OCC_CMD_PATH integrity:sign-app --path=$TMP_DIR/$APP_NAME --privateKey="$NC_KEY_FILE" --certificate="$NC_CERT_FILE"
+  tar czf release.tar.gz $APP_NAME
   rm -rf $APP_NAME
 fi
 
