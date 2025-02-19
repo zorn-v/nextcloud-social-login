@@ -39,7 +39,7 @@ git archive release --prefix=$APP_NAME/ -o release.tar.gz
 git checkout master
 git branch -D release
 
-if [ -n "$OCC_CMD_PATH"]
+if [ -n "$OCC_CMD_PATH" ]
 then
   TMP_DIR=`mktemp -d`
   mv release.tar.gz $TMP_DIR/
