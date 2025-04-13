@@ -4,23 +4,16 @@ namespace OCA\SocialLogin\AlternativeLogin;
 
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\Security\CSP\AddContentSecurityPolicyEvent;
-use OCP\IConfig;
+use OCP\IAppConfig;
 use OCP\Util;
 
 class TelegramLogin extends SocialLogin
 {
-    private $appName;
-    /** @var IEventDispatcher */
-    private $dispatcher;
-    /** @var IConfig */
-    private $config;
-
-    public function __construct($appName, IEventDispatcher $dispatcher, IConfig $config)
-    {
-        $this->appName = $appName;
-        $this->dispatcher = $dispatcher;
-        $this->config = $config;
-    }
+    public function __construct(
+        private $appName,
+        private IEventDispatcher $dispatcher,
+        private IAppConfig $appConfig
+    ) {}
 
     public function getLink(): string
     {
@@ -40,7 +33,7 @@ class TelegramLogin extends SocialLogin
             $csp->addAllowedScriptDomain('telegram.org');
             $event->addPolicy($csp);
         });
-        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
+        $providers = $this->appConfig->getValueArray($this->appName, 'oauth_providers');
         $token = $providers['telegram']['secret'] ?? '';
         list($botId) = explode(':', $token);
         Util::addHeader('meta', [

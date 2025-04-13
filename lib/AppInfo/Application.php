@@ -10,6 +10,7 @@ use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\EventDispatcher\IEventDispatcher;
+use OCP\IAppConfig;
 use OCP\IConfig;
 use OCP\IL10N;
 use OCP\IRequest;
@@ -42,6 +43,7 @@ class Application extends App implements IBootstrap
 
         $l = $this->query(IL10N::class);
         $config = $this->query(IConfig::class);
+        $appConfig = $this->query(IAppConfig::class);
 
         $dispatcher = $this->query(IEventDispatcher::class);
         $dispatcher->addListener(BeforeUserDeletedEvent::class, [$this, 'preDeleteUser']);
@@ -67,7 +69,7 @@ class Application extends App implements IBootstrap
 
         $providersCount = 0;
         $loginClass = '';
-        $providers = json_decode($config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
+        $providers = $appConfig->getValueArray($this->appName, 'oauth_providers');
         foreach ($providers as $name => $provider) {
             if ($provider['appid']) {
                 ++$providersCount;
@@ -76,7 +78,7 @@ class Application extends App implements IBootstrap
             }
         }
 
-        $providers = json_decode($config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
+        $providers = $appConfig->getValueArray($this->appName, 'custom_providers');
         foreach ($providers as $providersType => $providerList) {
             foreach ($providerList as $provider) {
                 ++$providersCount;
@@ -97,7 +99,7 @@ class Application extends App implements IBootstrap
                 exit();
             }
 
-            $hideDefaultLogin = $providersCount > 0 && $config->getAppValue($this->appName, 'hide_default_login');
+            $hideDefaultLogin = $providersCount > 0 && $appConfig->getValueBool($this->appName, 'hide_default_login');
             if ($hideDefaultLogin && $request->getPathInfo() === '/login') {
                 $this->regContext->registerAlternativeLogin(DefaultLoginShow::class);
             }

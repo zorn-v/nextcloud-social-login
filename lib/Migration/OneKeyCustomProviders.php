@@ -3,19 +3,15 @@ namespace OCA\SocialLogin\Migration;
 
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
-use OCP\IConfig;
+use OCP\IAppConfig;
 
 class OneKeyCustomProviders implements IRepairStep
 {
-    /** @var IConfig */
-    private $config;
-
     private $appName = 'sociallogin';
 
-    public function __construct(IConfig $config)
-    {
-        $this->config = $config;
-    }
+    public function __construct(
+        private IAppConfig $appConfig
+    ) {}
 
     public function getName()
     {
@@ -24,19 +20,19 @@ class OneKeyCustomProviders implements IRepairStep
 
     public function run(IOutput $output)
     {
-        if (version_compare($this->config->getAppValue($this->appName, 'installed_version'), '3.1.0') > 0) {
+        if (version_compare($this->appConfig->getValueString($this->appName, 'installed_version'), '3.1.0') > 0) {
             return;
         }
-        $customProviders = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true) ?: [];
+        $customProviders = $this->appConfig->getValueArray($this->appName, 'custom_providers');
         $customProvidersNames = ['openid', 'custom_oidc', 'custom_oauth2'];
         foreach ($customProvidersNames as $providerName) {
             $configKey = $providerName.'_providers';
-            $providers = json_decode($this->config->getAppValue($this->appName, $configKey), true);
+            $providers = $this->appConfig->getValueArray($this->appName, $configKey);
             if (!empty($providers)) {
                 $customProviders[$providerName] = $providers;
             }
-            $this->config->deleteAppValue($this->appName, $configKey);
+            $this->appConfig->deleteKey($this->appName, $configKey);
         }
-        $this->config->setAppValue($this->appName, 'custom_providers', json_encode($customProviders));
+        $this->appConfig->setValueArray($this->appName, 'custom_providers', $customProviders);
     }
 }

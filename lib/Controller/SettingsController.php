@@ -9,9 +9,10 @@ use OCP\AppFramework\Http\Attribute\PasswordConfirmationRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\RedirectResponse;
 use OCP\Authentication\Token\IToken;
+use OCP\IAppConfig;
+use OCP\IConfig;
 use OCP\IL10N;
 use OCP\IRequest;
-use OCP\IConfig;
 use OCP\IURLGenerator;
 use OCP\IUserSession;
 use OCA\SocialLogin\Db\ConnectedLoginMapper;
@@ -19,44 +20,26 @@ use OCA\SocialLogin\Service\ProviderService;
 
 class SettingsController extends Controller
 {
-    /** @var IConfig */
-    private $config;
-    /** @var IURLGenerator */
-    private $urlGenerator;
-    /** @var IUserSession */
-    private $userSession;
-    /** @var IL10N */
-    private $l;
-    /** @var IProvider */
-    private $tokenProvider;
-    /** @var ConnectedLoginMapper */
-    private $socialConnect;
-
     public function __construct(
         $appName,
         IRequest $request,
-        IConfig $config,
-        IURLGenerator $urlGenerator,
-        IUserSession $userSession,
-        IL10N $l,
-        IProvider $tokenProvider,
-        ConnectedLoginMapper $socialConnect
+        private IAppConfig $appConfig,
+        private IConfig $config,
+        private IURLGenerator $urlGenerator,
+        private IUserSession $userSession,
+        private IL10N $l,
+        private IProvider $tokenProvider,
+        private ConnectedLoginMapper $socialConnect
     ) {
         parent::__construct($appName, $request);
-        $this->config = $config;
-        $this->urlGenerator = $urlGenerator;
-        $this->userSession = $userSession;
-        $this->l = $l;
-        $this->tokenProvider = $tokenProvider;
-        $this->socialConnect = $socialConnect;
     }
 
     public function saveAdmin($options, $providers, $custom_providers) {
         foreach ($options as $k => $v) {
-            $this->config->setAppValue($this->appName, $k, $v ? true : false);
+            $this->appConfig->setValueBool($this->appName, $k, $v ? true : false);
         }
 
-        $this->config->setAppValue($this->appName, 'oauth_providers', json_encode($providers));
+        $this->appConfig->setValueArray($this->appName, 'oauth_providers', $providers, false, true);
 
         if (is_array($custom_providers)) {
             try {
@@ -69,7 +52,7 @@ class SettingsController extends Controller
                 return new JSONResponse(['message' => $e->getMessage()]);
             }
         }
-        $this->config->setAppValue($this->appName, 'custom_providers', json_encode($custom_providers));
+        $this->appConfig->setValueArray($this->appName, 'custom_providers', $custom_providers, false, true);
 
         return new JSONResponse(['success' => true]);
     }

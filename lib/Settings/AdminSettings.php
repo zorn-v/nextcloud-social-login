@@ -5,29 +5,19 @@ namespace OCA\SocialLogin\Settings;
 use OCA\SocialLogin\Service\ProviderService;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\Settings\ISettings;
+use OCP\IAppConfig;
 use OCP\IGroupManager;
 use OCP\IURLGenerator;
-use OCP\IConfig;
 use OCP\Util;
 
 class AdminSettings implements ISettings
 {
-    /** @var string */
-    private $appName;
-    /** @var IConfig */
-    private $config;
-    /** @var IURLGenerator */
-    private $urlGenerator;
-    /** @var IGroupManager */
-    private $groupManager;
-
-    public function __construct($appName, IConfig $config, IURLGenerator $urlGenerator, IGroupManager $groupManager)
-    {
-        $this->appName = $appName;
-        $this->config = $config;
-        $this->urlGenerator = $urlGenerator;
-        $this->groupManager = $groupManager;
-    }
+    public function __construct(
+        private $appName,
+        private IAppConfig $appConfig,
+        private IURLGenerator $urlGenerator,
+        private IGroupManager $groupManager
+    ) {}
 
     public function getForm()
     {
@@ -39,7 +29,7 @@ class AdminSettings implements ISettings
             $groupNames[] = $group->getGid();
         }
         $providers = [];
-        $savedProviders = json_decode($this->config->getAppValue($this->appName, 'oauth_providers'), true) ?: [];
+        $savedProviders = $this->appConfig->getValueArray($this->appName, 'oauth_providers');
         foreach (ProviderService::DEFAULT_PROVIDERS as $provider) {
             if (array_key_exists($provider, $savedProviders)) {
                 $providers[$provider] = $savedProviders[$provider];
@@ -50,7 +40,7 @@ class AdminSettings implements ISettings
                 ];
             }
         }
-        $customProviders = json_decode($this->config->getAppValue($this->appName, 'custom_providers'), true);
+        $customProviders = $this->appConfig->getValueArray($this->appName, 'custom_providers');
 
         $params = [
             'app_name' => $this->appName,
@@ -60,7 +50,7 @@ class AdminSettings implements ISettings
             'providers' => $providers,
         ];
         foreach (ProviderService::OPTIONS as $paramName) {
-            $params['options'][$paramName] = !!$this->config->getAppValue($this->appName, $paramName);
+            $params['options'][$paramName] = $this->appConfig->getValueBool($this->appName, $paramName);
         }
         return new TemplateResponse($this->appName, 'admin', $params);
     }

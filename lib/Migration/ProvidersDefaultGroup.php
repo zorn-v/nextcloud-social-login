@@ -3,19 +3,15 @@ namespace OCA\SocialLogin\Migration;
 
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
-use OCP\IConfig;
+use OCP\IAppConfig;
 
 class ProvidersDefaultGroup implements IRepairStep
 {
-    /** @var IConfig */
-    private $config;
-
     private $appName = 'sociallogin';
 
-    public function __construct(IConfig $config)
-    {
-        $this->config = $config;
-    }
+    public function __construct(
+        private IAppConfig $appConfig
+    ) {}
 
     public function getName()
     {
@@ -24,11 +20,11 @@ class ProvidersDefaultGroup implements IRepairStep
 
     public function run(IOutput $output)
     {
-        if (version_compare($this->config->getAppValue($this->appName, 'installed_version'), '1.15.1') >= 0) {
+        if (version_compare($this->appConfig->getValueString($this->appName, 'installed_version'), '1.15.1') >= 0) {
             return;
         }
 
-        $defaultGroup = $this->config->getAppValue($this->appName, 'new_user_group');
+        $defaultGroup = $this->appConfig->getValueString($this->appName, 'new_user_group');
 
         $this->setProvidersGroup('oauth_providers', $defaultGroup);
         $this->setProvidersGroup('openid_providers', $defaultGroup);
@@ -36,22 +32,22 @@ class ProvidersDefaultGroup implements IRepairStep
         $this->setProvidersGroup('custom_oauth2_providers', $defaultGroup);
 
         if ($defaultGroup) {
-            $this->config->setAppValue($this->appName, 'tg_group', $defaultGroup);
+            $this->appConfig->setValueString($this->appName, 'tg_group', $defaultGroup);
         }
 
-        $this->config->deleteAppValue($this->appName, 'new_user_group');
+        $this->appConfig->deleteKey($this->appName, 'new_user_group');
     }
 
     private function setProvidersGroup($configKey, $defaultGroup)
     {
-        $providers = json_decode($this->config->getAppValue($this->appName, $configKey), true);
+        $providers = $this->appConfig->getValueArray($this->appName, $configKey);
         if (is_array($providers)) {
             foreach ($providers as &$provider) {
                 if (!isset($provider['defaultGroup'])) {
                     $provider['defaultGroup'] = $defaultGroup;
                 }
             }
-            $this->config->setAppValue($this->appName, $configKey, json_encode($providers));
+            $this->appConfig->setValueArray($this->appName, $configKey, $providers);
         }
     }
 }
