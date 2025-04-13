@@ -327,6 +327,9 @@ export default {
     background-color: #ebebeb;
     color: rgba(0, 0, 0, 0.4);
   }
+  .section h2 {
+    display: block;
+  }
   .section h2.provider-title {
     margin-bottom: 10px;
   }
