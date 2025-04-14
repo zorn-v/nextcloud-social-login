@@ -39,7 +39,11 @@ class SettingsController extends Controller
             $this->appConfig->setValueBool($this->appName, $k, $v ? true : false);
         }
 
-        $this->appConfig->setValueArray($this->appName, 'oauth_providers', $providers, false, true);
+        if ($providers) {
+            $this->appConfig->setValueArray($this->appName, 'oauth_providers', $providers, false, true);
+        } else {
+            $this->appConfig->deleteKey($this->appName, 'oauth_providers');
+        }
 
         if (is_array($custom_providers)) {
             try {
@@ -52,7 +56,11 @@ class SettingsController extends Controller
                 return new JSONResponse(['message' => $e->getMessage()]);
             }
         }
-        $this->appConfig->setValueArray($this->appName, 'custom_providers', $custom_providers, false, true);
+        if ($custom_providers) {
+            $this->appConfig->setValueArray($this->appName, 'custom_providers', $custom_providers, false, true);
+        } else {
+            $this->appConfig->deleteKey($this->appName, 'custom_providers');
+        }
 
         return new JSONResponse(['success' => true]);
     }
