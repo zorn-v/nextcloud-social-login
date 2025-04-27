@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Salvesta",
     "None" : "Pole",
-    "Secret" : "Salajane",
+    "Secret" : "Saladus",
     "Title" : "Pealkiri",
     "Scope" : "Skoop"
 },
