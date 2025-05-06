@@ -6,11 +6,9 @@ For OAuth you must create app for certain providers. Login button appear at logi
 
 ## Installation
 
-Login to your NextCloud installation as an administrator and under "Apps" click "Download and enable" next to the "Social Login" app.
+Login to your Nextcloud installation as an administrator and under "Apps" click "Download and enable" next to the "Social Login" app.
 
 See below for setup and configuration instructions.
-
-
 
 ## Custom OAuth2/OIDC groups
 
@@ -42,7 +40,6 @@ There is also support for setting the displayName:
 {"roles": [{gid: 1, displayName: "admin"}, {gid: 2, displayName: "user"}]}
 ```
 
-
 You can use provider groups in two ways:
 
 1. Map provider groups to existing nextcloud groups
@@ -59,15 +56,19 @@ If you want sync groups on every login do not forget to check "Update user profi
 
 You can copy link of certain login button to get proper "redirect url" for OAuth app setting.
 
-* [Google](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/google.md)
 * [Amazon](https://developer.amazon.com/loginwithamazon/console/site/lwa/overview.html)
-* [Facebook](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/facebook.md)
-* [Twitter](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/twitter.md)
-* [GitHub](https://github.com/settings/developers)
-* [Discord](#configure-discord)
-* [Telegram](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/telegram.md)
-* PlexTv - you can use any title as app id
+* [Apple](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/apple.md)
 * [Codeberg](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/codeberg.md)
+* [Discord](#configure-discord)
+* [Facebook](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/facebook.md)
+* [GitHub](https://github.com/settings/developers)
+* [GitLab](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/gitlab.md)
+* [Google](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/google.md)
+* [Keycloak](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/keycloak.md)
+* [Mail.ru](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/mailru.md)
+* PlexTv - you can use any title as app id
+* [Telegram](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/telegram.md)
+* [Twitter](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/twitter.md)
 
 Details about "Allow login only from specified domain" google setting you can find here [#44](https://github.com/zorn-v/nextcloud-social-login/issues/44)
 You can use comma separated list for multiple domains
