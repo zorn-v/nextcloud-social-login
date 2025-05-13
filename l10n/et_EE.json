@@ -1,6 +1,7 @@
 { "translations": {
     "Save" : "Salvesta",
     "None" : "Pole",
+    "Team ID" : "Tiimi tunnus",
     "Secret" : "Saladus",
     "Title" : "Pealkiri",
     "Scope" : "Skoop"

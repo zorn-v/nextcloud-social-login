@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Salvesta",
     "None" : "Pole",
+    "Team ID" : "Tiimi tunnus",
     "Secret" : "Saladus",
     "Title" : "Pealkiri",
     "Scope" : "Skoop"
