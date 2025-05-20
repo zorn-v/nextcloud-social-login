@@ -1,4 +1,4 @@
-# Social login
+# Social Login
 
 Make it possible to create users and log in via Telegram, OAuth, or OpenID.
 
@@ -10,7 +10,7 @@ Log in to your Nextcloud installation as an administrator. Under "Apps", click "
 
 See below for setup and configuration instructions.
 
-## Custom OAuth2/OIDC groups
+## Custom OAuth2/OIDC Groups
 
 You can use groups from your custom provider. For this, specify the "Groups claim" in the custom OAuth2/OIDC provider settings. This claim should be returned from the provider in the `id_token` or at the user info endpoint. The format should be an `array` or a comma-separated string. E.g., (with a claim named `roles`):
 
@@ -35,7 +35,7 @@ Nested claims are also supported. For example, `resource_access.client-id.roles`
 }
 ```
 
-DisplayName support is also available:
+**DisplayName** support is also available:
 ```json
 {"roles": [{"gid": 1, "displayName": "admin"}, {"gid": 2, "displayName": "user"}]}
 ```
@@ -47,12 +47,12 @@ You can use provider groups in two ways:
 
 To sync groups on every login, ensure the "Update user profile every login" setting is checked.
 
-## Examples for groups
+## Examples for Groups
 
 * Configure WSO2IS to return a roles claim with OIDC [here](https://medium.com/@dewni.matheesha/claim-mapping-and-retrieving-end-user-information-in-wso2is-cffd5f3937ff).
 * [GitLab OIDC configuration to allow specific GitLab groups](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/gitlab.md).
 
-## Built-in OAuth providers
+## Built-in OAuth Providers
 
 Copy the link from a specific login button to get the correct "redirect URL" for OAuth app settings.
 
@@ -72,7 +72,7 @@ Copy the link from a specific login button to get the correct "redirect URL" for
 
 For details about Google's "Allow login only from specified domain" setting, see [#44](https://github.com/zorn-v/nextcloud-social-login/issues/44). Use a comma-separated list for multiple domains.
 
-## Config
+## Configuration
 
 Add `'social_login_auto_redirect' => true` to `config.php` to automatically redirect unauthorized users to social login if only one provider is configured. To temporarily disable this (e.g., for local admin login), add `noredir=1` to the login URL: `https://cloud.domain.com/login?noredir=1`.
 
@@ -85,7 +85,7 @@ Configure HTTP client options using:
 ```
 in `config.php`.
 
-### Configure a provider via CLI
+### Configure a Provider via CLI
 
 Use the `occ` utility to configure providers via the command line. Replace variables and URLs with your deployment values:
 ```bash
