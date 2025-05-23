@@ -1,20 +1,18 @@
-# Social login
+# Social Login
 
-Make possible create users and login via Telegram, OAuth or OpenID
+Make it possible to create users and log in via Telegram, OAuth, or OpenID.
 
-For OAuth you must create app for certain providers. Login button appear at login page if app id specified. Settings are in "Social login" section of settings page.
+For OAuth, you must create an app with certain providers. Login buttons will appear on the login page if an app ID is specified. Settings are located in the "Social login" section of the settings page.
 
 ## Installation
 
-Login to your NextCloud installation as an administrator and under "Apps" click "Download and enable" next to the "Social Login" app.
+Log in to your Nextcloud installation as an administrator. Under "Apps", click "Download and enable" next to the "Social Login" app.
 
 See below for setup and configuration instructions.
 
+## Custom OAuth2/OIDC Groups
 
-
-## Custom OAuth2/OIDC groups
-
-You can use groups from your custom provider. For that you should specify "Groups claim" in custom OAuth2/OIDC provider settings. That claim should be returned from provider in `id_token` or at user info endpoint. Format should be `array` or comma separated string. Eg (with claim named `roles`)
+You can use groups from your custom provider. For this, specify the "Groups claim" in the custom OAuth2/OIDC provider settings. This claim should be returned from the provider in the `id_token` or at the user info endpoint. The format should be an `array` or a comma-separated string. E.g., (with a claim named `roles`):
 
 ```json
 {"roles": ["admin", "user"]}
@@ -24,7 +22,7 @@ or
 {"roles": "admin,user"}
 ```
 
-Also nested claims is supported. For example `resource_access.client-id.roles` for
+Nested claims are also supported. For example, `resource_access.client-id.roles` for:
 
 ```json
 "resource_access": {
@@ -37,90 +35,88 @@ Also nested claims is supported. For example `resource_access.client-id.roles` f
 }
 ```
 
-There is also support for setting the displayName:
+**DisplayName** support is also available:
+```json
+{"roles": [{"gid": 1, "displayName": "admin"}, {"gid": 2, "displayName": "user"}]}
 ```
-{"roles": [{gid: 1, displayName: "admin"}, {gid: 2, displayName: "user"}]}
-```
-
 
 You can use provider groups in two ways:
 
-1. Map provider groups to existing nextcloud groups
-2. Create provider groups in nextcloud and associate it to user (if appropriate option specified)
+1. Map provider groups to existing Nextcloud groups.
+2. Create provider groups in Nextcloud and associate them with users (if the appropriate option is enabled).
 
-If you want sync groups on every login do not forget to check "Update user profile every login" setting
+To sync groups on every login, ensure the "Update user profile every login" setting is checked.
 
-## Examples for groups
+## Examples for Groups
 
-* You can find example how to configure WSO2IS for return roles claim with OIDC [here](https://medium.com/@dewni.matheesha/claim-mapping-and-retrieving-end-user-information-in-wso2is-cffd5f3937ff)
-* [GitLab OIDC allowing specific GitLab groups](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/gitlab.md)
+* Configure WSO2IS to return a roles claim with OIDC [here](https://medium.com/@dewni.matheesha/claim-mapping-and-retrieving-end-user-information-in-wso2is-cffd5f3937ff).
+* [GitLab OIDC configuration to allow specific GitLab groups](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/gitlab.md).
 
-## Built-in OAuth providers
+## Built-in OAuth Providers
 
-You can copy link of certain login button to get proper "redirect url" for OAuth app setting.
+Copy the link from a specific login button to get the correct "redirect URL" for OAuth app settings.
 
-* [Google](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/google.md)
 * [Amazon](https://developer.amazon.com/loginwithamazon/console/site/lwa/overview.html)
-* [Facebook](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/facebook.md)
-* [Twitter](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/twitter.md)
-* [GitHub](https://github.com/settings/developers)
-* [Discord](#configure-discord)
-* [Telegram](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/telegram.md)
-* PlexTv - you can use any title as app id
+* [Apple](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/apple.md)
 * [Codeberg](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/codeberg.md)
+* [Discord](#configure-discord)
+* [Facebook](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/facebook.md)
+* [GitHub](https://github.com/settings/developers)
+* [GitLab](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/gitlab.md)
+* [Google](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/google.md)
+* [Keycloak](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/keycloak.md)
+* [Mail.ru](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/mailru.md)
+* **PlexTv**: Use any title as the app ID.
+* [Telegram](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/telegram.md)
+* [Twitter](https://github.com/zorn-v/nextcloud-social-login/blob/master/docs/sso/twitter.md)
 
-Details about "Allow login only from specified domain" google setting you can find here [#44](https://github.com/zorn-v/nextcloud-social-login/issues/44)
-You can use comma separated list for multiple domains
+For details about Google's "Allow login only from specified domain" setting, see [#44](https://github.com/zorn-v/nextcloud-social-login/issues/44). Use a comma-separated list for multiple domains.
 
-## Config
+## Configuration
 
-You can use `'social_login_auto_redirect' => true` setting in `config.php` for auto redirect unauthorized users to social login if only one provider is configured.
-If you want to temporary disable this function (e.g. for login as local admin), you can add `noredir=1` query parameter in url for login page. Something like `https://cloud.domain.com/login?noredir=1`
+Add `'social_login_auto_redirect' => true` to `config.php` to automatically redirect unauthorized users to social login if only one provider is configured. To temporarily disable this (e.g., for local admin login), add `noredir=1` to the login URL: `https://cloud.domain.com/login?noredir=1`.
 
-To set options for http client, you can use
+Configure HTTP client options using:
 ```php
   'social_login_http_client' => [
     'timeout' => 45,
-    'proxy' => 'socks4://127.0.0.1:9050', // Check https://curl.se/libcurl/c/CURLOPT_PROXY.html for allowed variants
+    'proxy' => 'socks4://127.0.0.1:9050', // See <https://curl.se/libcurl/c/CURLOPT_PROXY.html> for allowed formats
   ],
 ```
-in `config.php`
+in `config.php`.
 
-### Configurate a provider via CLI
+### Configure a Provider via CLI
 
-You can configure everything from commandline by using the occ utility. To setup a oidc-provider replace the variables and URLs with values that match your deployment.
+Use the `occ` utility to configure providers via the command line. Replace variables and URLs with your deployment values:
 ```bash
 php occ config:app:set sociallogin custom_providers --value='{"custom_oidc": [{"name": "gitlab_oidc", "title": "Gitlab", "authorizeUrl": "https://gitlab.my-domain.org/oauth/authorize", "tokenUrl": "https://gitlab.my-domain.org/oauth/token", "userInfoUrl": "https://gitlab.my-domain.org/oauth/userinfo", "logoutUrl": "", "clientId": "$my_application_id", "clientSecret": "$my_super_secret_secret", "scope": "openid", "groupsClaim": "groups", "style": "gitlab", "defaultGroup": ""}]}'
 ```
-to do this with docker you just need to add `docker exec -t -uwww-data CONTAINER_NAME` in front of the command, or run it interactively from `docker exec -it -uwww-data CONTAINER_NAME sh`
+For Docker, prepend `docker exec -t -uwww-data CONTAINER_NAME` to the command or run interactively via `docker exec -it -uwww-data CONTAINER_NAME sh`.
 
-To find out how to configure other providers, just configure them in the GUI and take a look at the database afterwards:
-```
+To inspect configurations:
+```sql
 mysql -u nextcloud -p nextcloud
 Password: <yourpassword>
 
 > SELECT * FROM oc_appconfig WHERE appid='sociallogin';
 ```
-
-Or just run
-
-`docker exec -t -uwww-data CONTAINER_NAME php occ config:app:get sociallogin custom_providers`
+Or run:
+```bash
+docker exec -t -uwww-data CONTAINER_NAME php occ config:app:get sociallogin custom_providers
+```
 
 ### Configure Discord
 
-To properly configure discord you have to:
-
-1. Create new discord application on [DiscordApp developers](https://discordapp.com/developers/applications/me#top)
-2. Open tab `Settings -> OAuth2 -> General`. In `Redirects` add new redirection link looking like this: `https://nextcloud.mydomain.com/apps/sociallogin/oauth/discord`.
-3. Copy `CLIENT ID` and generate and copy `CLIENT SECRET`
-4. Open in Nextcloud `Settings -> Social Login` and paste `CLIENT ID` into field `App id` and `CLIENT SECRET` into `Secret`.
-5. Select default group for users created this way.
-6. For group mapping check [#395](https://github.com/zorn-v/nextcloud-social-login/pull/395)
+1. Create a Discord application at [Discord Developer Portal](https://discord.com/developers/applications).
+2. Navigate to `Settings > OAuth2 > General`. Add a redirect URL: `https://nextcloud.mydomain.com/apps/sociallogin/oauth/discord`.
+3. Copy the `CLIENT ID` and generate a `CLIENT SECRET`.
+4. In Nextcloud, go to `Settings > Social Login`. Paste the `CLIENT ID` into "App id" and `CLIENT SECRET` into "Secret".
+5. Select a default group for new users.
+6. For group mapping, see [#395](https://github.com/zorn-v/nextcloud-social-login/pull/395).
 
 ## Hint
 
-### About Callback(Reply) Url
-You can copy link from specific login button on login page and paste it on provider's website as callback url. To make proper button visible, just fill certain provider settings with random data and change it later.
+### Callback (Reply) URL
+Copy the link from a login button on the Nextcloud login page and use it as the callback URL on your provider's site. To make the button visible temporarily, fill provider settings with placeholder data and update later.
 
-Some users may get strange reply(Callback) url error from provider even if you pasted the right url, that's because your nextcloud server may generate http urls when you are actually using https.
-Please set 'overwriteprotocol' => 'https', in your config.php file.
+If you encounter callback URL errors despite correct settings, ensure your Nextcloud server generates HTTPS URLs by adding `'overwriteprotocol' => 'https'` to `config.php`.

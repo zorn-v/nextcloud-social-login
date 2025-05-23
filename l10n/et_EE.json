@@ -1,7 +1,8 @@
 { "translations": {
     "Save" : "Salvesta",
     "None" : "Pole",
-    "Secret" : "Salajane",
+    "Team ID" : "Tiimi tunnus",
+    "Secret" : "Saladus",
     "Title" : "Pealkiri",
     "Scope" : "Skoop"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"

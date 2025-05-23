@@ -5,7 +5,7 @@ OC.L10N.register(
     "Log in with %s" : "Log på med %s",
     "This account already connected" : "Denne konto er allerede blevet forbundet",
     "Auto creating new users is disabled" : "Automatisk oprettelse af nye brugere er slået fra",
-    "Email already registered" : "E-mailadressen er allerede i brug",
+    "Email already registered" : "E-mail adressen er allerede i brug",
     "New user created" : "Ny bruger oprettet",
     "Save" : "Gem",
     "None" : "Ingen",
