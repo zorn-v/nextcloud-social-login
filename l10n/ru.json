@@ -66,6 +66,11 @@
     "Client Id" : "Идентификатор клиента",
     "Client Secret" : "Секрет клиента",
     "Scope" : "Объем",
+    "Identifier url" : "URL-адрес идентификатора",
+    "Custom OAuth2" : "Пользовательский OAuth2",
+    "API Base URL" : "Базовый URL-адрес API",
+    "Authorize url (can be relative to base URL)" : "URL-адрес авторизации (может быть относительно базового URL-адреса)",
+    "Token url (can be relative to base URL)" : "URL-адрес токена (может быть относительно базового URL-адреса)",
     "Disable password confirmation on settings change" : "Отключить подтверждение паролем изменения настроек",
     "Social login connect" : "Привязки социальных логинов",
     "Available providers" : "Доступные поставщики"
