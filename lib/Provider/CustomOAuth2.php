@@ -48,19 +48,20 @@ class CustomOAuth2 extends OAuth2
         if (isset($response->ocs->data)) {
             $response = $response->ocs->data;
         }
-        if (!isset($response->identifier)) {
-            $response->identifier = $response->id
-                ?? $response->ID
-                ?? $response->data->id
-                ?? $response->user_id
-                ?? $response->userid
-                ?? $response->userId
-                ?? $response->oauth_user_id
-                ?? $response->sub
-                ?? $response->client_id
-                ?? null
-            ;
-        }
+        $identifierClaim = $this->config->get('identifier_claim');
+        $response->identifier = $response->$identifierClaim
+            ?? $response->identifier
+            ?? $response->id
+            ?? $response->ID
+            ?? $response->data->id
+            ?? $response->user_id
+            ?? $response->userid
+            ?? $response->userId
+            ?? $response->oauth_user_id
+            ?? $response->sub
+            ?? $response->client_id
+            ?? null
+        ;
         $displayNameClaim = $this->config->get('displayname_claim');
         $response->displayName = $response->$displayNameClaim
             ?? $response->displayName

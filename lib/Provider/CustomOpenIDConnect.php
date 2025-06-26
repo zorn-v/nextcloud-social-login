@@ -31,10 +31,11 @@ class CustomOpenIDConnect extends CustomOAuth2
         $user = json_decode($userData);
         $data = new Data\Collection($user);
 
+        $identifierClaim = $this->config->get('identifier_claim');
         $displayNameClaim = $this->config->get('displayname_claim');
 
         $userProfile = new User\Profile();
-        $userProfile->identifier  = $data->get('sub');
+        $userProfile->identifier  = $data->get($identifierClaim) ?: $data->get('sub');
         $userProfile->displayName = $data->get($displayNameClaim) ?: $data->get('name') ?: $data->get('preferred_username');
         $userProfile->photoURL    = $data->get('picture');
         $userProfile->email       = $data->get('email');
@@ -55,7 +56,7 @@ class CustomOpenIDConnect extends CustomOAuth2
         if (!empty($userInfoUrl)) {
             $profile = new Data\Collection( $this->apiRequest($userInfoUrl) );
             if (empty($userProfile->identifier)) {
-                $userProfile->identifier = $profile->get('sub');
+                $userProfile->identifier = $profile->get($identifierClaim) ?: $profile->get('sub');
             }
             $userProfile->displayName = $profile->get($displayNameClaim) ?: $profile->get('name') ?: $profile->get('preferred_username') ?: $profile->get('nickname');
             if (!$userProfile->photoURL) {
