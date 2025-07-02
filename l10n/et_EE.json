@@ -4,6 +4,7 @@
     "Team ID" : "Tiimi tunnus",
     "Secret" : "Saladus",
     "Title" : "Pealkiri",
-    "Scope" : "Skoop"
+    "Scope" : "Skoop",
+    "Profile url" : "Profiili võrguaadress"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

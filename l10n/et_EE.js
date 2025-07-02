@@ -6,6 +6,7 @@ OC.L10N.register(
     "Team ID" : "Tiimi tunnus",
     "Secret" : "Saladus",
     "Title" : "Pealkiri",
-    "Scope" : "Skoop"
+    "Scope" : "Skoop",
+    "Profile url" : "Profiili võrguaadress"
 },
 "nplurals=2; plural=(n != 1);");
