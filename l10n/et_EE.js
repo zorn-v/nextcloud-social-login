@@ -1,10 +1,21 @@
 OC.L10N.register(
     "sociallogin",
     {
+    "Some error occurred while saving settings" : "Seadistuste salvestamisel ilmnes mingi viga",
+    "Do you really want to remove {providerTitle} provider ?" : "Kas oled kindel, et tahad {providerTitle} teenusepakkuja jäädavalt kustutada?",
+    "Confirm remove" : "Kinnita eemaldamine",
     "Save" : "Salvesta",
+    "Button style" : "Nupu stiil",
     "None" : "Pole",
+    "Default group" : "Vaikimisi grupp",
+    "Add default provider" : "Lisa vaikimisi teenusepakkuja",
+    "Services ID" : "Teenuste tunnus",
+    "App id" : "Rakenduse tunnus",
     "Team ID" : "Tiimi tunnus",
+    "Key ID" : "Võtme tunnus",
+    "Key content" : "Võtme sisu",
     "Secret" : "Saladus",
+    "Allow login only from specified domain" : "Luba sisselogimine vaid kindlast domeenist",
     "Title" : "Pealkiri",
     "Scope" : "Skoop",
     "Profile url" : "Profiili võrguaadress"
