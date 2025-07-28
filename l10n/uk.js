@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Зберегти",
     "None" : "Нічого",
+    "Team ID" : "Ідентифікатор команди",
     "Secret" : "Секретне",
     "Title" : "Назва",
     "Client Secret" : "Ключ клієнта",
