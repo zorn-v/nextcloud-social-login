@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Hifadhi",
     "None" : "Hakuna",
+    "Team ID" : "Team ID",
     "Title" : "Kichwa cha habari",
     "Client Secret" : "Client Secret",
     "Scope" : "Scope"
