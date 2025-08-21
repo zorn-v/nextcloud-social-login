@@ -13,6 +13,7 @@ return [
         ['name' => 'settings#disconnectSocialLogin', 'url' => '/disconnect-social/{login}', 'verb' => 'GET'],
         ['name' => 'settings#savePersonal', 'url' => '/settings/save-personal', 'verb' => 'POST'],
         ['name' => 'api#setConfig', 'url' => '/api/config', 'verb' => 'POST'],
+        ['name' => 'api#getConfig', 'url' => '/api/config', 'verb' => 'GET'],
         ['name' => 'login#oauth', 'url' => '/oauth/{provider}', 'verb' => 'GET'],
         ['name' => 'login#oauth', 'url' => '/oauth/{provider}', 'postfix' => '.post', 'verb' => 'POST'],
         ['name' => 'login#custom', 'url' => '/{type}/{provider}', 'verb' => 'GET'],

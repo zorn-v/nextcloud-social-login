@@ -7,6 +7,7 @@ namespace OCA\SocialLogin\Controller;
 use OCP\AppFramework\ApiController as BaseController;
 use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\Response;
+use OCP\AppFramework\Http\JSONResponse;
 use OCP\IAppConfig;
 use OCP\IRequest;
 
@@ -33,5 +34,20 @@ class ApiController extends BaseController
             $this->appConfig->setValueBool($this->appName, $key, (bool)$config);
         }
         return new Response();
+    }
+
+    /**
+     * @NoCSRFRequired
+     */
+    #[NoCSRFRequired]
+    public function getConfig($key)
+    {
+        $arrayKeys = ['oauth_providers', 'custom_providers'];
+        if (in_array($key, $arrayKeys)) {
+            $result = $this->appConfig->getValueArray($this->appName, $key);
+        } else {
+            $result = $this->appConfig->getValueBool($this->appName, $key);
+        }
+        return new JSONResponse($result);
     }
 }
