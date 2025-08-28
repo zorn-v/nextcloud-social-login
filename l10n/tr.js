@@ -56,7 +56,7 @@ OC.L10N.register(
     "Restrict login for users without assigned groups" : "İlişkilendirilmiş bir grubu olmayan kullanıcıların oturum açması engellensin",
     "Disable notify admins about new users" : "Yöneticilere yeni kullanıcılar için bildirim gönderilmesin",
     "Hide default login" : "Varsayılan oturum açma gizlensin",
-    "Button text without prefix" : "Ön ek olmadan düğme metni",
+    "Button text without prefix" : "Ön ek olmadan düğme yazısı",
     "Custom OpenID Connect" : "Özel OpenID Connect",
     "Internal name" : "İç ad",
     "Title" : "Başlık",
