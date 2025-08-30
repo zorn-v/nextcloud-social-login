@@ -1,8 +1,8 @@
 OC.L10N.register(
     "sociallogin",
     {
-    "Log in with username or email" : "Piesakieties ar lietotājvārdu vai e-pastu",
-    "Log in with %s" : "Piesakieties ar %s",
+    "Log in with username or email" : "Pieteikties ar lietotājvārdu vai e-pasta adresi",
+    "Log in with %s" : "Pieteikties ar %s",
     "This account already connected" : "Šis konts jau ir sasaistīts",
     "Email already registered" : "E-pasts jau reģistrēts",
     "New user created" : "Izveidots jauns lietotājs",
