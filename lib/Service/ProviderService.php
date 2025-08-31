@@ -192,9 +192,6 @@ class ProviderService
     public function handleDefault($provider)
     {
         $config = [];
-        $scopes = [
-            'discord' => 'identify email guilds guilds.members.read',
-        ];
         $providers = $this->appConfig->getValueArray($this->appName, 'oauth_providers');
         if (isset($providers[$provider])) {
             $prov = $providers[$provider];
@@ -204,15 +201,28 @@ class ProviderService
                 'callback' => $callbackUrl,
                 'default_group' => $prov['defaultGroup'],
             ], $this->applyConfigMapping('default', $prov));
+
+            // Set scopes for special cases
+            // Discord: for limiting to guilds https://discord.com/developers/docs/topics/oauth2#scopes
+            // GitHub: for limiting to Organizations but include hidden Members (readOrg)
+            switch ($provider) {
+                case 'discord':
+                    $config['scope'] = 'identify email guilds guilds.members.read';
+                    break;
+                case 'GitHub':
+                    if (isset($prov['orgs']) && !empty($prov['orgs']) && isset($prov['readOrg']) && $prov['readOrg']) {
+                        $config['scope'] = 'user:email read:org';
+                    }
+                    break;
+                default:
+                    break;
+            }
+
             $opts = ['orgs', 'workspace', 'guilds', 'groupMapping', 'useGuildNames'];
             foreach ($opts as $opt) {
                 if (isset($prov[$opt])) {
                     $config[$opt] = $prov[$opt];
                 }
-            }
-
-            if (isset($scopes[$provider])) {
-                $config['scope'] = $scopes[$provider];
             }
 
             if (isset($prov['auth_params']) && is_array($prov['auth_params'])) {

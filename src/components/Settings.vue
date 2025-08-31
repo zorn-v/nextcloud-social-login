@@ -128,6 +128,11 @@
           {{ t(appName, 'Allow login only for specified organizations') }}<br/>
           <input type="text" :name="'providers['+name+'][orgs]'" v-model="provider.orgs"/>
         </label>
+        <br/>
+        <label>
+          <input type="checkbox" :name="'providers['+name+'][readOrg]'" v-model="provider.readOrg" />
+          {{ t(appName, 'Allow hidden organization members to register (requests read:org scope)') }}
+        </label>
       </template>
       <template v-if="name === 'BitBucket'">
         <br/>
