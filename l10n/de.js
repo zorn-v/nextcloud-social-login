@@ -86,7 +86,6 @@ OC.L10N.register(
     "SSO Secret" : "SSO-Geheimnis",
     "Disable password confirmation on settings change" : "Passwortbestätigung bei Einstellungsänderung deaktivieren",
     "Social login connect" : "Soziale Anmeldung verbinden",
-    "Available providers" : "Verfügbare Anbieter",
-    "Allow hidden organization members to register (requests read:org scope)" : "Erlaube versteckten Organisationsmitgliedern die Registrierung (fordert die Berechtigung read:org an)"
+    "Available providers" : "Verfügbare Anbieter"
 },
 "nplurals=2; plural=(n != 1);");
