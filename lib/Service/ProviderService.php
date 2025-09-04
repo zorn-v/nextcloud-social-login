@@ -210,7 +210,7 @@ class ProviderService
                     $config['scope'] = 'identify email guilds guilds.members.read';
                     break;
                 case 'GitHub':
-                    if (isset($prov['orgs']) && !empty($prov['orgs']) && isset($prov['readOrg']) && $prov['readOrg']) {
+                    if (!empty($prov['orgs']) && !empty($prov['readOrg'])) {
                         $config['scope'] = 'user:email read:org';
                     }
                     break;
@@ -218,7 +218,7 @@ class ProviderService
                     break;
             }
 
-            $opts = ['orgs', 'workspace', 'guilds', 'groupMapping', 'useGuildNames'];
+            $opts = ['orgs', 'workspace', 'guilds', 'groupMapping', 'useGuildNames', 'readOrg'];
             foreach ($opts as $opt) {
                 if (isset($prov[$opt])) {
                     $config[$opt] = $prov[$opt];
