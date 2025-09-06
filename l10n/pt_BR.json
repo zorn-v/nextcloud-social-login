@@ -39,6 +39,7 @@
     "Secret" : "Segredo",
     "Allow login only from specified domain" : "Permitir login apenas do domínio especificado",
     "Allow login only for specified organizations" : "Permitir login apenas para organizações especificadas",
+    "Allow hidden organization members to register (requests read:org scope)" : "Permitir que membros ocultos da organização se registrem (solicita escopo read:org)",
     "Allow login only for specified workspace" : "Permitir login apenas para o espaço de trabalho especificado",
     "Allow login only for specified guilds" : "Permitir login apenas para guildas especificadas",
     "Use guild nick" : "Usar apelido da guilda",

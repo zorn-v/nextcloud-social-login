@@ -41,6 +41,7 @@ OC.L10N.register(
     "Secret" : "Geheimer Schlüssel",
     "Allow login only from specified domain" : "Anmeldung nur von der angegebenen Domain erlauben",
     "Allow login only for specified organizations" : "Anmeldung nur für angegebene Organisationen zulassen",
+    "Allow hidden organization members to register (requests read:org scope)" : "Versteckten Organisationsmitgliedern die Registrierung erlauben (Anfragen read:org scope)",
     "Allow login only for specified workspace" : "Anmeldung nur für den angegebenen Workspace zulassen",
     "Allow login only for specified guilds" : "Anmeldung nur für bestimmte Gilden zulassen",
     "Use guild nick" : "Gilden-Nick benutzen",
