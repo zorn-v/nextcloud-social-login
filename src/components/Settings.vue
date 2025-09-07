@@ -130,7 +130,7 @@
         </label>
         <br/>
         <label>
-          <input type="checkbox" :name="'providers['+name+'][readOrg]'" v-model="provider.readOrg" />
+          <input type="checkbox" :name="'providers['+name+'][readOrg]'" :checked="provider.readOrg" />
           {{ t(appName, 'Allow hidden organization members to register (requests read:org scope)') }}
         </label>
       </template>
