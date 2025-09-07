@@ -39,6 +39,7 @@
     "Secret" : "Parola",
     "Allow login only from specified domain" : "Yalnızca belirtilen etki alanıyla oturum açılabilsin",
     "Allow login only for specified organizations" : "Yalnızca belirtilen kuruluşlarla oturum açılabilsin",
+    "Allow hidden organization members to register (requests read:org scope)" : "Gizli kuruluş üyeleri hesap açabilsin (read: org kapsamı istekleri)",
     "Allow login only for specified workspace" : "Yalnızca belirtilen çalışma alanıyla oturum açılabilsin",
     "Allow login only for specified guilds" : "Yalnızca belirtilen topluluklar ile oturum açılabilsin",
     "Use guild nick" : "Guild takma adı kullanılsın",
