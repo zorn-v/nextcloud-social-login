@@ -41,6 +41,7 @@ OC.L10N.register(
     "Secret" : "Тајни",
     "Allow login only from specified domain" : "Дозоли пријаву само са одређеног домена",
     "Allow login only for specified organizations" : "Дозоли пријаву само за одређене одганизације",
+    "Allow hidden organization members to register (requests read:org scope)" : "Дозволи регистрацију чланова скривене организације (потребан је опсег read:org)",
     "Allow login only for specified workspace" : "Дозоли пријаву само за одређени радни простор",
     "Allow login only for specified guilds" : "Дозоли пријаву само за одређене гилде",
     "Use guild nick" : "Користи надимак гилде",

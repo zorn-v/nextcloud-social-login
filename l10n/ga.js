@@ -41,6 +41,7 @@ OC.L10N.register(
     "Secret" : "Rúnda",
     "Allow login only from specified domain" : "Ceadaigh logáil isteach ón bhfearann ​​sonraithe amháin",
     "Allow login only for specified organizations" : "Ceadaigh logáil isteach d'eagraíochtaí sonraithe amháin",
+    "Allow hidden organization members to register (requests read:org scope)" : "Ceadaigh do bhaill eagraíochta i bhfolach clárú (iarrann raon feidhme read:org)",
     "Allow login only for specified workspace" : "Ceadaigh logáil isteach do spás oibre sonraithe amháin",
     "Allow login only for specified guilds" : "Ceadaigh logáil isteach ach amháin le haghaidh guilds sonraithe",
     "Use guild nick" : "Bain úsáid as guild nick",
