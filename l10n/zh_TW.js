@@ -41,6 +41,7 @@ OC.L10N.register(
     "Secret" : "密碼",
     "Allow login only from specified domain" : "僅允許來自特定網域的登入",
     "Allow login only for specified organizations" : "僅允許特定組織登入",
+    "Allow hidden organization members to register (requests read:org scope)" : "允許隱藏的組織成員註冊（請求 read:org 範圍）",
     "Allow login only for specified workspace" : "僅允許特定工作空間登入",
     "Allow login only for specified guilds" : "僅允許特定公會登入",
     "Use guild nick" : "使用團體暱稱",
