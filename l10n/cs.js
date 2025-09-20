@@ -41,6 +41,7 @@ OC.L10N.register(
     "Secret" : "Soukromý",
     "Allow login only from specified domain" : "Umožnit přihlašování pouze z dané domény",
     "Allow login only for specified organizations" : "Umožnit přihlašování pouze pro dané organizace",
+    "Allow hidden organization members to register (requests read:org scope)" : "Umožnit skrytým členům organizace se zaregistrovat (vyžaduje rozsah read:org)",
     "Allow login only for specified workspace" : "Umožnit přihlášení pouze pro daný pracovní prostor",
     "Allow login only for specified guilds" : "Umožnit přihlášení pouze pro dané „cechy“ (guild)",
     "Use guild nick" : "Použít přezdívku ve skupině",
