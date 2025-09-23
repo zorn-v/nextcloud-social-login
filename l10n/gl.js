@@ -65,7 +65,7 @@ OC.L10N.register(
     "Token url" : "URL do testemuño",
     "Display name claim (optional)" : "Reclamación do nome para amosar (opcional)",
     "User info URL (optional)" : "URL da información do usuario (opcional)",
-    "Logout URL (optional)" : "URL de saída (opcional)",
+    "Logout URL (optional)" : "URL de saída da sesión (opcional)",
     "Client Id" : "ID de cliente",
     "Client Secret" : "Segredo do cliente",
     "Scope" : "Ámbito",
