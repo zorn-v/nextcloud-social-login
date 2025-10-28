@@ -1,3 +1,5 @@
+@use "sass:string";
+
 $buttons: (
   (apple, #000, 20px, true),
   (facebook, #3c5a99, 14px, true),
@@ -45,7 +47,7 @@ $buttons: (
       color: #ffffff !important;
       background-color: $color;
       &::before {
-        background-image: url("../img/button/#{to-lower-case($name)}.svg");
+        background-image: url("../img/button/#{string.to-lower-case($name)}.svg");
         width: $icon-width;
       }
     }
