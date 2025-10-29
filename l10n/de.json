@@ -53,7 +53,7 @@
     "Automatically create groups if they do not exists" : "Gruppen automatisch erstellen, wenn sie nicht vorhanden sind",
     "Restrict login for users without mapped groups" : "Die Anmeldung für Benutzer ohne zugeordnete Gruppen beschränken",
     "Restrict login for users without assigned groups" : "Anmeldung für Benutzer ohne zugewiesene Gruppen beschränken",
-    "Disable notify admins about new users" : "Administratoren über neue Benutzer benachrichtigen deaktivieren",
+    "Disable notify admins about new users" : "Die Administration über neue Benutzer benachrichtigen deaktivieren",
     "Hide default login" : "Standardanmeldung ausblenden",
     "Button text without prefix" : "Schaltflächentext ohne Präfix",
     "Custom OpenID Connect" : "Benutzerdefiniertes OpenID-Connect",
