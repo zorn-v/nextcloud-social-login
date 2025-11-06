@@ -18,7 +18,7 @@ OC.L10N.register(
     "Users without assigned groups is not allowed to login, please contact support" : "Benutzer ohne zugewiesene Gruppen dürfen sich nicht anmelden, wenden Sie sich bitte an den Support",
     "Your user group is not allowed to login, please contact support" : "Ihre Benutzergruppe darf sich nicht anmelden, bitte wenden Sie sich an den Support",
     "Auto creating new users is disabled" : "Das automatische Erstellen neuer Benutzer ist deaktiviert",
-    "Email already registered" : "E-Mailadresse bereits registriert",
+    "Email already registered" : "E-Mail-Adresse bereits registriert",
     "New user created" : "Neuer Benutzer erstellt",
     "User %s (%s) just created via social login" : "Benutzer %s (%s) wurde über Social Login erstellt",
     "Social login" : "Social-Login",
