@@ -15,9 +15,9 @@ class CustomOAuth2 extends OAuth2
 
     public function __construct(
         $config = [],
-        HttpClientInterface $httpClient = null,
-        StorageInterface $storage = null,
-        LoggerInterface $logger = null
+        ?HttpClientInterface $httpClient = null,
+        ?StorageInterface $storage = null,
+        ?LoggerInterface $logger = null
     ) {
         parent::__construct($config, $httpClient, $storage, $logger);
         $this->providerId = $this->clientId;
@@ -97,14 +97,14 @@ class CustomOAuth2 extends OAuth2
         if ($groupsClaim = $this->config->get('groups_claim')) {
             // First, attempt to get groups using the full namespace directly.
             $groups = $data->get($groupsClaim);
-    
+
             // If not found, fall back to the original logic with path splitting.
             if ($groups === null) {
                 // Assume groups_claim could be composed of dot-separated subpaths.
                 $nestedClaims = str_getcsv($groupsClaim, '.', '"');
                 $claim = array_shift($nestedClaims);
                 $groups = $data->get($claim);
-    
+
                 while (count($nestedClaims) > 0) {
                     $claim = array_shift($nestedClaims);
                     if (!isset($groups->{$claim})) {
@@ -114,14 +114,14 @@ class CustomOAuth2 extends OAuth2
                     $groups = $groups->{$claim};
                 }
             }
-    
+
             // Convert groups to array if necessary
             if (is_array($groups)) {
                 return $groups;
             } elseif (is_string($groups)) {
                 return $this->strToArray($groups);
             }
-    
+
             return [];
         }
         return null;
