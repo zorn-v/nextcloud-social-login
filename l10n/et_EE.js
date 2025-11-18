@@ -42,6 +42,7 @@ OC.L10N.register(
     "Add group mapping" : "Lisa gruppide vastendamine",
     "Disable auto create new users" : "Lülita uute kasutajate automaatne loomine välja",
     "Allow users to connect social logins with their account" : "Võimaldab kasutajate sisselogimist sotsiaalvõrgustiku teenuse kasutajakonto alusel",
+    "Update user profile every login" : "Uuenda kasutajaprofiili igal sisselogimisel",
     "Automatically create groups if they do not exists" : "Kui gruppe pole olemas, siis loo nad automaatselt",
     "Disable notify admins about new users" : "Ära teavita peakasutajaid uute kasutajate lisandumisest",
     "Hide default login" : "Peida vaikimisi sisselogimine",
