@@ -1,0 +1,9 @@
+{ "translations": {
+    "Save" : "ບັນທຶກ",
+    "None" : "ບໍ່ມີ",
+    "Team ID" : "Team ID",
+    "Secret" : "Secret",
+    "Title" : "ຫົວຂໍ້",
+    "Scope" : "Scope"
+},"pluralForm" :"nplurals=1; plural=0;"
+}
