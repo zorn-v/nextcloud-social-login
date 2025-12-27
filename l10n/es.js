@@ -1,11 +1,11 @@
 OC.L10N.register(
     "sociallogin",
     {
-    "Log in with username or email" : "Ingresar con nombre de usuario o correo electrónico",
+    "Log in with username or email" : "Iniciar sesión con nombre de usuario o correo electrónico",
     "Provider name cannot be empty" : "El nombre del proveedor no puede estar vacío",
     "Duplicate provider name \"%s\"" : "Nombre del proveedor duplicado \"%s\"",
     "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "Nombre del proveedor \"%s\" inválido. Los caractéres permitidos son \"0-9a-z_.@-\"",
-    "Log in with %s" : "Ingresar con %s",
+    "Log in with %s" : "Iniciar sesión con %s",
     "Unknown %s provider: \"%s\"" : "Proveedor: \"%s\" Desconocido %s",
     "Can not get identifier from provider" : "No se pudo obtener el identificador del proveedor",
     "Login from %s domain is not allowed for %s provider" : "El ingreso desde el dominio %s no está permitido para el proveedor %s",
@@ -51,7 +51,7 @@ OC.L10N.register(
     "Allow users to connect social logins with their account" : "Permitir a los usuarios conectar social logins con su cuenta",
     "Prevent creating an account if the email address exists in another account" : "Impedir la creación de cuentas si la dirección de correo electrónico existe en otra cuenta",
     "Update user profile every login" : "Actualizar el perfil de usuario en cada ingreso",
-    "Do not prune not available user groups on login" : "No remover los grupos de usuarios no disponibles al ingresar",
+    "Do not prune not available user groups on login" : "No eliminar grupos de usuarios no disponibles al iniciar sesión",
     "Automatically create groups if they do not exists" : "Crear automáticamente los grupos si estos no existen",
     "Restrict login for users without mapped groups" : "Restrigir el ingreso para los usuarios sin grupos mapeados",
     "Restrict login for users without assigned groups" : "Restrigir el ingreso para los usuarios sin grupos asignados",
