@@ -15,7 +15,7 @@ OC.L10N.register(
     "Login is available only to members of the following Discord guilds: %s" : "El ingreso está disponible solo para los miembros de los siguientes gremios de Discord: %s",
     "Social login connect is disabled" : "La conexión Social login está deshabilitada",
     "This account already connected" : "Esta cuenta ya está conectada",
-    "Users without assigned groups is not allowed to login, please contact support" : "Los usuarios que no tengan un grupo asociado no podran ingresar, por favor contacte a soporte",
+    "Users without assigned groups is not allowed to login, please contact support" : "Los usuarios sin grupos asignados no podrán iniciar sesión. Póngase en contacto con soporte",
     "Your user group is not allowed to login, please contact support" : "Su grupo de usuarios no tiene permitido el ingreso, por favor contacte a soporte",
     "Auto creating new users is disabled" : "La creación automática de usuarios nuevos está deshabilitada",
     "Email already registered" : "El correo electrónico ya está registrado",
