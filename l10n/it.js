@@ -1,6 +1,9 @@
 OC.L10N.register(
     "sociallogin",
     {
+    "Log in with %s" : "Accedi con %s",
+    "This account already connected" : "Questo account è già connesso",
+    "New user created" : "Nuovo utente creato",
     "Save" : "Salva",
     "None" : "Nessuno",
     "Team ID" : "ID team",
