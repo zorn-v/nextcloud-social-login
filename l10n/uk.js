@@ -47,7 +47,7 @@ OC.L10N.register(
     "Add group mapping" : "Додати групове зіставлення",
     "Disable auto create new users" : "Вимкнути автоматичне створення нових користувачів",
     "Create users with disabled account" : "Створення користувачів з вимкненим обліковим записом",
-    "Allow users to connect social logins with their account" : "Дозвольте користувачам прив'язувати соціальні логіни до свого акаунта",
+    "Allow users to connect social logins with their account" : "Дозволити користувачам асоціювати облікові записи соцмереж зі своїм обліковим записом",
     "Prevent creating an account if the email address exists in another account" : "Заборонити створення акаунта, якщо адреса електронної пошти існує в іншому акаунті",
     "Update user profile every login" : "Оновлювати профіль користувача при кожному вході",
     "Do not prune not available user groups on login" : "Не обрізати недоступні групи користувачів при вході",
