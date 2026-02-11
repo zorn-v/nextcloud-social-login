@@ -58,6 +58,7 @@ class CustomOAuth2 extends OAuth2
                 ?? $response->oauth_user_id
                 ?? $response->sub
                 ?? $response->client_id
+                ?? $response->uid
                 ?? null
             ;
         }
