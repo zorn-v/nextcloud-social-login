@@ -422,7 +422,11 @@ class ProviderService
         if ($provider === 'telegram') {
             $provider = 'tg'; //For backward compatibility
         }
-        $uid = $provider.'-'.$profileId;
+        if ($this->config->getSystemValue('social_login_unchanged_uid', false)) {
+            $uid = $profileId;
+        } else {
+            $uid = $provider.'-'.$profileId;
+        }
         if (strlen($uid) > 64 || !preg_match('#^[a-z0-9_.@-]+$#i', $profileId)) {
             $uid = $provider.'-'.md5($profileId);
         }

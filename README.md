@@ -76,6 +76,8 @@ For details about Google's "Allow login only from specified domain" setting, see
 
 Add `'social_login_auto_redirect' => true` to `config.php` to automatically redirect unauthorized users to social login if only one provider is configured. To temporarily disable this (e.g., for local admin login), add `noredir=1` to the login URL: `https://cloud.domain.com/login?noredir=1`.
 
+Add `'social_login_unchanged_uid' => true` to `config.php` to use the user identifier in social login without the provider prefix. This is usefull when adding SSO to already existion users.
+
 Configure HTTP client options using:
 ```php
   'social_login_http_client' => [
