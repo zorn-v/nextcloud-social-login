@@ -12,7 +12,6 @@ use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IAppConfig;
 use OCP\IConfig;
-use OCP\IL10N;
 use OCP\IRequest;
 use OCP\ISession;
 use OCP\IUserSession;
@@ -41,7 +40,6 @@ class Application extends App implements IBootstrap
     {
         Util::addStyle($this->appName, 'styles');
 
-        $l = $this->query(IL10N::class);
         $config = $this->query(IConfig::class);
         $appConfig = $this->query(IAppConfig::class);
 
@@ -61,6 +59,10 @@ class Application extends App implements IBootstrap
                     exit();
                 });
             }
+            return;
+        }
+
+        if ($config->get('hide_social_login')) {
             return;
         }
 

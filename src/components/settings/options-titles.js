@@ -13,4 +13,5 @@ export default {
   disable_notify_admins: t(appName, 'Disable notify admins about new users'),
   hide_default_login: t(appName, 'Hide default login'),
   button_text_wo_prefix: t(appName, 'Button text without prefix'),
+  hide_social_login: t(appName, 'Hide social login')
 }

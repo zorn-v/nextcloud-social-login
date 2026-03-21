@@ -44,6 +44,7 @@ class ProviderService
         'disable_notify_admins',
         'hide_default_login',
         'button_text_wo_prefix',
+        'hide_social_login',
     ];
     const DEFAULT_PROVIDERS = [
         'apple',
