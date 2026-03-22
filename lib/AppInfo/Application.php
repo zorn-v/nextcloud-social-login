@@ -62,7 +62,7 @@ class Application extends App implements IBootstrap
             return;
         }
 
-        if ($config->get('hide_social_login')) {
+        if ($appConfig->getValueBool($this->appName, 'hide_social_login')) {
             return;
         }
 
