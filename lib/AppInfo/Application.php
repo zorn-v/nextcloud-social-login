@@ -61,8 +61,16 @@ class Application extends App implements IBootstrap
             }
             return;
         }
-
-        if ($config->get('hide_social_login')) {
+        $doNotDisplay = false;
+        try {
+            // NC v32 and up
+            $doNotDisplay=$appConfig->getValueBool($this->appName, 'hide_social_login')
+        } catch (Exception $e) {
+            // NC v31 and below
+            //echo 'Caught exception: ',  $e->getMessage(), "\n";
+            $doNotDisplay=$config->get('hide_social_login')
+        }
+        if ($doNotDisplay) {
             return;
         }
 
