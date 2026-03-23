@@ -56,6 +56,7 @@
     "Disable notify admins about new users" : "Administration über neue Benutzer benachrichtigen deaktivieren",
     "Hide default login" : "Standardanmeldung ausblenden",
     "Button text without prefix" : "Schaltflächentext ohne Präfix",
+    "Hide social login" : "Social-Login verbergen",
     "Custom OpenID Connect" : "Benutzerdefiniertes OpenID-Connect",
     "Internal name" : "Interner Name",
     "Title" : "Titel",

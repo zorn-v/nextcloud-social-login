@@ -58,6 +58,7 @@ OC.L10N.register(
     "Disable notify admins about new users" : "Disable notify admins about new users",
     "Hide default login" : "Hide default login",
     "Button text without prefix" : "Button text without prefix",
+    "Hide social login" : "Hide social login",
     "Custom OpenID Connect" : "Custom OpenID Connect",
     "Internal name" : "Internal name",
     "Title" : "Title",
