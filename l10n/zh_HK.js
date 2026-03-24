@@ -58,6 +58,7 @@ OC.L10N.register(
     "Disable notify admins about new users" : "停用對管理員關於新用戶的通知",
     "Hide default login" : "隱藏預設登入",
     "Button text without prefix" : "沒有前綴的按鈕文字",
+    "Hide social login" : "隱藏社群網站登入",
     "Custom OpenID Connect" : "自訂 OpenID 連結",
     "Internal name" : "內部名稱",
     "Title" : "標題",
