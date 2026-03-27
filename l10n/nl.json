@@ -18,7 +18,7 @@
     "Auto creating new users is disabled" : "Automatisch aanmaken van nieuwe gebruikers is uitgeschakeld",
     "Email already registered" : "E-mail al geregistreerd",
     "New user created" : "Nieuwe gebruiker aangemaakt",
-    "User %s (%s) just created via social login" : "Gebruiker%s (%s) zojuist aangemaakt via social login",
+    "User %s (%s) just created via social login" : "Gebruiker %s (%s) zojuist aangemaakt via social login",
     "Social login" : "Social login",
     "Social Login" : "Social login",
     "Social login via OAuth or OpenID" : "Social login via OAuth of OpenID",
