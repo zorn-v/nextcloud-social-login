@@ -58,6 +58,7 @@ OC.L10N.register(
     "Disable notify admins about new users" : "Díchumasaigh fógraí a chur ar riarthóirí faoi úsáideoirí nua",
     "Hide default login" : "Folaigh logáil isteach réamhshocraithe",
     "Button text without prefix" : "Téacs cnaipe gan réimír",
+    "Hide social login" : "Folaigh logáil isteach sóisialta",
     "Custom OpenID Connect" : "Ceangail OpenID Saincheaptha",
     "Internal name" : "Ainm inmheánach",
     "Title" : "Teideal",
