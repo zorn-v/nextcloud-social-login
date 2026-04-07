@@ -56,6 +56,7 @@
     "Disable notify admins about new users" : "A rendszergazdák új felhasználókról való értesítésének kikapcsolása",
     "Hide default login" : "Alapértelmezett bejelentkezés elrejtése",
     "Button text without prefix" : "Alsó szöveg előtag nélkül",
+    "Hide social login" : "Közösségi bejelentkezés elrejtése",
     "Custom OpenID Connect" : "Egyéni OpenID kapcsolat",
     "Internal name" : "Belső név",
     "Title" : "Cím",
