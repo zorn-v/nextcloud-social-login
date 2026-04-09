@@ -1,6 +1,11 @@
 /*!
+ * SPDX-FileCopyrightText: 2019 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+/*!
  * SPDX-FileCopyrightText: 2025 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 /*!
@@ -12,13 +17,13 @@
  */
 
 /**
-* @vue/runtime-dom v3.5.22
+* @vue/runtime-dom v3.5.32
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
 
 /**
-* @vue/shared v3.5.22
+* @vue/shared v3.5.32
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
