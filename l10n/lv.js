@@ -12,7 +12,7 @@ OC.L10N.register(
     "None" : "Nav",
     "Secret" : "Noslēpums",
     "Disable auto create new users" : "Atspējot automātisku jaunu lietotāju izveidi",
-    "Create users with disabled account" : "Izveidojiet lietotājus ar atspējotu kontu",
+    "Create users with disabled account" : "Izveidot lietotājus ar atspējotu kontu",
     "Title" : "Amats",
     "Scope" : "Darbības joma",
     "Profile url" : "Profila URL"
