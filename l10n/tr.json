@@ -56,6 +56,7 @@
     "Disable notify admins about new users" : "Yöneticilere yeni kullanıcılar için bildirim gönderilmesin",
     "Hide default login" : "Varsayılan oturum açma gizlensin",
     "Button text without prefix" : "Ön ek olmadan düğme yazısı",
+    "Hide social login" : "Sosyal ağ ile oturum açma gizlensin",
     "Custom OpenID Connect" : "Özel OpenID Connect",
     "Internal name" : "İç ad",
     "Title" : "Başlık",
