@@ -104,34 +104,41 @@ class CustomOAuth2 extends OAuth2
     protected function getGroups(Data\Collection $data)
     {
         if ($groupsClaim = $this->config->get('groups_claim')) {
-            // First, attempt to get groups using the full namespace directly.
-            $groups = $data->get($groupsClaim);
+            $getSingleClaim = function ($groupsClaim) use ($data) {
+                // First, attempt to get groups using the full namespace directly.
+                $groups = $data->get($groupsClaim);
 
-            // If not found, fall back to the original logic with path splitting.
-            if ($groups === null) {
-                // Assume groups_claim could be composed of dot-separated subpaths.
-                $nestedClaims = str_getcsv($groupsClaim, '.', '"');
-                $claim = array_shift($nestedClaims);
-                $groups = $data->get($claim);
-
-                while (count($nestedClaims) > 0) {
+                // If not found, fall back to the original logic with path splitting.
+                if ($groups === null) {
+                    // Assume groups_claim could be composed of dot-separated subpaths.
+                    $nestedClaims = str_getcsv($groupsClaim, '.', '"');
                     $claim = array_shift($nestedClaims);
-                    if (!isset($groups->{$claim})) {
-                        $groups = [];
-                        break;
+                    $groups = $data->get($claim);
+
+                    while (count($nestedClaims) > 0) {
+                        $claim = array_shift($nestedClaims);
+                        if (!isset($groups->{$claim})) {
+                            $groups = [];
+                            break;
+                        }
+                        $groups = $groups->{$claim};
                     }
-                    $groups = $groups->{$claim};
                 }
-            }
 
-            // Convert groups to array if necessary
-            if (is_array($groups)) {
-                return $groups;
-            } elseif (is_string($groups)) {
-                return $this->strToArray($groups);
-            }
+                // Convert groups to array if necessary
+                if (is_array($groups)) {
+                    return $groups;
+                } elseif (is_string($groups)) {
+                    return $this->strToArray($groups);
+                }
 
-            return [];
+                return [];
+            };
+            $result = [];
+            foreach ($this->strToArray($groupsClaim) as $claim) {
+                $result = array_merge($result, $getSingleClaim($claim));
+            }
+            return $result;
         }
         return null;
     }

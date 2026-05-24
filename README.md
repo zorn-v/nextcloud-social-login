@@ -12,7 +12,8 @@ See below for setup and configuration instructions.
 
 ## Custom OAuth2/OIDC Groups
 
-You can use groups from your custom provider. For this, specify the "Groups claim" in the custom OAuth2/OIDC provider settings. This claim should be returned from the provider in the `id_token` or at the user info endpoint. The format should be an `array` or a comma-separated string. E.g., (with a claim named `roles`):
+You can use groups from your custom provider. For this, specify the "Groups claim" in the custom OAuth2/OIDC provider settings. This claim should be returned from the provider in the `id_token` or at the user info endpoint. Multiple claims (comma separated) also supported - groups will be merged.
+The format should be an `array` or a comma-separated string. E.g., (with a claim named `roles`):
 
 ```json
 {"roles": ["admin", "user"]}
