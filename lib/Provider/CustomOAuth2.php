@@ -45,13 +45,21 @@ class CustomOAuth2 extends OAuth2
             [], // parameters
             ["X-Scope" => $this->config->get('scope')] // headers
         );
+        if (isset($response->data) && is_object($response->data)) {
+            foreach ($response->data as $key => $value) {
+                if (!isset($response->$key)) {
+                    $response->$key = $value;
+                }
+            }
+        }
         if (isset($response->ocs->data)) {
             $response = $response->ocs->data;
         }
         if (!isset($response->identifier)) {
             $response->identifier = $response->id
                 ?? $response->ID
-                ?? $response->data->id
+                ?? $response->union_id
+                ?? $response->open_id
                 ?? $response->user_id
                 ?? $response->userid
                 ?? $response->userId
