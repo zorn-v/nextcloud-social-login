@@ -20,8 +20,8 @@ use Hybridauth\Adapter\OAuth2;
 use Hybridauth\Data;
 use Hybridauth\User;
 
-use phpseclib3\Crypt\PublicKeyLoader;
-use phpseclib3\Math\BigInteger;
+use phpseclib\Crypt\RSA;
+use phpseclib\Math\BigInteger;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -96,6 +96,8 @@ class Apple extends OAuth2
      * you must provide values with encoded spaces (`%20`) instead of plus (`+`) signs.
      */
     protected $AuthorizeUrlParametersEncType = PHP_QUERY_RFC3986;
+
+    protected $supportRequestState = false;
 
     /**
      * {@inheritdoc}
@@ -198,18 +200,17 @@ class Apple extends OAuth2
 
             foreach ($publicKeys->keys as $publicKey) {
                 try {
+                    $rsa = new RSA();
                     $jwk = (array)$publicKey;
 
-                    $key = PublicKeyLoader::load(
+                    $rsa->loadKey(
                         [
                             'e' => new BigInteger(base64_decode($jwk['e']), 256),
                             'n' => new BigInteger(base64_decode(strtr($jwk['n'], '-_', '+/'), true), 256)
                         ]
-                    )
-                        ->withHash('sha1')
-                        ->withMGFHash('sha1');
+                    );
 
-                    $pem = (string)$key;
+                    $pem = $rsa->getPublicKey();
 
                     $payload = (version_compare($this->getJwtVersion(), '6.2') < 0) ?
                         JWT::decode($id_token, $pem, ['RS256']) :

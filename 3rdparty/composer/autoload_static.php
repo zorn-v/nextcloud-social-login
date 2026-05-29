@@ -7,22 +7,22 @@ namespace Composer\Autoload;
 class ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f
 {
     public static $prefixLengthsPsr4 = array (
-        'H' => 
+        'H' =>
         array (
             'Hybridauth\\' => 11,
         ),
-        'F' => 
+        'F' =>
         array (
             'Firebase\\JWT\\' => 13,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Hybridauth\\' => 
+        'Hybridauth\\' =>
         array (
             0 => __DIR__ . '/..' . '/hybridauth/hybridauth/src',
         ),
-        'Firebase\\JWT\\' => 
+        'Firebase\\JWT\\' =>
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
@@ -78,7 +78,7 @@ class ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f
         'Hybridauth\\Logger\\Psr3LoggerWrapper' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Logger/Psr3LoggerWrapper.php',
         'Hybridauth\\Provider\\AOLOpenID' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/AOLOpenID.php',
         'Hybridauth\\Provider\\Amazon' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Amazon.php',
-        'Hybridauth\\Provider\\Apple' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Apple.php',
+        'Hybridauth\\Provider\\Apple' => __DIR__ . '/..' . '/custom/Hybridauth/Provider/Apple.php',
         'Hybridauth\\Provider\\Authentiq' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Authentiq.php',
         'Hybridauth\\Provider\\AutoDesk' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/AutoDesk.php',
         'Hybridauth\\Provider\\BitBucket' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/BitBucket.php',
