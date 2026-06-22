@@ -63,7 +63,7 @@ OC.L10N.register(
     "Internal name" : "Vidinis vardas",
     "Title" : "Pavadinimas",
     "Authorize url" : "Patvirtinti URL",
-    "Token url" : "Žymos URL",
+    "Token url" : "Žymens URL",
     "Display name claim (optional)" : "Rodytojo vardo nurodymas (neprivaloma)",
     "User info URL (optional)" : "Vartotojo informacijos URL (nebūtina)",
     "Logout URL (optional)" : "Atsijungimo URL (nebūtina)",
