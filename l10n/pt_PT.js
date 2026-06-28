@@ -1,10 +1,23 @@
 OC.L10N.register(
     "sociallogin",
     {
+    "Duplicate provider name \"%s\"" : "Nome de provedor \"%s\" duplicado",
+    "Login from %s domain is not allowed for %s provider" : "Login a partir do domínio %s não é permitido para o provedor %s",
+    "Login is available only to members of the following Discord guilds: %s" : "Login está disponível apenas para membros das seguintes guildas no Discord: %s",
+    "New user created" : "Novo usuário criado",
+    "Settings for social login successfully saved" : "Configurações para login social salvas com sucesso",
     "Save" : "Guardar",
     "None" : "Nenhum",
     "Secret" : "Secreto",
+    "Create users with disabled account" : "Criar usuários com conta desativada",
+    "Automatically create groups if they do not exists" : "Criar automaticamente grupos se eles não existirem",
+    "Hide social login" : "Ocultar login social",
     "Title" : "Título",
-    "Scope" : "Âmbito"
+    "Display name claim (optional)" : "Reivindicação de nome de exibição (opcional)",
+    "Scope" : "Âmbito",
+    "Groups claim (optional)" : "Reivindicação de grupos (opcional)",
+    "Token url (can be relative to base URL)" : "URL do token (pode ser relativo ao URL base)",
+    "Profile url" : "URL do perfil",
+    "SSO Secret" : "Segredo SSO"
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
