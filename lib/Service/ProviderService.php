@@ -601,17 +601,44 @@ class ProviderService
         \OC::$server->get(\OCP\Files\IRootFolder::class)->getUserFolder($user->getUID());
 
         if ($redirectUrl = $this->session->get('login_redirect_url')) {
-            if (strpos($redirectUrl, '/') === 0) {
-                // URL relative to the Nextcloud webroot, generate an absolute one
-                $redirectUrl = $this->urlGenerator->getAbsoluteURL($redirectUrl);
-            } // else, this is an absolute URL, leave it as-is
-
-            return new RedirectResponse($redirectUrl);
+            $safeRedirectUrl = $this->getSafeInternalRedirectUrl($redirectUrl);
+            if ($safeRedirectUrl !== null) {
+                return new RedirectResponse($safeRedirectUrl);
+            }
+            // Untrusted (off-site) URL: ignore it and fall through to the default.
         }
 
         $this->session->set('last-password-confirm', time());
 
         return new RedirectResponse($this->urlGenerator->getAbsoluteURL('/'));
+    }
+
+    /**
+     * Resolve a stored `login_redirect_url` to a URL that is guaranteed to point
+     * at this Nextcloud instance, or null if it does not. This prevents an open
+     * redirect: `login_redirect_url` is read from an unauthenticated request and
+     * was previously reflected verbatim into a Location header for any absolute
+     * URL, allowing `.../apps/sociallogin/oauth/<provider>?login_redirect_url=https://evil.example`
+     * to bounce a freshly-authenticated victim off-site.
+     */
+    private function getSafeInternalRedirectUrl(string $redirectUrl): ?string
+    {
+        // Path relative to the Nextcloud webroot, but not a protocol-relative
+        // "//host" or a "/\host" backslash trick that browsers treat as a host.
+        if (strpos($redirectUrl, '/') === 0
+            && strpos($redirectUrl, '//') !== 0
+            && strpos($redirectUrl, '/\\') !== 0
+        ) {
+            return $this->urlGenerator->getAbsoluteURL($redirectUrl);
+        }
+
+        // Absolute URL: only honor it when it targets this very instance.
+        $base = rtrim($this->urlGenerator->getAbsoluteURL('/'), '/');
+        if ($redirectUrl === $base || strpos($redirectUrl, $base . '/') === 0) {
+            return $redirectUrl;
+        }
+
+        return null;
     }
 
     private function notifyAdmins($uid, $displayName, $groupId)
