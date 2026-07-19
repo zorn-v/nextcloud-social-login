@@ -4,10 +4,10 @@ OC.L10N.register(
     "Save" : "Spara",
     "None" : "Ingen",
     "Team ID" : "Team-ID",
-    "Secret" : "Hemlig",
+    "Secret" : "Hemlig nyckel",
     "Title" : "Titel",
     "Client Secret" : "Klienthemlighet",
-    "Scope" : "Sammanhang",
+    "Scope" : "Omfattning",
     "Consumer key" : "Konsumentnyckel"
 },
 "nplurals=2; plural=(n != 1);");
