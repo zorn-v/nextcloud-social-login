@@ -22,12 +22,12 @@
     "@nextcloud/router": "^3.1.0",
     "css-loader": "^5.2.7",
     "mini-css-extract-plugin": "^2.10.2",
-    "sass": "^1.100.0",
+    "sass": "^1.101.6",
     "sass-loader": "^16.0.8",
     "style-loader": "^3.3.4",
-    "vue": "^3.2.41",
+    "vue": "^3.5.40",
     "vue-loader": "^17.4.2",
-    "webpack": "^5.107.2",
+    "webpack": "^5.108.4",
     "webpack-cli": "^4.10.0",
     "webpack-remove-empty-scripts": "^0.7.3"
   }
