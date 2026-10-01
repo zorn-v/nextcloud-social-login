@@ -156,7 +156,7 @@ class Telegram extends AbstractAdapter implements AdapterInterface
         $secret_key = hash('sha256', $this->botSecret, true);
         $hash = hash_hmac('sha256', $data_check_string, $secret_key);
 
-        if (strcmp($hash, $check_hash) !== 0) {
+        if (!hash_equals($hash, $check_hash)) {
             throw new InvalidAuthorizationCodeException(
                 sprintf('Provider returned an error: %s', 'Data is NOT from Telegram')
             );
