@@ -56,7 +56,7 @@ OC.L10N.register(
     "Restrict login for users without mapped groups" : "Obmedziť prihlásenie pre užívateľov ktorý nemajú namapované skupiny",
     "Restrict login for users without assigned groups" : "Obmedziť prihlásenie pre užívateľov ktorý nemajú priradené skupiny",
     "Disable notify admins about new users" : "Zakázať upozorňovanie administrátorov na nových užívateľov",
-    "Hide default login" : "Skryť východzie prihlásenie",
+    "Hide default login" : "Skryť predvolené prihlásenie",
     "Button text without prefix" : "Text tlačítka bez prefixu",
     "Hide social login" : "Skryť sociálne prihlásenie",
     "Custom OpenID Connect" : "Vlastné pripojenie OpenID",
