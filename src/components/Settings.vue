@@ -47,6 +47,10 @@
           </select>
         </label>
         <br/>
+        <label class="cb-group-label">
+          <input type="checkbox" :name="'custom_providers['+provType+']['+k+'][createDisabledUsers]'" :checked="!!provider.createDisabledUsers"/>
+          <div>{{ t(appName, 'Create users with disabled account') }}</div>
+        </label>
         <GroupMapping v-if="provData.hasGroupMapping"
           :groups="groups"
           :group-mapping="provider.groupMapping"
@@ -54,6 +58,7 @@
           @add="provider.groupMapping.push({foreign: '', local: ''})"
           @remove="provider.groupMapping.splice($event, 1)"
         />
+
       </div>
     </div>
     <hr/>
@@ -129,9 +134,9 @@
           <input type="text" :name="'providers['+name+'][orgs]'" v-model="provider.orgs"/>
         </label>
         <br/>
-        <label>
+        <label class="cb-group-label">
           <input type="checkbox" :name="'providers['+name+'][readOrg]'" :checked="provider.readOrg" />
-          {{ t(appName, 'Allow hidden organization members to register (requests read:org scope)') }}
+          <div>{{ t(appName, 'Allow hidden organization members to register (requests read:org scope)') }}</div>
         </label>
       </template>
       <template v-if="name === 'BitBucket'">
@@ -148,11 +153,16 @@
           <input type="text" :name="'providers['+name+'][guilds]'" v-model="provider.guilds"/>
         </label>
         <br/>
-        <label>
+        <label class="cb-group-label">
           <input type="checkbox" :name="'providers['+name+'][useGuildNames]'" :checked="!!provider.useGuildNames"/>
-          {{ t(appName, 'Use guild nick') }}
+          <div>{{ t(appName, 'Use guild nick') }}</div>
         </label>
       </template>
+      <br/>
+      <label class="cb-group-label">
+        <input type="checkbox" :name="'providers['+name+'][createDisabledUsers]'" :checked="!!provider.createDisabledUsers"/>
+        <div>{{ t(appName, 'Create users with disabled account') }}</div>
+      </label>
       <GroupMapping v-if="provider.groupMapping"
         :groups="groups"
         :group-mapping="provider.groupMapping"
@@ -162,7 +172,6 @@
       />
     </div>
     <br/>
-
     <button>{{ t(appName, 'Save') }}</button>
   </form>
 </template>
@@ -305,6 +314,20 @@ export default {
   input, select, textarea {
     width: 100%;
   }
+  label.cb-group-label {
+    display: flex;
+  }
+  label.cb-group-label input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+  }
+  label.cb-group-label > div {
+    padding-top: 8px;
+    cursor: pointer;
+  }
+  label.cb-group-label + br {
+    display: none;
+  }
   input[type="checkbox"] {
     width: 20px;
     vertical-align: middle;
@@ -318,7 +341,7 @@ export default {
     vertical-align: top;
     margin-right: 15px;
     margin-bottom: 20px;
-    min-width: 285px;
+    width: 360px;
   }
   .provider-settings .provider-remove {
     float: right;

@@ -219,7 +219,7 @@ class ProviderService
                     break;
             }
 
-            $opts = ['orgs', 'workspace', 'guilds', 'groupMapping', 'useGuildNames', 'readOrg'];
+            $opts = ['orgs', 'workspace', 'guilds', 'groupMapping', 'useGuildNames', 'readOrg', 'createDisabledUsers'];
             foreach ($opts as $opt) {
                 if (isset($prov[$opt])) {
                     $config[$opt] = $prov[$opt];
@@ -427,10 +427,10 @@ class ProviderService
         if (strlen($uid) > 64 || !preg_match('#^[a-z0-9_.@-]+$#i', $profileId)) {
             $uid = $provider.'-'.md5($profileId);
         }
-        return $this->login($uid, $profile, $provider.'-');
+        return $this->login($uid, $profile, $provider.'-', $config);
     }
 
-    private function login($uid, Profile $profile, $newGroupPrefix = '')
+    private function login($uid, Profile $profile, $newGroupPrefix = '', array $config = [])
     {
         $user = $this->userManager->get($uid);
         if (null === $user) {
@@ -477,7 +477,7 @@ class ProviderService
             $userPassword = '1@aA'.substr(base64_encode(random_bytes(64)), 0, 30);
             $user = $this->userManager->createUser($uid, $userPassword);
 
-            if ($this->appConfig->getValueBool($this->appName, 'create_disabled_users')) {
+            if (!empty($config['createDisabledUsers'])) {
                 $user->setEnabled(false);
             }
 
