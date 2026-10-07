@@ -10,7 +10,7 @@
     "Login is available only to members of the following GitHub organizations: %s" : "Prihlásovanie je prístupné iba členom nasledujúcich Github organizácií: %s",
     "Invalid setup for Bitbucket workspaces" : "Neplatné nastavenie pre pracovné priestory Bitbucket",
     "Login is available only to members of the following Bitbucket workspaces: %s" : "Prihlásovanie je prístupné iba členom nasledovného pracovného priestoru Bitbucket: %s",
-    "Login is available only to members of the following Discord guilds: %s" : "Prihlásovanie je prístupné iba členom nasledovnej Discord skupiny: %s",
+    "Login is available only to members of the following Discord guilds: %s" : "Prihlasovanie je prístupné iba členom nasledujúcich Discord serverov: %s",
     "Social login connect is disabled" : "Prihlasovanie cez sociálne siete je vypnuté",
     "This account already connected" : "Tento účet už je pripojený",
     "Users without assigned groups is not allowed to login, please contact support" : "Užívatelia bez pridelených skupín sa nemôžu prihlásiť, kontaktujte podporu",
