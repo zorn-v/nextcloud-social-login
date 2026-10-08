@@ -73,7 +73,7 @@
     "Custom OAuth2" : "Vlastný OAuth2",
     "API Base URL" : "Základna URL API",
     "Authorize url (can be relative to base URL)" : "URL overenia (može byt relatívne k základnej URL)",
-    "Token url (can be relative to base URL)" : "URL tokenu (može byt relatívne k základnej URL)",
+    "Token url (can be relative to base URL)" : "URL tokenu (môže byť relatívne k základnej URL)",
     "Profile url (can be relative to base URL)" : "URL profilu (može byt relatívne k základnej URL)",
     "Scope (optional)" : "Rozsah (voliteľné)",
     "Profile Fields (optional, comma-separated)" : "Položky profilu (voliteľné, oddelené čiarkami)",

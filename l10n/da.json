@@ -3,7 +3,7 @@
     "Provider name cannot be empty" : "Udbyderens navn skal udfyldes",
     "Duplicate provider name \"%s\"" : "Udbydernavnet \"%s\" findes allerede",
     "Invalid provider name \"%s\". Allowed characters \"0-9a-z_.@-\"" : "Ugyldigt udbydernavn \"%s\". Tilladte tegn: \"0-9a-z_.@-\"",
-    "Log in with %s" : "Log på med %s",
+    "Log in with %s" : "Log ind med %s",
     "Unknown %s provider: \"%s\"" : "Ukendt %s-udbyder: \"%s\"",
     "Can not get identifier from provider" : "Id'et kunne ikke hentes fra udbyderen",
     "Login from %s domain is not allowed for %s provider" : "Login fra domænet %s er ikke tilladt for udbyderen %s",
