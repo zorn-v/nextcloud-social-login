@@ -9,7 +9,7 @@
     "Login from %s domain is not allowed for %s provider" : "Innskráning frá léninu %s er ekki leyfð fyrir %s þjónustuveituna",
     "Login is available only to members of the following GitHub organizations: %s" : "Innskráning er einungis heimil meðlimum eftirfarandi GitHub-heilda: %s",
     "Invalid setup for Bitbucket workspaces" : "Ógild uppsetning fyrir Bitbucket-vinnusvæði",
-    "Login is available only to members of the following Bitbucket workspaces: %s" : "Innskráning er einungis heimil meðlimum eftirfarandi Bitbucket-vinnusvæða: s",
+    "Login is available only to members of the following Bitbucket workspaces: %s" : "Innskráning er einungis heimil meðlimum eftirfarandi Bitbucket-vinnusvæða: %s",
     "Login is available only to members of the following Discord guilds: %s" : "Innskráning er einungis heimil meðlimum eftirfarandi Discord-gilda: %s",
     "Social login connect is disabled" : "Tenging innskráningar á samfélagsnet er óvirk",
     "This account already connected" : "Þessi aðgangur er þegar tengdur",
