@@ -1,6 +1,7 @@
 { "translations": {
     "Save" : "Salvează",
     "None" : "Niciuna",
+    "Team ID" : "ID echipă",
     "Secret" : "Secret",
     "Title" : "Titlu",
     "Scope" : "Scop"

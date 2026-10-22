@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Salvează",
     "None" : "Niciuna",
+    "Team ID" : "ID echipă",
     "Secret" : "Secret",
     "Title" : "Titlu",
     "Scope" : "Scop"
