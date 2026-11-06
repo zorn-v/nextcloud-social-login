@@ -21,6 +21,9 @@ class CustomOAuth2 extends OAuth2
     ) {
         parent::__construct($config, $httpClient, $storage, $logger);
         $this->providerId = $this->clientId;
+        // Add client Basic authentication header
+        $authHeader = 'Basic ' . base64_encode("$this->clientId:$this->clientSecret");
+        $this->tokenExchangeHeaders['Authorization'] = $authHeader;
     }
 
     /**
