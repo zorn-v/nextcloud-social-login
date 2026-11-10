@@ -79,6 +79,7 @@ class ComposerStaticInit2fd16dd8fbb94748e1ada016e6921a0f
         'Hybridauth\\Provider\\AOLOpenID' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/AOLOpenID.php',
         'Hybridauth\\Provider\\Amazon' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Amazon.php',
         'Hybridauth\\Provider\\Apple' => __DIR__ . '/..' . '/custom/Hybridauth/Provider/Apple.php',
+        'Hybridauth\\Provider\\Apple3' => __DIR__ . '/..' . '/custom/Hybridauth/Provider/Apple3.php',
         'Hybridauth\\Provider\\Authentiq' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/Authentiq.php',
         'Hybridauth\\Provider\\AutoDesk' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/AutoDesk.php',
         'Hybridauth\\Provider\\BitBucket' => __DIR__ . '/..' . '/hybridauth/hybridauth/src/Provider/BitBucket.php',

@@ -214,7 +214,10 @@ class ProviderService
                         $config['scope'] = 'user:email read:org';
                     }
                     break;
-                default:
+                case 'apple':
+                    if (!class_exists(\phpseclib\Crypt\RSA::class)) {
+                        $provider .= '3';
+                    }
                     break;
             }
 
