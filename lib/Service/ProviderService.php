@@ -193,6 +193,7 @@ class ProviderService
     {
         $config = [];
         $providers = $this->appConfig->getValueArray($this->appName, 'oauth_providers');
+        $providerClass = Provider::class.'\\'.ucfirst($provider);
         if (isset($providers[$provider])) {
             $prov = $providers[$provider];
 
@@ -216,7 +217,7 @@ class ProviderService
                     break;
                 case 'apple':
                     if (!class_exists(\phpseclib\Crypt\RSA::class)) {
-                        $provider .= '3';
+                        $providerClass .= '3';
                     }
                     break;
             }
@@ -236,7 +237,7 @@ class ProviderService
                 }
             }
         }
-        return $this->auth(Provider::class.'\\'.ucfirst($provider), $config, $provider, 'OAuth');
+        return $this->auth($providerClass, $config, $provider, 'OAuth');
     }
 
     public function handleCustom($type, $provider)
