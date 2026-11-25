@@ -19,9 +19,8 @@ set -e
 [ -z "$NC_TOKEN" ] && echo NC_TOKEN var is missing. Go to https://apps.nextcloud.com/account/token get one and put it in .credentials && exit 1
 
 VERSION=v`grep '<version>' appinfo/info.xml | sed 's/[^0-9.]//g'`
-REL_RES=`curl -sH "Authorization: token $GITHUB_TOKEN" -d "{\"tag_name\":\"$VERSION\"}" https://api.github.com/repos/$GITHUB_REPO/releases`
-UPLOAD_URL=`echo $REL_RES | grep '"upload_url"' | sed 's/.*"\(https:.*\){.*/\1/'`
-[ -z "$UPLOAD_URL" ] && echo -e "Can not get upload url\n$REL_RES" && exit 1
+UPLOAD_URL=`curl -sH "Authorization: token $GITHUB_TOKEN" -d "{\"tag_name\":\"$VERSION\"}" https://api.github.com/repos/$GITHUB_REPO/releases | grep '"upload_url"' | sed 's/.*"\(https:.*\){.*/\1/'`
+[ -z "$UPLOAD_URL" ] && echo "Can not get upload url" && exit 1
 
 git push
 git checkout -b release
@@ -53,7 +52,7 @@ then
 fi
 
 echo Posting release.tar.gz to $UPLOAD_URL
-curl -sSH "Authorization: token $GITHUB_TOKEN" -H 'Content-Type: application/octet-stream' --data-binary '@release.tar.gz' ${UPLOAD_URL}?name=release.tar.gz
+curl -sSH "Authorization: token $GITHUB_TOKEN" -H 'Content-Type: application/octet-stream' --data-binary '@release.tar.gz' ${UPLOAD_URL}?name=release.tar.gz > /dev/null
 DOWNLOAD_URL=https://github.com/$GITHUB_REPO/releases/download/$VERSION/release.tar.gz
 
 echo Making release on apps.nextcloud.com
