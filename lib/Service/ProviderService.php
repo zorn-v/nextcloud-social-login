@@ -237,7 +237,12 @@ class ProviderService
                 }
             }
         }
-        return $this->auth($providerClass, $config, $provider, 'OAuth');
+        try {
+            return $this->auth($providerClass, $config, $provider, 'OAuth');
+        } catch (LoginException $e) {
+            $this->storage->clear();
+            throw $e;
+        }
     }
 
     public function handleCustom($type, $provider)
@@ -265,7 +270,12 @@ class ProviderService
                 }
             }
         }
-        return $this->auth(self::TYPE_CLASSES[$type], $config, $provider);
+        try {
+            return $this->auth(self::TYPE_CLASSES[$type], $config, $provider);
+        } catch (LoginException $e) {
+            $this->storage->clear();
+            throw $e;
+        }
     }
 
     private function applyConfigMapping($mapping, $data)
@@ -318,12 +328,10 @@ class ProviderService
             $adapter->authenticate();
             $profile = $adapter->getUserProfile();
         }  catch (\Exception $e) {
-            $this->storage->clear();
             throw new LoginException($e->getMessage());
         }
         $profileId = preg_replace('#.*/#', '', rtrim($profile->identifier, '/'));
         if (empty($profileId)) {
-            $this->storage->clear();
             throw new LoginException($this->l->t('Can not get identifier from provider'));
         }
 
@@ -331,7 +339,6 @@ class ProviderService
             $profileHd = preg_match('#@(.+)#', $profile->email, $m) ? $m[1] : null;
             $allowedHd = array_map('trim', explode(',', $config['authorize_url_parameters']['hd']));
             if (!in_array($profileHd, $allowedHd)) {
-                $this->storage->clear();
                 throw new LoginException($this->l->t('Login from %s domain is not allowed for %s provider', [$profileHd, $provider]));
             }
         }
@@ -346,7 +353,6 @@ class ProviderService
                         return;
                     } catch (\Exception $e) {}
                 }
-                $this->storage->clear();
                 throw new LoginException($this->l->t('Login is available only to members of the following GitHub organizations: %s', $config['orgs']));
             };
             $checkOrgs();
@@ -369,7 +375,6 @@ class ProviderService
                         return;
                     }
                 } catch (\Exception $e) {}
-                $this->storage->clear();
                 throw new LoginException($this->l->t('Login is available only to members of the following Bitbucket workspaces: %s', $config['workspace']));
             };
             $checkWorks();
@@ -384,7 +389,6 @@ class ProviderService
                         return $guild->id;
                     }
                 }
-                $this->storage->clear();
                 throw new LoginException($this->l->t('Login is available only to members of the following Discord guilds: %s', $config['guilds']));
             };
             $matchingGuildId = $checkGuilds();
