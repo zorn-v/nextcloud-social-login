@@ -52,9 +52,11 @@ then
   rm -rf $APP_NAME
 fi
 
+echo Posting release.tar.gz to github
 curl -sSH "Authorization: token $GITHUB_TOKEN" -H 'Content-Type: application/octet-stream' --data-binary '@release.tar.gz' ${UPLOAD_URL}?name=release.tar.gz > /dev/null
 DOWNLOAD_URL=https://github.com/$GITHUB_REPO/releases/download/$VERSION/release.tar.gz
 
+echo Making release on apps.nextcloud.com
 SIG=`openssl dgst -sha512 -sign $NC_KEY_FILE release.tar.gz | openssl base64 -A`
 curl -X POST -sSH "Authorization: Token $NC_TOKEN" -H 'Content-Type: application/json' -d "{\"download\":\"$DOWNLOAD_URL\",\"signature\":\"$SIG\"}" https://apps.nextcloud.com/api/v1/apps/releases
 
