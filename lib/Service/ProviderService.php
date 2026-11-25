@@ -430,7 +430,13 @@ class ProviderService
         if (strlen($uid) > 64 || !preg_match('#^[a-z0-9_.@-]+$#i', $profileId)) {
             $uid = $provider.'-'.md5($profileId);
         }
-        return $this->login($uid, $profile, $provider.'-', $config);
+        try {
+            return $this->login($uid, $profile, $provider.'-', $config);
+        } catch (LoginException $e) {
+            // Do not keep the provider token of a refused login, or the next attempt reuses it
+            $this->storage->clear();
+            throw $e;
+        }
     }
 
     private function login($uid, Profile $profile, $newGroupPrefix = '', array $config = [])
