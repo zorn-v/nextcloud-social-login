@@ -19,8 +19,9 @@ set -e
 [ -z "$NC_TOKEN" ] && echo NC_TOKEN var is missing. Go to https://apps.nextcloud.com/account/token get one and put it in .credentials && exit 1
 
 VERSION=v`grep '<version>' appinfo/info.xml | sed 's/[^0-9.]//g'`
-UPLOAD_URL=`curl -sH "Authorization: token $GITHUB_TOKEN" -d "{\"tag_name\":\"$VERSION\"}" https://api.github.com/repos/$GITHUB_REPO/releases | grep '"upload_url"' | sed 's/.*"\(https:.*\){.*/\1/'`
-[ -z "$UPLOAD_URL" ] && echo "Can not get upload url" && exit 1
+REL_RES=`curl -sH "Authorization: token $GITHUB_TOKEN" -d "{\"tag_name\":\"$VERSION\"}" https://api.github.com/repos/$GITHUB_REPO/releases`
+UPLOAD_URL=`echo "$REL_RES" | grep '"upload_url"' | sed 's/.*"\(https:.*\){.*/\1/'`
+[ -z "$UPLOAD_URL" ] && echo -e "Can not get upload url\n$REL_RES" && exit 1
 
 git push
 git checkout -b release
